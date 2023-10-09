@@ -1,10 +1,11 @@
 import YTMusic from "ytmusic-api";
 
+import { env } from "~/env.mjs";
+
 export async function MusicData() {
-  const id = "mZHZviUWvDA";
   const client = await new YTMusic().initialize();
   if (!client) throw new Error("invariant: client is falsy");
-  const data = await client.getSong(id);
+  const data = await client.getSong(env.RECENT_FAVOURITE_SONG_ID);
   const thumbnail = data.thumbnails
     .sort((a, b) => a.width - b.width)
     .find(value => value.width >= 72);
