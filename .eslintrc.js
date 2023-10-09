@@ -20,6 +20,7 @@ module.exports = {
     "import/order": "off",
     "no-console": "off",
     "react/jsx-sort-props": "off",
+    "react/no-array-index-key": "off",
   },
   overrides: [
     {
