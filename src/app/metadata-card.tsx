@@ -1,5 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 
+import { LinkButton } from "~/components/ui/button";
+
 export function MetadataCard({
   left,
   right,
@@ -21,14 +23,13 @@ export function MetadataCard({
           <div className="text-xs font-light uppercase tracking-widest text-text-tertiary">
             {title}
           </div>
-          <a
+          <LinkButton
             href={href}
-            className="text-text-secondary transition-colors hover:text-text-primary"
-            target="_blank"
-            rel="noreferrer noopener"
+            variants={{ variant: "ghost", size: "icon-sm" }}
+            className="-m-1.5 text-text-secondary hover:text-text-primary"
           >
             <Icon className="h-4 w-4" />
-          </a>
+          </LinkButton>
         </div>
         {right}
       </div>
