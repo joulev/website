@@ -49,10 +49,16 @@ async function getStats() {
 }
 
 function BackgroundPattern() {
+  // For uniform patterns
+  let seed = 1;
+  function seededRandom() {
+    const x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  }
   const classes = ["bg-text-primary", "bg-text-secondary", "bg-text-tertiary"];
   const days = new Array(49)
     .fill(null)
-    .map(_ => classes[Math.floor(Math.random() * classes.length)]);
+    .map(_ => classes[Math.floor(seededRandom() * classes.length)]);
   return (
     <div className="grid-rows-7 absolute -left-6 -top-6 -z-10 grid grid-cols-7 gap-1">
       {days.map((c, i) => (
