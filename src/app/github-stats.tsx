@@ -62,7 +62,7 @@ function BackgroundPattern() {
   return (
     <div className="grid-rows-7 absolute -left-6 -top-6 -z-10 grid grid-cols-7 gap-1">
       {days.map((c, i) => (
-        <div key={i} className="h-3 w-3 rounded-[0.1rem]" style={{ background: c }} />
+        <div key={i} className="h-3 w-3 rounded-[0.2rem]" style={{ background: c }} />
       ))}
     </div>
   );
