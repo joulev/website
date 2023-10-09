@@ -9,7 +9,7 @@ import { MusicData } from "./music-data";
 
 export default function Page() {
   return (
-    <main className="container max-w-screen-md">
+    <main className="container max-w-screen-md py-24">
       <Card className="flex flex-col p-0">
         <div className="flex flex-col items-start gap-6 bg-bg-darker p-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
