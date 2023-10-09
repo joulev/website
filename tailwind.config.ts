@@ -1,20 +1,37 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 const config: Config = {
+  future: { hoverOnlyWhenSupported: true },
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+    borderRadius: { DEFAULT: "0.5rem", full: "2rem" },
+    container: { center: true, padding: "1.5rem" },
+    colors: {
+      text: {
+        primary: "var(--text-primary)",
+        secondary: "var(--text-secondary)",
+        tertiary: "var(--text-tertiary)",
       },
+      bg: {
+        idle: "var(--bg-idle)",
+        darker: "var(--bg-darker)",
+        hover: "var(--bg-hover)",
+        disabled: "var(--bg-disabled)",
+      },
+      black: "black",
+      transparent: "transparent",
+      cyan: "var(--cyan)",
     },
+    fontFamily: { sans: ["var(--font)", ...defaultTheme.fontFamily.sans] },
+    transitionDuration: { DEFAULT: "300ms" },
   },
-  plugins: [],
-}
-export default config
+  plugins: [animate],
+};
+
+export default config;
