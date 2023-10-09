@@ -4,6 +4,9 @@ import { LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
 
+import { GitHubStats } from "./github-stats";
+import { MusicData } from "./music-data";
+
 export default function Page() {
   return (
     <main className="container max-w-screen-md">
@@ -14,10 +17,10 @@ export default function Page() {
             <div className="text-text-secondary">@joulev</div>
           </div>
           <div className="flex flex-row gap-3">
-            <LinkButton href="https://github.com/joulev">
+            <LinkButton href="https://github.com/joulev" target="_blank" rel="noreferrer noopener">
               <Github /> GitHub
             </LinkButton>
-            <LinkButton href="mailto:me@joulev.dev">
+            <LinkButton href="mailto:me@joulev.dev" target="_blank" rel="noreferrer noopener">
               <Mail /> Email
             </LinkButton>
           </div>
@@ -40,6 +43,10 @@ export default function Page() {
             I am also active on Discord and you can find me as a moderator on{" "}
             <Link href="https://discord.gg/nextjs">the official Next.js Discord server</Link>.
           </p>
+          <div className="grid grid-cols-1 grid-rows-2 gap-6 sm:grid-cols-2 sm:grid-rows-1">
+            <GitHubStats />
+            <MusicData />
+          </div>
         </div>
       </Card>
     </main>

@@ -6,19 +6,15 @@ import { forwardRef } from "react";
 
 import { cn } from "~/lib/cn";
 
-import styles from "./css/hover-background.module.css";
 import { useHoverBackground } from "./hooks/use-hover-background";
 
 const buttonVariants = cva({
-  base: [
-    "disabled:bg-bg-disabled relative inline-flex flex-row items-center justify-center gap-[--button-gap] rounded-full outline-offset-4 backdrop-blur transition disabled:cursor-not-allowed disabled:text-text-tertiary",
-    styles.hoverBg,
-  ],
+  base: "hover-bg relative inline-flex flex-row items-center justify-center gap-[--button-gap] rounded-full outline-offset-4 backdrop-blur transition disabled:cursor-not-allowed disabled:bg-bg-disabled disabled:text-text-tertiary",
   variants: {
     variant: {
-      primary: "text-black bg-text-primary shadow disabled:shadow-none",
+      primary: "bg-text-primary text-black shadow disabled:shadow-none",
       secondary: "bg-bg-idle text-text-primary",
-      ghost: "bg-transparent hover:bg-bg-hover text-text-primary",
+      ghost: "bg-transparent text-text-primary hover:bg-bg-hover",
     },
     size: {
       sm: "w-fit px-3 py-1 text-sm [--button-gap:0.25rem] [&_svg]:h-4 [&_svg]:w-4",

@@ -1,0 +1,13 @@
+diff --git a/dist/YTMusic.js b/dist/YTMusic.js
+index c2a5de90ac1e1a92946b56a9e65d66ec3593d3d1..5c42b2c07ab72208c7c96b68df90bbd6981ea553 100644
+--- a/dist/YTMusic.js
++++ b/dist/YTMusic.js
+@@ -116,7 +116,7 @@ class YTMusic {
+             "X-YouTube-Page-CL": this.config.PAGE_CL,
+             "X-YouTube-Page-Label": this.config.PAGE_BUILD_LABEL,
+             "X-YouTube-Utc-Offset": String(-new Date().getTimezoneOffset()),
+-            "X-YouTube-Time-Zone": new Intl.DateTimeFormat().resolvedOptions().timeZone,
++            "X-YouTube-Time-Zone": new Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Ho_Chi_Minh",
+         };
+         const searchParams = new URLSearchParams({
+             ...query,

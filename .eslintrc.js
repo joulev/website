@@ -18,11 +18,17 @@ module.exports = {
     "@typescript-eslint/no-confusing-void-expression": "off",
     "import/no-extraneous-dependencies": "off",
     "import/order": "off",
+    "no-console": "off",
     "react/jsx-sort-props": "off",
   },
   overrides: [
     {
-      files: ["src/app/**/page.tsx", "src/app/**/layout.tsx", "tailwind.config.ts"],
+      files: [
+        "src/app/**/page.tsx",
+        "src/app/**/layout.tsx",
+        "tailwind.config.ts",
+        "next.config.mjs",
+      ],
       rules: { "import/no-default-export": "off" },
     },
   ],

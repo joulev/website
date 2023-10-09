@@ -30,6 +30,11 @@ const config: Config = {
     },
     fontFamily: { sans: ["var(--font)", ...defaultTheme.fontFamily.sans] },
     transitionDuration: { DEFAULT: "300ms" },
+    extend: {
+      spacing: {
+        18: "4.5rem",
+      },
+    },
   },
   plugins: [animate],
 };
