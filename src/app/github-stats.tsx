@@ -55,14 +55,14 @@ function BackgroundPattern() {
     const x = Math.sin(seed++) * 10000;
     return x - Math.floor(x);
   }
-  const classes = ["bg-text-primary", "bg-text-secondary", "bg-text-tertiary"];
+  const colours = ["#32D74BB0", "#32D74B70", "#32D74B30"];
   const days = new Array(49)
     .fill(null)
-    .map(_ => classes[Math.floor(seededRandom() * classes.length)]);
+    .map(_ => colours[Math.floor(seededRandom() * colours.length)]);
   return (
     <div className="grid-rows-7 absolute -left-6 -top-6 -z-10 grid grid-cols-7 gap-1">
       {days.map((c, i) => (
-        <div key={i} className={cn("h-3 w-3 rounded-[0.1rem]", c)} />
+        <div key={i} className="h-3 w-3 rounded-[0.1rem]" style={{ background: c }} />
       ))}
     </div>
   );
