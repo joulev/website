@@ -90,7 +90,7 @@ export async function GitHubStats() {
         </>
       }
       right={
-        <div className="flex flex-row flex-wrap gap-x-6">
+        <div className="flex flex-row flex-wrap gap-x-6 sm:gap-x-3 md:gap-x-6">
           <GitHubStatsData label="Issues" value={issues} />
           <GitHubStatsData label="PRs" value={prs} />
           <GitHubStatsData label="Contributed to" value={contribs} fullWidth />
