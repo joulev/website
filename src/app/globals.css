@@ -28,6 +28,11 @@ hr {
     32 / 32px stretch;
 }
 
+.card-sm {
+  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' fill='none'%3E%3Crect width='199' height='199' x='.5' y='.5' stroke='url(%23a)' rx='19.5'/%3E%3Cdefs%3E%3ClinearGradient id='a' x1='8.5' x2='100' y1='0' y2='241.5' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23fff' stop-opacity='.4'/%3E%3Cstop offset='.385' stop-color='%23fff' stop-opacity='0'/%3E%3Cstop offset='.516' stop-color='%23737373' stop-opacity='.021'/%3E%3Cstop offset='.516' stop-color='%23fff' stop-opacity='.01'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='.1'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E")
+    20 / 20px stretch;
+}
+
 .recessed {
   @apply bg-bg-darker;
   box-shadow:

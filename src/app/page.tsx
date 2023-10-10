@@ -4,9 +4,12 @@ import { LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
 import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
+import { cn } from "~/lib/cn";
 
 import { GitHubStats } from "./github-stats";
 import { MusicData } from "./music-data";
+import { NameH1 } from "./name-h1";
+import styles from "./page.module.css";
 
 export default function Page() {
   return (
@@ -14,7 +17,7 @@ export default function Page() {
       <Card className="flex flex-col p-0">
         <div className="flex flex-col items-start gap-6 bg-bg-darker p-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-3xl font-medium">John Doe</h1>
+            <NameH1 />
             <div className="text-text-secondary">@joulev</div>
           </div>
           <div className="flex flex-row gap-3">
@@ -41,7 +44,7 @@ export default function Page() {
             masterpieces or movie soundtracks to catchy Japanese popular music.
           </p>
           <p>
-            I am also active on Discord and you can find me as a moderator on{" "}
+            I am also active on Discord and you can find me as a moderator and helper on{" "}
             <Link href="https://discord.gg/nextjs">the official Next.js Discord server</Link>.
           </p>
           <div className="grid grid-cols-1 grid-rows-2 gap-6 sm:grid-cols-2 sm:grid-rows-1">
@@ -52,7 +55,9 @@ export default function Page() {
         <hr />
         <div className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2">
           <List>
-            <ListHeader>Packages</ListHeader>
+            <ListHeader asChild>
+              <h2>Packages</h2>
+            </ListHeader>
             <ListContent>
               <ListItem asChild>
                 <Link unstyled href="https://github.com/joulev/tailwind-dark-aware">
@@ -67,7 +72,9 @@ export default function Page() {
             </ListContent>
           </List>
           <List>
-            <ListHeader>Apps</ListHeader>
+            <ListHeader asChild>
+              <h2>Apps</h2>
+            </ListHeader>
             <ListContent variants={{ withSeparator: false }}>
               <ListItem asChild>
                 <Link unstyled href="https://nextjs-faq.com">
@@ -84,6 +91,41 @@ export default function Page() {
               </ListItem>
             </ListContent>
           </List>
+        </div>
+        <hr />
+        <div className="flex flex-col bg-bg-darker sm:flex-row">
+          <div className="flex flex-col gap-3 p-6 sm:w-2/3">
+            <h2 className="text-lg font-bold">Current project</h2>
+            <p>
+              I am building a glassmorphic component system based on{" "}
+              <Link href="https://www.figma.com/community/file/1253443272911187215/apple-design-resources-visionos">
+                visionOS UI design
+              </Link>
+              . You are seeing that design system at work in this very page, and if you are curious,
+              you can check out this list of <Link href="/glui">all completed components</Link> so
+              far.
+            </p>
+          </div>
+          <div
+            className="relative min-h-[120px] flex-grow bg-[1.5rem_0px] sm:bg-[0px_1.5rem]"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg width='54' height='54' viewBox='0 0 54 54' fill='none' xmlns='http://www.w3.org/2000/svg' %3E%3Crect x='5' y='5' width='36' height='36' rx='4' stroke='%238080804d' strokeWidth='2' /%3E%3C/svg%3E\")",
+            }}
+          >
+            <div
+              className={cn(
+                "absolute left-1/2 top-1/2 h-18 w-24 -translate-x-16 -translate-y-12 rounded-[1rem] bg-bg-idle backdrop-blur",
+                styles.cardSm,
+              )}
+            />
+            <div
+              className={cn(
+                "absolute left-1/2 top-1/2 h-18 w-24 -translate-x-8 -translate-y-6 rounded-[1rem] bg-bg-idle backdrop-blur",
+                styles.cardSm,
+              )}
+            />
+          </div>
         </div>
       </Card>
     </main>
