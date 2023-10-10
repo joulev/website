@@ -1,4 +1,4 @@
-import { Github, Mail } from "lucide-react";
+import { ChevronRight, Github, Mail } from "lucide-react";
 
 import { LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
@@ -8,16 +8,15 @@ import { cn } from "~/lib/cn";
 
 import { GitHubStats } from "./github-stats";
 import { MusicData } from "./music-data";
-import { NameH1 } from "./name-h1";
 import styles from "./page.module.css";
 
 export default function Page() {
   return (
     <main className="container max-w-screen-md py-24">
       <Card className="flex flex-col p-0">
-        <div className="flex flex-col items-start gap-6 bg-bg-darker p-6 sm:flex-row sm:items-end sm:justify-between">
+        <section className="flex flex-col items-start gap-6 bg-bg-darker p-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <NameH1 />
+            <h1 className="text-3xl font-medium">Vu Van Dung</h1>
             <div className="text-text-secondary">@joulev</div>
           </div>
           <div className="flex flex-row gap-3">
@@ -28,8 +27,46 @@ export default function Page() {
               <Mail /> Email
             </LinkButton>
           </div>
-        </div>
-        <div className="flex flex-col gap-6 p-6">
+        </section>
+        <hr />
+        <section className="flex flex-col bg-bg-darker sm:flex-row">
+          <div className="flex flex-col items-start gap-6 p-6 sm:w-2/3">
+            <h2 className="text-lg font-bold">Current project</h2>
+            <p>
+              I am building a glassmorphic component system based on{" "}
+              <Link href="https://www.figma.com/community/file/1253443272911187215/apple-design-resources-visionos">
+                visionOS UI design
+              </Link>
+              . You are seeing that design system at work in this very page, and if you are curious,
+              you can check out the completed components (so far) here:
+            </p>
+            <LinkButton href="/glui" variants={{ variant: "primary" }}>
+              Completed components
+              <ChevronRight />
+            </LinkButton>
+          </div>
+          <div
+            className="relative min-h-[120px] flex-grow bg-[1.5rem_0px] sm:bg-[0px_1.5rem]"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg width='54' height='54' viewBox='0 0 54 54' fill='none' xmlns='http://www.w3.org/2000/svg' %3E%3Crect x='5' y='5' width='36' height='36' rx='4' stroke='%238080804d' strokeWidth='2' /%3E%3C/svg%3E\")",
+            }}
+          >
+            <div
+              className={cn(
+                "absolute left-1/2 top-1/2 h-18 w-24 -translate-x-16 -translate-y-12 rounded-[1rem] bg-bg-idle backdrop-blur",
+                styles.cardSm,
+              )}
+            />
+            <div
+              className={cn(
+                "absolute left-1/2 top-1/2 h-18 w-24 -translate-x-8 -translate-y-6 rounded-[1rem] bg-bg-idle backdrop-blur",
+                styles.cardSm,
+              )}
+            />
+          </div>
+        </section>
+        <section className="flex flex-col gap-6 p-6">
           <p>
             I am a software developer. I build things for the web, mostly using{" "}
             <Link href="https://nextjs.org">Next.js</Link>.
@@ -51,9 +88,9 @@ export default function Page() {
             <GitHubStats />
             <MusicData />
           </div>
-        </div>
+        </section>
         <hr />
-        <div className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2">
+        <section className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2">
           <List>
             <ListHeader asChild>
               <h2>Packages</h2>
@@ -91,42 +128,7 @@ export default function Page() {
               </ListItem>
             </ListContent>
           </List>
-        </div>
-        <hr />
-        <div className="flex flex-col bg-bg-darker sm:flex-row">
-          <div className="flex flex-col gap-3 p-6 sm:w-2/3">
-            <h2 className="text-lg font-bold">Current project</h2>
-            <p>
-              I am building a glassmorphic component system based on{" "}
-              <Link href="https://www.figma.com/community/file/1253443272911187215/apple-design-resources-visionos">
-                visionOS UI design
-              </Link>
-              . You are seeing that design system at work in this very page, and if you are curious,
-              you can check out this list of <Link href="/glui">all completed components</Link> so
-              far.
-            </p>
-          </div>
-          <div
-            className="relative min-h-[120px] flex-grow bg-[1.5rem_0px] sm:bg-[0px_1.5rem]"
-            style={{
-              backgroundImage:
-                "url(\"data:image/svg+xml,%3Csvg width='54' height='54' viewBox='0 0 54 54' fill='none' xmlns='http://www.w3.org/2000/svg' %3E%3Crect x='5' y='5' width='36' height='36' rx='4' stroke='%238080804d' strokeWidth='2' /%3E%3C/svg%3E\")",
-            }}
-          >
-            <div
-              className={cn(
-                "absolute left-1/2 top-1/2 h-18 w-24 -translate-x-16 -translate-y-12 rounded-[1rem] bg-bg-idle backdrop-blur",
-                styles.cardSm,
-              )}
-            />
-            <div
-              className={cn(
-                "absolute left-1/2 top-1/2 h-18 w-24 -translate-x-8 -translate-y-6 rounded-[1rem] bg-bg-idle backdrop-blur",
-                styles.cardSm,
-              )}
-            />
-          </div>
-        </div>
+        </section>
       </Card>
     </main>
   );
