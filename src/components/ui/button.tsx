@@ -13,8 +13,8 @@ const buttonVariants = cva({
   variants: {
     variant: {
       primary: "bg-text-primary text-black shadow disabled:shadow-none",
-      secondary: "bg-bg-idle text-text-primary",
-      ghost: "bg-transparent text-text-primary hover:bg-bg-hover",
+      secondary: "bg-bg-idle text-text-primary active:bg-bg-active",
+      ghost: "bg-transparent text-text-primary hover:bg-bg-hover active:bg-bg-active",
     },
     size: {
       sm: "w-fit px-3 py-1 text-sm [--button-gap:0.25rem] [&_svg]:h-4 [&_svg]:w-4",

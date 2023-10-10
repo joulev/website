@@ -22,6 +22,7 @@ const config: Config = {
         idle: "var(--bg-idle)",
         darker: "var(--bg-darker)",
         hover: "var(--bg-hover)",
+        active: "var(--bg-active)",
         disabled: "var(--bg-disabled)",
       },
       separator: "var(--separator)",

@@ -33,7 +33,7 @@ const withSeparatorClasses = cn(
   "[&_[data-li]:first-of-type]:border-none [&_[data-li]:hover]:border-transparent [&_[data-li]:hover_+_[data-li]]:border-transparent [&_[data-li]]:border-t [&_[data-li]]:border-separator",
 );
 const listContentVariants = cva({
-  base: "flex flex-col overflow-hidden rounded [&_[data-li-inner]]:px-6 [&_[data-li-inner]]:py-4 [&_[data-li-inner]]:transition-colors [&_[data-li]]:transition-colors",
+  base: "flex flex-col overflow-hidden rounded [&_[data-li-inner]:hover:active]:bg-bg-active [&_[data-li-inner]]:px-6 [&_[data-li-inner]]:py-4 [&_[data-li-inner]]:transition-colors [&_[data-li]]:transition-colors",
   variants: {
     variant: {
       plain: "[&_[data-li-inner]:hover]:bg-bg-idle [&_[data-li-inner]]:rounded",
