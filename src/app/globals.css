@@ -12,8 +12,13 @@
     --bg-darker: #12121233;
     --bg-disabled: #afafaf0c;
     --bg-button-hover-bg: #afafaf30;
+    --separator: #afafaf1c;
     --cyan: #5ac8f5;
   }
+}
+
+hr {
+  @apply border-separator;
 }
 
 /* https://dev.to/noriste/production-grade-gradient-bordered-transparent-and-rounded-button-56h4 */
@@ -32,7 +37,7 @@
 }
 
 .hover-bg {
-  @apply overflow-hidden [--hover-bg-colour:--bg-button-hover-bg] before:absolute before:inset-0 before:-z-10 before:opacity-0 before:transition hover:before:opacity-100 disabled:before:opacity-0;
+  @apply relative overflow-hidden [--hover-bg-colour:--bg-button-hover-bg] before:absolute before:inset-0 before:-z-10 before:opacity-0 before:transition hover:before:opacity-100 disabled:before:opacity-0;
   &::before {
     background: radial-gradient(
       60px circle at var(--hover-bg-left) var(--hover-bg-top),

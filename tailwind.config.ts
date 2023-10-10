@@ -10,7 +10,7 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    borderRadius: { DEFAULT: "0.5rem", full: "2rem" },
+    borderRadius: { DEFAULT: "1.25rem", full: "2rem" },
     container: { center: true, padding: "1.5rem" },
     colors: {
       text: {
@@ -24,6 +24,7 @@ const config: Config = {
         hover: "var(--bg-hover)",
         disabled: "var(--bg-disabled)",
       },
+      separator: "var(--separator)",
       black: "black",
       transparent: "transparent",
       cyan: "var(--cyan)",

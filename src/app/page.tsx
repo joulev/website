@@ -3,6 +3,7 @@ import { Github, Mail } from "lucide-react";
 import { LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
+import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
 
 import { GitHubStats } from "./github-stats";
 import { MusicData } from "./music-data";
@@ -13,7 +14,7 @@ export default function Page() {
       <Card className="flex flex-col p-0">
         <div className="flex flex-col items-start gap-6 bg-bg-darker p-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-3xl font-medium">Vu Van Dung</h1>
+            <h1 className="text-3xl font-medium">John Doe</h1>
             <div className="text-text-secondary">@joulev</div>
           </div>
           <div className="flex flex-row gap-3">
@@ -47,6 +48,34 @@ export default function Page() {
             <GitHubStats />
             <MusicData />
           </div>
+        </div>
+        <hr />
+        <div className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2">
+          <List>
+            <ListHeader>Packages</ListHeader>
+            <ListContent>
+              <ListItem asChild>
+                <a href="https://github.com/joulev/tailwind-dark-aware">tailwind-dark-aware</a>
+              </ListItem>
+              <ListItem asChild>
+                <a href="https://github.com/joulev/nextjs-route-types">nextjs-route-types</a>
+              </ListItem>
+            </ListContent>
+          </List>
+          <List>
+            <ListHeader>Apps</ListHeader>
+            <ListContent variants={{ withSeparator: false }}>
+              <ListItem asChild>
+                <a href="https://nextjs-faq.com">nextjs-faq</a>
+              </ListItem>
+              <ListItem asChild>
+                <a href="https://ezkomment.joulev.dev">ezkomment</a>
+              </ListItem>
+              <ListItem asChild>
+                <button type="button">Apps at joulev.dev</button>
+              </ListItem>
+            </ListContent>
+          </List>
         </div>
       </Card>
     </main>

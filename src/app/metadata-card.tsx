@@ -16,7 +16,7 @@ export function MetadataCard({
   href: string;
 }) {
   return (
-    <div className="recessed relative flex flex-row gap-3 overflow-hidden rounded-[1.25rem] p-3">
+    <div className="recessed relative flex flex-row gap-3 overflow-hidden rounded p-3">
       {left}
       <div className="flex min-w-0 flex-grow flex-col">
         <div className="flex flex-grow flex-row justify-between">
