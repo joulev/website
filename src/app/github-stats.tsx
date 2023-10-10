@@ -3,7 +3,6 @@ import { unstable_cache as cache } from "next/cache";
 import { Octokit } from "octokit";
 
 import { env } from "~/env.mjs";
-import { cn } from "~/lib/cn";
 
 import { MetadataCard } from "./metadata-card";
 
@@ -73,17 +72,9 @@ function BackgroundPattern() {
   );
 }
 
-function GitHubStatsData({
-  fullWidth,
-  label,
-  value,
-}: {
-  fullWidth?: boolean;
-  label: string;
-  value: number;
-}) {
+function GitHubStatsData({ label, value }: { label: string; value: number }) {
   return (
-    <div className={cn("flex flex-row items-center gap-1", fullWidth && "col-span-full")}>
+    <div className="flex flex-row items-center gap-1">
       <span className="text-sm text-text-secondary">{label}:</span>
       {value}
     </div>
@@ -104,7 +95,8 @@ export async function GitHubStats() {
         <div className="flex flex-row flex-wrap gap-x-6 sm:gap-x-3 md:gap-x-6">
           <GitHubStatsData label="Issues" value={issues} />
           <GitHubStatsData label="PRs" value={prs} />
-          <GitHubStatsData label="Contributed to" value={contribs} fullWidth />
+          <hr className="w-full border-none" />
+          <GitHubStatsData label="Contributed to" value={contribs} />
         </div>
       }
       title="GitHub Stats"
