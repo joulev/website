@@ -1,12 +1,12 @@
 "use client";
 
 import { type VariantProps, cva } from "cva";
-import Link from "next/link";
 import { forwardRef } from "react";
 
 import { cn } from "~/lib/cn";
 
 import { useHoverBackground } from "./hooks/use-hover-background";
+import { Link } from "./link";
 
 const buttonVariants = cva({
   base: "hover-bg inline-flex flex-row items-center justify-center gap-[--button-gap] rounded-full outline-offset-4 backdrop-blur transition disabled:cursor-not-allowed disabled:bg-bg-disabled disabled:text-text-tertiary",
@@ -39,7 +39,6 @@ export const Button = forwardRef<
     <button
       className={cn(buttonVariants({ ...variants, className }))}
       type="button"
-      tabIndex={0}
       {...rest}
       {...useHoverBackground({ style, onMouseMove })}
       ref={ref}
@@ -55,8 +54,8 @@ export const LinkButton = forwardRef<
 >(function LinkButton({ variants, href, className, style, onMouseMove, children, ...rest }, ref) {
   return (
     <Link
+      unstyled
       className={cn(buttonVariants({ ...variants, className }))}
-      tabIndex={0}
       href={href}
       {...rest}
       {...useHoverBackground({ style, onMouseMove })}

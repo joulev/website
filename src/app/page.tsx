@@ -55,10 +55,14 @@ export default function Page() {
             <ListHeader>Packages</ListHeader>
             <ListContent>
               <ListItem asChild>
-                <a href="https://github.com/joulev/tailwind-dark-aware">tailwind-dark-aware</a>
+                <Link unstyled href="https://github.com/joulev/tailwind-dark-aware">
+                  tailwind-dark-aware
+                </Link>
               </ListItem>
               <ListItem asChild>
-                <a href="https://github.com/joulev/nextjs-route-types">nextjs-route-types</a>
+                <Link unstyled href="https://github.com/joulev/nextjs-route-types">
+                  nextjs-route-types
+                </Link>
               </ListItem>
             </ListContent>
           </List>
@@ -66,10 +70,14 @@ export default function Page() {
             <ListHeader>Apps</ListHeader>
             <ListContent variants={{ withSeparator: false }}>
               <ListItem asChild>
-                <a href="https://nextjs-faq.com">nextjs-faq</a>
+                <Link unstyled href="https://nextjs-faq.com">
+                  nextjs-faq
+                </Link>
               </ListItem>
               <ListItem asChild>
-                <a href="https://ezkomment.joulev.dev">ezkomment</a>
+                <Link unstyled href="https://ezkomment.joulev.dev">
+                  ezkomment
+                </Link>
               </ListItem>
               <ListItem asChild>
                 <button type="button">Apps at joulev.dev</button>
