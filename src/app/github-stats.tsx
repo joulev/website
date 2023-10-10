@@ -1,4 +1,5 @@
 import { Github } from "lucide-react";
+import { unstable_cache as cache } from "next/cache";
 import { Octokit } from "octokit";
 
 import { env } from "~/env.mjs";
@@ -7,46 +8,50 @@ import { cn } from "~/lib/cn";
 import { MetadataCard } from "./metadata-card";
 
 // Taken from https://github.com/anuraghazra/github-readme-stats
-async function getStats() {
-  const octokit = new Octokit({ auth: env.GITHUB_TOKEN });
-  const gql = String.raw;
-  const { user } = await octokit.graphql<{
-    user: {
-      repositoriesContributedTo: { totalCount: number };
-      pullRequests: { totalCount: number };
-      openIssues: { totalCount: number };
-      closedIssues: { totalCount: number };
-    };
-  }>(
-    gql`
-      query ($login: String!) {
-        user(login: $login) {
-          repositoriesContributedTo(
-            first: 1
-            contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]
-          ) {
-            totalCount
-          }
-          pullRequests(first: 1) {
-            totalCount
-          }
-          openIssues: issues(states: OPEN) {
-            totalCount
-          }
-          closedIssues: issues(states: CLOSED) {
-            totalCount
+const getStats = cache(
+  async () => {
+    const octokit = new Octokit({ auth: env.GITHUB_TOKEN });
+    const gql = String.raw;
+    const { user } = await octokit.graphql<{
+      user: {
+        repositoriesContributedTo: { totalCount: number };
+        pullRequests: { totalCount: number };
+        openIssues: { totalCount: number };
+        closedIssues: { totalCount: number };
+      };
+    }>(
+      gql`
+        query ($login: String!) {
+          user(login: $login) {
+            repositoriesContributedTo(
+              first: 1
+              contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]
+            ) {
+              totalCount
+            }
+            pullRequests(first: 1) {
+              totalCount
+            }
+            openIssues: issues(states: OPEN) {
+              totalCount
+            }
+            closedIssues: issues(states: CLOSED) {
+              totalCount
+            }
           }
         }
-      }
-    `,
-    { login: "joulev" },
-  );
-  return {
-    issues: user.closedIssues.totalCount + user.openIssues.totalCount,
-    prs: user.pullRequests.totalCount,
-    contribs: user.repositoriesContributedTo.totalCount,
-  };
-}
+      `,
+      { login: "joulev" },
+    );
+    return {
+      issues: user.closedIssues.totalCount + user.openIssues.totalCount,
+      prs: user.pullRequests.totalCount,
+      contribs: user.repositoriesContributedTo.totalCount,
+    };
+  },
+  [],
+  { revalidate: 86400 }, // 24 hours
+);
 
 function BackgroundPattern() {
   // For uniform patterns
