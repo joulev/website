@@ -29,6 +29,7 @@ const config: Config = {
       black: "black",
       transparent: "transparent",
       cyan: "var(--cyan)",
+      blue: "var(--blue)",
     },
     fontFamily: { sans: ["var(--font)", ...defaultTheme.fontFamily.sans] },
     transitionDuration: { DEFAULT: "300ms" },

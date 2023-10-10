@@ -2,18 +2,24 @@ import { Github, Home, User } from "lucide-react";
 
 import { Button, LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
+import { Input } from "~/components/ui/input";
 import { Link } from "~/components/ui/link";
 import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
+import { cn } from "~/lib/cn";
 
 function capitalise(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function Showcase({ title, children }: React.PropsWithChildren<{ title: string }>) {
+function Showcase({
+  title,
+  className,
+  children,
+}: React.PropsWithChildren<{ title: string; className?: string }>) {
   return (
     <section className="flex flex-col gap-6">
       <h2 className="text-xl font-bold">{title}</h2>
-      {children}
+      <Card className={cn("flex flex-col gap-6", className)}>{children}</Card>
     </section>
   );
 }
@@ -23,28 +29,26 @@ function ButtonShowcase() {
   const buttonSizes = ["sm", "md", "lg"] as const;
   return (
     <Showcase title="Buttons">
-      <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
-        <div className="flex flex-col gap-6">
-          {buttonSizes.map(size => (
-            <div key={size} className="flex flex-row flex-wrap gap-3">
-              {buttonVariants.map(variant => (
-                <Button key={variant} variants={{ variant, size }}>
-                  {capitalise(variant)}
-                </Button>
-              ))}
-            </div>
-          ))}
-        </div>
-        <div className="flex flex-row flex-wrap gap-3">
-          <Button disabled>Disabled</Button>
-          <Button variants={{ size: "icon-md" }}>
-            <User />
-          </Button>
-          <Button>
-            <User /> User
-          </Button>
-          <LinkButton href="https://example.com">Link</LinkButton>
-        </div>
+      <div className="flex flex-col gap-6">
+        {buttonSizes.map(size => (
+          <div key={size} className="flex flex-row flex-wrap gap-3">
+            {buttonVariants.map(variant => (
+              <Button key={variant} variants={{ variant, size }}>
+                {capitalise(variant)}
+              </Button>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-row flex-wrap gap-3">
+        <Button disabled>Disabled</Button>
+        <Button variants={{ size: "icon-md" }}>
+          <User />
+        </Button>
+        <Button>
+          <User /> User
+        </Button>
+        <LinkButton href="https://example.com">Link</LinkButton>
       </div>
     </Showcase>
   );
@@ -77,42 +81,50 @@ function LinkShowcase() {
 function CardShowcase() {
   return (
     <Showcase title="Cards">
-      <Card>
+      <div>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non doloribus iure porro, sunt
         dolore eius, delectus reprehenderit maiores iste temporibus, praesentium repudiandae quod.
         Sapiente nesciunt, exercitationem, libero ipsa nam molestias nostrum quidem labore earum
-        deleniti, impedit nemo consequatur unde ut facilis? Veritatis dignissimos veniam, amet
-        corporis, repellendus iste nemo maxime laboriosam sed doloremque animi laudantium placeat
-        quam soluta beatae rem assumenda libero architecto ullam aperiam facere odio vel. Assumenda
-        nesciunt, ratione consequuntur mollitia natus voluptates reiciendis quos. Culpa maiores, sed
-        inventore quidem voluptatibus quo deserunt perferendis qui, tempore itaque ratione dolor
-        possimus? Quos corporis magni hic aspernatur nihil ducimus! Fuga.
-      </Card>
+        deleniti, impedit nemo consequatur unde ut facilis?
+      </div>
+      <div className="flex flex-row justify-end gap-3">
+        <Button>Cancel</Button>
+        <Button variants={{ variant: "primary" }}>Submit</Button>
+      </div>
     </Showcase>
   );
 }
 
 function ListShowcase() {
   return (
-    <Showcase title="List">
-      <Card className="grid grid-cols-1 gap-9 sm:grid-cols-2">
-        <List>
-          <ListHeader>Title</ListHeader>
-          <ListContent>
-            {Array.from({ length: 5 }).map((_, i) => (
-              <ListItem key={i}>Item {i + 1}</ListItem>
-            ))}
-          </ListContent>
-        </List>
-        <List>
-          <ListHeader>Title</ListHeader>
-          <ListContent variants={{ variant: "plain" }}>
-            {Array.from({ length: 5 }).map((_, i) => (
-              <ListItem key={i}>Item {i + 1}</ListItem>
-            ))}
-          </ListContent>
-        </List>
-      </Card>
+    <Showcase title="List" className="grid grid-cols-1 gap-9 sm:grid-cols-2">
+      <List>
+        <ListHeader>Title</ListHeader>
+        <ListContent>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <ListItem key={i}>Item {i + 1}</ListItem>
+          ))}
+        </ListContent>
+      </List>
+      <List>
+        <ListHeader>Title</ListHeader>
+        <ListContent variants={{ variant: "plain" }}>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <ListItem key={i}>Item {i + 1}</ListItem>
+          ))}
+        </ListContent>
+      </List>
+    </Showcase>
+  );
+}
+
+function InputShowcase() {
+  return (
+    <Showcase title="Input" className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <Input type="text" placeholder="Text" />
+      <Input type="number" placeholder="Number" />
+      <Input type="file" />
+      <Input type="text" placeholder="Disabled" disabled />
     </Showcase>
   );
 }
@@ -157,6 +169,8 @@ export default function Page() {
       <CardShowcase />
       <hr />
       <ListShowcase />
+      <hr />
+      <InputShowcase />
     </main>
   );
 }
