@@ -1,11 +1,40 @@
-import { Github, Home, User } from "lucide-react";
+import {
+  ChevronDown,
+  Cloud,
+  CreditCard,
+  Github,
+  Home,
+  LogOut,
+  Mail,
+  MessageSquare,
+  Plus,
+  PlusCircle,
+  User,
+  UserPlus,
+} from "lucide-react";
 
 import { Button, LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
 import { Input } from "~/components/ui/input";
 import { Link } from "~/components/ui/link";
 import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
 import { cn } from "~/lib/cn";
+
+import { DropdownCheckboxesShowcase, DropdownRadioGroupShowcase } from "./client-components";
 
 function capitalise(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -129,6 +158,86 @@ function InputShowcase() {
   );
 }
 
+function DropdownShowcase() {
+  return (
+    <Showcase title="Dropdown" className="grid grid-cols-1 sm:grid-cols-3">
+      <div className="grid place-items-center py-9">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button>
+              Normal
+              <ChevronDown />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-52">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <User />
+                <span>Profile</span>
+                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <CreditCard />
+                <span>Billing</span>
+                <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+              </DropdownMenuItem>
+              <DropdownMenuItem disabled>
+                <Cloud />
+                <span>API</span>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>
+                  <UserPlus />
+                  <span>Invite users</span>
+                </DropdownMenuSubTrigger>
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent>
+                    <DropdownMenuItem>
+                      <Mail />
+                      <span>Email</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <MessageSquare />
+                      <span>Message</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>
+                      <PlusCircle />
+                      <span>More...</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
+              <DropdownMenuItem>
+                <Plus />
+                <span>New Team</span>
+                <DropdownMenuShortcut>⌘T</DropdownMenuShortcut>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <LogOut />
+              <span>Log out</span>
+              <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+      <div className="grid place-items-center py-9">
+        <DropdownCheckboxesShowcase />
+      </div>
+      <div className="grid place-items-center py-9">
+        <DropdownRadioGroupShowcase />
+      </div>
+    </Showcase>
+  );
+}
+
 export default function Page() {
   return (
     <main className="container flex max-w-screen-md flex-col gap-9 py-24">
@@ -171,6 +280,8 @@ export default function Page() {
       <ListShowcase />
       <hr />
       <InputShowcase />
+      <hr />
+      <DropdownShowcase />
     </main>
   );
 }
