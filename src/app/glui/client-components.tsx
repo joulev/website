@@ -14,6 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import { Input } from "~/components/ui/input";
 
 export function DropdownCheckboxesShowcase() {
   const [showStatusBar, setShowStatusBar] = useState(true);
@@ -70,5 +71,17 @@ export function DropdownRadioGroupShowcase() {
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
+  );
+}
+
+export function ControlledInputShowcase() {
+  const [value, setValue] = useState("Controlled input");
+  return (
+    <Input
+      type="text"
+      placeholder="Text (controlled)"
+      value={value}
+      onChange={e => setValue(e.target.value)}
+    />
   );
 }

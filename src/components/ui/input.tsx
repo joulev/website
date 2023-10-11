@@ -1,7 +1,7 @@
 "use client";
 
 import { X } from "lucide-react";
-import { forwardRef, useCallback, useRef } from "react";
+import { forwardRef, useCallback, useState } from "react";
 
 import { cn } from "~/lib/cn";
 
@@ -9,21 +9,35 @@ import { Button } from "./button";
 import { useHoverBackground } from "./hooks/use-hover-background";
 
 export const Input = forwardRef<HTMLInputElement, React.ComponentProps<"input">>(function Input(
-  { className, type, disabled, placeholder, ...props },
+  {
+    className,
+    type,
+    disabled,
+    value: valueFromProps,
+    onChange: onChangeFromProps,
+    defaultValue,
+    ...props
+  },
   ref,
 ) {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const setRef = useCallback(
-    (el: HTMLInputElement | null) => {
-      inputRef.current = el;
-      if (typeof ref === "function") ref(el);
-      else if (ref) ref.current = el;
+  const isControlled = typeof valueFromProps !== "undefined";
+  const hasDefaultValue = typeof defaultValue !== "undefined";
+  const [internalValue, setInternalValue] = useState(hasDefaultValue ? defaultValue : "");
+  const value = isControlled ? valueFromProps : internalValue;
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (onChangeFromProps) onChangeFromProps(e);
+      if (!isControlled) setInternalValue(e.target.value);
     },
-    [ref],
+    [isControlled, onChangeFromProps],
   );
-  const clearInput = useCallback(() => {
-    if (inputRef.current) inputRef.current.value = "";
-  }, []);
+  const onClear = useCallback(() => {
+    if (onChangeFromProps)
+      // welp
+      onChangeFromProps({ target: { value: "" } } as React.ChangeEvent<HTMLInputElement>);
+    if (!isControlled) setInternalValue("");
+  }, [isControlled, onChangeFromProps]);
+
   return (
     <div
       className={cn(
@@ -46,11 +60,12 @@ export const Input = forwardRef<HTMLInputElement, React.ComponentProps<"input">>
         )}
         disabled={disabled}
         {...props}
-        placeholder={placeholder?.length && placeholder.length > 0 ? placeholder : " "}
-        ref={setRef}
+        value={value}
+        onChange={onChange}
+        ref={ref}
       />
       <div className="absolute right-[7px] top-1/2 -translate-y-1/2 opacity-100 transition-opacity peer-placeholder-shown:pointer-events-none peer-placeholder-shown:opacity-0 peer-disabled:pointer-events-none peer-disabled:opacity-0">
-        <Button variants={{ size: "icon-sm" }} onClick={clearInput}>
+        <Button variants={{ size: "icon-sm" }} onClick={() => onClear()}>
           <X />
         </Button>
       </div>

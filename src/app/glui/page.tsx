@@ -34,7 +34,11 @@ import { Link } from "~/components/ui/link";
 import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
 import { cn } from "~/lib/cn";
 
-import { DropdownCheckboxesShowcase, DropdownRadioGroupShowcase } from "./client-components";
+import {
+  ControlledInputShowcase,
+  DropdownCheckboxesShowcase,
+  DropdownRadioGroupShowcase,
+} from "./client-components";
 
 function capitalise(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -152,7 +156,7 @@ function InputShowcase() {
     <Showcase title="Input" className="grid grid-cols-1 gap-6 sm:grid-cols-2">
       <Input type="text" placeholder="Text" />
       <Input type="number" placeholder="Number" />
-      <Input type="file" />
+      <ControlledInputShowcase />
       <Input type="text" placeholder="Disabled" disabled />
     </Showcase>
   );
