@@ -49,7 +49,7 @@ export const Input = forwardRef<HTMLInputElement, React.ComponentProps<"input">>
       <input
         type={type}
         className={cn(
-          "caret-blue placeholder:text-secondary peer w-full bg-transparent pr-[42px] placeholder:font-medium",
+          "peer w-full bg-transparent pr-[42px] caret-blue placeholder:font-medium placeholder:text-text-secondary",
           type === "file" ? "py-[6px] pl-[7px]" : "py-[9px] pl-4",
           "file:rounded-full file:border-none file:bg-bg-idle file:px-3 file:py-1 file:text-sm file:text-text-primary file:transition-colors file:active:bg-bg-active",
           // https://stackoverflow.com/a/27935448

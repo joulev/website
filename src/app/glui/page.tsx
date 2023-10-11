@@ -32,6 +32,16 @@ import {
 import { Input } from "~/components/ui/input";
 import { Link } from "~/components/ui/link";
 import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
 import { cn } from "~/lib/cn";
 
 import {
@@ -242,6 +252,33 @@ function DropdownShowcase() {
   );
 }
 
+function SelectShowcase() {
+  return (
+    <Showcase title="Select" className="flex flex-row justify-center py-12">
+      <Select>
+        <SelectTrigger className="w-[240px]">
+          <SelectValue placeholder="Select a fruit" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Fruits</SelectLabel>
+            <SelectItem value="apple">Apple</SelectItem>
+            <SelectItem value="banana">Banana</SelectItem>
+          </SelectGroup>
+          <SelectSeparator />
+          <SelectGroup>
+            <SelectLabel>Vegetables</SelectLabel>
+            <SelectItem value="broccoli">Broccoli</SelectItem>
+            <SelectItem value="carrot" disabled>
+              Carrot
+            </SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </Showcase>
+  );
+}
+
 export default function Page() {
   return (
     <main className="container flex max-w-screen-md flex-col gap-9 py-24">
@@ -286,6 +323,8 @@ export default function Page() {
       <InputShowcase />
       <hr />
       <DropdownShowcase />
+      <hr />
+      <SelectShowcase />
     </main>
   );
 }
