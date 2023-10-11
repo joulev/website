@@ -103,7 +103,7 @@ DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName;
 export const DropdownMenuCheckboxItem = forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>
->(({ className, children, checked, ...props }, ref) => (
+>(({ className, children, checked, style, onMouseMove, ...props }, ref) => (
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
@@ -112,6 +112,7 @@ export const DropdownMenuCheckboxItem = forwardRef<
     )}
     checked={checked}
     {...props}
+    {...useHoverBackground({ style, onMouseMove })}
   >
     <DropdownMenuPrimitive.ItemIndicator>
       <Check />
@@ -125,7 +126,7 @@ DropdownMenuCheckboxItem.displayName = DropdownMenuPrimitive.CheckboxItem.displa
 export const DropdownMenuRadioItem = forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.RadioItem>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem>
->(({ className, children, ...props }, ref) => (
+>(({ className, children, style, onMouseMove, ...props }, ref) => (
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
@@ -133,6 +134,7 @@ export const DropdownMenuRadioItem = forwardRef<
       className,
     )}
     {...props}
+    {...useHoverBackground({ style, onMouseMove })}
   >
     <DropdownMenuPrimitive.ItemIndicator>
       <Circle className="fill-current !h-2 !w-2" />
