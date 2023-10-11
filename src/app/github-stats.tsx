@@ -74,8 +74,8 @@ function BackgroundPattern() {
 
 function GitHubStatsData({ label, value }: { label: string; value: number }) {
   return (
-    <div className="flex flex-row items-center gap-1">
-      <span className="text-sm text-text-secondary">{label}:</span>
+    <div>
+      <span className="mr-1 text-sm text-text-secondary">{label}:</span>
       {value}
     </div>
   );
