@@ -6,6 +6,7 @@ const YOUTUBE_VIDEO_ID_LENGTH = 11;
 
 export const env = createEnv({
   server: {
+    RESUME_URL: z.string().url(),
     GITHUB_TOKEN: z.string().startsWith("ghp_"),
     RECENT_FAVOURITE_SONG_ID: z.string().length(YOUTUBE_VIDEO_ID_LENGTH),
   },
