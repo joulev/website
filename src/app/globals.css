@@ -6,7 +6,7 @@
   :root {
     --text-primary: #fffffff5;
     --text-secondary: #aaaaaa9c;
-    --text-tertiary: #afafaf48;
+    --text-tertiary: #afafaf70;
     --bg-idle: #8080804d;
     --bg-hover: #afafaf0c;
     --bg-active: #afafaf42;
@@ -21,10 +21,6 @@
 
 hr {
   @apply border-separator;
-}
-
-.test {
-  height: calc((2000px / 100vh) * 100px);
 }
 
 /* https://dev.to/noriste/production-grade-gradient-bordered-transparent-and-rounded-button-56h4 */
