@@ -82,7 +82,7 @@ export default function Page() {
             masterpieces or movie soundtracks to catchy Japanese popular music.
           </p>
           <p>
-            I am also active on Discord and you can find me as a moderator and helper on{" "}
+            I am also active on Discord. You can find me as a moderator and helper on{" "}
             <Link href="https://discord.gg/nextjs">the official Next.js Discord server</Link>.
           </p>
           <div className="grid grid-cols-1 grid-rows-2 gap-6 sm:grid-cols-2 sm:grid-rows-1">
