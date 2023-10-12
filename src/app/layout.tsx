@@ -22,7 +22,7 @@ function Background() {
   }
   return (
     <div
-      className="fixed left-1/2 top-1/2 -z-50 min-h-full min-w-full origin-center -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-[#334155]"
+      className="fixed left-1/2 top-1/2 -z-50 min-h-full min-w-full origin-center -translate-x-1/2 -translate-y-1/2 overflow-hidden"
       style={{ aspectRatio: `${W} / ${H}` }}
     >
       <div
@@ -76,7 +76,7 @@ function Background() {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={cn(font.variable, "bg-[black] font-sans text-text-primary")}>
+      <body className={cn(font.variable, "bg-[#334155] font-sans text-text-primary")}>
         <Background />
         {children}
       </body>

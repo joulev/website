@@ -17,7 +17,7 @@ export const List = forwardRef<HTMLDivElement, BaseProps<"div">>(function List(
   ref,
 ) {
   const Component = asChild ? Slot : "div";
-  return <Component {...props} className={cn("flex flex-col gap-3", className)} ref={ref} />;
+  return <Component {...props} className={cn("flex flex-col gap-2", className)} ref={ref} />;
 });
 
 export const ListHeader = forwardRef<HTMLDivElement, BaseProps<"div">>(function ListHeader(
@@ -87,5 +87,15 @@ export const ListItem = forwardRef<HTMLDivElement, BaseProps<"div">>(function Li
         ref={ref}
       />
     </div>
+  );
+});
+
+export const ListFooter = forwardRef<HTMLDivElement, BaseProps<"div">>(function ListFooter(
+  { asChild, className, ...props },
+  ref,
+) {
+  const Component = asChild ? Slot : "div";
+  return (
+    <Component {...props} className={cn("px-6 text-xs text-text-secondary", className)} ref={ref} />
   );
 });

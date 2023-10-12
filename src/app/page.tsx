@@ -3,7 +3,7 @@ import { ChevronRight, Github, Mail } from "lucide-react";
 import { LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
-import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
+import { List, ListContent, ListFooter, ListHeader, ListItem } from "~/components/ui/lists";
 import { cn } from "~/lib/cn";
 
 import { GitHubStats } from "./github-stats";
@@ -90,7 +90,7 @@ export default function Page() {
           </div>
         </section>
         <hr />
-        <section className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2">
+        <section className="mx-auto flex max-w-lg flex-col gap-6 p-6">
           <List>
             <ListHeader asChild>
               <h2>Packages</h2>
@@ -123,10 +123,43 @@ export default function Page() {
                   ezkomment
                 </Link>
               </ListItem>
+            </ListContent>
+          </List>
+          <List>
+            <ListHeader asChild>
+              <h2>Apps at joulev.dev</h2>
+            </ListHeader>
+            <ListContent variants={{ withSeparator: false }}>
               <ListItem asChild>
-                <button type="button">Apps at joulev.dev</button>
+                <Link unstyled href="https://tategaki.joulev.dev/">
+                  tategaki
+                </Link>
+              </ListItem>
+              <ListItem asChild>
+                <Link unstyled href="https://anime.joulev.dev/">
+                  anime
+                </Link>
+              </ListItem>
+              <ListItem asChild>
+                <Link unstyled href="https://link.joulev.dev/">
+                  link
+                </Link>
+              </ListItem>
+              <ListItem asChild>
+                <Link unstyled href="https://presentation.joulev.dev/">
+                  presentation
+                </Link>
+              </ListItem>
+              <ListItem asChild>
+                <Link unstyled href="https://irasuto.joulev.dev/">
+                  irasuto
+                </Link>
               </ListItem>
             </ListContent>
+            <ListFooter>
+              These apps will be incrementally migrated into joulev.dev/apps under the new design
+              system in the upcoming months.
+            </ListFooter>
           </List>
         </section>
       </Card>
