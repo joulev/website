@@ -1,43 +1,24 @@
 "use client";
 
 import { X } from "lucide-react";
-import { forwardRef, useCallback, useState } from "react";
+import { forwardRef, useCallback } from "react";
 
 import { cn } from "~/lib/cn";
 
 import { Button } from "./button";
 import { useHoverBackground } from "./hooks/use-hover-background";
 
-export const Input = forwardRef<HTMLInputElement, React.ComponentProps<"input">>(function Input(
-  {
-    className,
-    type,
-    disabled,
-    value: valueFromProps,
-    onChange: onChangeFromProps,
-    defaultValue,
-    ...props
-  },
-  ref,
-) {
-  const isControlled = typeof valueFromProps !== "undefined";
-  const hasDefaultValue = typeof defaultValue !== "undefined";
-  const [internalValue, setInternalValue] = useState(hasDefaultValue ? defaultValue : "");
-  const value = isControlled ? valueFromProps : internalValue;
-  const onChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (onChangeFromProps) onChangeFromProps(e);
-      if (!isControlled) setInternalValue(e.target.value);
-    },
-    [isControlled, onChangeFromProps],
-  );
+export const Input = forwardRef<
+  HTMLInputElement,
+  // Force controlled component
+  Omit<React.ComponentProps<"input">, "defaultValue" | "value" | "onChange"> & {
+    value?: string;
+    onValueChange?: (val: string) => void;
+  }
+>(function Input({ className, type, disabled, value, onValueChange, ...props }, ref) {
   const onClear = useCallback(() => {
-    if (onChangeFromProps)
-      // welp
-      onChangeFromProps({ target: { value: "" } } as React.ChangeEvent<HTMLInputElement>);
-    if (!isControlled) setInternalValue("");
-  }, [isControlled, onChangeFromProps]);
-
+    onValueChange?.("");
+  }, [onValueChange]);
   return (
     <div
       className={cn(
@@ -49,9 +30,9 @@ export const Input = forwardRef<HTMLInputElement, React.ComponentProps<"input">>
       <input
         type={type}
         className={cn(
-          "peer w-full bg-transparent pr-[42px] caret-blue placeholder:font-medium placeholder:text-text-secondary",
-          type === "file" ? "py-[6px] pl-[7px]" : "py-[9px] pl-4",
-          "file:rounded-full file:border-none file:bg-bg-idle file:px-3 file:py-1 file:text-sm file:text-text-primary file:transition-colors file:active:bg-bg-active",
+          "peer w-full bg-transparent py-[9px] pl-4 pr-[42px] caret-blue placeholder:font-medium placeholder:text-text-secondary",
+          // type === "file" ? "py-[6px] pl-[7px]" : "py-[9px] pl-4",
+          // "file:rounded-full file:border-none file:bg-bg-idle file:px-3 file:py-1 file:text-sm file:text-text-primary file:transition-colors file:active:bg-bg-active",
           // https://stackoverflow.com/a/27935448
           "[&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none",
           "[&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none",
@@ -61,10 +42,15 @@ export const Input = forwardRef<HTMLInputElement, React.ComponentProps<"input">>
         disabled={disabled}
         {...props}
         value={value}
-        onChange={onChange}
+        onChange={event => onValueChange?.(event.target.value)}
         ref={ref}
       />
-      <div className="absolute right-[7px] top-1/2 -translate-y-1/2 opacity-100 transition-opacity peer-placeholder-shown:pointer-events-none peer-placeholder-shown:opacity-0 peer-disabled:pointer-events-none peer-disabled:opacity-0">
+      <div
+        className={cn(
+          "absolute right-[7px] top-1/2 -translate-y-1/2 transition-opacity peer-disabled:pointer-events-none peer-disabled:opacity-0",
+          value === "" ? "pointer-events-none opacity-0" : "opacity-100",
+        )}
+      >
         <Button variants={{ size: "icon-sm" }} onClick={() => onClear()}>
           <X />
         </Button>

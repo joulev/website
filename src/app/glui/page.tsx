@@ -29,7 +29,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { Input } from "~/components/ui/input";
 import { Link } from "~/components/ui/link";
 import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
 import {
@@ -164,10 +163,7 @@ function ListShowcase() {
 function InputShowcase() {
   return (
     <Showcase title="Input" className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-      <Input type="text" placeholder="Text" />
-      <Input type="number" placeholder="Number" />
       <ControlledInputShowcase />
-      <Input type="text" placeholder="Disabled" disabled />
     </Showcase>
   );
 }

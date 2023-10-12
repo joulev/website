@@ -77,11 +77,9 @@ export function DropdownRadioGroupShowcase() {
 export function ControlledInputShowcase() {
   const [value, setValue] = useState("Controlled input");
   return (
-    <Input
-      type="text"
-      placeholder="Text (controlled)"
-      value={value}
-      onChange={e => setValue(e.target.value)}
-    />
+    <>
+      <Input type="text" placeholder="Text" value={value} onValueChange={setValue} />
+      <Input type="text" placeholder="Disabled" disabled />
+    </>
   );
 }
