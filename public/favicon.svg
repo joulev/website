@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" fill="none">
+  <g clip-path="url(#a)">
+    <rect width="256" height="256" fill="#334155" rx="128"/>
+    <ellipse cx="255.47" cy="92.267" fill="url(#b)" fill-opacity=".5" rx="216.148" ry="275.436" transform="rotate(-24.211 255.47 92.267)"/>
+    <ellipse cx="-.53" cy="56.711" fill="url(#c)" fill-opacity=".5" rx="216.148" ry="275.436" transform="rotate(12.992 -.53 56.711)"/>
+    <ellipse cx="128.362" cy="267.234" fill="url(#d)" fill-opacity=".3" rx="216.148" ry="275.436" transform="rotate(98.15 128.362 267.234)"/>
+    <path fill="#fff" fill-opacity=".961" d="M79.373 152.681c-2.805 1.682-6.373-.339-6.373-3.61v-42.739c0-3.266 3.56-5.288 6.365-3.615l35.74 21.312c2.734 1.631 2.739 5.589.009 7.225l-35.74 21.427Z"/>
+    <path fill="#fff" fill-opacity=".961" d="M145.248 111.311a4.208 4.208 0 0 1 1.884 3.509v25.587a4.21 4.21 0 0 1-1.878 3.505L74.886 190.71c-3.47 2.308-1.836 7.714 2.33 7.714h43.4a4.21 4.21 0 0 0 2.316-.694l57.214-37.693a4.21 4.21 0 0 0 1.894-3.515V98.924a4.209 4.209 0 0 0-1.921-3.533l-58.207-37.714a4.206 4.206 0 0 0-2.289-.677H77.26c-4.17 0-5.801 5.414-2.325 7.718l70.313 46.593Z"/>
+  </g>
+  <defs>
+    <radialGradient id="b" cx="0" cy="0" r="1" gradientTransform="matrix(0 275.436 -216.148 0 255.47 92.267)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E40AF"/>
+      <stop offset="1" stop-color="#1E40AF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="c" cx="0" cy="0" r="1" gradientTransform="matrix(0 275.436 -216.148 0 -.53 56.711)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#166534"/>
+      <stop offset="1" stop-color="#166534" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="d" cx="0" cy="0" r="1" gradientTransform="matrix(0 275.436 -216.148 0 128.362 267.234)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#713F12"/>
+      <stop offset="1" stop-color="#713F12" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="a">
+      <rect width="256" height="256" fill="#fff" rx="128"/>
+    </clipPath>
+  </defs>
+</svg>

@@ -19,19 +19,9 @@ module.exports = {
     "@typescript-eslint/no-misused-promises": "off",
     "import/no-extraneous-dependencies": "off",
     "import/order": "off",
+    "import/no-default-export": "off",
     "no-console": "off",
     "react/jsx-sort-props": "off",
     "react/no-array-index-key": "off",
   },
-  overrides: [
-    {
-      files: [
-        "src/app/**/page.tsx",
-        "src/app/**/layout.tsx",
-        "tailwind.config.ts",
-        "next.config.mjs",
-      ],
-      rules: { "import/no-default-export": "off" },
-    },
-  ],
 };

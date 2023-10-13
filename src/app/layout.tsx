@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hanken_Grotesk as HankenGrotesk } from "next/font/google";
 import tw from "tailwindcss/colors";
 
@@ -83,3 +84,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://joulev.dev"),
+  robots: { index: true, follow: true },
+  twitter: { card: "summary_large_image", creator: "@joulev_3" },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", type: "image/x-icon", sizes: "any" },
+    ],
+  },
+};

@@ -12,6 +12,7 @@ import {
   User,
   UserPlus,
 } from "lucide-react";
+import type { Metadata } from "next";
 
 import { Button, LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
@@ -324,3 +325,8 @@ export default function Page() {
     </main>
   );
 }
+
+export const metadata: Metadata = {
+  title: "joulev.dev » glui",
+  description: "A glassmorphic component collection",
+};
