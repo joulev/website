@@ -10,7 +10,7 @@ export async function getOpengraphImage({ title, subtitle }: { title: string; su
       <div tw="flex" style={{ width, height, color: "#fffffff5" }}>
         {/* eslint-disable-next-line @next/next/no-img-element -- We are in Satori */}
         <img
-          src="https://cdn.discordapp.com/attachments/1069885585357033483/1162271548900646952/image.png?ex=653b54bb&is=6528dfbb&hm=338c0b52c93e28231fc0098e464e7ccd05e632cecc6bbc63e31ddc2e041efa14&"
+          src="https://github.com/joulev/joulev/assets/44609036/7dfd6800-3349-4cd8-bdb9-ed2de9927c01"
           alt=""
           tw="absolute inset-0"
         />
