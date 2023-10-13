@@ -329,4 +329,9 @@ export default function Page() {
 export const metadata: Metadata = {
   title: "joulev.dev » glui",
   description: "A glassmorphic component collection",
+  openGraph: {
+    title: "joulev.dev » cuid2",
+    description: "A glassmorphic component collection",
+    url: "/glui",
+  },
 };

@@ -44,6 +44,11 @@ export default function Page({ params }: PageProps) {
 export const metadata: Metadata = {
   title: "joulev.dev » cuid2",
   description: "Online cuid2 generator",
+  openGraph: {
+    title: "joulev.dev » cuid2",
+    description: "Online cuid2 generator",
+    url: "/apps/cuid2",
+  },
 };
 
 export const runtime = "edge";

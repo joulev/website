@@ -171,4 +171,9 @@ export default function Page() {
 export const metadata: Metadata = {
   title: "Vu Van Dung",
   description: "Software developer. I build things for the web.",
+  openGraph: {
+    title: "Vu Van Dung",
+    description: "Software developer. I build things for the web.",
+    url: "/",
+  },
 };
