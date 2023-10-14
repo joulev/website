@@ -48,6 +48,13 @@ export const metadata: Metadata = {
     title: "joulev.dev » cuid2",
     description: "Online cuid2 generator",
     url: "/apps/cuid2",
+    images: {
+      url: "/apps/cuid2/opengraph-image",
+      width: 1200,
+      height: 630,
+      alt: "joulev.dev » cuid2",
+      type: "image/png",
+    },
   },
 };
 
