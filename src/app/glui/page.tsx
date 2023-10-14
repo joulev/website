@@ -332,54 +332,59 @@ function NavigationMenuShowcase() {
   return (
     <section className="flex flex-col gap-6">
       <h2 className="text-xl font-bold">Navigation Menu</h2>
-      <div className="mx-auto pb-[582px] md:pb-[320px]">
-        <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid grid-cols-1 md:grid-cols-2 lg:w-[500px]">
-                  <li>
-                    <NavigationMenuLink href="#" asChild unstyled>
-                      <div className="flex h-full w-full select-none flex-col justify-end bg-bg-darker p-6 no-underline outline-none">
-                        <div className="mb-2 mt-4 text-lg font-medium">glui</div>
-                        <p className="text-sm leading-tight text-text-secondary">
-                          Glassmorphic component collection based on visionOS UI design system
-                        </p>
-                      </div>
-                    </NavigationMenuLink>
-                  </li>
-                  <div className="flex flex-col gap-3 p-3">
-                    <NavigationMenuListItem title="Introduction">
-                      Re-usable components built using Radix UI and Tailwind CSS.
-                    </NavigationMenuListItem>
-                    <NavigationMenuListItem title="Installation">
-                      How to install dependencies and structure your app.
-                    </NavigationMenuListItem>
-                    <NavigationMenuListItem title="Typography">
-                      Styles for headings, paragraphs, lists...etc
-                    </NavigationMenuListItem>
-                  </div>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Components</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid gap-3 p-3 md:grid-cols-2 lg:w-[600px]">
-                  {components.map(component => (
-                    <NavigationMenuListItem key={component.title} title={component.title}>
-                      {component.description}
-                    </NavigationMenuListItem>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem className="max-sm:hidden">
-              <NavigationMenuMainLink href="#">Documentation</NavigationMenuMainLink>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+      <div className="flex flex-col items-center">
+        <div>
+          <NavigationMenu className="z-0">
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid grid-cols-1 md:grid-cols-2 lg:w-[500px]">
+                    <li>
+                      <NavigationMenuLink href="#" asChild unstyled>
+                        <div className="flex h-full w-full select-none flex-col justify-end bg-bg-darker p-6 no-underline outline-none">
+                          <div className="mb-2 mt-4 text-lg font-medium">glui</div>
+                          <p className="text-sm leading-tight text-text-secondary">
+                            Glassmorphic component collection based on visionOS UI design system
+                          </p>
+                        </div>
+                      </NavigationMenuLink>
+                    </li>
+                    <div className="flex flex-col gap-3 p-3">
+                      <NavigationMenuListItem title="Introduction">
+                        Re-usable components built using Radix UI and Tailwind CSS.
+                      </NavigationMenuListItem>
+                      <NavigationMenuListItem title="Installation">
+                        How to install dependencies and structure your app.
+                      </NavigationMenuListItem>
+                      <NavigationMenuListItem title="Typography">
+                        Styles for headings, paragraphs, lists...etc
+                      </NavigationMenuListItem>
+                    </div>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid gap-3 p-3 md:grid-cols-2 lg:w-[600px]">
+                    {components.map(component => (
+                      <NavigationMenuListItem key={component.title} title={component.title}>
+                        {component.description}
+                      </NavigationMenuListItem>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem className="max-sm:hidden">
+                <NavigationMenuMainLink href="#">Documentation</NavigationMenuMainLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+        <div className="grid h-[582px] place-items-center text-text-tertiary md:h-[320px]">
+          Interact with the navigation menu above.
+        </div>
       </div>
     </section>
   );

@@ -3,6 +3,7 @@ import { Hanken_Grotesk as HankenGrotesk } from "next/font/google";
 import tw from "tailwindcss/colors";
 
 import { Logo } from "~/components/logo";
+import { Link } from "~/components/ui/link";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -140,7 +141,12 @@ function Navigation() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem className="grid h-10 w-10 place-items-center rounded-full">
-            <Logo logoWidth={18} className="fill-text-secondary" />
+            <Link href="/" className="group/logo-link" unstyled>
+              <Logo
+                logoWidth={18}
+                className="fill-text-secondary transition group-hover/logo-link:fill-text-primary"
+              />
+            </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuMainLink href="/">Home</NavigationMenuMainLink>

@@ -38,8 +38,7 @@ export const NavigationMenuList = forwardRef<
   <NavigationMenuPrimitive.List
     ref={ref}
     className={cn(
-      "card", // TODO
-      "group flex flex-1 list-none items-center justify-center gap-2 rounded-full bg-bg-idle p-2 backdrop-blur",
+      "card-pill group flex flex-1 list-none items-center justify-center gap-2 rounded-full bg-bg-idle p-2 backdrop-blur",
       className,
     )}
     {...props}
