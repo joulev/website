@@ -70,6 +70,7 @@ function Background() {
           background: getBackgroundCSS(colours[3]),
         }}
       />
+      <div className="absolute inset-0 backdrop-blur" />
     </div>
   );
 }
