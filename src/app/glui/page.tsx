@@ -3,7 +3,6 @@ import {
   Cloud,
   CreditCard,
   Github,
-  Home,
   LogOut,
   Mail,
   MessageSquare,
@@ -388,16 +387,7 @@ function NavigationMenuShowcase() {
 
 export default function Page() {
   return (
-    <main className="container flex max-w-screen-md flex-col gap-9 py-24">
-      <div>
-        <LinkButton
-          href="/"
-          variants={{ variant: "ghost" }}
-          className="-mx-4 text-text-secondary hover:text-text-primary"
-        >
-          <Home /> Go back home
-        </LinkButton>
-      </div>
+    <main className="container flex max-w-screen-md flex-col gap-9">
       <section className="flex flex-col gap-6">
         <div>
           <h1 className="flex flex-row items-center gap-3">

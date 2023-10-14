@@ -13,7 +13,7 @@ import styles from "./page.module.css";
 
 export default function Page() {
   return (
-    <main className="container max-w-screen-md py-24">
+    <main className="container max-w-screen-md">
       <Card className="flex flex-col p-0">
         <section className="flex flex-col items-start gap-6 bg-bg-darker p-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
