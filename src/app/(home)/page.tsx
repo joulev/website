@@ -55,13 +55,13 @@ export default function Page() {
           >
             <div
               className={cn(
-                "absolute left-1/2 top-1/2 h-18 w-24 -translate-x-16 -translate-y-12 rounded-[1rem] bg-bg-idle backdrop-blur",
+                "absolute left-1/2 top-1/2 h-18 w-24 -translate-x-[68px] -translate-y-12 rounded-[1rem] bg-bg-idle backdrop-blur",
                 styles.cardSm,
               )}
             />
             <div
               className={cn(
-                "absolute left-1/2 top-1/2 h-18 w-24 -translate-x-8 -translate-y-6 rounded-[1rem] bg-bg-idle backdrop-blur",
+                "absolute left-1/2 top-1/2 h-18 w-24 -translate-x-7 -translate-y-6 rounded-[1rem] bg-bg-idle backdrop-blur",
                 styles.cardSm,
               )}
             />
