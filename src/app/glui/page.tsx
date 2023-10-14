@@ -375,7 +375,7 @@ function NavigationMenuShowcase() {
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
-            <NavigationMenuItem>
+            <NavigationMenuItem className="max-sm:hidden">
               <NavigationMenuMainLink href="#">Documentation</NavigationMenuMainLink>
             </NavigationMenuItem>
           </NavigationMenuList>
