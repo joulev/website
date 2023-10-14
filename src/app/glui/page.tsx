@@ -33,6 +33,15 @@ import {
 import { Link } from "~/components/ui/link";
 import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
 import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuMainLink,
+  NavigationMenuTrigger,
+} from "~/components/ui/navigation-menu";
+import {
   Select,
   SelectContent,
   SelectGroup,
@@ -276,6 +285,107 @@ function SelectShowcase() {
   );
 }
 
+function NavigationMenuListItem({ title, children }: React.PropsWithChildren<{ title: string }>) {
+  return (
+    <li>
+      <NavigationMenuLink
+        href="#"
+        className="flex select-none flex-col justify-between gap-3 leading-none no-underline outline-none"
+      >
+        <div className="text-sm font-semibold leading-none">{title}</div>
+        <p className="line-clamp-2 text-sm leading-snug text-text-secondary">{children}</p>
+      </NavigationMenuLink>
+    </li>
+  );
+}
+function NavigationMenuShowcase() {
+  const components: { title: string; description: string }[] = [
+    {
+      title: "Alert Dialog",
+      description:
+        "A modal dialog that interrupts the user with important content and expects a response.",
+    },
+    {
+      title: "Hover Card",
+      description: "For sighted users to preview content available behind a link.",
+    },
+    {
+      title: "Progress",
+      description:
+        "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+    },
+    {
+      title: "Scroll-area",
+      description: "Visually or semantically separates content.",
+    },
+    {
+      title: "Tabs",
+      description:
+        "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+    },
+    {
+      title: "Tooltip",
+      description:
+        "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+    },
+  ];
+
+  return (
+    <section className="flex flex-col gap-6">
+      <h2 className="text-xl font-bold">Navigation Menu</h2>
+      <div className="mx-auto pb-[582px] md:pb-[320px]">
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:w-[500px]">
+                  <li>
+                    <NavigationMenuLink href="#" asChild unstyled>
+                      <div className="flex h-full w-full select-none flex-col justify-end bg-bg-darker p-6 no-underline outline-none">
+                        <div className="mb-2 mt-4 text-lg font-medium">glui</div>
+                        <p className="text-sm leading-tight text-text-secondary">
+                          Glassmorphic component collection based on visionOS UI design system
+                        </p>
+                      </div>
+                    </NavigationMenuLink>
+                  </li>
+                  <div className="flex flex-col gap-3 p-3">
+                    <NavigationMenuListItem title="Introduction">
+                      Re-usable components built using Radix UI and Tailwind CSS.
+                    </NavigationMenuListItem>
+                    <NavigationMenuListItem title="Installation">
+                      How to install dependencies and structure your app.
+                    </NavigationMenuListItem>
+                    <NavigationMenuListItem title="Typography">
+                      Styles for headings, paragraphs, lists...etc
+                    </NavigationMenuListItem>
+                  </div>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid gap-3 p-3 md:grid-cols-2 lg:w-[600px]">
+                  {components.map(component => (
+                    <NavigationMenuListItem key={component.title} title={component.title}>
+                      {component.description}
+                    </NavigationMenuListItem>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuMainLink href="#">Documentation</NavigationMenuMainLink>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </div>
+    </section>
+  );
+}
+
 export default function Page() {
   return (
     <main className="container flex max-w-screen-md flex-col gap-9 py-24">
@@ -322,6 +432,8 @@ export default function Page() {
       <DropdownShowcase />
       <hr />
       <SelectShowcase />
+      <hr />
+      <NavigationMenuShowcase />
     </main>
   );
 }

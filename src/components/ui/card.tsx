@@ -9,7 +9,7 @@ export const Card = forwardRef<HTMLDivElement, React.ComponentPropsWithoutRef<"d
   return (
     <div
       className={cn(
-        "card overflow-hidden rounded-full border bg-bg-idle p-6 backdrop-blur transition",
+        "card overflow-hidden rounded-full bg-bg-idle p-6 backdrop-blur transition",
         className,
       )}
       {...rest}
