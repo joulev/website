@@ -20,6 +20,7 @@ export function Form({ initialValue }: { initialValue: number }) {
     >
       <div className="flex-grow sm:w-36 sm:flex-grow-0">
         <Input
+          required
           type="number"
           placeholder="Length"
           value={String(value)}
