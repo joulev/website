@@ -10,11 +10,13 @@ import { CopyButton } from "./copy-button";
 import { Form } from "./form";
 
 const DEFAULT_LENGTH = 12;
+const MIN_LENGTH = 1;
+const MAX_LENGTH = 64;
 function getLength(params: Params) {
   if (!params.idLength) return DEFAULT_LENGTH;
   if (params.idLength.length !== 1) notFound();
   const length = parseInt(params.idLength[0]);
-  if (isNaN(length)) notFound();
+  if (isNaN(length) || length < MIN_LENGTH || length > MAX_LENGTH) notFound();
   return length;
 }
 
