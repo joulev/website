@@ -405,13 +405,19 @@ export default function Page() {
             A component collection based on{" "}
             <Link href="https://www.figma.com/community/file/1253443272911187215/apple-design-resources-visionos">
               visionOS UI design system
-            </Link>
+            </Link>{" "}
+            and built using <Link href="https://radix-ui.com/">Radix UI</Link>,{" "}
+            <Link href="https://tailwindcss.com/">Tailwind CSS</Link> and{" "}
+            <Link href="https://ui.shadcn.com/">shadcn/ui</Link>.
           </div>
         </div>
-        <Button disabled>
+        <LinkButton
+          href="https://github.com/joulev/website/tree/main/src/components/ui"
+          variants={{ variant: "primary" }}
+        >
           <Github />
-          GitHub (soon)
-        </Button>
+          See the components on GitHub
+        </LinkButton>
       </section>
       <hr />
       <ButtonShowcase />
