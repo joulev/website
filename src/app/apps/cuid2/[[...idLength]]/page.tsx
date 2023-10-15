@@ -27,7 +27,7 @@ export default function Page({ params }: PageProps) {
     <main className="container max-w-screen-md">
       <Card className="flex flex-col p-0">
         <div className="relative break-all bg-bg-darker p-12 pt-[90px] text-center text-3xl sm:p-24 sm:text-5xl">
-          <span className="select-all">
+          <span className="font-mono select-all">
             <Balancer>{value}</Balancer>
           </span>
           <div className="absolute right-6 top-6 flex flex-col">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Hanken_Grotesk as HankenGrotesk } from "next/font/google";
+import { B612_Mono as B612Mono, Hanken_Grotesk as HankenGrotesk } from "next/font/google";
 import tw from "tailwindcss/colors";
 
 import { Logo } from "~/components/logo";
@@ -17,7 +17,8 @@ import { cn } from "~/lib/cn";
 
 import "./globals.css";
 
-const font = HankenGrotesk({ subsets: ["latin"], variable: "--font" });
+const sans = HankenGrotesk({ subsets: ["latin"], variable: "--sans" });
+const mono = B612Mono({ subsets: ["latin"], weight: "400", variable: "--mono" });
 
 function Background() {
   const [W, H] = [2000, 1400];
@@ -181,7 +182,9 @@ function Navigation() {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={cn(font.variable, "bg-[#334155] font-sans text-text-primary")}>
+      <body
+        className={cn(sans.variable, mono.variable, "bg-[#334155] font-sans text-text-primary")}
+      >
         <Background />
         <div className="pb-24 pt-[152px]">{children}</div>
         <Navigation />

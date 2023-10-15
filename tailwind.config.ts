@@ -32,7 +32,10 @@ const config: Config = {
       cyan: "var(--cyan)",
       blue: "var(--blue)",
     },
-    fontFamily: { sans: ["var(--font)", ...defaultTheme.fontFamily.sans] },
+    fontFamily: {
+      sans: ["var(--sans)", ...defaultTheme.fontFamily.sans],
+      mono: ["var(--mono)", ...defaultTheme.fontFamily.mono],
+    },
     transitionDuration: { DEFAULT: "300ms" },
     extend: {
       spacing: {
