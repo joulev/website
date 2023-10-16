@@ -10,6 +10,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "3.428.0",
+    "@discordjs/builders": "1.6.5",
     "@neondatabase/serverless": "0.6.0",
     "@paralleldrive/cuid2": "2.2.2",
     "@radix-ui/react-dialog": "1.0.5",
@@ -26,6 +28,7 @@
     "autoprefixer": "10.4.16",
     "cva": "1.0.0-beta.1",
     "date-fns": "2.30.0",
+    "discord-api-types": "0.37.60",
     "dotenv": "16.3.1",
     "drizzle-kit": "0.19.13",
     "drizzle-orm": "0.28.6",
@@ -42,6 +45,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-intersection-observer": "9.5.2",
+    "react-tweet": "3.1.1",
     "react-wrap-balancer": "1.1.0",
     "tailwind-merge": "1.14.0",
     "tailwindcss": "3.3.3",
