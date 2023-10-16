@@ -36,7 +36,7 @@ const config: Config = {
       sans: ["var(--sans)", ...defaultTheme.fontFamily.sans],
       mono: ["var(--mono)", ...defaultTheme.fontFamily.mono],
     },
-    transitionDuration: { DEFAULT: "300ms" },
+    transitionDuration: { DEFAULT: "300ms", 600: "600ms" },
     extend: {
       spacing: {
         18: "4.5rem",

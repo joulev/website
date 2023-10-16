@@ -152,7 +152,7 @@ export default function Page() {
                 </Link>
               </ListItem>
               <ListItem asChild>
-                <Link unstyled href="https://irasuto.joulev.dev/">
+                <Link unstyled href="/apps/irasuto">
                   irasuto
                 </Link>
               </ListItem>

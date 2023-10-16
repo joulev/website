@@ -1,0 +1,13 @@
+diff --git a/index.cjs b/index.cjs
+index d6085807f138fca830a8fb8bf9470779f091fa61..0fd6c9d3109eb60cd20f2263478e60ccdab080a1 100755
+--- a/index.cjs
++++ b/index.cjs
+@@ -11167,7 +11167,7 @@ var require_node2 = __commonJS({
+           sourcefile: filename,
+           loader: getLoader(filename),
+           sourcemap: "both",
+-          target: options.target,
++          target: "es6",
+           jsxFactory: options.jsxFactory,
+           jsxFragment: options.jsxFragment,
+           format,

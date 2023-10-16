@@ -9,6 +9,7 @@ export const env = createEnv({
     RESUME_URL: z.string().url(),
     GITHUB_TOKEN: z.string().startsWith("ghp_"),
     RECENT_FAVOURITE_SONG_ID: z.string().length(YOUTUBE_VIDEO_ID_LENGTH),
+    DATABASE_URL: z.string().startsWith("postgres://"),
   },
   experimental__runtimeEnv: {},
 });

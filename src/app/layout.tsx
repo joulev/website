@@ -133,7 +133,7 @@ function Navigation() {
     },
     {
       title: "irasuto",
-      href: "https://irasuto.joulev.dev",
+      href: "/apps/irasuto",
       description: "A website featuring Japanese illustrations that I love",
     },
   ];

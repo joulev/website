@@ -3,12 +3,14 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "db:push": "drizzle-kit push:pg",
     "dev": "next dev",
     "format": "prettier --write .",
     "lint": "next lint",
     "start": "next start"
   },
   "dependencies": {
+    "@neondatabase/serverless": "0.6.0",
     "@paralleldrive/cuid2": "2.2.2",
     "@radix-ui/react-dialog": "1.0.5",
     "@radix-ui/react-dropdown-menu": "2.0.6",
@@ -23,6 +25,10 @@
     "@vercel/style-guide": "5.0.1",
     "autoprefixer": "10.4.16",
     "cva": "1.0.0-beta.1",
+    "date-fns": "2.30.0",
+    "dotenv": "16.3.1",
+    "drizzle-kit": "0.19.13",
+    "drizzle-orm": "0.28.6",
     "eslint": "8.51.0",
     "eslint-config-next": "13.5.4",
     "lucide-react": "0.284.0",
@@ -35,6 +41,7 @@
     "prettier-plugin-tailwindcss": "0.5.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-intersection-observer": "9.5.2",
     "react-wrap-balancer": "1.1.0",
     "tailwind-merge": "1.14.0",
     "tailwindcss": "3.3.3",
@@ -45,7 +52,8 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "ytmusic-api@4.4.0": "patches/ytmusic-api@4.4.0.patch"
+      "ytmusic-api@4.4.0": "patches/ytmusic-api@4.4.0.patch",
+      "drizzle-kit@0.19.13": "patches/drizzle-kit@0.19.13.patch"
     }
   }
 }

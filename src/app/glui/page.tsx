@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import type { Metadata } from "next";
 
+import { Title } from "~/components/title";
 import { Button, LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import {
@@ -394,23 +395,25 @@ export default function Page() {
   return (
     <main className="container flex max-w-screen-md flex-col gap-9">
       <section className="flex flex-col gap-6">
-        <div>
-          <h1 className="flex flex-row items-center gap-3">
-            <span className="text-3xl font-medium">glui</span>
-            <span className="cursor-default select-none rounded-full bg-bg-idle px-3 py-1 text-sm text-text-secondary backdrop-blur">
+        <Title
+          title="glui"
+          titleLabel={
+            <span className="cursor-default select-none self-center rounded-full bg-bg-idle px-3 py-1 text-sm text-text-secondary backdrop-blur">
               work in progress
             </span>
-          </h1>
-          <div className="text-lg text-text-secondary">
-            A component collection based on{" "}
-            <Link href="https://www.figma.com/community/file/1253443272911187215/apple-design-resources-visionos">
-              visionOS UI design system
-            </Link>{" "}
-            and built using <Link href="https://radix-ui.com/">Radix UI</Link>,{" "}
-            <Link href="https://tailwindcss.com/">Tailwind CSS</Link> and{" "}
-            <Link href="https://ui.shadcn.com/">shadcn/ui</Link>.
-          </div>
-        </div>
+          }
+          subtitle={
+            <div className="text-lg text-text-secondary">
+              A component collection based on{" "}
+              <Link href="https://www.figma.com/community/file/1253443272911187215/apple-design-resources-visionos">
+                visionOS UI design system
+              </Link>{" "}
+              and built using <Link href="https://radix-ui.com/">Radix UI</Link>,{" "}
+              <Link href="https://tailwindcss.com/">Tailwind CSS</Link> and{" "}
+              <Link href="https://ui.shadcn.com/">shadcn/ui</Link>.
+            </div>
+          }
+        />
         <LinkButton
           href="https://github.com/joulev/website/tree/main/src/components/ui"
           variants={{ variant: "primary" }}
