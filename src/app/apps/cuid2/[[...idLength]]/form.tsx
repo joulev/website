@@ -6,9 +6,12 @@ import { startTransition, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 
+import { MAX_LENGTH, MIN_LENGTH } from "./constants";
+
 export function Form({ initialValue }: { initialValue: number }) {
   const router = useRouter();
   const [value, setValue] = useState(initialValue);
+  const valueIsValid = value >= MIN_LENGTH && value <= MAX_LENGTH;
   return (
     <form
       className="flex flex-row gap-6"
@@ -27,7 +30,9 @@ export function Form({ initialValue }: { initialValue: number }) {
           onValueChange={v => setValue(parseInt(v))}
         />
       </div>
-      <Button type="submit">Generate</Button>
+      <Button type="submit" disabled={!valueIsValid}>
+        Generate
+      </Button>
     </form>
   );
 }

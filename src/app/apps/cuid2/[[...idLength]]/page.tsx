@@ -6,12 +6,10 @@ import { Balancer } from "react-wrap-balancer";
 import { Card } from "~/components/ui/card";
 
 import type { PageProps, Params } from "./$types";
+import { DEFAULT_LENGTH, MAX_LENGTH, MIN_LENGTH } from "./constants";
 import { CopyButton } from "./copy-button";
 import { Form } from "./form";
 
-const DEFAULT_LENGTH = 12;
-const MIN_LENGTH = 1;
-const MAX_LENGTH = 64;
 function getLength(params: Params) {
   if (!params.idLength) return DEFAULT_LENGTH;
   if (params.idLength.length !== 1) notFound();
@@ -27,7 +25,7 @@ export default function Page({ params }: PageProps) {
     <main className="container max-w-screen-md">
       <Card className="flex flex-col p-0">
         <div className="relative break-all bg-bg-darker p-12 pt-[90px] text-center text-3xl sm:p-24 sm:text-5xl">
-          <span className="font-mono select-all">
+          <span className="select-all font-mono">
             <Balancer>{value}</Balancer>
           </span>
           <div className="absolute right-6 top-6 flex flex-col">
