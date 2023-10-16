@@ -15,6 +15,7 @@ import {
 } from "~/components/ui/navigation-menu";
 import { cn } from "~/lib/cn";
 
+import { Animate } from "./animate";
 import "./globals.css";
 
 const sans = HankenGrotesk({ subsets: ["latin"], variable: "--sans" });
@@ -169,7 +170,7 @@ function Navigation() {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuMainLink href="/sponsor" target="_blank" rel="noreferrer noopener">
+            <NavigationMenuMainLink href="https://joulev.dev/sponsor">
               Sponsor
             </NavigationMenuMainLink>
           </NavigationMenuItem>
@@ -186,7 +187,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         className={cn(sans.variable, mono.variable, "bg-[#334155] font-sans text-text-primary")}
       >
         <Background />
-        <div className="pb-24 pt-[152px]">{children}</div>
+        <Animate>{children}</Animate>
         <Navigation />
       </body>
     </html>
