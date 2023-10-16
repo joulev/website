@@ -5,6 +5,9 @@ import { env } from "./src/env.mjs";
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+  experimental: {
+    serverActions: true,
+  },
   rewrites: async () => [
     { source: "/cv", destination: env.RESUME_URL },
     { source: "/cv.pdf", destination: env.RESUME_URL },

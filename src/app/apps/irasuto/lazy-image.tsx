@@ -7,6 +7,7 @@ import { cn } from "~/lib/cn";
 
 export function LazyImage({
   src,
+  alt,
   className,
   ...props
 }: React.ComponentProps<"img"> & { width: number; height: number }) {
@@ -41,9 +42,9 @@ export function LazyImage({
           dataUrl ||
           `data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${props.width} ${props.height}'%3e%3c/svg%3e`
         }
-        alt="Tweet"
+        alt={alt}
         {...props}
-        className={cn("duration-600 transition", dataUrl ? "opacity-100" : "opacity-0", className)}
+        className={cn("transition duration-600", dataUrl ? "opacity-100" : "opacity-0", className)}
       />
     </div>
   );

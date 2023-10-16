@@ -1,9 +1,8 @@
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { EmbedBuilder } from "@discordjs/builders";
 import type { RESTPostAPIWebhookWithTokenJSONBody } from "discord-api-types/v10";
 import { sql } from "drizzle-orm";
 import { revalidateTag } from "next/cache";
-import { getTweet as _getTweet } from "react-tweet/api";
+import { getTweet } from "react-tweet/api";
 import { z } from "zod";
 
 import { env } from "~/env.mjs";
@@ -11,41 +10,12 @@ import { db } from "~/lib/db";
 import { photos as photosSchema } from "~/lib/db/schema";
 import type { NewIrasutoPhoto } from "~/lib/db/schema";
 
+import { uploadPhotoToR2 } from "../s3";
+
 const schema = z.object({ password: z.literal(env.PASSWORD), url: z.string().url() });
 
-const S3 = new S3Client({
-  region: "auto",
-  endpoint: `https://${env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-  credentials: { accessKeyId: env.R2_ACCESS_KEY, secretAccessKey: env.R2_SECRET_ACCESS_KEY },
-});
-
-function convertUrlToPhotoId(url: string) {
-  return url.replace("https://pbs.twimg.com/media/", "");
-}
-
-async function uploadPhoto(url: string, tweetUrl: string) {
-  const id = convertUrlToPhotoId(url);
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Failed to download photo for id=${id} (${tweetUrl})`);
-
-  const arrayBuffer = await res.arrayBuffer();
-  const metadata = res.headers.get("content-type");
-  const buffer = Buffer.from(arrayBuffer);
-
-  const result = await S3.send(
-    new PutObjectCommand({
-      Bucket: "webapps-irasuto",
-      Key: `irasuto/${id}`,
-      Body: buffer,
-      ContentType: metadata ?? undefined,
-    }),
-  );
-  if (result.$metadata.httpStatusCode !== 200)
-    throw new Error(`Failed to upload photo for id=${id} (${tweetUrl})`);
-}
-
 async function getPhotos(id: string): Promise<NewIrasutoPhoto[] | null> {
-  const tweet = await _getTweet(id);
+  const tweet = await getTweet(id);
   if (!tweet?.photos) return null;
   return tweet.photos.map(photo => ({
     url: photo.url,
@@ -108,8 +78,8 @@ export async function POST(request: Request) {
 
     await Promise.all(
       photos.map(async photo => {
-        await uploadPhoto(photo.url, photo.tweetUrl);
-        photo.url = `https://r2.irasuto.joulev.dev/irasuto/${convertUrlToPhotoId(photo.url)}`;
+        const fileName = await uploadPhotoToR2(photo.url, photo.tweetUrl);
+        photo.url = `https://r2.irasuto.joulev.dev/irasuto/${fileName}`;
 
         // We don't parallelise this because we don't want to have db items without photos
         await db.insert(photosSchema).values(photo);
