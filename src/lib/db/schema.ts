@@ -1,4 +1,4 @@
-import { pgTable, serial, smallint, timestamp, varchar } from "drizzle-orm/pg-core";
+import { boolean, pgTable, serial, smallint, timestamp, varchar } from "drizzle-orm/pg-core";
 
 export const photos = pgTable("photos", {
   id: serial("id").primaryKey(),
@@ -12,3 +12,13 @@ export const photos = pgTable("photos", {
 });
 export type IrasutoPhoto = typeof photos.$inferSelect;
 export type NewIrasutoPhoto = typeof photos.$inferInsert;
+
+export const shortLinks = pgTable("short_links", {
+  id: serial("id").primaryKey(),
+  slug: varchar("slug", { length: 256 }).unique().notNull(),
+  url: varchar("url", { length: 4096 }).notNull(),
+  updated: timestamp("updated").notNull().defaultNow(),
+  isJoulev: boolean("is_joulev").notNull().default(false),
+});
+export type ShortLink = typeof shortLinks.$inferSelect;
+export type NewShortLink = typeof shortLinks.$inferInsert;
