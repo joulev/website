@@ -60,7 +60,7 @@ export const NavigationMenuLink = forwardRef<
       <NavigationMenuPrimitive.Link
         className={cn(
           unstyled ||
-            "hover-bg relative block rounded p-3 transition-colors hover:bg-bg-idle active:bg-bg-active",
+            "hover-bg relative m-1 block rounded p-2 transition-all hover:m-0 hover:bg-bg-idle hover:p-3 active:m-0 active:bg-bg-active active:p-3",
           className,
         )}
         {...useHoverBackground({ style, onMouseMove })}
