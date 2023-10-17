@@ -13,7 +13,7 @@ export function SubmitButton({ isValid }: { isValid: boolean }) {
       className="w-full"
       disabled={!isValid || pending}
     >
-      Shorten URL
+      {pending ? <>Working on it&hellip;</> : "Shorten URL"}
     </Button>
   );
 }
