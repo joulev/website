@@ -142,7 +142,7 @@ export default function Page() {
                 </Link>
               </ListItem>
               <ListItem asChild>
-                <Link unstyled href="https://link.joulev.dev/">
+                <Link unstyled href="/apps/link">
                   link
                 </Link>
               </ListItem>

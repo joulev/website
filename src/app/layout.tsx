@@ -128,8 +128,8 @@ function Navigation() {
     },
     {
       title: "link",
-      href: "https://link.joulev.dev",
-      description: "A simple URL shortener mainly for personal use",
+      href: "/apps/link",
+      description: "A simple URL shortener",
     },
     {
       title: "irasuto",
