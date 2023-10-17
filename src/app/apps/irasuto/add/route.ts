@@ -3,7 +3,13 @@ import type { RESTPostAPIWebhookWithTokenJSONBody } from "discord-api-types/v10"
 import { sql } from "drizzle-orm";
 import { revalidateTag } from "next/cache";
 import { getTweet } from "react-tweet/api";
-import { z } from "zod";
+import {
+  literal as vLiteral,
+  object as vObject,
+  parse as vParse,
+  string as vString,
+  url as vUrl,
+} from "valibot";
 
 import { env } from "~/env.mjs";
 import { db } from "~/lib/db";
@@ -12,7 +18,7 @@ import type { NewIrasutoPhoto } from "~/lib/db/schema";
 
 import { uploadPhotoToR2 } from "../s3";
 
-const schema = z.object({ password: z.literal(env.PASSWORD), url: z.string().url() });
+const schema = vObject({ password: vLiteral(env.PASSWORD), url: vString([vUrl()]) });
 
 async function getPhotos(id: string): Promise<NewIrasutoPhoto[] | null> {
   const tweet = await getTweet(id);
@@ -64,7 +70,7 @@ function buildEmbedFromPhoto(
 export async function POST(request: Request) {
   const e = (msg: string) => new Error(msg);
   try {
-    const url = new URL(schema.parse(await request.json()).url);
+    const url = new URL(vParse(schema, await request.json()).url);
     if (url.hostname !== "twitter.com" && url.hostname !== "x.com")
       throw e(`Invalid hostname: ${url.hostname}`);
 

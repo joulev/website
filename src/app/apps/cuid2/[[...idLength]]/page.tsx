@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Balancer } from "react-wrap-balancer";
 
+import { CopyButton } from "~/components/copy-button";
 import { Card } from "~/components/ui/card";
 
 import type { PageProps, Params } from "./$types";
 import { DEFAULT_LENGTH, MAX_LENGTH, MIN_LENGTH } from "./constants";
-import { CopyButton } from "./copy-button";
 import { Form } from "./form";
 
 function getLength(params: Params) {

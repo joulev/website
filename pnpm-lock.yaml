@@ -136,6 +136,9 @@ dependencies:
   typescript:
     specifier: 5.2.2
     version: 5.2.2
+  valibot:
+    specifier: 0.19.0
+    version: 0.19.0
   ytmusic-api:
     specifier: 4.4.0
     version: 4.4.0(patch_hash=f3kahw6eczgoujoh5s4zhwljd4)
@@ -6958,6 +6961,10 @@ packages:
   /uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
+    dev: false
+
+  /valibot@0.19.0:
+    resolution: {integrity: sha512-vzeuctzVirzoiDN9BTc4GludHaSgFYoy6AnbHOjfBUbX0DibqKuNCr2Ti4ox8eLdBdDSEZSZ3LwXZgjL6aE4RQ==}
     dev: false
 
   /validate-npm-package-license@3.0.4:
