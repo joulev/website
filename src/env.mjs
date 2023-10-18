@@ -17,6 +17,9 @@ export const env = createEnv({
     R2_ACCESS_KEY: z.string().min(1),
     R2_SECRET_ACCESS_KEY: z.string().min(1),
     DISCORD_WEBHOOK: z.string().url().optional(),
+
+    // chat
+    OPENAI_API_KEY: z.string().min(1),
   },
   experimental__runtimeEnv: {},
 });
