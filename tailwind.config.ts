@@ -1,3 +1,4 @@
+import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
 import defaultTheme from "tailwindcss/defaultTheme";
@@ -41,9 +42,33 @@ const config: Config = {
       spacing: {
         18: "4.5rem",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            "--tw-prose-body": "var(--text-primary)",
+            "--tw-prose-headings": "var(--text-primary)",
+            "--tw-prose-lead": "var(--text-secondary)",
+            "--tw-prose-links": "var(--text-primary)",
+            "--tw-prose-bold": "var(--text-primary)",
+            "--tw-prose-counters": "var(--text-secondary)",
+            "--tw-prose-bullets": "var(--text-secondary)",
+            "--tw-prose-hr": "var(--separator)",
+            "--tw-prose-quotes": "var(--text-primary)",
+            "--tw-prose-quote-borders": "var(--bg-idle)",
+            "--tw-prose-captions": "var(--text-secondary)",
+            "--tw-prose-kbd": "var(--text-primary)",
+            "--tw-prose-kbd-shadows": "var(--bg-idle)",
+            "--tw-prose-code": "var(--text-primary)",
+            "--tw-prose-pre-code": "var(--text-primary)",
+            "--tw-prose-pre-bg": "var(--bg-darker)",
+            "--tw-prose-th-borders": "var(--separator)",
+            "--tw-prose-td-borders": "var(--separator)",
+          },
+        },
+      },
     },
   },
-  plugins: [animate],
+  plugins: [animate, typography],
 };
 
 export default config;
