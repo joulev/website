@@ -6,6 +6,7 @@ import { useCallback, useState } from "react";
 import { Title } from "~/components/title";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
+import { TextArea } from "~/components/ui/textarea";
 import { cn } from "~/lib/cn";
 
 export default function Page() {
@@ -54,15 +55,14 @@ export default function Page() {
         ))}
 
         <div className="flex flex-col gap-3 p-6">
-          <textarea
+          <TextArea
             className="h-24 w-full"
             value={prompt}
+            onValueChange={setPrompt}
             onKeyDown={onKeyDown}
-            onChange={e => setPrompt(e.target.value)}
             disabled={isLoading}
           />
-          <div className="flex flex-row justify-end gap-3">
-            <Button onClick={() => setPrompt("")}>Cancel</Button>
+          <div className="flex flex-row justify-end">
             <Button variants={{ variant: "primary" }} onClick={submit} disabled={isLoading}>
               Submit
             </Button>

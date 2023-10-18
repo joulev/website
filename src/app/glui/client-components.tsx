@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { Input } from "~/components/ui/input";
+import { TextArea } from "~/components/ui/textarea";
 
 export function DropdownCheckboxesShowcase() {
   const [showStatusBar, setShowStatusBar] = useState(true);
@@ -82,4 +83,9 @@ export function ControlledInputShowcase() {
       <Input type="text" placeholder="Disabled" disabled />
     </>
   );
+}
+
+export function ControlledTextAreaShowcase() {
+  const [value, setValue] = useState("Controlled input");
+  return <TextArea placeholder="Text" value={value} onValueChange={setValue} />;
 }

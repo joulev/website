@@ -55,6 +55,7 @@ import { cn } from "~/lib/cn";
 
 import {
   ControlledInputShowcase,
+  ControlledTextAreaShowcase,
   DropdownCheckboxesShowcase,
   DropdownRadioGroupShowcase,
 } from "./client-components";
@@ -69,10 +70,13 @@ function Showcase({
   children,
 }: React.PropsWithChildren<{ title: string; className?: string }>) {
   return (
-    <section className="flex flex-col gap-6">
-      <h2 className="text-xl font-bold">{title}</h2>
-      <Card className={cn("flex flex-col gap-6", className)}>{children}</Card>
-    </section>
+    <>
+      <hr />
+      <section className="flex flex-col gap-6">
+        <h2 className="text-xl font-bold">{title}</h2>
+        <Card className={cn("flex flex-col gap-6", className)}>{children}</Card>
+      </section>
+    </>
   );
 }
 
@@ -391,6 +395,14 @@ function NavigationMenuShowcase() {
   );
 }
 
+function TextAreaShowcase() {
+  return (
+    <Showcase title="TextArea">
+      <ControlledTextAreaShowcase />
+    </Showcase>
+  );
+}
+
 export default function Page() {
   return (
     <main className="container flex max-w-screen-md flex-col gap-9">
@@ -422,22 +434,15 @@ export default function Page() {
           See the components on GitHub
         </LinkButton>
       </section>
-      <hr />
       <ButtonShowcase />
-      <hr />
-      <LinkShowcase />
-      <hr />
       <CardShowcase />
-      <hr />
-      <ListShowcase />
-      <hr />
-      <InputShowcase />
-      <hr />
       <DropdownShowcase />
-      <hr />
-      <SelectShowcase />
-      <hr />
+      <InputShowcase />
+      <LinkShowcase />
+      <ListShowcase />
       <NavigationMenuShowcase />
+      <SelectShowcase />
+      <TextAreaShowcase />
     </main>
   );
 }
