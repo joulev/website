@@ -27,3 +27,5 @@ export default function Page({ searchParams }: PageProps) {
     </div>
   );
 }
+
+export const runtime = "edge";

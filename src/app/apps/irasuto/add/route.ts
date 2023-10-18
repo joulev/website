@@ -110,3 +110,5 @@ export async function POST(request: Request) {
     return new Response("Invalid request", { status: 400 });
   }
 }
+
+export const runtime = "edge";
