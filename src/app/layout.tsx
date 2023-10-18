@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { B612_Mono as B612Mono, Hanken_Grotesk as HankenGrotesk } from "next/font/google";
+import { Hanken_Grotesk as HankenGrotesk, Inconsolata } from "next/font/google";
 import tw from "tailwindcss/colors";
 
 import { Logo } from "~/components/logo";
@@ -18,7 +18,7 @@ import { cn } from "~/lib/cn";
 import "./globals.css";
 
 const sans = HankenGrotesk({ subsets: ["latin"], variable: "--sans" });
-const mono = B612Mono({ subsets: ["latin"], weight: "400", variable: "--mono" });
+const mono = Inconsolata({ subsets: ["latin"], variable: "--mono" });
 
 function Background() {
   const [W, H] = [2000, 1400];
