@@ -1,4 +1,6 @@
+import { Github } from "lucide-react";
 import type { Metadata } from "next";
+import { unstable_cache as cache } from "next/cache";
 import { Hanken_Grotesk as HankenGrotesk, Inconsolata } from "next/font/google";
 import tw from "tailwindcss/colors";
 
@@ -179,6 +181,26 @@ function Navigation() {
   );
 }
 
+async function BuildTime() {
+  const timeFormatter = new Intl.DateTimeFormat("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+  const dateFormatter = new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+  // eslint-disable-next-line @typescript-eslint/require-await -- unstable_cache requires it
+  const time = await cache(async () => {
+    const date = new Date();
+    const formatted = `${timeFormatter.format(date)}, ${dateFormatter.format(date)}`;
+    return formatted;
+  })();
+  return time;
+}
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -186,7 +208,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         className={cn(sans.variable, mono.variable, "bg-[#334155] font-sans text-text-primary")}
       >
         <Background />
-        <div className="pb-24 pt-[152px]">{children}</div>
+        <div className="pb-12 pt-[152px]">{children}</div>
+        <div className="flex flex-row items-center justify-center gap-1 px-6 pb-12 text-xs text-text-tertiary">
+          Deployed from
+          <Link
+            unstyled
+            href="https://github.com/joulev/website"
+            className="inline-flex flex-row items-center gap-1 transition hover:text-text-secondary"
+          >
+            <Github className="h-3 w-3" />
+            joulev/website
+          </Link>
+          at <BuildTime />.
+        </div>
         <Navigation />
       </body>
     </html>
