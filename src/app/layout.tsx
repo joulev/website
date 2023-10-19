@@ -191,6 +191,7 @@ async function BuildTime() {
     day: "2-digit",
     month: "short",
     year: "numeric",
+    timeZoneName: "short",
   });
   // eslint-disable-next-line @typescript-eslint/require-await -- unstable_cache requires it
   const time = await cache(async () => {
@@ -201,6 +202,22 @@ async function BuildTime() {
   return time;
 }
 
+function VersionFooter() {
+  const sha = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA;
+  const url = sha
+    ? `https://github.com/joulev/website/commit/${sha}`
+    : "https://github.com/joulev/website";
+  const label = sha ? sha.slice(0, 7) : "unknown";
+  return (
+    <footer className="px-6 pb-12 text-center text-xs text-text-tertiary">
+      <Link unstyled href={url} className="transition hover:text-text-secondary">
+        <Github className="inline h-3 w-3" /> joulev/website@{label}
+      </Link>{" "}
+      at <BuildTime />
+    </footer>
+  );
+}
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -209,18 +226,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         <Background />
         <div className="pb-12 pt-[152px]">{children}</div>
-        <div className="flex flex-row items-center justify-center gap-1 px-6 pb-12 text-xs text-text-tertiary">
-          Deployed from
-          <Link
-            unstyled
-            href="https://github.com/joulev/website"
-            className="inline-flex flex-row items-center gap-1 transition hover:text-text-secondary"
-          >
-            <Github className="h-3 w-3" />
-            joulev/website
-          </Link>
-          at <BuildTime /> UTC.
-        </div>
+        <VersionFooter />
         <Navigation />
       </body>
     </html>
