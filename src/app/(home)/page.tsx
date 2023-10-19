@@ -132,7 +132,7 @@ export default function Page() {
             </ListHeader>
             <ListContent variants={{ withSeparator: false }}>
               <ListItem asChild>
-                <Link unstyled href="https://tategaki.joulev.dev/">
+                <Link unstyled href="/apps/tategaki">
                   tategaki
                 </Link>
               </ListItem>

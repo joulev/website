@@ -1,0 +1,7 @@
+.crushed {
+  transform: scaleY(calc(2 / var(--furigana-count)));
+}
+
+.ruler {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='24'%3E%3Cpath fill='none' stroke='black' d='M.5 24V.5h23.5V24'/%3E%3C/svg%3E");
+}

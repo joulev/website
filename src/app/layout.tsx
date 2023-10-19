@@ -120,7 +120,7 @@ function Navigation() {
     },
     {
       title: "tategaki",
-      href: "https://tategaki.joulev.dev",
+      href: "/apps/tategaki",
       description: "A website featuring text displayed in Japanese vertical writing style",
     },
     {
