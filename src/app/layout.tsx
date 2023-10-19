@@ -219,7 +219,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <Github className="h-3 w-3" />
             joulev/website
           </Link>
-          at <BuildTime />.
+          at <BuildTime /> UTC.
         </div>
         <Navigation />
       </body>
