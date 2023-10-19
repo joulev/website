@@ -1,6 +1,5 @@
 import { Github } from "lucide-react";
 import type { Metadata } from "next";
-import { unstable_cache as cache } from "next/cache";
 import { Hanken_Grotesk as HankenGrotesk, Inconsolata } from "next/font/google";
 import tw from "tailwindcss/colors";
 
@@ -181,27 +180,6 @@ function Navigation() {
   );
 }
 
-async function BuildTime() {
-  const timeFormatter = new Intl.DateTimeFormat("en-GB", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
-  const dateFormatter = new Intl.DateTimeFormat("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-    timeZoneName: "short",
-  });
-  // eslint-disable-next-line @typescript-eslint/require-await -- unstable_cache requires it
-  const time = await cache(async () => {
-    const date = new Date();
-    const formatted = `${timeFormatter.format(date)}, ${dateFormatter.format(date)}`;
-    return formatted;
-  })();
-  return time;
-}
-
 function VersionFooter() {
   const sha = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA;
   const url = sha
@@ -211,9 +189,9 @@ function VersionFooter() {
   return (
     <footer className="px-6 pb-12 text-center text-xs text-text-tertiary">
       <Link unstyled href={url} className="transition hover:text-text-secondary">
-        <Github className="inline h-3 w-3" /> joulev/website@{label}
-      </Link>{" "}
-      at <BuildTime />
+        <Github className="inline h-3 w-3" /> joulev/website@
+        <span className="font-mono">{label}</span>
+      </Link>
     </footer>
   );
 }
