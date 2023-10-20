@@ -5,7 +5,7 @@ const END_CHARS = "」』］】〕｝〉》）。、"; // characters that should
 
 export function splitLine(paragraph: RawParagraph, height: number): Paragraph {
   const lines: Paragraph = [];
-  let line: Line = [{ char: " ", furigana: null }];
+  let line: Line = [{ char: " ", furigana: null, count: 0 }]; // First line indentation doesn't need animation
   for (const char of paragraph) {
     if (line.length + 1 === height && START_CHARS.includes(char.char)) {
       lines.push(line);

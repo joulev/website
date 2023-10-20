@@ -31,9 +31,12 @@ function Furigana({ furigana }: { furigana: string }) {
   );
 }
 
-function Character({ character: { char, furigana } }: { character: Type.Character }) {
+function Character({ character: { char, furigana, count } }: { character: Type.Character }) {
   return (
-    <span className="relative mr-6 grid h-6 w-6 place-items-center">
+    <span
+      className="relative mr-6 grid h-6 w-6 place-items-center animate-in fade-in slide-in-from-top-1 fill-mode-both"
+      style={{ animationDelay: `${count * 3}ms` }}
+    >
       {char[0]}
       {char.length > 1 && <span className="absolute left-0 top-full">{char[1]}</span>}
       {furigana ? <Furigana furigana={furigana} /> : null}

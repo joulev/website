@@ -15,16 +15,18 @@ const paragraphs = [
 const FURIGANA_START = "<";
 const FURIGANA_END = ">";
 
+let count = 0;
 export const rawParagraphs = paragraphs.map(p => {
   const characters: RawParagraph = [];
   for (let i = 0; i < p.length; i++) {
-    const cur: Character = { char: p[i], furigana: null };
+    const cur: Character = { char: p[i], furigana: null, count };
     if (i < p.length - 1 && p[i + 1] === FURIGANA_START) {
       const end = p.indexOf(FURIGANA_END, i + 2);
       cur.furigana = p.substring(i + 2, end);
       i = end;
     }
     characters.push(cur);
+    count++;
   }
   return characters;
 });
