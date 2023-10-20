@@ -170,7 +170,11 @@ function Navigation() {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuMainLink href="/sponsor" target="_blank" rel="noreferrer noopener">
+            <NavigationMenuMainLink
+              href="https://joulev.dev/sponsor"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
               Sponsor
             </NavigationMenuMainLink>
           </NavigationMenuItem>
