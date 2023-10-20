@@ -8,7 +8,7 @@ export const photos = pgTable("photos", {
   tweetUrl: varchar("tweet_url", { length: 256 }).notNull(),
   authorName: varchar("author_name", { length: 256 }).notNull(),
   authorHandle: varchar("author_handle", { length: 256 }).notNull(),
-  date: timestamp("date").notNull().defaultNow(),
+  date: timestamp("date").notNull(),
 });
 export type IrasutoPhoto = typeof photos.$inferSelect;
 export type NewIrasutoPhoto = typeof photos.$inferInsert;

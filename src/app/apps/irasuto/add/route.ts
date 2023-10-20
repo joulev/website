@@ -30,7 +30,7 @@ async function getPhotos(id: string): Promise<NewIrasutoPhoto[] | null> {
     tweetUrl: `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`,
     authorName: tweet.user.name,
     authorHandle: tweet.user.screen_name,
-    date: new Date(tweet.created_at),
+    date: new Date(), // date that it is added to the db, not the posted date
   }));
 }
 
@@ -55,7 +55,7 @@ function buildEmbedFromPhoto(
           },
           {
             name: "Posted",
-            value: `<t:${Math.round((photo.date ?? new Date()).valueOf() / 1000)}:R>`,
+            value: `<t:${Math.round(photo.date.valueOf() / 1000)}:R>`,
             inline: true,
           },
         ])
