@@ -10,7 +10,7 @@ import type { PageProps } from "./$types";
 export default function Page({ searchParams }: PageProps) {
   const slug = searchParams.slug;
   if (typeof slug !== "string" || slug.length === 0) redirect("/apps/link");
-  const url = `https://link.joulev.dev/l/${slug}`;
+  const url = `https://l.joulev.dev/${slug}`;
   return (
     <div className="flex flex-col gap-6 p-6">
       <div>Your short link has been created successfully:</div>
