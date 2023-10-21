@@ -58,6 +58,9 @@ dependencies:
   '@types/react-dom':
     specifier: 18.2.11
     version: 18.2.11
+  '@vercel/analytics':
+    specifier: 1.1.1
+    version: 1.1.1
   '@vercel/style-guide':
     specifier: 5.0.1
     version: 5.0.1(eslint@8.51.0)(prettier@3.0.3)(typescript@5.2.2)
@@ -97,6 +100,9 @@ dependencies:
   next:
     specifier: 13.5.4
     version: 13.5.4(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)
+  next-axiom:
+    specifier: 1.0.0
+    version: 1.0.0(next@13.5.4)(react@18.2.0)
   nextjs-route-types:
     specifier: 1.0.1
     version: 1.0.1(next@13.5.4)
@@ -3180,6 +3186,12 @@ packages:
 
   /@ungap/structured-clone@1.2.0:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
+    dev: false
+
+  /@vercel/analytics@1.1.1:
+    resolution: {integrity: sha512-+NqgNmSabg3IFfxYhrWCfB/H+RCUOCR5ExRudNG2+pcRehq628DJB5e1u1xqwpLtn4pAYii4D98w7kofORAGQA==}
+    dependencies:
+      server-only: 0.0.1
     dev: false
 
   /@vercel/style-guide@5.0.1(eslint@8.51.0)(prettier@3.0.3)(typescript@5.2.2):
@@ -6333,6 +6345,18 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: false
 
+  /next-axiom@1.0.0(next@13.5.4)(react@18.2.0):
+    resolution: {integrity: sha512-bgXtPWJHLB9Rm64WgWMLQLPtgf+zlnpZmFqkveRyZRN/ZBKhnyptiSbBizxEiZ2TEJj2fcxcqEfzPDJVN2JF9Q==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      next: '>=13.4'
+      react: '>=18.0.0'
+    dependencies:
+      next: 13.5.4(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      whatwg-fetch: 3.6.19
+    dev: false
+
   /next-tick@1.1.0:
     resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}
     dev: false
@@ -7277,6 +7301,10 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
+  /server-only@0.0.1:
+    resolution: {integrity: sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==}
+    dev: false
+
   /set-function-name@2.0.1:
     resolution: {integrity: sha512-tMNCiqYVkXIZgc2Hnoy2IvC/f8ezc5koaRFkCjrpWzGpCd3qbZXPzVy9MAZzK1ch/X0jvSkojys3oqJN0qCmdA==}
     engines: {node: '>= 0.4'}
@@ -8052,6 +8080,10 @@ packages:
 
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+    dev: false
+
+  /whatwg-fetch@3.6.19:
+    resolution: {integrity: sha512-d67JP4dHSbm2TrpFj8AbO8DnL1JXL5J9u0Kq2xW6d0TFDbCA3Muhdt8orXC22utleTVj7Prqt82baN6RBvnEgw==}
     dev: false
 
   /whatwg-url@5.0.0:

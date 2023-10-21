@@ -1,4 +1,5 @@
 // @ts-check
+import { withAxiom } from "next-axiom";
 import { withNextJSRouteTypes } from "nextjs-route-types";
 
 import { env } from "./src/env.mjs";
@@ -18,4 +19,4 @@ const nextConfig = {
   ],
 };
 
-export default withNextJSRouteTypes(nextConfig);
+export default withAxiom(withNextJSRouteTypes(nextConfig));

@@ -1,5 +1,7 @@
+import { Analytics } from "@vercel/analytics/react";
 import { Github } from "lucide-react";
 import type { Metadata } from "next";
+import { AxiomWebVitals } from "next-axiom";
 import { Hanken_Grotesk as HankenGrotesk, Inconsolata } from "next/font/google";
 import tw from "tailwindcss/colors";
 
@@ -210,6 +212,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="pb-12 pt-[152px]">{children}</div>
         <VersionFooter />
         <Navigation />
+        <Analytics />
+        <AxiomWebVitals />
       </body>
     </html>
   );
