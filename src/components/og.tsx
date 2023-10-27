@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property -- tw is recognised by Satori */
-import { ImageResponse } from "next/server";
+import { ImageResponse } from "next/og";
 
 import { Logo } from "./logo";
 
