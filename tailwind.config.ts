@@ -34,8 +34,8 @@ const config: Config = {
       blue: "var(--blue)",
     },
     fontFamily: {
-      sans: ["var(--sans)", ...defaultTheme.fontFamily.sans],
-      mono: ["var(--mono)", ...defaultTheme.fontFamily.mono],
+      sans: ["var(--font-geist-sans)", "var(--sans)", ...defaultTheme.fontFamily.sans],
+      mono: ["var(--font-geist-mono)", "var(--mono)", ...defaultTheme.fontFamily.mono],
     },
     transitionDuration: { DEFAULT: "300ms", 600: "600ms" },
     extend: {

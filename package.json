@@ -37,6 +37,7 @@
     "drizzle-orm": "0.28.6",
     "eslint": "8.52.0",
     "eslint-config-next": "14.0.0",
+    "geist": "0.1.24",
     "lucide-react": "0.289.0",
     "next": "14.0.0",
     "next-axiom": "1.1.0",

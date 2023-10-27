@@ -1,8 +1,8 @@
 import { Analytics } from "@vercel/analytics/react";
+import { GeistMono, GeistSans } from "geist/font";
 import { Github } from "lucide-react";
 import type { Metadata } from "next";
 import { AxiomWebVitals } from "next-axiom";
-import { Hanken_Grotesk as HankenGrotesk, Inconsolata } from "next/font/google";
 import tw from "tailwindcss/colors";
 
 import { Logo } from "~/components/logo";
@@ -20,8 +20,8 @@ import { cn } from "~/lib/cn";
 
 import "./globals.css";
 
-const sans = HankenGrotesk({ subsets: ["latin"], variable: "--sans" });
-const mono = Inconsolata({ subsets: ["latin"], variable: "--mono" });
+const sans = GeistSans;
+const mono = GeistMono;
 
 function Background() {
   const [W, H] = [2000, 1400];
