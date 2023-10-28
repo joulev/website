@@ -28,9 +28,9 @@ function Background() {
   const colours = [
     // top - right - bottom - left
     { colour: tw.blue[800], opacity: 0.5 },
-    { colour: tw.emerald[800], opacity: 0.5 },
-    { colour: tw.yellow[900], opacity: 0.3 },
-    { colour: tw.green[800], opacity: 0.5 },
+    { colour: tw.violet[800], opacity: 0.5 },
+    { colour: tw.rose[900], opacity: 0.4 },
+    { colour: tw.purple[800], opacity: 0.5 },
   ] as const;
   function getBackgroundCSS({ colour, opacity }: (typeof colours)[number]) {
     const opacityHex = Math.round(opacity * 255).toString(16);

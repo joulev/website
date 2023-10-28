@@ -49,7 +49,7 @@ export function Collage({ photos }: { photos: Photo[] }) {
   return (
     <div
       className={cn(
-        "duration-600 grid min-h-screen grid-cols-1 divide-x divide-separator transition sm:grid-cols-2 lg:grid-cols-3",
+        "grid min-h-screen grid-cols-1 divide-x divide-separator transition duration-600 sm:grid-cols-2 lg:grid-cols-3",
         count === null ? "opacity-0" : "opacity-100",
       )}
     >

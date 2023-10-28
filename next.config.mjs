@@ -7,7 +7,7 @@ import { env } from "./src/env.mjs";
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   experimental: {
-    serverActions: true,
+    webpackBuildWorker: true,
   },
   rewrites: async () => [
     { source: "/cv", destination: env.RESUME_URL },
