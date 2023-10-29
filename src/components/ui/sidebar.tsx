@@ -2,7 +2,7 @@
 
 import { Slot } from "@radix-ui/react-slot";
 import { ChevronDown } from "lucide-react";
-import { forwardRef } from "react";
+import { createContext, forwardRef, useCallback, useContext, useState } from "react";
 
 import { cn } from "~/lib/cn";
 import type { BaseProps } from "~/types/utils";
@@ -45,18 +45,36 @@ export const SidebarHeaderTitle = forwardRef<HTMLDivElement, BaseProps<"h1">>(
   },
 );
 
-export const SidebarSection = forwardRef<HTMLDivElement, BaseProps<"div">>(function SidebarSection(
-  { asChild, className, ...props },
-  ref,
-) {
+const SectionContext = createContext<{ isOpen: boolean; toggle: () => void } | null>(null);
+
+function useSectionContext() {
+  const context = useContext(SectionContext);
+  if (!context)
+    throw new Error(
+      "invariant(ui/sidebar): useSectionContext must be used within a SidebarSection",
+    );
+  return context;
+}
+
+export const SidebarSection = forwardRef<
+  HTMLDivElement,
+  BaseProps<"div"> & { isCollapsedInitially?: boolean }
+>(function SidebarSection({ asChild, className, isCollapsedInitially, ...props }, ref) {
+  const [isOpen, setIsOpen] = useState(!isCollapsedInitially);
+  const toggle = useCallback(() => setIsOpen(x => !x), []);
   const Component = asChild ? Slot : "div";
-  return <Component {...props} className={cn("flex flex-col p-3", className)} ref={ref} />;
+  return (
+    <SectionContext.Provider value={{ isOpen, toggle }}>
+      <Component {...props} className={cn("flex flex-col p-3", className)} ref={ref} />
+    </SectionContext.Provider>
+  );
 });
 
 export const SidebarSectionHeading = forwardRef<
   HTMLDivElement,
   React.ComponentPropsWithoutRef<"h2"> & { hideCollapseButton?: boolean }
 >(function SidebarSectionHeading({ className, children, hideCollapseButton, ...props }, ref) {
+  const { isOpen, toggle } = useSectionContext();
   return (
     <h2
       {...props}
@@ -68,8 +86,8 @@ export const SidebarSectionHeading = forwardRef<
     >
       <span className="h-[30px] flex-grow truncate">{children}</span>
       {hideCollapseButton || (
-        <Button variants={{ variant: "ghost", size: "icon-sm" }}>
-          <ChevronDown />
+        <Button variants={{ variant: "ghost", size: "icon-sm" }} onClick={toggle}>
+          <ChevronDown className={cn(isOpen || "rotate-180", "transition-transform")} />
         </Button>
       )}
     </h2>
@@ -78,8 +96,18 @@ export const SidebarSectionHeading = forwardRef<
 
 export const SidebarSectionItems = forwardRef<HTMLDivElement, BaseProps<"div">>(
   function SidebarSectionItems({ asChild, className, ...props }, ref) {
+    const { isOpen } = useSectionContext();
     const Component = asChild ? Slot : "div";
-    return <Component {...props} className={cn("flex flex-col gap-1", className)} ref={ref} />;
+    return (
+      <div
+        className="grid transition-all ease-in-out"
+        style={{ gridTemplateRows: isOpen ? "1fr" : "0fr", opacity: isOpen ? 1 : 0 }}
+      >
+        <div className="overflow-hidden">
+          <Component {...props} className={cn("flex flex-col gap-1", className)} ref={ref} />
+        </div>
+      </div>
+    );
   },
 );
 

@@ -2,10 +2,12 @@ import {
   Atom,
   ChevronDown,
   Cloud,
+  Coffee,
   CreditCard,
   FlaskConical,
   Gamepad2,
   Github,
+  ListIcon,
   LogOut,
   Mail,
   MessageSquare,
@@ -447,7 +449,7 @@ function SidebarShowcase() {
             </SidebarSectionItem>
           </SidebarSectionItems>
         </SidebarSection>
-        <SidebarSection>
+        <SidebarSection isCollapsedInitially>
           <SidebarSectionHeading>Gaming notes</SidebarSectionHeading>
           <SidebarSectionItems>
             <SidebarSectionItem>
@@ -458,6 +460,19 @@ function SidebarShowcase() {
               <Swords />
               <SidebarSectionItemName>Honkai: Star Rail build guide</SidebarSectionItemName>
               <SidebarSectionItemCounter>5</SidebarSectionItemCounter>
+            </SidebarSectionItem>
+          </SidebarSectionItems>
+        </SidebarSection>
+        <SidebarSection>
+          <SidebarSectionHeading>Miscellaneous</SidebarSectionHeading>
+          <SidebarSectionItems>
+            <SidebarSectionItem>
+              <ListIcon />
+              <SidebarSectionItemName>Shopping lists</SidebarSectionItemName>
+            </SidebarSectionItem>
+            <SidebarSectionItem>
+              <Coffee />
+              <SidebarSectionItemName>Good coffee shops</SidebarSectionItemName>
             </SidebarSectionItem>
           </SidebarSectionItems>
         </SidebarSection>
