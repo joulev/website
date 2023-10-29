@@ -28,7 +28,14 @@ function Navigation({ items }: { items: Item[] }) {
     <SidebarSection>
       <SidebarSectionItems>
         {items.map(({ content, icon, slug, count }) => (
-          <SidebarSectionItem key="slug" active={`/apps/anime${slug}` === pathname} asChild>
+          <SidebarSectionItem
+            key="slug"
+            active={
+              `/apps/anime${slug}` === pathname ||
+              (slug === "/watching" && pathname === "/apps/anime")
+            }
+            asChild
+          >
             <Link href={`/apps/anime${slug}`} unstyled>
               {icon}
               <SidebarSectionItemName>{content}</SidebarSectionItemName>

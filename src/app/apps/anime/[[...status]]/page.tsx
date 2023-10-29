@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import type { PageProps, Params } from "./$types";
 
 export default function Page({ params }: PageProps) {
-  const status = params.status.join("/");
+  const status = params.status?.join("/") ?? "watching";
   if (
     status !== "watching" &&
     status !== "rewatching" &&
@@ -21,7 +21,7 @@ export default function Page({ params }: PageProps) {
 }
 
 export function generateMetadata({ params }: PageProps): Metadata {
-  const status = params.status.join("/");
+  const status = params.status?.join("/") ?? "watching";
   switch (status) {
     case "watching":
       return { title: "Watching" };
@@ -47,6 +47,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
 
 export function generateStaticParams(): Params[] {
   return [
+    { status: [] },
     { status: ["watching"] },
     { status: ["rewatching"] },
     { status: ["completed", "tv"] },
