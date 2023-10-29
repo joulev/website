@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { Card } from "~/components/ui/card";
 
 import { Sidebar } from "./sidebar";
@@ -14,3 +16,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </main>
   );
 }
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s – joulev » anime",
+    default: "joulev » anime",
+  },
+  description: "joulev's anime list",
+  openGraph: {
+    title: "joulev.dev » anime",
+    description: "joulev's anime list",
+    url: "/apps/anime",
+  },
+};
