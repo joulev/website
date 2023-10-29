@@ -11,7 +11,7 @@ export const getLists = cache(async (status?: MediaListStatus) => {
   const { data } = await client.query({
     query: GET_ANIME,
     variables: { status },
-    context: { fetchOptions: { next: { tag: ["lists"] } } },
+    context: { fetchOptions: { next: { tags: ["lists"] } } satisfies RequestInit },
   });
   const lists = data.MediaListCollection?.lists ?? [];
   return {
