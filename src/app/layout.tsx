@@ -3,7 +3,6 @@ import { Github } from "lucide-react";
 import type { Metadata } from "next";
 import { AxiomWebVitals } from "next-axiom";
 import { Hanken_Grotesk as HankenGrotesk, Inconsolata } from "next/font/google";
-import tw from "tailwindcss/colors";
 
 import { Logo } from "~/components/logo";
 import { Link } from "~/components/ui/link";
@@ -18,77 +17,11 @@ import {
 } from "~/components/ui/navigation-menu";
 import { cn } from "~/lib/cn";
 
+import { Background } from "./background";
 import "./globals.css";
 
 const sans = HankenGrotesk({ subsets: ["latin"], variable: "--sans" });
 const mono = Inconsolata({ subsets: ["latin"], variable: "--mono" });
-
-function Background() {
-  const [W, H] = [2000, 1400];
-  const colours = [
-    // top - right - bottom - left
-    { colour: tw.blue[800], opacity: 0.5 },
-    { colour: tw.violet[800], opacity: 0.5 },
-    { colour: tw.rose[900], opacity: 0.4 },
-    { colour: tw.purple[800], opacity: 0.5 },
-  ] as const;
-  function getBackgroundCSS({ colour, opacity }: (typeof colours)[number]) {
-    const opacityHex = Math.round(opacity * 255).toString(16);
-    return `radial-gradient(50% 50% at 50% 50%, ${colour}${opacityHex} 0%, ${colour}00 100%)`;
-  }
-  return (
-    <div
-      className="fixed left-1/2 top-1/2 -z-50 min-h-[100lvh] min-w-full origin-center -translate-x-1/2 -translate-y-1/2 overflow-hidden"
-      style={{ aspectRatio: `${W} / ${H}` }}
-    >
-      <div
-        className="absolute origin-center"
-        style={{
-          width: `${(2293 / W) * 100}%`,
-          height: `${(1995 / H) * 100}%`,
-          left: "12%",
-          top: "-50%",
-          transform: "rotate(-147.82deg)",
-          background: getBackgroundCSS(colours[0]),
-        }}
-      />
-      <div
-        className="absolute origin-center"
-        style={{
-          width: `${(2748 / W) * 100}%`,
-          height: `${(2259 / H) * 100}%`,
-          left: "20%",
-          top: 0,
-          transform: "rotate(99.75deg)",
-          background: getBackgroundCSS(colours[1]),
-        }}
-      />
-      <div
-        className="absolute origin-center"
-        style={{
-          width: `${(2293 / W) * 100}%`,
-          height: `${(2205 / H) * 100}%`,
-          left: "-20%",
-          top: "0%",
-          transform: "rotate(-170.86deg)",
-          background: getBackgroundCSS(colours[2]),
-        }}
-      />
-      <div
-        className="absolute origin-center"
-        style={{
-          width: `${(2464 / W) * 100}%`,
-          height: `${(2075 / H) * 100}%`,
-          left: "-50%",
-          top: "-50%",
-          transform: "rotate(99.75deg)",
-          background: getBackgroundCSS(colours[3]),
-        }}
-      />
-      <div className="absolute inset-0 backdrop-blur" />
-    </div>
-  );
-}
 
 function NavigationMenuListItem({
   href,
@@ -208,7 +141,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <body
         className={cn(sans.variable, mono.variable, "bg-[#334155] font-sans text-text-primary")}
       >
-        <Background />
+        <Background position={Math.random()} />
         <div className="pb-12 pt-[152px]">{children}</div>
         <VersionFooter />
         <Navigation />
