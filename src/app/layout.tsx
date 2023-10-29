@@ -126,7 +126,7 @@ function Navigation() {
     },
     {
       title: "anime",
-      href: "https://anime.joulev.dev",
+      href: "/apps/anime",
       description: "My anime list using the AniList API. A different frontend of AniList for me",
     },
     {

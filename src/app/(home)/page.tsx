@@ -137,18 +137,13 @@ export default function Page() {
                 </Link>
               </ListItem>
               <ListItem asChild>
-                <Link unstyled href="https://anime.joulev.dev/">
+                <Link unstyled href="/apps/anime">
                   anime
                 </Link>
               </ListItem>
               <ListItem asChild>
                 <Link unstyled href="/apps/link">
                   link
-                </Link>
-              </ListItem>
-              <ListItem asChild>
-                <Link unstyled href="https://presentation.joulev.dev/">
-                  presentation
                 </Link>
               </ListItem>
               <ListItem asChild>

@@ -5,12 +5,9 @@ import type { VariantProps } from "cva";
 import { forwardRef } from "react";
 
 import { cn, cva } from "~/lib/cn";
+import type { BaseProps } from "~/types/utils";
 
 import { useHoverBackground } from "./hooks/use-hover-background";
-
-type BaseProps<T extends React.ElementType> = React.ComponentPropsWithoutRef<T> & {
-  asChild?: boolean;
-};
 
 export const List = forwardRef<HTMLDivElement, BaseProps<"div">>(function List(
   { asChild, className, ...props },

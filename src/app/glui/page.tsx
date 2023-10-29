@@ -1,13 +1,18 @@
 import {
+  Atom,
   ChevronDown,
   Cloud,
   CreditCard,
+  FlaskConical,
+  Gamepad2,
   Github,
   LogOut,
   Mail,
   MessageSquare,
   Plus,
   PlusCircle,
+  Sigma,
+  Swords,
   User,
   UserPlus,
 } from "lucide-react";
@@ -51,6 +56,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
+import {
+  Sidebar,
+  SidebarHeader,
+  SidebarHeaderTitle,
+  SidebarSection,
+  SidebarSectionHeading,
+  SidebarSectionItem,
+  SidebarSectionItemCounter,
+  SidebarSectionItemName,
+  SidebarSectionItems,
+} from "~/components/ui/sidebar";
 import { cn } from "~/lib/cn";
 
 import {
@@ -403,6 +419,53 @@ function TextAreaShowcase() {
   );
 }
 
+function SidebarShowcase() {
+  return (
+    <Showcase title="Sidebar" className="p-0">
+      <Sidebar className="w-64">
+        <SidebarHeader>
+          <SidebarHeaderTitle>My notes</SidebarHeaderTitle>
+          <Button>Edit</Button>
+        </SidebarHeader>
+        <SidebarSection>
+          <SidebarSectionHeading hideCollapseButton>Study</SidebarSectionHeading>
+          <SidebarSectionItems>
+            <SidebarSectionItem>
+              <Sigma />
+              <SidebarSectionItemName>Mathematics</SidebarSectionItemName>
+              <SidebarSectionItemCounter>3</SidebarSectionItemCounter>
+            </SidebarSectionItem>
+            <SidebarSectionItem>
+              <Atom />
+              <SidebarSectionItemName>Physics</SidebarSectionItemName>
+              <SidebarSectionItemCounter>2</SidebarSectionItemCounter>
+            </SidebarSectionItem>
+            <SidebarSectionItem active>
+              <FlaskConical />
+              <SidebarSectionItemName>Chemistry</SidebarSectionItemName>
+              <SidebarSectionItemCounter>1 new</SidebarSectionItemCounter>
+            </SidebarSectionItem>
+          </SidebarSectionItems>
+        </SidebarSection>
+        <SidebarSection>
+          <SidebarSectionHeading>Gaming notes</SidebarSectionHeading>
+          <SidebarSectionItems>
+            <SidebarSectionItem>
+              <Gamepad2 />
+              <SidebarSectionItemName>Game release dates</SidebarSectionItemName>
+            </SidebarSectionItem>
+            <SidebarSectionItem>
+              <Swords />
+              <SidebarSectionItemName>Honkai: Star Rail build guide</SidebarSectionItemName>
+              <SidebarSectionItemCounter>5</SidebarSectionItemCounter>
+            </SidebarSectionItem>
+          </SidebarSectionItems>
+        </SidebarSection>
+      </Sidebar>
+    </Showcase>
+  );
+}
+
 export default function Page() {
   return (
     <main className="container flex max-w-screen-md flex-col gap-9">
@@ -442,6 +505,7 @@ export default function Page() {
       <ListShowcase />
       <NavigationMenuShowcase />
       <SelectShowcase />
+      <SidebarShowcase />
       <TextAreaShowcase />
     </main>
   );
