@@ -4,7 +4,7 @@ import { getClient } from "~/lib/apollo/client";
 
 import { GET_ANIME, type MediaListStatus } from "./queries";
 
-export type Item = NonNullable<Awaited<ReturnType<typeof getLists>>["watching"][number]>;
+export type AnimeListItem = NonNullable<Awaited<ReturnType<typeof getLists>>["watching"][number]>;
 
 export const getLists = cache(async (status?: MediaListStatus) => {
   const client = getClient();

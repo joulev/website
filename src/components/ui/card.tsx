@@ -9,7 +9,8 @@ export const Card = forwardRef<HTMLDivElement, React.ComponentPropsWithoutRef<"d
   return (
     <div
       className={cn(
-        "card overflow-hidden rounded-full bg-bg-idle p-6 backdrop-blur transition",
+        "overflow-clip", // overflow-hidden will prevent sticky positioning from working
+        "card rounded-full bg-bg-idle p-6 backdrop-blur transition",
         className,
       )}
       {...rest}
