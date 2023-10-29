@@ -87,7 +87,7 @@ export const SidebarSectionHeading = forwardRef<
       <span className="h-[30px] flex-grow truncate">{children}</span>
       {hideCollapseButton || (
         <Button variants={{ variant: "ghost", size: "icon-sm" }} onClick={toggle}>
-          <ChevronDown className={cn(isOpen || "rotate-180", "transition-transform")} />
+          <ChevronDown className={cn(isOpen || "-rotate-90", "transition-transform")} />
         </Button>
       )}
     </h2>
