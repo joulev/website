@@ -24,4 +24,5 @@ module.exports = {
     "react/jsx-sort-props": "off",
     "react/no-array-index-key": "off",
   },
+  ignorePatterns: ["src/lib/gql"],
 };

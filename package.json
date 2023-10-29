@@ -16,6 +16,7 @@
     "@discordjs/builders": "1.6.5",
     "@graphql-codegen/cli": "5.0.0",
     "@graphql-codegen/client-preset": "4.1.0",
+    "@graphql-typed-document-node/core": "3.2.0",
     "@neondatabase/serverless": "0.6.0",
     "@paralleldrive/cuid2": "2.2.2",
     "@parcel/watcher": "2.3.0",

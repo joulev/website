@@ -28,6 +28,9 @@ dependencies:
   '@graphql-codegen/client-preset':
     specifier: 4.1.0
     version: 4.1.0(graphql@16.8.1)
+  '@graphql-typed-document-node/core':
+    specifier: 3.2.0
+    version: 3.2.0(graphql@16.8.1)
   '@neondatabase/serverless':
     specifier: 0.6.0
     version: 0.6.0
