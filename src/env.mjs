@@ -20,6 +20,11 @@ export const env = createEnv({
 
     // chat
     OPENAI_API_KEY: z.string().min(1),
+
+    // anilist
+    ANILIST_CLIENT_ID: z.string().min(1),
+    ANILIST_CLIENT_SECRET: z.string().min(1),
+    NEXTAUTH_SECRET: z.string().min(1),
   },
   experimental__runtimeEnv: {},
 });

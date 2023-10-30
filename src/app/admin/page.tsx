@@ -1,9 +1,21 @@
-import { Link } from "~/components/ui/link";
+import { getServerSession } from "next-auth";
 
-export default function Page() {
+import { authOptions } from "~/lib/auth/config";
+
+import { LoginButton, LogoutButton } from "./login-button";
+
+export default async function Page() {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return (
+      <div>
+        You are not authenticated. <LoginButton />
+      </div>
+    );
+  }
   return (
     <div>
-      You are authenticated. <Link href="/admin/chat">Chat now</Link>.
+      You are authenticated (id = {JSON.stringify(session)}). <LogoutButton />
     </div>
   );
 }
