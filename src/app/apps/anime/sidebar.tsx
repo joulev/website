@@ -2,7 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Title } from "~/components/title";
 import { Button } from "~/components/ui/button";
@@ -51,6 +51,11 @@ function Navigation({ items }: { items: Item[] }) {
 
 export function Sidebar({ items }: { items: Item[] }) {
   const [expanded, setExpanded] = useState(false);
+  const pathname = usePathname();
+  const normalisedPathname = pathname === "/apps/anime" ? "/apps/anime/watching" : pathname;
+  useEffect(() => {
+    setExpanded(x => !x);
+  }, [normalisedPathname]);
   return (
     <div className="bg-bg-darker md:w-64 md:shrink-0">
       <div className="md:sticky md:top-0">
