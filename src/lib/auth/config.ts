@@ -31,4 +31,10 @@ export const authOptions: AuthOptions = {
       profile: (profile: Profile) => ({ id: profile.id }),
     },
   ],
+  callbacks: {
+    signIn: ({ profile }) => {
+      const JOULEV_USER_ID = 858763;
+      return profile?.id === JOULEV_USER_ID;
+    },
+  },
 };
