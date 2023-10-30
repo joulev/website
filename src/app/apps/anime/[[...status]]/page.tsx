@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { List, ListContent, ListHeader } from "~/components/ui/lists";
+
 import { type AnimeListItem, getLists } from "../get-lists";
-import { getTitle } from "../utils";
+import { getListTitleFromStatus, getTitle } from "../utils";
 import type { PageProps, Params } from "./$types";
+import { Card } from "./card";
 
 type AllowedStatus =
   | "watching"
@@ -109,32 +112,21 @@ export default async function Page({ params }: PageProps) {
     variant === "planning" ? "planning" : variant.includes("completed") ? "completed" : "others",
   ).filter((item): item is NonNullable<(typeof list)[number]> => item !== null);
 
-  return <pre>{JSON.stringify(sortedList, null, 2)}</pre>;
+  return (
+    <List>
+      <ListHeader>{getListTitleFromStatus(status)}</ListHeader>
+      <ListContent>
+        {sortedList.map(item => (
+          <Card key={item.id} item={item} variant={variant} />
+        ))}
+      </ListContent>
+    </List>
+  );
 }
 
 export function generateMetadata({ params }: PageProps): Metadata {
   const status = params.status?.join("/") ?? "watching";
-  switch (status) {
-    case "watching":
-      return { title: "Watching" };
-    case "rewatching":
-      return { title: "Rewatching" };
-    case "completed/tv":
-      return { title: "Completed TV" };
-    case "completed/movies":
-      return { title: "Completed Movies" };
-    case "completed/others":
-      return { title: "Completed (others)" };
-    case "paused":
-      return { title: "Paused" };
-    case "dropped":
-      return { title: "Dropped" };
-    case "planning":
-      return { title: "Planning" };
-    default:
-      // Next.js *should* not reach this branch, but it does, so ah well...
-      return { title: "404" };
-  }
+  return { title: getListTitleFromStatus(status, "404") };
 }
 
 export function generateStaticParams(): Params[] {

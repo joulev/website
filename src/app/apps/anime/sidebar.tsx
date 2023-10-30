@@ -15,10 +15,11 @@ import {
   SidebarSectionItems,
 } from "~/components/ui/sidebar";
 
+import { getListTitleFromStatus } from "./utils";
+
 interface Item {
-  content: React.ReactNode;
   icon: React.ReactNode;
-  slug: string;
+  status: string;
   count: number;
 }
 
@@ -27,18 +28,18 @@ function Navigation({ items }: { items: Item[] }) {
   return (
     <SidebarSection>
       <SidebarSectionItems>
-        {items.map(({ content, icon, slug, count }) => (
+        {items.map(({ icon, status, count }) => (
           <SidebarSectionItem
             key="slug"
             active={
-              `/apps/anime${slug}` === pathname ||
-              (slug === "/watching" && pathname === "/apps/anime")
+              `/apps/anime/${status}` === pathname ||
+              (status === "watching" && pathname === "/apps/anime")
             }
             asChild
           >
-            <Link href={`/apps/anime${slug}`} unstyled>
+            <Link href={`/apps/anime/${status}`} unstyled>
               {icon}
-              <SidebarSectionItemName>{content}</SidebarSectionItemName>
+              <SidebarSectionItemName>{getListTitleFromStatus(status)}</SidebarSectionItemName>
               {count > 0 ? <SidebarSectionItemCounter>{count}</SidebarSectionItemCounter> : null}
             </Link>
           </SidebarSectionItem>

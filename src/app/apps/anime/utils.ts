@@ -39,3 +39,26 @@ export function getAccumulatedScore(scores: number[]) {
     scores.map((score, index) => score * SCORE_COEF[index]).reduce((a, b) => a + b, 0),
   );
 }
+
+export function getListTitleFromStatus(status: string, fallback = "Unknown list") {
+  switch (status) {
+    case "watching":
+      return "Watching";
+    case "rewatching":
+      return "Rewatching";
+    case "completed/tv":
+      return "Completed TV";
+    case "completed/movies":
+      return "Completed Movies";
+    case "completed/others":
+      return "Completed (others)";
+    case "paused":
+      return "Paused";
+    case "dropped":
+      return "Dropped";
+    case "planning":
+      return "Planning";
+    default:
+      return fallback;
+  }
+}

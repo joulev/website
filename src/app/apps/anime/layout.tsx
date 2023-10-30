@@ -17,54 +17,14 @@ import { Sidebar } from "./sidebar";
 
 function getNavbarItems(lists: Awaited<ReturnType<typeof getLists>>) {
   return [
-    {
-      content: "Watching",
-      icon: <PlayCircle />,
-      slug: "/watching",
-      count: lists.watching.length,
-    },
-    {
-      content: "Rewatching",
-      icon: <Repeat />,
-      slug: "/rewatching",
-      count: lists.rewatching.length,
-    },
-    {
-      content: "Completed TV",
-      icon: <Tv2 />,
-      slug: "/completed/tv",
-      count: lists.completedTV.length,
-    },
-    {
-      content: "Completed Movies",
-      icon: <Film />,
-      slug: "/completed/movies",
-      count: lists.completedMovies.length,
-    },
-    {
-      content: "Completed (others)",
-      icon: <CheckCircle />,
-      slug: "/completed/others",
-      count: lists.completedOthers.length,
-    },
-    {
-      content: "Paused",
-      icon: <PauseCircle />,
-      slug: "/paused",
-      count: lists.paused.length,
-    },
-    {
-      content: "Dropped",
-      icon: <XCircle />,
-      slug: "/dropped",
-      count: lists.dropped.length,
-    },
-    {
-      content: "Planning",
-      icon: <Calendar />,
-      slug: "/planning",
-      count: lists.planning.length,
-    },
+    { icon: <PlayCircle />, status: "watching", count: lists.watching.length },
+    { icon: <Repeat />, status: "rewatching", count: lists.rewatching.length },
+    { icon: <Tv2 />, status: "completed/tv", count: lists.completedTV.length },
+    { icon: <Film />, status: "completed/movies", count: lists.completedMovies.length },
+    { icon: <CheckCircle />, status: "completed/others", count: lists.completedOthers.length },
+    { icon: <PauseCircle />, status: "paused", count: lists.paused.length },
+    { icon: <XCircle />, status: "dropped", count: lists.dropped.length },
+    { icon: <Calendar />, status: "planning", count: lists.planning.length },
   ];
 }
 
@@ -75,9 +35,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
     <main className="container max-w-screen-lg">
       <Card className="flex flex-col items-stretch p-0 md:flex-row">
         <Sidebar items={navbarItems} />
-        <div className="flex max-w-full flex-grow flex-col divide-y divide-separator overflow-x-auto">
-          {children}
-        </div>
+        <div className="mx-auto w-full max-w-lg p-6">{children}</div>
       </Card>
     </main>
   );

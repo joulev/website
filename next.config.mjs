@@ -9,6 +9,16 @@ const nextConfig = {
   experimental: {
     webpackBuildWorker: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "s4.anilist.co",
+        port: "",
+        pathname: "/file/anilistcdn/media/anime/cover/small/**",
+      },
+    ],
+  },
   rewrites: async () => [
     { source: "/cv", destination: env.RESUME_URL },
     { source: "/cv.pdf", destination: env.RESUME_URL },
