@@ -48,6 +48,7 @@ import {
   NavigationMenuMainLink,
   NavigationMenuTrigger,
 } from "~/components/ui/navigation-menu";
+import { Progress } from "~/components/ui/progress";
 import {
   Select,
   SelectContent,
@@ -484,6 +485,18 @@ function SidebarShowcase() {
   );
 }
 
+function ProgressShowcase() {
+  return (
+    <Showcase title="Progress">
+      <div className="mx-auto flex w-64 flex-col gap-6">
+        {[0, 0.2, 0.4, 0.6, 0.8, 1].map(value => (
+          <Progress value={value} key={value} />
+        ))}
+      </div>
+    </Showcase>
+  );
+}
+
 export default function Page() {
   return (
     <main className="container flex max-w-screen-md flex-col gap-9">
@@ -522,6 +535,7 @@ export default function Page() {
       <LinkShowcase />
       <ListShowcase />
       <NavigationMenuShowcase />
+      <ProgressShowcase />
       <SelectShowcase />
       <SidebarShowcase />
       <TextAreaShowcase />
