@@ -32,6 +32,14 @@ export const authOptions: AuthOptions = {
     },
   ],
   callbacks: {
+    jwt: ({ token, account }) => {
+      if (account) token.accessToken = account.access_token;
+      return token;
+    },
+    session: ({ session, token }) => {
+      if (typeof token.accessToken === "string") session.accessToken = token.accessToken;
+      return session;
+    },
     signIn: ({ profile }) => {
       const JOULEV_USER_ID = 858763;
       return profile?.id === JOULEV_USER_ID;
