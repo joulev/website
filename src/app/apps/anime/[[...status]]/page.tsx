@@ -5,8 +5,8 @@ import { List, ListContent, ListHeader } from "~/components/ui/lists";
 
 import { type AnimeListItem, getLists } from "../get-lists";
 import { getListTitleFromStatus, getTitle } from "../utils";
-import type { PageProps, Params } from "./$types";
-import { Card } from "./card";
+import type { PageProps } from "./$types";
+import { Card, type CardVariant } from "./card";
 
 type AllowedStatus =
   | "watching"
@@ -14,14 +14,6 @@ type AllowedStatus =
   | "completed/tv"
   | "completed/movies"
   | "completed/others"
-  | "paused"
-  | "dropped"
-  | "planning";
-type CardVariant =
-  | "watching"
-  | "rewatching"
-  | "completed"
-  | "completed-others"
   | "paused"
   | "dropped"
   | "planning";
@@ -129,18 +121,19 @@ export function generateMetadata({ params }: PageProps): Metadata {
   return { title: getListTitleFromStatus(status, "404") };
 }
 
-export function generateStaticParams(): Params[] {
-  return [
-    { status: [] },
-    { status: ["watching"] },
-    { status: ["rewatching"] },
-    { status: ["completed", "tv"] },
-    { status: ["completed", "movies"] },
-    { status: ["completed", "others"] },
-    { status: ["paused"] },
-    { status: ["dropped"] },
-    { status: ["planning"] },
-  ];
-}
+// export function generateStaticParams(): Params[] {
+//   return [
+//     { status: [] },
+//     { status: ["watching"] },
+//     { status: ["rewatching"] },
+//     { status: ["completed", "tv"] },
+//     { status: ["completed", "movies"] },
+//     { status: ["completed", "others"] },
+//     { status: ["paused"] },
+//     { status: ["dropped"] },
+//     { status: ["planning"] },
+//   ];
+// }
 
-export const dynamicParams = false;
+// export const dynamicParams = false;
+export const revalidate = 0;
