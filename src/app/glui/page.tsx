@@ -311,10 +311,7 @@ function SelectShowcase() {
 function NavigationMenuListItem({ title, children }: React.PropsWithChildren<{ title: string }>) {
   return (
     <li>
-      <NavigationMenuLink
-        href="#"
-        className="flex select-none flex-col justify-between gap-3 leading-none no-underline outline-none"
-      >
+      <NavigationMenuLink className="flex select-none flex-col justify-between gap-3 leading-none no-underline outline-none">
         <div className="text-sm font-semibold leading-none">{title}</div>
         <p className="line-clamp-2 text-sm leading-snug text-text-secondary">{children}</p>
       </NavigationMenuLink>
@@ -367,13 +364,14 @@ function NavigationMenuShowcase() {
                   <NavigationMenuContent>
                     <ul className="grid grid-cols-1 md:grid-cols-2 lg:w-[500px]">
                       <li>
-                        <NavigationMenuLink href="#" asChild unstyled>
-                          <div className="flex h-full w-full select-none flex-col justify-end bg-bg-darker p-6 no-underline outline-none">
-                            <div className="mb-2 mt-4 text-lg font-medium">glui</div>
-                            <p className="text-sm leading-tight text-text-secondary">
-                              Glassmorphic component collection based on visionOS UI design system
-                            </p>
-                          </div>
+                        <NavigationMenuLink
+                          className="flex h-full w-full select-none flex-col justify-end bg-bg-darker p-6 no-underline outline-none"
+                          unstyled
+                        >
+                          <div className="mb-2 mt-4 text-lg font-medium">glui</div>
+                          <p className="text-sm leading-tight text-text-secondary">
+                            Glassmorphic component collection based on visionOS UI design system
+                          </p>
                         </NavigationMenuLink>
                       </li>
                       <div className="flex flex-col gap-3 p-3">
@@ -403,7 +401,7 @@ function NavigationMenuShowcase() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem className="max-sm:hidden">
-                  <NavigationMenuMainLink href="#">Documentation</NavigationMenuMainLink>
+                  <NavigationMenuMainLink>Documentation</NavigationMenuMainLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
