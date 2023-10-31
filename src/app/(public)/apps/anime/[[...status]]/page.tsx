@@ -77,7 +77,9 @@ async function getList(status: AllowedStatus): Promise<[(AnimeListItem | null)[]
 }
 
 export default async function Page({ params }: PageProps) {
-  const status = params.status?.join("/") ?? "watching";
+  // the decodeURIComponent is here because on Vercel at the time of writing, navigating to
+  // completed/tv gives ["completed%2Ftv"] instead of ["completed", "tv"] for some reasons.
+  const status = decodeURIComponent(params.status?.join("/") ?? "watching");
   if (
     status !== "watching" &&
     status !== "rewatching" &&
