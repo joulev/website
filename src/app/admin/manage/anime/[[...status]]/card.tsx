@@ -1,6 +1,3 @@
-import Image from "next/image";
-
-import { Link } from "~/components/ui/link";
 import { ListItem } from "~/components/ui/lists";
 import { Progress } from "~/components/ui/progress";
 import type { AnimeCardVariant, AnimeListItem } from "~/lib/anime/get-lists";
@@ -86,29 +83,11 @@ function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCard
 
 export function Card({ item, variant }: { item: AnimeListItem; variant: AnimeCardVariant }) {
   return (
-    <ListItem asChild>
-      <Link href={`https://anilist.co/anime/${item.mediaId}`} unstyled>
-        <div className="flex w-full flex-row gap-6">
-          {/* min-w-0 is required here for truncating to work */}
-          <div className="flex min-w-0 flex-grow flex-col justify-between gap-3">
-            <div className="truncate">{getTitle(item.media?.title)}</div>
-            <BottomPart item={item} variant={variant} />
-          </div>
-          {item.media?.coverImage?.medium ? (
-            <div className="relative hidden min-h-[64px] w-12 shrink-0 overflow-clip rounded-[0.5rem] sm:block">
-              <Image
-                src={item.media.coverImage.medium}
-                alt="cover"
-                fill
-                className="object-cover"
-                sizes="(min-width: 640px) 48px, 0px"
-              />
-            </div>
-          ) : (
-            <div className="bg-daw-main-200 hidden min-h-[96px] w-18 shrink-0 rounded sm:block" />
-          )}
-        </div>
-      </Link>
+    <ListItem>
+      <div className="flex w-full flex-col gap-3">
+        <div className="truncate">{getTitle(item.media?.title)}</div>
+        <BottomPart item={item} variant={variant} />
+      </div>
     </ListItem>
   );
 }

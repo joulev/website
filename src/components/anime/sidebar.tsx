@@ -14,8 +14,7 @@ import {
   SidebarSectionItemName,
   SidebarSectionItems,
 } from "~/components/ui/sidebar";
-
-import { getListTitleFromStatus } from "./utils";
+import { getListTitleFromStatus } from "~/lib/anime/utils";
 
 interface Item {
   icon: React.ReactNode;
