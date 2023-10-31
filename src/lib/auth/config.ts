@@ -3,7 +3,7 @@ import NextAuth, { type Profile } from "next-auth";
 import type { OAuthConfig } from "next-auth/providers";
 
 import { env } from "~/env.mjs";
-import { getClient } from "~/lib/apollo/client";
+import { getClient } from "~/lib/graphql";
 
 import { GET_USER } from "./queries";
 
@@ -31,7 +31,7 @@ export const {
           const accessToken = tokens.access_token;
           if (!accessToken) throw new Error(`invariant: invalid access token: ${accessToken}`);
           const client = getClient(accessToken);
-          const { data } = await client.query({ query: GET_USER });
+          const data = await client.request(GET_USER);
           if (!data.Viewer?.id) throw new Error(`invariant: invalid user id: ${data.Viewer?.id}`);
           return { id: String(data.Viewer.id) };
         },

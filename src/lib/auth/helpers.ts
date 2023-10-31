@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { getClient } from "~/lib/apollo/client";
+import { getClient } from "~/lib/graphql";
 
 import { auth } from "./config";
 
@@ -10,7 +10,7 @@ export async function getSession() {
   return session;
 }
 
-export async function getAuthenticatedApolloClient() {
+export async function getAuthenticatedGraphQLClient() {
   const session = await getSession();
   return getClient(session.accessToken);
 }

@@ -137,3 +137,4 @@ export function generateMetadata({ params }: PageProps): Metadata {
 
 // export const dynamicParams = false;
 export const revalidate = 0;
+export const runtime = "edge";

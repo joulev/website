@@ -3,6 +3,7 @@ import { OpenAI } from "openai";
 import { any, array, enumType, object, optional, safeParse, string } from "valibot";
 
 import { env } from "~/env.mjs";
+import { getSession } from "~/lib/auth/helpers";
 
 const openai = new OpenAI({ apiKey: env.OPENAI_API_KEY });
 
@@ -34,6 +35,8 @@ The person you are talking to is experienced in JavaScript and web development. 
 TypeScript by default, unless that person asks you to use a different programming language.`;
 
 export async function POST(req: Request) {
+  await getSession();
+
   const result = safeParse(bodySchema, (await req.json()) as unknown);
   if (!result.success) return Response.json({}, { status: 400 });
   const { messages } = result.output;

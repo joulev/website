@@ -1,6 +1,6 @@
 import { cache } from "react";
 
-import { getClient } from "~/lib/apollo/client";
+import { getClient } from "~/lib/graphql";
 
 import { GET_ANIME, type MediaListStatus } from "./queries";
 
@@ -8,11 +8,7 @@ export type AnimeListItem = NonNullable<Awaited<ReturnType<typeof getLists>>["wa
 
 export const getLists = cache(async (status?: MediaListStatus) => {
   const client = getClient();
-  const { data } = await client.query({
-    query: GET_ANIME,
-    variables: { status },
-    context: { fetchOptions: { next: { tags: ["lists"] } } satisfies RequestInit },
-  });
+  const data = await client.request(GET_ANIME, { status });
   const lists = data.MediaListCollection?.lists ?? [];
   return {
     lists,
