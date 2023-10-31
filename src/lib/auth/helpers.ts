@@ -6,7 +6,7 @@ import { auth } from "./config";
 
 export async function getSession() {
   const session = await auth();
-  if (!session) redirect("/api/auth/signin");
+  if (!session) redirect("/sign-in");
   return session;
 }
 

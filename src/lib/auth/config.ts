@@ -10,6 +10,10 @@ import { GET_USER } from "./queries";
 export const {
   handlers: { GET, POST },
   auth,
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- this is how next-auth does it, don't ask me why
+  signOut,
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- this is how next-auth does it, don't ask me why
+  signIn,
 } = NextAuth({
   providers: [
     {
