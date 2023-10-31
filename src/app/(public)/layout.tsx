@@ -17,12 +17,15 @@ function NavigationMenuListItem({
 }: React.PropsWithChildren<{ href: string; title: string }>) {
   return (
     <li>
-      <NavigationMenuLink
-        href={href}
-        className="flex select-none flex-col justify-between gap-3 leading-none no-underline outline-none"
-      >
-        <div className="text-sm font-semibold leading-none">{title}</div>
-        <p className="line-clamp-2 text-sm leading-snug text-text-secondary">{children}</p>
+      <NavigationMenuLink asChild>
+        <Link
+          href={href}
+          className="flex select-none flex-col justify-between gap-3 leading-none no-underline outline-none"
+          unstyled
+        >
+          <div className="text-sm font-semibold leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-text-secondary">{children}</p>
+        </Link>
       </NavigationMenuLink>
     </li>
   );
@@ -73,7 +76,11 @@ function Navigation() {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuMainLink href="/">Home</NavigationMenuMainLink>
+            <NavigationMenuMainLink asChild>
+              <Link href="/" unstyled>
+                Home
+              </Link>
+            </NavigationMenuMainLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger>Apps</NavigationMenuTrigger>

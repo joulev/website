@@ -7,7 +7,6 @@ import { forwardRef } from "react";
 import { cn } from "~/lib/cn";
 
 import { useHoverBackground } from "./hooks/use-hover-background";
-import { Link } from "./link";
 
 export const NavigationMenu = forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -50,46 +49,37 @@ export const NavigationMenuItem = NavigationMenuPrimitive.Item;
 
 export const NavigationMenuLink = forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Link>,
-  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Link> & {
-    href: string;
-    unstyled?: boolean;
-  }
->(({ href, unstyled, className, style, onMouseMove, ...props }, ref) => {
-  return (
-    <Link href={href} passHref legacyBehavior unstyled>
-      <NavigationMenuPrimitive.Link
-        className={cn(
-          unstyled ||
-            "hover-bg relative m-1 block rounded p-2 transition-all hover:m-0 hover:bg-bg-idle hover:p-3 active:m-0 active:bg-bg-active active:p-3",
-          className,
-        )}
-        {...useHoverBackground({ style, onMouseMove })}
-        {...props}
-        ref={ref}
-      />
-    </Link>
-  );
-});
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Link> & { unstyled?: boolean }
+>(({ unstyled, className, style, onMouseMove, ...props }, ref) => (
+  <NavigationMenuPrimitive.Link
+    className={cn(
+      unstyled ||
+        "hover-bg relative m-1 block rounded p-2 transition-all hover:m-0 hover:bg-bg-idle hover:p-3 active:m-0 active:bg-bg-active active:p-3",
+      className,
+    )}
+    {...useHoverBackground({ style, onMouseMove })}
+    {...props}
+    ref={ref}
+  />
+));
 NavigationMenuLink.displayName = NavigationMenuPrimitive.Link.displayName;
 
 export const NavigationMenuMainLink = forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Link>,
-  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Link> & { href: string }
->(function NavigationMenuMainLink({ href, className, style, onMouseMove, ...props }, ref) {
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Link>
+>(function NavigationMenuMainLink({ className, style, onMouseMove, ...props }, ref) {
   return (
-    <Link href={href} passHref legacyBehavior unstyled>
-      <NavigationMenuPrimitive.Link
-        ref={ref}
-        className={cn(
-          // Must be flex here, otherwise the height is off by 3px. Don't ask me why.
-          "hover-bg relative flex flex-row items-center rounded-full px-4 py-2 text-text-secondary transition-colors hover:bg-bg-idle hover:text-text-primary focus:outline-none active:bg-bg-active active:text-text-primary disabled:pointer-events-none disabled:opacity-50",
-          "before:rounded-full", // somehow I need this here. Don't ask me why
-          className,
-        )}
-        {...useHoverBackground({ style, onMouseMove })}
-        {...props}
-      />
-    </Link>
+    <NavigationMenuPrimitive.Link
+      ref={ref}
+      className={cn(
+        // Must be flex here, otherwise the height is off by 3px. Don't ask me why.
+        "hover-bg relative flex flex-row items-center rounded-full px-4 py-2 text-text-secondary transition-colors hover:bg-bg-idle hover:text-text-primary focus:outline-none active:bg-bg-active active:text-text-primary disabled:pointer-events-none disabled:opacity-50",
+        "before:rounded-full", // somehow I need this here. Don't ask me why
+        className,
+      )}
+      {...useHoverBackground({ style, onMouseMove })}
+      {...props}
+    />
   );
 });
 
