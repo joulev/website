@@ -22,7 +22,7 @@ interface Item {
   count: number;
 }
 
-function Navigation({ items }: { items: Item[] }) {
+function Navigation({ basePath, items }: { basePath: string; items: Item[] }) {
   const pathname = usePathname();
   return (
     <SidebarSection>
@@ -31,12 +31,12 @@ function Navigation({ items }: { items: Item[] }) {
           <SidebarSectionItem
             key="slug"
             active={
-              `/apps/anime/${status}` === pathname ||
-              (status === "watching" && pathname === "/apps/anime")
+              `${basePath}/${status}` === pathname ||
+              (status === "watching" && pathname === basePath)
             }
             asChild
           >
-            <Link href={`/apps/anime/${status}`} unstyled>
+            <Link href={`${basePath}/${status}`} unstyled>
               {icon}
               <SidebarSectionItemName>{getListTitleFromStatus(status)}</SidebarSectionItemName>
               {count > 0 ? <SidebarSectionItemCounter>{count}</SidebarSectionItemCounter> : null}
@@ -48,10 +48,10 @@ function Navigation({ items }: { items: Item[] }) {
   );
 }
 
-export function Sidebar({ items }: { items: Item[] }) {
+export function Sidebar({ basePath, items }: { basePath: string; items: Item[] }) {
   const [expanded, setExpanded] = useState(false);
   const pathname = usePathname();
-  const normalisedPathname = pathname === "/apps/anime" ? "/apps/anime/watching" : pathname;
+  const normalisedPathname = pathname === basePath ? `${basePath}/watching` : pathname;
   useEffect(() => {
     setExpanded(x => !x);
   }, [normalisedPathname]);
@@ -73,7 +73,7 @@ export function Sidebar({ items }: { items: Item[] }) {
           style={{ "--rows": expanded ? "1fr" : "0fr", "--opacity": expanded ? 1 : 0 }}
         >
           <div className="overflow-hidden">
-            <Navigation items={items} />
+            <Navigation basePath={basePath} items={items} />
           </div>
         </div>
       </div>

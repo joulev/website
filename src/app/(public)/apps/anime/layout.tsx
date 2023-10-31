@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-export { AnimeLayout as default } from "~/components/anime/layout";
+import { AnimeLayout } from "~/components/anime/layout";
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <AnimeLayout>{children}</AnimeLayout>;
+}
 
 export const metadata: Metadata = {
   title: {

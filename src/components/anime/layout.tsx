@@ -27,13 +27,19 @@ function getNavbarItems(lists: Awaited<ReturnType<typeof getAllLists>>) {
   ];
 }
 
-export async function AnimeLayout({ children }: { children: React.ReactNode }) {
+export async function AnimeLayout({
+  isAdmin,
+  children,
+}: {
+  isAdmin?: boolean;
+  children: React.ReactNode;
+}) {
   const lists = await getAllLists();
   const navbarItems = getNavbarItems(lists);
   return (
     <main className="container max-w-screen-lg">
       <Card className="flex flex-col items-stretch p-0 md:flex-row">
-        <Sidebar items={navbarItems} />
+        <Sidebar basePath={isAdmin ? "/admin/manage/anime" : "/apps/anime"} items={navbarItems} />
         <div className="mx-auto w-full max-w-lg p-6">{children}</div>
       </Card>
     </main>
