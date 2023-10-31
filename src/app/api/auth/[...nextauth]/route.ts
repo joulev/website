@@ -1,7 +1,2 @@
-import NextAuth from "next-auth";
-
-import { authOptions } from "~/lib/auth/config";
-
-const handler = NextAuth(authOptions) as (req: Request) => Response;
-
-export { handler as GET, handler as POST };
+export { GET, POST } from "~/lib/auth/config";
+// export const runtime = "edge"; <- currently causes compile error with the apollo client

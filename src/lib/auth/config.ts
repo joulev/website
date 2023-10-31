@@ -1,11 +1,16 @@
-import type { AuthOptions, Profile } from "next-auth";
+import type { TokenSet } from "@auth/core/types";
+import NextAuth, { type Profile } from "next-auth";
+import type { OAuthConfig } from "next-auth/providers";
 
 import { env } from "~/env.mjs";
 import { getClient } from "~/lib/apollo/client";
 
 import { GET_USER } from "./queries";
 
-export const authOptions: AuthOptions = {
+export const {
+  handlers: { GET, POST },
+  auth,
+} = NextAuth({
   providers: [
     {
       id: "anilist",
@@ -17,19 +22,20 @@ export const authOptions: AuthOptions = {
       },
       token: "https://anilist.co/api/v2/oauth/token",
       userinfo: {
-        request: async ({ tokens }) => {
+        url: "https://graphql.anilist.co", // it's not used, but must be here else next-auth complains userinfo is not available
+        request: async ({ tokens }: { tokens: TokenSet }): Promise<Profile> => {
           const accessToken = tokens.access_token;
           if (!accessToken) throw new Error(`invariant: invalid access token: ${accessToken}`);
           const client = getClient(accessToken);
           const { data } = await client.query({ query: GET_USER });
           if (!data.Viewer?.id) throw new Error(`invariant: invalid user id: ${data.Viewer?.id}`);
-          return { id: data.Viewer.id };
+          return { id: String(data.Viewer.id) };
         },
       },
       clientId: env.ANILIST_CLIENT_ID,
       clientSecret: env.ANILIST_CLIENT_SECRET,
       profile: (profile: Profile) => ({ id: profile.id }),
-    },
+    } satisfies OAuthConfig<Profile>,
   ],
   callbacks: {
     jwt: ({ token, account }) => {
@@ -41,8 +47,8 @@ export const authOptions: AuthOptions = {
       return session;
     },
     signIn: ({ profile }) => {
-      const JOULEV_USER_ID = 858763;
+      const JOULEV_USER_ID = "858763";
       return profile?.id === JOULEV_USER_ID;
     },
   },
-};
+});

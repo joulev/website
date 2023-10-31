@@ -1,16 +1,16 @@
-import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 import { getClient } from "~/lib/apollo/client";
 
-import { authOptions } from "./config";
+import { auth } from "./config";
 
-async function getAccessToken() {
-  const session = await getServerSession(authOptions);
-  if (!session) throw new Error("Not authenticated");
-  return session.accessToken;
+export async function getSession() {
+  const session = await auth();
+  if (!session) redirect("/api/auth/signin");
+  return session;
 }
 
 export async function getAuthenticatedApolloClient() {
-  const token = await getAccessToken();
-  return getClient(token);
+  const session = await getSession();
+  return getClient(session.accessToken);
 }

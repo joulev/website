@@ -1,11 +1,9 @@
-import { getServerSession } from "next-auth";
-
-import { authOptions } from "~/lib/auth/config";
+import { auth } from "~/lib/auth/config";
 
 import { LoginButton, LogoutButton } from "./login-button";
 
 export default async function Page() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (!session) {
     return (
       <div>
