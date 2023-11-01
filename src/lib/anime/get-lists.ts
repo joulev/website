@@ -1,8 +1,9 @@
 import { cache } from "react";
 
+import type { MediaListStatus } from "~/lib/gql/graphql";
 import { getClient } from "~/lib/graphql";
 
-import { GET_ANIME, type MediaListStatus } from "./queries";
+import { GET_ANIME } from "./queries";
 import { getTitle } from "./utils";
 
 export type AnimeAllowedStatus =

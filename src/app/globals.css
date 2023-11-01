@@ -23,6 +23,13 @@ hr {
   @apply border-separator;
 }
 
+#nprogress {
+  @apply pointer-events-none;
+}
+#nprogress .bar {
+  @apply fixed left-0 top-0 z-50 h-0.5 w-full bg-text-primary;
+}
+
 /* https://dev.to/noriste/production-grade-gradient-bordered-transparent-and-rounded-button-56h4 */
 .card {
   @apply border;

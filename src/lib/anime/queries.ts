@@ -1,12 +1,5 @@
 import { graphql } from "~/lib/gql/gql";
 
-export { MediaListStatus } from "~/lib/gql/graphql";
-export type {
-  GetAnimeQuery as GetAnime,
-  SearchAnimeQuery as SearchAnime,
-  SearchAnimeQueryVariables as SearchAnimeVariables,
-} from "~/lib/gql/graphql";
-
 export const GET_ANIME = graphql(/* GraphQL */ `
   query GetAnime($status: MediaListStatus) {
     MediaListCollection(userName: "joulev", type: ANIME, status: $status) {
