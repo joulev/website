@@ -1,9 +1,11 @@
-import { ChevronsRight, Pause, Pencil, Play, Repeat, StopCircle, Trash, X } from "lucide-react";
+import { ChevronsRight, Pause, Play, Repeat, StopCircle, Trash, X } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
 import { ListItem } from "~/components/ui/lists";
 import type { AnimeCardVariant, AnimeListItem } from "~/lib/anime/get-lists";
 import { convertSeason, getTitle } from "~/lib/anime/utils";
+
+import { UpdateItemScore } from "./update-item-score";
 
 function BottomPartTemplate({ text, children }: { text: string; children: React.ReactNode }) {
   return (
@@ -53,9 +55,7 @@ function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCard
           <Button variants={{ size: "icon-sm" }}>
             <Repeat />
           </Button>
-          <Button variants={{ size: "icon-sm" }}>
-            <Pencil />
-          </Button>
+          <UpdateItemScore item={item} />
         </BottomPartTemplate>
       );
     case "completed-others":
