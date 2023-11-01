@@ -39,7 +39,7 @@ export async function AnimeLayout({
   return (
     <main className="container max-w-screen-lg">
       <Card className="flex flex-col items-stretch p-0 md:flex-row">
-        <Sidebar basePath={isAdmin ? "/admin/manage/anime" : "/apps/anime"} items={navbarItems} />
+        <Sidebar isAdmin={isAdmin} items={navbarItems} />
         <div className="mx-auto w-full max-w-lg p-6">{children}</div>
       </Card>
     </main>

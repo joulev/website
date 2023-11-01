@@ -73,7 +73,7 @@ export const NavigationMenuMainLink = forwardRef<
       ref={ref}
       className={cn(
         // Must be flex here, otherwise the height is off by 3px. Don't ask me why.
-        "hover-bg relative flex flex-row items-center rounded-full px-4 py-2 text-text-secondary transition-colors hover:bg-bg-idle hover:text-text-primary focus:outline-none active:bg-bg-active active:text-text-primary disabled:pointer-events-none disabled:opacity-50",
+        "hover-bg relative flex flex-row items-center whitespace-nowrap rounded-full px-4 py-2 text-text-secondary transition-colors hover:bg-bg-idle hover:text-text-primary focus:outline-none active:bg-bg-active active:text-text-primary disabled:pointer-events-none disabled:opacity-50",
         "before:rounded-full", // somehow I need this here. Don't ask me why
         className,
       )}

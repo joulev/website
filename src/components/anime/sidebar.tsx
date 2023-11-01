@@ -48,9 +48,10 @@ function Navigation({ basePath, items }: { basePath: string; items: Item[] }) {
   );
 }
 
-export function Sidebar({ basePath, items }: { basePath: string; items: Item[] }) {
+export function Sidebar({ isAdmin, items }: { isAdmin?: boolean; items: Item[] }) {
   const [expanded, setExpanded] = useState(false);
   const pathname = usePathname();
+  const basePath = isAdmin ? "/admin/manage/anime" : "/apps/anime";
   const normalisedPathname = pathname === basePath ? `${basePath}/watching` : pathname;
   useEffect(() => {
     setExpanded(x => !x);
@@ -59,7 +60,7 @@ export function Sidebar({ basePath, items }: { basePath: string; items: Item[] }
     <div className="bg-bg-darker md:w-64 md:shrink-0">
       <div className="md:sticky md:top-0">
         <div className="flex flex-row items-start justify-between p-6">
-          <Title title="anime" subtitle="My anime list" />
+          <Title title="anime" subtitle={isAdmin ? "Manage anime" : "My anime list"} />
           <Button
             className="text-text-secondary hover:text-text-primary md:hidden"
             variants={{ variant: "ghost", size: "icon-md" }}
