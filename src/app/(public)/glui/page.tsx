@@ -24,6 +24,16 @@ import { Title } from "~/components/title";
 import { Button, LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~/components/ui/dialog";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -495,6 +505,40 @@ function ProgressShowcase() {
   );
 }
 
+function DialogShowcase() {
+  return (
+    <Showcase title="Dialog" className="flex flex-row justify-center py-12">
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button>About Lipsum</Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Lipsum</DialogTitle>
+            <DialogDescription>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry.{" "}
+              <Link href="https://lipsum.com">Source</Link>
+            </DialogDescription>
+          </DialogHeader>
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies nulla ut leo
+            blandit congue. Duis eleifend, sapien eget tristique bibendum, elit massa tempus diam,
+            eleifend porta nunc justo in ante. Integer vitae blandit neque.
+          </div>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button className="w-full sm:w-auto">Cancel</Button>
+            </DialogClose>
+            <Button className="w-full sm:w-auto" variants={{ variant: "primary" }}>
+              Submit
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </Showcase>
+  );
+}
+
 export default function Page() {
   return (
     <main className="container flex max-w-screen-md flex-col gap-9">
@@ -528,6 +572,7 @@ export default function Page() {
       </section>
       <ButtonShowcase />
       <CardShowcase />
+      <DialogShowcase />
       <DropdownShowcase />
       <InputShowcase />
       <LinkShowcase />
