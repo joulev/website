@@ -35,34 +35,9 @@ function NavigationMenuListItem({
 function Navigation() {
   const components: { title: string; href: string; description: string }[] = [
     {
-      title: "glui",
-      href: "/glui",
-      description: "A glassmorphic component system, based on visionOS UI design",
-    },
-    {
-      title: "cuid2",
-      href: "/apps/cuid2",
-      description: "Online cuid2 generator",
-    },
-    {
-      title: "tategaki",
-      href: "/apps/tategaki",
-      description: "A website featuring text displayed in Japanese vertical writing style",
-    },
-    {
       title: "anime",
-      href: "/apps/anime",
-      description: "My anime list using the AniList API. A different frontend of AniList for me",
-    },
-    {
-      title: "link",
-      href: "/apps/link",
-      description: "A simple URL shortener",
-    },
-    {
-      title: "irasuto",
-      href: "/apps/irasuto",
-      description: "A website featuring Japanese illustrations that I love",
+      href: "/admin/manage/anime",
+      description: "Manage my anime list",
     },
   ];
   return (
@@ -78,7 +53,7 @@ function Navigation() {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Apps</NavigationMenuTrigger>
+            <NavigationMenuTrigger>Manage</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[500px] max-w-[calc(100vw-48px)] gap-3 p-3 md:grid-cols-2 lg:w-[600px]">
                 {components.map(component => (
