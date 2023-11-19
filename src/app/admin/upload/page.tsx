@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { cn } from "~/lib/cn";
 
@@ -42,6 +42,15 @@ export default function Page() {
       setIsUploading(false);
     }
   }
+  useEffect(() => {
+    async function onPaste(e: ClipboardEvent) {
+      const file = e.clipboardData?.files[0];
+      if (!file) return;
+      await handleUpload(file);
+    }
+    window.addEventListener("paste", onPaste);
+    return () => window.removeEventListener("paste", onPaste);
+  });
   return (
     <>
       {isUploading ? (
@@ -72,7 +81,7 @@ export default function Page() {
               Drag the (one) file here, or
               <br />
               <label>
-                <span className="link cursor-pointer">click to select the file</span>
+                <span className="link cursor-pointer">click here to select the file</span>
                 <input
                   type="file"
                   className="hidden"
@@ -82,8 +91,10 @@ export default function Page() {
                     await handleUpload(file);
                   }}
                 />
-              </label>{" "}
-              to upload.
+              </label>
+              ,
+              <br />
+              or paste the file to upload.
             </div>
           )}
         </WorkArea>
