@@ -2,7 +2,7 @@ import { boolean, pgTable, serial, smallint, timestamp, varchar } from "drizzle-
 
 export const photos = pgTable("photos", {
   id: serial("id").primaryKey(),
-  url: varchar("url", { length: 256 }).unique().notNull(),
+  storageKey: varchar("storage_key", { length: 256 }).unique().notNull(),
   width: smallint("width").notNull(),
   height: smallint("height").notNull(),
   tweetUrl: varchar("tweet_url", { length: 256 }).notNull(),

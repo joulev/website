@@ -19,7 +19,9 @@ import { uploadPhotoToR2 } from "~/lib/s3/irasuto";
 
 const schema = vObject({ password: vLiteral(env.PASSWORD), url: vString([vUrl()]) });
 
-async function getPhotos(id: string): Promise<NewIrasutoPhoto[] | null> {
+type FetchedPhoto = Omit<NewIrasutoPhoto, "storageKey"> & { url: string };
+
+async function getPhotos(id: string): Promise<FetchedPhoto[] | null> {
   const tweet = await getTweet(id);
   if (!tweet?.photos) return null;
   return tweet.photos.map(photo => ({
@@ -34,7 +36,7 @@ async function getPhotos(id: string): Promise<NewIrasutoPhoto[] | null> {
 }
 
 function buildEmbedFromPhoto(
-  photo: NewIrasutoPhoto,
+  photo: FetchedPhoto,
   totalCount: number,
 ): RESTPostAPIWebhookWithTokenJSONBody {
   return {
@@ -83,11 +85,12 @@ export async function POST(request: Request) {
 
     await Promise.all(
       photos.map(async photo => {
-        const fileName = await uploadPhotoToR2(photo.url, photo.tweetUrl);
-        photo.url = `https://r2.irasuto.joulev.dev/irasuto/${fileName}`;
+        const { url: _, ...rest } = photo;
+
+        const key = await uploadPhotoToR2(photo.url, photo.tweetUrl);
 
         // We don't parallelise this because we don't want to have db items without photos
-        await db.insert(photosSchema).values(photo);
+        await db.insert(photosSchema).values({ ...rest, storageKey: key });
 
         if (env.DISCORD_WEBHOOK) {
           // This may be incorrect due to race conditions, but it's good enough

@@ -56,7 +56,7 @@ export function Collage({ photos }: { photos: Photo[] }) {
       {columns.map((column, i) => (
         <div key={i} className="flex flex-col divide-y divide-separator">
           {column.map(photo => (
-            <TweetPhoto key={photo.url} {...photo} />
+            <TweetPhoto key={photo.storageKey} {...photo} />
           ))}
         </div>
       ))}

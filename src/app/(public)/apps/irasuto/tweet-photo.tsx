@@ -5,10 +5,22 @@ import { Link } from "~/components/ui/link";
 import { LazyImage } from "./lazy-image";
 import type { Photo } from "./types";
 
-export function TweetPhoto({ url, width, height, tweetUrl, authorName, authorHandle }: Photo) {
+export function TweetPhoto({
+  storageKey,
+  width,
+  height,
+  tweetUrl,
+  authorName,
+  authorHandle,
+}: Photo) {
   return (
     <div className="group relative overflow-hidden">
-      <LazyImage src={url} alt={`Illustration by ${authorName}`} width={width} height={height} />
+      <LazyImage
+        src={`https://r2.joulev.dev/irasuto/${storageKey}`}
+        alt={`Illustration by ${authorName}`}
+        width={width}
+        height={height}
+      />
       <Link
         href={tweetUrl}
         unstyled

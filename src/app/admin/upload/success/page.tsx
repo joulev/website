@@ -10,7 +10,7 @@ import type { PageProps } from "./$types";
 export default function Page({ searchParams }: PageProps) {
   const key = searchParams.key;
   if (typeof key !== "string" || key.length === 0) redirect("/admin/upload");
-  const url = `https://r2.irasuto.joulev.dev/${key}`;
+  const url = `https://r2.joulev.dev/${key}`;
   return (
     <>
       <div>The file has been uploaded successfully:</div>

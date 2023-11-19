@@ -26,12 +26,11 @@ export async function uploadPhotoToR2(twitterImageUrl: string, tweetUrl: string)
   return id;
 }
 
-export async function removePhotoFromR2(r2ImageUrl: string) {
-  const id = r2ImageUrl.replace("https://r2.irasuto.joulev.dev/irasuto/", "");
-  const result = await S3.send(new DeleteObjectCommand({ Bucket: BUCKET, Key: `irasuto/${id}` }));
+export async function removePhotoFromR2(storageKey: string) {
+  const result = await S3.send(
+    new DeleteObjectCommand({ Bucket: BUCKET, Key: `irasuto/${storageKey}` }),
+  );
 
   if (Number(result.$metadata.httpStatusCode) >= 400)
-    throw new Error(`Failed to remove photo for id=${id} (${r2ImageUrl})`);
-
-  return id;
+    throw new Error(`Failed to remove photo for id=${storageKey}`);
 }

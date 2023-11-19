@@ -8,9 +8,9 @@ import { db } from "~/lib/db";
 import { photos } from "~/lib/db/schema";
 import { removePhotoFromR2 } from "~/lib/s3/irasuto";
 
-export async function removePhoto(url: string) {
+export async function removePhoto(storageKey: string) {
   await getSession();
-  await removePhotoFromR2(url);
-  await db.delete(photos).where(eq(photos.url, url));
+  await removePhotoFromR2(storageKey);
+  await db.delete(photos).where(eq(photos.storageKey, storageKey));
   revalidateTag("photos");
 }
