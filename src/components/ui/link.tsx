@@ -11,12 +11,7 @@ export const Link = forwardRef<
   return (
     <NextLink
       href={href}
-      className={cn(
-        unstyled ||
-          "rounded-[4px] font-semibold text-cyan transition hover:bg-bg-idle hover:[box-shadow:0_0_0_4px_var(--bg-idle)] active:bg-bg-active active:[box-shadow:0_0_0_4px_var(--bg-active)]",
-        // "[box-shadow:0_0_0_4px_transparent]", // this gave the behaviour I wanted, but removing it makes the thing even better
-        className,
-      )}
+      className={cn(unstyled || "link", className)}
       {...rest}
       {...(isExternal ? { target: "_blank", rel: "noreferrer noopener" } : {})}
       ref={ref}

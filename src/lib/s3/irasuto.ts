@@ -1,6 +1,6 @@
 import { DeleteObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 
-import { S3 } from "./client";
+import { BUCKET, S3 } from "./client";
 
 export async function uploadPhotoToR2(twitterImageUrl: string, tweetUrl: string) {
   const id = twitterImageUrl.replace("https://pbs.twimg.com/media/", "");
@@ -13,12 +13,13 @@ export async function uploadPhotoToR2(twitterImageUrl: string, tweetUrl: string)
 
   const result = await S3.send(
     new PutObjectCommand({
-      Bucket: "webapps-irasuto",
+      Bucket: BUCKET,
       Key: `irasuto/${id}`,
       Body: buffer,
       ContentType: metadata ?? undefined,
     }),
   );
+
   if (Number(result.$metadata.httpStatusCode) >= 400)
     throw new Error(`Failed to upload photo for id=${id} (${tweetUrl})`);
 
@@ -27,9 +28,8 @@ export async function uploadPhotoToR2(twitterImageUrl: string, tweetUrl: string)
 
 export async function removePhotoFromR2(r2ImageUrl: string) {
   const id = r2ImageUrl.replace("https://r2.irasuto.joulev.dev/irasuto/", "");
-  const result = await S3.send(
-    new DeleteObjectCommand({ Bucket: "webapps-irasuto", Key: `irasuto/${id}` }),
-  );
+  const result = await S3.send(new DeleteObjectCommand({ Bucket: BUCKET, Key: `irasuto/${id}` }));
+
   if (Number(result.$metadata.httpStatusCode) >= 400)
     throw new Error(`Failed to remove photo for id=${id} (${r2ImageUrl})`);
 

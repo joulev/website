@@ -16,6 +16,9 @@ dependencies:
   '@aws-sdk/client-s3':
     specifier: 3.451.0
     version: 3.451.0
+  '@aws-sdk/s3-request-presigner':
+    specifier: 3.454.0
+    version: 3.454.0
   '@discordjs/builders':
     specifier: 1.7.0
     version: 1.7.0
@@ -748,6 +751,20 @@ packages:
       tslib: 2.6.2
     dev: false
 
+  /@aws-sdk/s3-request-presigner@3.454.0:
+    resolution: {integrity: sha512-2Lr5bZkpSfl0Ixaylbv/ZGgimdzkw0I7akXwosWagnCAWRnWBnWGlWkAnHdnpHjQVamyVr0C6gST7+Y3fKh5Sg==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      '@aws-sdk/signature-v4-multi-region': 3.451.0
+      '@aws-sdk/types': 3.451.0
+      '@aws-sdk/util-format-url': 3.451.0
+      '@smithy/middleware-endpoint': 2.2.0
+      '@smithy/protocol-http': 3.0.9
+      '@smithy/smithy-client': 2.1.15
+      '@smithy/types': 2.5.0
+      tslib: 2.6.2
+    dev: false
+
   /@aws-sdk/signature-v4-multi-region@3.451.0:
     resolution: {integrity: sha512-qQKY7/txeNUTLyRL3WxUWEwaZ5sf76EIZgu9kLaR96cAYSxwQi/qQB3ijbfD6u7sJIA8aROMxeYK0VmRsQg0CA==}
     engines: {node: '>=14.0.0'}
@@ -825,6 +842,16 @@ packages:
     dependencies:
       '@aws-sdk/types': 3.451.0
       '@smithy/util-endpoints': 1.0.4
+      tslib: 2.6.2
+    dev: false
+
+  /@aws-sdk/util-format-url@3.451.0:
+    resolution: {integrity: sha512-gmcqSFTIISU9iN6rSbc8HVqB9ACluPbo4mS0ztkk9DaDz5zK/YxoKBJSfqkZFidMzxYiXeWruDCxD8ZgYRn6ug==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      '@aws-sdk/types': 3.451.0
+      '@smithy/querystring-builder': 2.0.13
+      '@smithy/types': 2.5.0
       tslib: 2.6.2
     dev: false
 

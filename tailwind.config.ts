@@ -33,6 +33,7 @@ const config: Config = {
       current: "currentColor",
       cyan: "var(--cyan)",
       blue: "var(--blue)",
+      red: "var(--red)",
     },
     fontFamily: {
       sans: ["var(--sans)", ...defaultTheme.fontFamily.sans],
