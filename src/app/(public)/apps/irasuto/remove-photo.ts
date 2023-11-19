@@ -5,8 +5,7 @@ import { revalidateTag } from "next/cache";
 
 import { db } from "~/lib/db";
 import { photos } from "~/lib/db/schema";
-
-import { removePhotoFromR2 } from "./s3";
+import { removePhotoFromR2 } from "~/lib/s3/irasuto";
 
 export async function removePhoto(url: string) {
   throw new Error("This function is disabled in production.");

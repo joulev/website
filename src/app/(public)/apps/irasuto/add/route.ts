@@ -15,8 +15,7 @@ import { env } from "~/env.mjs";
 import { db } from "~/lib/db";
 import { photos as photosSchema } from "~/lib/db/schema";
 import type { NewIrasutoPhoto } from "~/lib/db/schema";
-
-import { uploadPhotoToR2 } from "../s3";
+import { uploadPhotoToR2 } from "~/lib/s3/irasuto";
 
 const schema = vObject({ password: vLiteral(env.PASSWORD), url: vString([vUrl()]) });
 
