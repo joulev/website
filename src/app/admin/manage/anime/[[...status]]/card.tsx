@@ -37,7 +37,7 @@ import { MediaListStatus } from "~/lib/gql/graphql";
 import { useTransitionWithNProgress } from "~/lib/hooks/use-transition-with-nprogress";
 
 import {
-  cancelRewatch as _cancelRewatch,
+  cancelRewatch as cancelRewatchAction,
   incrementProgress,
   removeFromList,
   updateStatus,
@@ -121,7 +121,7 @@ function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCard
   const setAsPaused = () => startTransition(() => updateStatus(item, MediaListStatus.Paused));
   const setAsDropped = () => startTransition(() => updateStatus(item, MediaListStatus.Dropped));
   const increment = () => startTransition(() => incrementProgress(item));
-  const cancelRewatch = () => startTransition(() => _cancelRewatch(item));
+  const cancelRewatch = () => startTransition(() => cancelRewatchAction(item));
   const remove = () => startTransition(() => removeFromList(item));
 
   const watchedEpisodes = item.progress || 0;

@@ -1,5 +1,4 @@
 import { DeleteObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { getTweet as _getTweet } from "react-tweet/api";
 
 import { env } from "~/env.mjs";
 
