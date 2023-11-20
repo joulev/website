@@ -36,7 +36,7 @@ async function getPhotos(id: string): Promise<FetchedPhoto[] | null> {
 }
 
 function buildEmbedFromPhoto(
-  photo: FetchedPhoto,
+  photo: NewIrasutoPhoto,
   totalCount: number,
 ): RESTPostAPIWebhookWithTokenJSONBody {
   return {
@@ -60,7 +60,7 @@ function buildEmbedFromPhoto(
             inline: true,
           },
         ])
-        .setImage(photo.url)
+        .setImage(`https://r2.joulev.dev/irasuto/${photo.storageKey}`)
         .setFooter({ text: `Total: ${totalCount}` })
         .setColor(0x8ec8f6)
         .toJSON(),
@@ -89,8 +89,10 @@ export async function POST(request: Request) {
 
         const key = await uploadPhotoToR2(photo.url, photo.tweetUrl);
 
+        const newIrasutoPhoto: NewIrasutoPhoto = { ...rest, storageKey: key };
+
         // We don't parallelise this because we don't want to have db items without photos
-        await db.insert(photosSchema).values({ ...rest, storageKey: key });
+        await db.insert(photosSchema).values(newIrasutoPhoto);
 
         if (env.DISCORD_WEBHOOK) {
           // This may be incorrect due to race conditions, but it's good enough
@@ -98,7 +100,7 @@ export async function POST(request: Request) {
           await fetch(env.DISCORD_WEBHOOK, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(buildEmbedFromPhoto(photo, query[0].count)),
+            body: JSON.stringify(buildEmbedFromPhoto(newIrasutoPhoto, query[0].count)),
           });
         }
       }),
