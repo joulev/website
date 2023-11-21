@@ -1,7 +1,7 @@
 "use server";
 
 import { type GraphQLClient } from "graphql-request";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 import { type AnimeListItem } from "~/lib/anime/get-lists";
 import {
@@ -16,18 +16,13 @@ import { getAccumulatedScore } from "~/lib/anime/utils";
 import { getAuthenticatedGraphQLClient } from "~/lib/auth/helpers";
 import { MediaListStatus } from "~/lib/gql/graphql";
 
-function revalidateEverything() {
-  revalidatePath("/apps/anime", "layout");
-  revalidatePath("/admin/manage/anime", "layout");
-}
-
 function generateAction<T extends unknown[] = []>(
   callback: (client: GraphQLClient, ...data: T) => Promise<void>,
 ): (...data: T) => Promise<void> {
   return async (...args: T) => {
     const client = await getAuthenticatedGraphQLClient();
     await callback(client, ...args);
-    revalidateEverything();
+    revalidateTag("anime-lists");
   };
 }
 

@@ -1,4 +1,4 @@
-import { cache } from "react";
+import { unstable_cache as cache } from "next/cache";
 
 import type { MediaListStatus } from "~/lib/gql/graphql";
 import { getClient } from "~/lib/graphql";
@@ -29,29 +29,33 @@ export type AnimeCardVariant =
   | "dropped"
   | "planning";
 
-export const getAllLists = cache(async (status?: MediaListStatus) => {
-  const client = getClient();
-  const data = await client.request(GET_ANIME, { status });
-  const lists = data.MediaListCollection?.lists ?? [];
-  return {
-    lists,
-    watching: lists.find(list => list?.name === "Watching")?.entries ?? [],
-    rewatching: lists.find(list => list?.name === "Rewatching")?.entries ?? [],
-    paused: lists.find(list => list?.name === "Paused")?.entries ?? [],
-    dropped: lists.find(list => list?.name === "Dropped")?.entries ?? [],
-    planning: lists.find(list => list?.name === "Planning")?.entries ?? [],
-    completedTV: lists.find(list => list?.name === "Completed TV")?.entries ?? [],
-    completedMovies: lists.find(list => list?.name === "Completed Movie")?.entries ?? [],
-    completedOthers: lists
-      .filter(
-        list =>
-          list?.name?.toLowerCase().includes("completed") &&
-          !list.name.includes("TV") &&
-          !list.name.includes("Movie"),
-      )
-      .flatMap(list => list?.entries ?? []),
-  };
-});
+export const getAllLists = cache(
+  async (status?: MediaListStatus) => {
+    const client = getClient();
+    const data = await client.request(GET_ANIME, { status });
+    const lists = data.MediaListCollection?.lists ?? [];
+    return {
+      lists,
+      watching: lists.find(list => list?.name === "Watching")?.entries ?? [],
+      rewatching: lists.find(list => list?.name === "Rewatching")?.entries ?? [],
+      paused: lists.find(list => list?.name === "Paused")?.entries ?? [],
+      dropped: lists.find(list => list?.name === "Dropped")?.entries ?? [],
+      planning: lists.find(list => list?.name === "Planning")?.entries ?? [],
+      completedTV: lists.find(list => list?.name === "Completed TV")?.entries ?? [],
+      completedMovies: lists.find(list => list?.name === "Completed Movie")?.entries ?? [],
+      completedOthers: lists
+        .filter(
+          list =>
+            list?.name?.toLowerCase().includes("completed") &&
+            !list.name.includes("TV") &&
+            !list.name.includes("Movie"),
+        )
+        .flatMap(list => list?.entries ?? []),
+    };
+  },
+  [],
+  { tags: ["anime-lists"] },
+);
 
 function sortList(list: (AnimeListItem | null)[], type: "planning" | "completed" | "others") {
   if (type === "planning")
