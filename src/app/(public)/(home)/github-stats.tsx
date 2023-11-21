@@ -72,7 +72,7 @@ function BackgroundPattern() {
   );
 }
 
-function GitHubStatsData({ label, value }: { label: string; value: number }) {
+function GitHubStatsData({ label, value }: { label: React.ReactNode; value: number }) {
   return (
     <div>
       <span className="mr-1 text-sm text-text-secondary">{label}:</span>
@@ -92,11 +92,18 @@ export async function GitHubStats() {
         </>
       }
       right={
-        <div className="flex flex-row flex-wrap gap-x-6 sm:gap-x-3 md:gap-x-6">
+        <div className="flex flex-row flex-wrap gap-x-6 sm:gap-x-4 md:gap-x-6">
           <GitHubStatsData label="Issues" value={issues} />
           <GitHubStatsData label="PRs" value={prs} />
           <hr className="w-full border-none" />
-          <GitHubStatsData label="Contributed to" value={contribs} />
+          <GitHubStatsData
+            label={
+              <>
+                Contributed to<span className="sm:hidden md:inline"> (last year)</span>
+              </>
+            }
+            value={contribs}
+          />
         </div>
       }
       title="GitHub Stats"

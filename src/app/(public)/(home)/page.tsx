@@ -4,7 +4,7 @@ import { type Metadata } from "next";
 import { LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
-import { List, ListContent, ListFooter, ListHeader, ListItem } from "~/components/ui/lists";
+import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
 import { cn } from "~/lib/cn";
 
 import { GitHubStats } from "./github-stats";
@@ -70,7 +70,12 @@ export default function Page() {
         <section className="flex flex-col gap-6 p-6">
           <p>
             I am a software developer. I build things for the web, mostly using{" "}
-            <Link href="https://nextjs.org">Next.js</Link>.
+            <Link href="https://nextjs.org">Next.js</Link>. Sometimes I also{" "}
+            <Link href="https://github.com/vercel/next.js/commits?author=joulev">
+              contribute to Next.js
+            </Link>{" "}
+            itself, especially when I get bitten hard by a bug in the framework (which has happened
+            more occasionally than I&apos;d like it to).
           </p>
           <p>
             In free time, I usually either work on side projects or learn about new stuff related to
@@ -91,7 +96,7 @@ export default function Page() {
           </div>
         </section>
         <hr />
-        <section className="mx-auto flex max-w-lg flex-col gap-6 p-6">
+        <section className="mx-auto flex w-full max-w-lg flex-col gap-6 p-6">
           <List>
             <ListHeader asChild>
               <h2>Packages</h2>
@@ -132,6 +137,11 @@ export default function Page() {
             </ListHeader>
             <ListContent variants={{ withSeparator: false }}>
               <ListItem asChild>
+                <Link unstyled href="/glui">
+                  The glui design component collection
+                </Link>
+              </ListItem>
+              <ListItem asChild>
                 <Link unstyled href="/apps/tategaki">
                   tategaki
                 </Link>
@@ -152,10 +162,6 @@ export default function Page() {
                 </Link>
               </ListItem>
             </ListContent>
-            <ListFooter>
-              These apps will be incrementally migrated into joulev.dev/apps under the new design
-              system in the upcoming months.
-            </ListFooter>
           </List>
         </section>
       </Card>
