@@ -1,4 +1,4 @@
-import { ChevronRight, Github, Mail } from "lucide-react";
+import { ChevronRight, Github, Mail, Sparkles } from "lucide-react";
 import { type Metadata } from "next";
 
 import { LinkButton } from "~/components/ui/button";
@@ -78,18 +78,27 @@ export default function Page() {
             more occasionally than I&apos;d like it to).
           </p>
           <p>
+            I also was a frequent community helper in the official Next.js Discord server. You can
+            find me around the top of the{" "}
+            <Link href="https://nextjs-forum.com">forum leaderboard</Link>. Though it is{" "}
+            <em>was</em>, not <em>am</em> &mdash; due to personal reasons, I no longer do that.
+          </p>
+          <p>
             In free time, I usually either work on side projects or learn about new stuff related to
             web development. Or just randomly walk around in a quiet park, because Singapore has a
-            lot of them and I find them very peaceful.
+            lot of them and I find them very peaceful. Or watch{" "}
+            <Link href="/apps/anime">
+              a <em>lot</em> of anime
+            </Link>
+            .
           </p>
           <p>
             I almost always listen to music whenever I can. My taste ranges from beautiful classical
-            masterpieces or movie soundtracks to catchy Japanese popular music.
+            masterpieces or movie soundtracks to catchy Japanese popular music. Combinations of the
+            two, like pieces by{" "}
+            <Link href="https://en.wikipedia.org/wiki/Yuki_Kajiura">Yuki Kajiura</Link>, are simply
+            perfection <Sparkles className="inline h-5 w-5" />
           </p>
-          {/* <p>
-            I am also active on Discord. You can find me as a moderator and helper on{" "}
-            <Link href="https://discord.gg/nextjs">the official Next.js Discord server</Link>.
-          </p> */}
           <div className="grid grid-cols-1 grid-rows-2 gap-6 sm:grid-cols-2 sm:grid-rows-1">
             <GitHubStats />
             <MusicData />
