@@ -35,6 +35,16 @@ function NavigationMenuListItem({
 function Navigation() {
   const components: { title: string; href: string; description: string }[] = [
     {
+      title: "chat",
+      href: "/admin/chat",
+      description: "Chat with GPT-4 Turbo",
+    },
+    {
+      title: "upload",
+      href: "/admin/upload",
+      description: "Upload files to the Internet",
+    },
+    {
       title: "anime",
       href: "/admin/manage/anime",
       description: "Manage my anime list",
@@ -53,7 +63,7 @@ function Navigation() {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Manage</NavigationMenuTrigger>
+            <NavigationMenuTrigger>Admin items</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[500px] max-w-[calc(100vw-48px)] gap-3 p-3 md:grid-cols-2 lg:w-[600px]">
                 {components.map(component => (
@@ -67,13 +77,6 @@ function Navigation() {
                 ))}
               </ul>
             </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuMainLink asChild>
-              <Link href="/admin/chat" unstyled>
-                Chat
-              </Link>
-            </NavigationMenuMainLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuMainLink asChild>
