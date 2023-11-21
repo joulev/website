@@ -8,7 +8,7 @@ import { cn } from "~/lib/cn";
 import { useHoverBackground } from "./hooks/use-hover-background";
 import { Link } from "./link";
 
-const buttonVariants = cva({
+export const buttonVariants = cva({
   base: "hover-bg inline-flex shrink-0 flex-row items-center justify-center gap-[--button-gap] rounded-full outline-offset-4 backdrop-blur transition disabled:cursor-not-allowed disabled:bg-bg-disabled disabled:text-text-tertiary",
   variants: {
     variant: {

@@ -7,7 +7,7 @@ import { createContext, forwardRef, useCallback, useContext, useState } from "re
 import { cn } from "~/lib/cn";
 import type { BaseProps } from "~/types/utils";
 
-import { Button } from "./button";
+import { buttonVariants } from "./button";
 import { useHoverBackground } from "./hooks/use-hover-background";
 
 export const Sidebar = forwardRef<HTMLDivElement, BaseProps<"div">>(function Sidebar(
@@ -70,27 +70,37 @@ export const SidebarSection = forwardRef<
   );
 });
 
-export const SidebarSectionHeading = forwardRef<
-  HTMLDivElement,
-  React.ComponentPropsWithoutRef<"h2"> & { hideCollapseButton?: boolean }
->(function SidebarSectionHeading({ className, children, hideCollapseButton, ...props }, ref) {
-  const { isOpen, toggle } = useSectionContext();
+function SidebarSectionHeadingCollapseButton() {
+  const { isOpen } = useSectionContext();
   return (
-    <h2
+    <span
+      className={cn(buttonVariants({ variant: "ghost", size: "icon-sm" }))}
+      {...useHoverBackground({})}
+    >
+      <ChevronDown className={cn(isOpen || "-rotate-90", "transition-transform")} />
+    </span>
+  );
+}
+
+export const SidebarSectionHeading = forwardRef<
+  HTMLButtonElement,
+  React.ComponentPropsWithoutRef<"button"> & { hideCollapseButton?: boolean }
+>(function SidebarSectionHeading({ className, children, hideCollapseButton, ...props }, ref) {
+  const { toggle } = useSectionContext();
+  return (
+    <button
       {...props}
+      type="button"
       className={cn(
         "flex flex-row items-center justify-between gap-3 py-2 pl-3 pr-1 text-lg font-semibold",
         className,
       )}
+      onClick={toggle}
       ref={ref}
     >
-      <span className="h-[30px] flex-grow truncate">{children}</span>
-      {hideCollapseButton || (
-        <Button variants={{ variant: "ghost", size: "icon-sm" }} onClick={toggle}>
-          <ChevronDown className={cn(isOpen || "-rotate-90", "transition-transform")} />
-        </Button>
-      )}
-    </h2>
+      <span className="h-[30px] flex-grow truncate text-left">{children}</span>
+      {hideCollapseButton || <SidebarSectionHeadingCollapseButton />}
+    </button>
   );
 });
 
