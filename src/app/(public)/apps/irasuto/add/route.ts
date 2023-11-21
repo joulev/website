@@ -94,14 +94,15 @@ export async function POST(request: Request) {
         // We don't parallelise this because we don't want to have db items without photos
         await db.insert(photosSchema).values(newIrasutoPhoto);
 
-        if (env.DISCORD_WEBHOOK) {
+        if (env.DISCORD_WEBHOOKS) {
           // This may be incorrect due to race conditions, but it's good enough
           const query = await db.select({ count: sql<number>`COUNT(*)` }).from(photosSchema);
-          await fetch(env.DISCORD_WEBHOOK, {
+          const webhookRequestInit: RequestInit = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(buildEmbedFromPhoto(newIrasutoPhoto, query[0].count)),
-          });
+          };
+          await Promise.all(env.DISCORD_WEBHOOKS.map(u => fetch(u, webhookRequestInit)));
         }
       }),
     );

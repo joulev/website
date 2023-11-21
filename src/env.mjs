@@ -16,7 +16,10 @@ export const env = createEnv({
     R2_ACCOUNT_ID: z.string().min(1),
     R2_ACCESS_KEY: z.string().min(1),
     R2_SECRET_ACCESS_KEY: z.string().min(1),
-    DISCORD_WEBHOOK: z.string().url().optional(),
+    DISCORD_WEBHOOKS: z
+      .string()
+      .optional()
+      .transform(value => value?.split(" and ")),
 
     // chat
     OPENAI_API_KEY: z.string().min(1),
