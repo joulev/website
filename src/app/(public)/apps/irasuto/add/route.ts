@@ -50,13 +50,8 @@ function buildEmbedFromPhoto(
             inline: true,
           },
           {
-            name: "Source",
+            name: "Tweet",
             value: `[Click here](<${photo.tweetUrl}>)`,
-            inline: true,
-          },
-          {
-            name: "Posted",
-            value: `<t:${Math.round(photo.date.valueOf() / 1000)}:R>`,
             inline: true,
           },
         ])
