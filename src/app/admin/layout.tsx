@@ -49,6 +49,11 @@ function Navigation() {
       href: "/admin/manage/anime",
       description: "Manage my anime list",
     },
+    {
+      title: "irasuto",
+      href: "/admin/manage/irasuto",
+      description: "Manage the irasuto illustration collection",
+    },
   ];
   return (
     <div className="fixed left-1/2 top-12 -translate-x-1/2">

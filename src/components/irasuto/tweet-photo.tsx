@@ -1,9 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
+
 import { Link } from "~/components/ui/link";
 import type { Photo } from "~/lib/irasuto/types";
 
 import { LazyImage } from "./lazy-image";
+
+const DeleteButton = dynamic(() => import("./delete-button").then(mod => mod.DeleteButton));
 
 export function TweetPhoto({
   storageKey,
@@ -12,7 +16,8 @@ export function TweetPhoto({
   tweetUrl,
   authorName,
   authorHandle,
-}: Photo) {
+  allowDelete,
+}: Photo & { allowDelete?: boolean }) {
   return (
     <div className="group relative overflow-hidden">
       <LazyImage
@@ -31,6 +36,7 @@ export function TweetPhoto({
           <div className="text-sm text-text-secondary">@{authorHandle}</div>
         </div>
       </Link>
+      {allowDelete ? <DeleteButton storageKey={storageKey} /> : null}
     </div>
   );
 }

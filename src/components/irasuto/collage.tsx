@@ -43,7 +43,7 @@ function useOrganisedPhotos(photos: Photo[], columnCount: number | null) {
   return organisedPhotos;
 }
 
-export function Collage({ photos }: { photos: Photo[] }) {
+export function Collage({ photos, allowDelete }: { photos: Photo[]; allowDelete?: boolean }) {
   const count = useColumnCount();
   const columns = useOrganisedPhotos(photos, count);
   return (
@@ -56,7 +56,7 @@ export function Collage({ photos }: { photos: Photo[] }) {
       {columns.map((column, i) => (
         <div key={i} className="flex flex-col divide-y divide-separator">
           {column.map(photo => (
-            <TweetPhoto key={photo.storageKey} {...photo} />
+            <TweetPhoto key={photo.storageKey} {...photo} allowDelete={allowDelete} />
           ))}
         </div>
       ))}
