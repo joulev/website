@@ -1,9 +1,9 @@
 "use client";
 
 import { Link } from "~/components/ui/link";
+import type { Photo } from "~/lib/irasuto/types";
 
 import { LazyImage } from "./lazy-image";
-import type { Photo } from "./types";
 
 export function TweetPhoto({
   storageKey,

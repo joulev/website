@@ -3,9 +3,9 @@
 import { useEffect as useEffectOriginal, useLayoutEffect, useMemo, useState } from "react";
 
 import { cn } from "~/lib/cn";
+import type { Photo } from "~/lib/irasuto/types";
 
 import { TweetPhoto } from "./tweet-photo";
-import type { Photo } from "./types";
 
 const useEffect = typeof window === "undefined" ? useEffectOriginal : useLayoutEffect;
 
