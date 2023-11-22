@@ -54,6 +54,11 @@ function Navigation() {
       href: "/admin/manage/irasuto",
       description: "Manage the irasuto illustration collection",
     },
+    {
+      title: "link",
+      href: "/admin/manage/link",
+      description: "Manage personal short links",
+    },
   ];
   return (
     <div className="fixed left-1/2 top-12 -translate-x-1/2">

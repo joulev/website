@@ -6,7 +6,7 @@ export default async function Page() {
   const photos = await getPhotos();
   return (
     <main className="container">
-      <Card className="flex flex-col p-0">
+      <Card className="p-0">
         <Collage photos={photos} allowDelete />
       </Card>
     </main>
