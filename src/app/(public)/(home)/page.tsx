@@ -1,5 +1,7 @@
-import { ChevronRight, Github, Mail, Sparkles } from "lucide-react";
+import { ChevronRight, Github, Mail } from "lucide-react";
 import { type Metadata } from "next";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 import { LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
@@ -7,9 +9,22 @@ import { Link } from "~/components/ui/link";
 import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
 import { cn } from "~/lib/cn";
 
+import { getGithubReadme } from "./get-github-readme";
 import { GitHubStats } from "./github-stats";
 import { MusicData } from "./music-data";
 import styles from "./page.module.css";
+
+async function ReadmeContent() {
+  const markdown = await getGithubReadme();
+  return (
+    <Markdown
+      remarkPlugins={[remarkGfm]}
+      components={{ a: ({ href, ref: _, ...rest }) => <Link href={href ?? "/"} {...rest} /> }}
+    >
+      {markdown}
+    </Markdown>
+  );
+}
 
 export default function Page() {
   return (
@@ -68,37 +83,7 @@ export default function Page() {
           </div>
         </section>
         <section className="flex flex-col gap-6 p-6">
-          <p>
-            I am a software developer. I build things for the web, mostly using{" "}
-            <Link href="https://nextjs.org">Next.js</Link>. Sometimes I also{" "}
-            <Link href="https://github.com/vercel/next.js/commits?author=joulev">
-              contribute to Next.js
-            </Link>{" "}
-            itself, especially when I get bitten hard by a bug in the framework (which has happened
-            more occasionally than I&apos;d like it to).
-          </p>
-          <p>
-            I also was a frequent community helper in the official Next.js Discord server. You can
-            find me around the top of the{" "}
-            <Link href="https://nextjs-forum.com">forum leaderboard</Link>. Though it is{" "}
-            <em>was</em>, not <em>am</em> &mdash; due to personal reasons, I no longer do that.
-          </p>
-          <p>
-            In free time, I usually either work on side projects or learn about new stuff related to
-            web development. Or just randomly walk around in a quiet park, because Singapore has a
-            lot of them and I find them very peaceful. Or watch{" "}
-            <Link href="/apps/anime">
-              a <em>lot</em> of anime
-            </Link>
-            .
-          </p>
-          <p>
-            I almost always listen to music whenever I can. My taste ranges from beautiful classical
-            masterpieces or movie soundtracks to catchy Japanese popular music. Combinations of the
-            two, like pieces by{" "}
-            <Link href="https://en.wikipedia.org/wiki/Yuki_Kajiura">Yuki Kajiura</Link>, are simply
-            perfection <Sparkles className="inline h-5 w-5" />
-          </p>
+          <ReadmeContent />
           <div className="grid grid-cols-1 grid-rows-2 gap-6 sm:grid-cols-2 sm:grid-rows-1">
             <GitHubStats />
             <MusicData />

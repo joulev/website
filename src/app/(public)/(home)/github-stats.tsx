@@ -1,15 +1,12 @@
 import { Github } from "lucide-react";
 import { unstable_cache as cache } from "next/cache";
-import { Octokit } from "octokit";
-
-import { env } from "~/env.mjs";
 
 import { MetadataCard } from "./metadata-card";
+import { octokit } from "./octokit";
 
 // Taken from https://github.com/anuraghazra/github-readme-stats
 const getStats = cache(
   async () => {
-    const octokit = new Octokit({ auth: env.GITHUB_TOKEN });
     const gql = String.raw;
     const { user } = await octokit.graphql<{
       user: {
