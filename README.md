@@ -1,1 +1,1 @@
-The source code for the (new) joulev.dev website.
+The source code for my personal website https://joulev.dev.
