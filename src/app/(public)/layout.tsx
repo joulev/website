@@ -1,3 +1,7 @@
+"use client";
+
+import { SessionProvider, useSession } from "next-auth/react";
+
 import { Logo } from "~/components/logo";
 import { Link } from "~/components/ui/link";
 import {
@@ -9,6 +13,39 @@ import {
   NavigationMenuMainLink,
   NavigationMenuTrigger,
 } from "~/components/ui/navigation-menu";
+
+const navItems: { title: string; href: string; description: string }[] = [
+  {
+    title: "glui",
+    href: "/glui",
+    description: "A glassmorphic component system, based on visionOS UI design",
+  },
+  {
+    title: "cuid2",
+    href: "/apps/cuid2",
+    description: "Online cuid2 generator",
+  },
+  {
+    title: "tategaki",
+    href: "/apps/tategaki",
+    description: "A website featuring text displayed in Japanese vertical writing style",
+  },
+  {
+    title: "anime",
+    href: "/apps/anime",
+    description: "My anime list using the AniList API. A different frontend of AniList for me",
+  },
+  {
+    title: "link",
+    href: "/apps/link",
+    description: "A simple URL shortener",
+  },
+  {
+    title: "irasuto",
+    href: "/apps/irasuto",
+    description: "A website featuring Japanese illustrations that I love",
+  },
+];
 
 function NavigationMenuListItem({
   href,
@@ -30,39 +67,9 @@ function NavigationMenuListItem({
     </li>
   );
 }
+
 function Navigation() {
-  const components: { title: string; href: string; description: string }[] = [
-    {
-      title: "glui",
-      href: "/glui",
-      description: "A glassmorphic component system, based on visionOS UI design",
-    },
-    {
-      title: "cuid2",
-      href: "/apps/cuid2",
-      description: "Online cuid2 generator",
-    },
-    {
-      title: "tategaki",
-      href: "/apps/tategaki",
-      description: "A website featuring text displayed in Japanese vertical writing style",
-    },
-    {
-      title: "anime",
-      href: "/apps/anime",
-      description: "My anime list using the AniList API. A different frontend of AniList for me",
-    },
-    {
-      title: "link",
-      href: "/apps/link",
-      description: "A simple URL shortener",
-    },
-    {
-      title: "irasuto",
-      href: "/apps/irasuto",
-      description: "A website featuring Japanese illustrations that I love",
-    },
-  ];
+  const session = useSession();
   return (
     <div className="fixed left-1/2 top-12 -translate-x-1/2">
       <NavigationMenu>
@@ -86,26 +93,26 @@ function Navigation() {
             <NavigationMenuTrigger>Apps</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[500px] max-w-[calc(100vw-48px)] gap-3 p-3 md:grid-cols-2 lg:w-[600px]">
-                {components.map(component => (
-                  <NavigationMenuListItem
-                    key={component.title}
-                    href={component.href}
-                    title={component.title}
-                  >
-                    {component.description}
+                {navItems.map(item => (
+                  <NavigationMenuListItem key={item.title} href={item.href} title={item.title}>
+                    {item.description}
                   </NavigationMenuListItem>
                 ))}
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuMainLink
-              href="https://github.com/sponsors/joulev"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              Sponsor
-            </NavigationMenuMainLink>
+            {session.status === "authenticated" ? (
+              <NavigationMenuMainLink href="/admin/chat">Admin</NavigationMenuMainLink>
+            ) : (
+              <NavigationMenuMainLink
+                href="https://github.com/sponsors/joulev"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                Sponsor
+              </NavigationMenuMainLink>
+            )}
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
@@ -115,9 +122,9 @@ function Navigation() {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <SessionProvider>
       <div className="pb-12 pt-[152px]">{children}</div>
       <Navigation />
-    </>
+    </SessionProvider>
   );
 }
