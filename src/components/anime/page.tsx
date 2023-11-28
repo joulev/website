@@ -4,6 +4,8 @@ import { List, ListContent, ListHeader } from "~/components/ui/lists";
 import { type AnimeCardVariant, type AnimeListItem, getList } from "~/lib/anime/get-lists";
 import { getListTitleFromStatus } from "~/lib/anime/utils";
 
+import { EmptyState } from "./empty-state";
+
 export async function AnimePageContent({
   status: rawStatus,
   card: Card,
@@ -27,12 +29,7 @@ export async function AnimePageContent({
     notFound();
 
   const [list, variant] = await getList(status);
-  if (list.length === 0)
-    return (
-      <div className="px-6 py-12 text-center text-text-secondary">
-        No entries. Check back later.
-      </div>
-    );
+  if (list.length === 0) return <EmptyState>No entries. Check back later.</EmptyState>;
   return (
     <List>
       <ListHeader>{getListTitleFromStatus(status)}</ListHeader>

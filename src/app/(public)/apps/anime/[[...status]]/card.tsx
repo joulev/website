@@ -1,42 +1,11 @@
 import Image from "next/image";
 
+import { Score } from "~/components/anime/score";
 import { Link } from "~/components/ui/link";
 import { ListItem } from "~/components/ui/lists";
 import { Progress } from "~/components/ui/progress";
 import type { AnimeCardVariant, AnimeListItem } from "~/lib/anime/get-lists";
 import { convertSeason, getTitle } from "~/lib/anime/utils";
-
-function Score({ score }: { score: number }) {
-  const d2r = (degree: number) => (degree * Math.PI) / 180;
-  const sin = (degree: number) => Math.sin(d2r(degree));
-  const cos = (degree: number) => Math.cos(d2r(degree));
-
-  const center = 12;
-  const width = 4;
-
-  const f = (x: number) => 65.8656 * Math.pow(1.2035, x) - 60.8656; // f(0) = 5, f(7) = 180, f(10) ≈ 359
-  const angle = f(score);
-
-  const radius = center - width / 2;
-  const start = [center, width / 2];
-  const end0 = center + radius * sin(angle);
-  const end1 = center - radius * cos(angle);
-  const largeArcFlag = angle > 180 ? 1 : 0;
-
-  const pathString = `M ${start[0]} ${start[1]} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${end0} ${end1}`;
-
-  return (
-    <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
-      <circle cx={center} cy={center} r={radius} className="stroke-bg-idle" strokeWidth={width} />
-      <path
-        className="stroke-text-secondary"
-        strokeWidth={width}
-        strokeLinecap="round"
-        d={pathString}
-      />
-    </svg>
-  );
-}
 
 function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCardVariant }) {
   switch (variant) {
@@ -58,10 +27,7 @@ function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCard
     case "completed":
       return (
         <div className="flex flex-row items-center divide-x divide-separator">
-          <div className="flex flex-row items-center gap-1.5 pr-3">
-            <Score score={item.score ?? 0} />
-            <div className="text-sm">{item.score ?? "N/A"}</div>
-          </div>
+          <Score score={item.score} />
           {item.repeat ? (
             <div
               className="pl-3 text-sm text-text-secondary"

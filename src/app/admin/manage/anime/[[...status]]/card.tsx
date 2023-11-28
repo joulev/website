@@ -30,18 +30,17 @@ import {
 } from "~/components/ui/dialog";
 import { Input } from "~/components/ui/input";
 import { ListItem } from "~/components/ui/lists";
-import type { AnimeCardVariant, AnimeListItem } from "~/lib/anime/get-lists";
-import { constraintScore, convertSeason, getAccumulatedScore, getTitle } from "~/lib/anime/utils";
-import { cn } from "~/lib/cn";
-import { MediaListStatus } from "~/lib/gql/graphql";
-import { useTransitionWithNProgress } from "~/lib/hooks/use-transition-with-nprogress";
-
 import {
   cancelRewatch as cancelRewatchAction,
   incrementProgress,
   removeFromList,
   updateStatus,
-} from "./actions";
+} from "~/lib/anime/actions";
+import type { AnimeCardVariant, AnimeListItem } from "~/lib/anime/get-lists";
+import { constraintScore, convertSeason, getAccumulatedScore, getTitle } from "~/lib/anime/utils";
+import { cn } from "~/lib/cn";
+import { MediaListStatus } from "~/lib/gql/graphql";
+import { useTransitionWithNProgress } from "~/lib/hooks/use-transition-with-nprogress";
 
 function BottomPartTemplate({ text, children }: { text: string; children: React.ReactNode }) {
   return (

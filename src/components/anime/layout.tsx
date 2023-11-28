@@ -4,6 +4,7 @@ import {
   Film,
   PauseCircle,
   PlayCircle,
+  PlusCircle,
   Repeat,
   Tv2,
   XCircle,
@@ -14,7 +15,10 @@ import { getAllLists } from "~/lib/anime/get-lists";
 
 import { Sidebar } from "./sidebar";
 
-function getNavbarItems(lists: Awaited<ReturnType<typeof getAllLists>>) {
+function getNavbarItems(
+  lists: Awaited<ReturnType<typeof getAllLists>>,
+  isAdmin: boolean | undefined,
+) {
   return [
     { icon: <PlayCircle />, status: "watching", count: lists.watching.length },
     { icon: <Repeat />, status: "rewatching", count: lists.rewatching.length },
@@ -24,6 +28,7 @@ function getNavbarItems(lists: Awaited<ReturnType<typeof getAllLists>>) {
     { icon: <PauseCircle />, status: "paused", count: lists.paused.length },
     { icon: <XCircle />, status: "dropped", count: lists.dropped.length },
     { icon: <Calendar />, status: "planning", count: lists.planning.length },
+    ...(isAdmin ? [{ icon: <PlusCircle />, status: "add-to-ptw" }] : []),
   ];
 }
 
@@ -35,7 +40,7 @@ export async function AnimeLayout({
   children: React.ReactNode;
 }) {
   const lists = await getAllLists();
-  const navbarItems = getNavbarItems(lists);
+  const navbarItems = getNavbarItems(lists, isAdmin);
   return (
     <main className="container max-w-screen-lg">
       <Card className="flex flex-col items-stretch p-0 md:flex-row">

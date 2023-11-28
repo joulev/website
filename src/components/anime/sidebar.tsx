@@ -19,7 +19,7 @@ import { getListTitleFromStatus } from "~/lib/anime/utils";
 interface Item {
   icon: React.ReactNode;
   status: string;
-  count: number;
+  count?: number;
 }
 
 function Navigation({ basePath, items }: { basePath: string; items: Item[] }) {
@@ -29,7 +29,7 @@ function Navigation({ basePath, items }: { basePath: string; items: Item[] }) {
       <SidebarSectionItems>
         {items.map(({ icon, status, count }) => (
           <SidebarSectionItem
-            key="slug"
+            key={status}
             active={
               `${basePath}/${status}` === pathname ||
               (status === "watching" && pathname === basePath)
@@ -38,8 +38,10 @@ function Navigation({ basePath, items }: { basePath: string; items: Item[] }) {
           >
             <Link href={`${basePath}/${status}`} unstyled>
               {icon}
-              <SidebarSectionItemName>{getListTitleFromStatus(status)}</SidebarSectionItemName>
-              {count > 0 ? <SidebarSectionItemCounter>{count}</SidebarSectionItemCounter> : null}
+              <SidebarSectionItemName>
+                {status === "add-to-ptw" ? "Add to PTW" : getListTitleFromStatus(status)}
+              </SidebarSectionItemName>
+              {count ? <SidebarSectionItemCounter>{count}</SidebarSectionItemCounter> : null}
             </Link>
           </SidebarSectionItem>
         ))}

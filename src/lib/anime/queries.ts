@@ -50,13 +50,9 @@ export const SEARCH_ANIME = graphql(/* GraphQL */ `
           romaji
           native
         }
-        genres
         meanScore
-        season
+        format
         seasonYear
-        coverImage {
-          medium
-        }
       }
     }
   }
