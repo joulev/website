@@ -12,19 +12,16 @@ export const GET_ANIME = graphql(/* GraphQL */ `
           progress
           repeat
           advancedScores
-          notes
           updatedAt
           media {
             title {
               english
-              native
               romaji
             }
             coverImage {
               medium
             }
             episodes
-            genres
             season
             seasonYear
           }
@@ -48,7 +45,6 @@ export const SEARCH_ANIME = graphql(/* GraphQL */ `
         title {
           english
           romaji
-          native
         }
         meanScore
         format
