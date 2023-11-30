@@ -11,6 +11,7 @@ export const env = createEnv({
     GITHUB_TOKEN: z.string().startsWith("ghp_"),
     RECENT_FAVOURITE_PLAYLIST_ID: z.string().length(YOUTUBE_PLAYLIST_ID_LENGTH),
     DATABASE_URL: z.string().startsWith("postgres://"),
+    EDITOR_THEME_URL: z.string().url(),
 
     // irasuto
     R2_ACCOUNT_ID: z.string().min(1),

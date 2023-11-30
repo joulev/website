@@ -1,20 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { type Highlighter, getHighlighter, setCDN } from "shiki";
+import { type Highlighter, getHighlighter, setCDN, toShikiTheme } from "shiki";
 
 import { Title } from "~/components/title";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 
+interface Shiki {
+  highlighter: Highlighter;
+  theme: string;
+}
+
 setCDN("/vendored/shiki/");
 
 function Editor({
-  highlighter,
+  shiki,
   value,
   onChange,
 }: {
-  highlighter: Highlighter;
+  shiki: Shiki;
   value: string;
   onChange: (value: string) => void;
 }) {
@@ -23,7 +28,7 @@ function Editor({
       <div className="relative w-fit min-w-full text-sm">
         <div
           dangerouslySetInnerHTML={{
-            __html: highlighter.codeToHtml(`${value}\n`, { lang: "tsx", theme: "dark-plus" }),
+            __html: shiki.highlighter.codeToHtml(`${value}\n`, { lang: "tsx", theme: shiki.theme }),
           }}
           className="[&_pre]:p-6"
         />
@@ -42,9 +47,14 @@ function Editor({
 
 export default function Page() {
   const [code, setCode] = useState("");
-  const [highlighter, setHighlighter] = useState<Highlighter | null>(null);
+  const [shiki, setShiki] = useState<Shiki | null>(null);
   useEffect(() => {
-    void (async () => setHighlighter(await getHighlighter({ theme: "dark-plus" })))();
+    void (async () => {
+      const themeJson: unknown = await fetch("/admin/snippets/get-theme").then(r => r.json());
+      const theme = toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
+      const highlighter = await getHighlighter({ theme });
+      setShiki({ highlighter, theme: theme.name });
+    })();
   }, []);
   return (
     <main className="container max-w-screen-sm">
@@ -55,8 +65,8 @@ export default function Page() {
           </div>
         </div>
         <div className="flex flex-col">
-          {highlighter ? (
-            <Editor highlighter={highlighter} value={code} onChange={setCode} />
+          {shiki ? (
+            <Editor shiki={shiki} value={code} onChange={setCode} />
           ) : (
             <div className="grid h-[68px] place-items-center text-sm text-text-secondary">
               Loading shiki&hellip;
