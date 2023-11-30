@@ -34,6 +34,7 @@ import {
   cancelRewatch as cancelRewatchAction,
   incrementProgress,
   removeFromList,
+  updateScore,
   updateStatus,
 } from "~/lib/anime/actions";
 import type { AnimeCardVariant, AnimeListItem } from "~/lib/anime/get-lists";
@@ -55,11 +56,14 @@ const icons = [Enjoyment, Story, Character, Animation, Music];
 const keys = ["Enjoyment", "Story", "Characters", "Animation", "Music"] as const;
 
 function UpdateItemScore({ item }: { item: AnimeListItem }) {
+  const startTransition = useTransitionWithNProgress();
+
   const advancedScores = item.advancedScores as Record<(typeof keys)[number], string | undefined>;
   const originalScoresStr = keys.map(key => String(advancedScores[key] ?? "0"));
   const [scoresStr, setScoresStr] = useState(originalScoresStr);
   const scores = scoresStr.map(score => constraintScore(Number(score)));
   const accumulate = getAccumulatedScore(scores);
+  const setScore = () => startTransition(() => updateScore(item, scores));
 
   return (
     <Dialog onOpenChange={isOpen => isOpen || setScoresStr(originalScoresStr)}>
@@ -102,9 +106,15 @@ function UpdateItemScore({ item }: { item: AnimeListItem }) {
           <DialogClose asChild>
             <Button className="w-full sm:w-auto">Cancel</Button>
           </DialogClose>
-          <Button className="w-full sm:w-auto" variants={{ variant: "primary" }}>
-            Update
-          </Button>
+          <DialogClose asChild>
+            <Button
+              className="w-full sm:w-auto"
+              variants={{ variant: "primary" }}
+              onClick={setScore}
+            >
+              Update
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
