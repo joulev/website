@@ -1,7 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { type Highlighter, type Lang, getHighlighter, setCDN, toShikiTheme } from "shiki";
+import {
+  type Highlighter,
+  type IShikiTheme,
+  type Lang,
+  getHighlighter,
+  setCDN,
+  toShikiTheme,
+} from "shiki";
 
 import { Title } from "~/components/title";
 import { Button } from "~/components/ui/button";
@@ -9,12 +16,12 @@ import { Card } from "~/components/ui/card";
 
 interface Shiki {
   highlighter: Highlighter;
-  theme: string;
+  theme: IShikiTheme;
 }
 
 setCDN("/vendored/shiki/");
 
-const preloadedLanguages: Lang[] = ["js", "jsx", "ts", "tsx", "css", "html", "json"];
+const preloadedLanguages: Lang[] = ["tsx", "css", "html", "json"];
 
 function LoadingScreen({ children }: { children: React.ReactNode }) {
   return (
@@ -34,22 +41,32 @@ function Editor({
   if (!shiki) return <LoadingScreen>Loading shiki&hellip;</LoadingScreen>;
   if (shiki instanceof Error) return <LoadingScreen>Failed to load shiki.</LoadingScreen>;
   return (
-    <div className="overflow-x-auto">
-      <div className="relative w-fit min-w-full">
-        <div
-          dangerouslySetInnerHTML={{
-            __html: shiki.highlighter.codeToHtml(`${value}\n`, { lang: "tsx", theme: shiki.theme }),
-          }}
-          className="[&_pre]:p-6"
-        />
-        <textarea
-          value={value}
-          onChange={e => onChange(e.target.value)}
-          className="absolute inset-0 resize-none bg-transparent p-6 font-mono text-transparent focus:outline-none"
-          spellCheck={false}
-          autoCorrect="off"
-          autoComplete="off"
-        />
+    <div className="flex flex-row bg-[--bg] font-mono" style={{ "--bg": shiki.theme.bg }}>
+      <div className="flex w-8 flex-col items-end py-6 text-text-tertiary">
+        {value.split("\n").map((_, i) => (
+          <span key={i}>{i + 1}</span>
+        ))}
+      </div>
+      <div className="flex-grow overflow-x-auto">
+        <div className="relative w-fit min-w-full">
+          <div
+            dangerouslySetInnerHTML={{
+              __html: shiki.highlighter.codeToHtml(`${value}\n`, {
+                lang: "tsx",
+                theme: shiki.theme.name,
+              }),
+            }}
+            className="[&_pre]:p-6"
+          />
+          <textarea
+            value={value}
+            onChange={e => onChange(e.target.value)}
+            className="absolute inset-0 resize-none bg-transparent p-6 text-transparent caret-text-primary focus:outline-none"
+            spellCheck={false}
+            autoCorrect="off"
+            autoComplete="off"
+          />
+        </div>
       </div>
     </div>
   );
@@ -63,7 +80,7 @@ export default function Page() {
       const themeJson: unknown = await fetch("/admin/snippets/get-theme").then(r => r.json());
       const theme = toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
       const highlighter = await getHighlighter({ theme, langs: preloadedLanguages });
-      setShiki({ highlighter, theme: theme.name });
+      setShiki({ highlighter, theme });
     })().catch(() => setShiki(new Error()));
   }, []);
   return (
