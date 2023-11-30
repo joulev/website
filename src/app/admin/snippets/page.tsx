@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { type Highlighter, getHighlighter, setCDN, toShikiTheme } from "shiki";
+import { type Highlighter, type Lang, getHighlighter, setCDN, toShikiTheme } from "shiki";
 
 import { Title } from "~/components/title";
 import { Button } from "~/components/ui/button";
@@ -13,6 +13,8 @@ interface Shiki {
 }
 
 setCDN("/vendored/shiki/");
+
+const preloadedLanguages: Lang[] = ["js", "jsx", "ts", "tsx", "css", "html", "json"];
 
 function LoadingScreen({ children }: { children: React.ReactNode }) {
   return (
@@ -60,7 +62,7 @@ export default function Page() {
     (async () => {
       const themeJson: unknown = await fetch("/admin/snippets/get-theme").then(r => r.json());
       const theme = toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
-      const highlighter = await getHighlighter({ theme });
+      const highlighter = await getHighlighter({ theme, langs: preloadedLanguages });
       setShiki({ highlighter, theme: theme.name });
     })().catch(() => setShiki(new Error()));
   }, []);
