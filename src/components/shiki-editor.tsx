@@ -59,26 +59,25 @@ export function ShikiEditor({
   if (!shiki) return <LoadingScreen>Loading shiki&hellip;</LoadingScreen>;
   if (shiki instanceof Error) return <LoadingScreen>Failed to load shiki.</LoadingScreen>;
   const themeName = typeof shiki.theme === "string" ? shiki.theme : shiki.theme.name;
-  const bg = typeof shiki.theme === "string" ? undefined : shiki.theme.bg;
   return (
-    <div className="flex flex-row bg-[--bg] font-mono text-sm" style={{ "--bg": bg }}>
-      <div className="flex w-8 flex-col items-end py-6 text-text-tertiary">
-        {value.split("\n").map((_, i) => (
-          <span key={i}>{i + 1}</span>
-        ))}
-      </div>
+    <div className="flex flex-row font-mono text-sm">
       <div className="flex-grow overflow-x-auto">
         <div className="relative w-fit min-w-full">
           <div
             dangerouslySetInnerHTML={{
               __html: shiki.highlighter.codeToHtml(`${value}\n`, { lang: "tsx", theme: themeName }),
             }}
-            className="[&_pre]:p-6"
+            className="[&_pre]:p-6 [&_pre]:pl-[60px]"
           />
+          <div className="absolute inset-y-0 left-0 flex w-9 flex-col items-end py-6 text-text-tertiary">
+            {value.split("\n").map((_, i) => (
+              <span key={i}>{i + 1}</span>
+            ))}
+          </div>
           <textarea
             value={value}
             onChange={e => onChange(e.target.value)}
-            className="absolute inset-0 resize-none bg-transparent p-6 text-transparent caret-text-primary focus:outline-none"
+            className="absolute inset-0 resize-none bg-transparent p-6 pl-[60px] text-transparent caret-text-primary focus:outline-none"
             spellCheck={false}
             autoCorrect="off"
             autoComplete="off"
