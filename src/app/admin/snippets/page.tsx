@@ -24,9 +24,7 @@ setCDN("/vendored/shiki/");
 const preloadedLanguages: Lang[] = ["tsx", "css", "html", "json"];
 
 function LoadingScreen({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="grid h-[68px] place-items-center text-sm text-text-secondary">{children}</div>
-  );
+  return <div className="grid h-18 place-items-center text-sm text-text-secondary">{children}</div>;
 }
 
 function Editor({
