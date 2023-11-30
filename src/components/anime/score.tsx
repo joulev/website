@@ -36,7 +36,7 @@ export function Score({
           d={pathString}
         />
       </svg>
-      <div className="text-sm">{score ?? "N/A"}</div>
+      <div className="text-sm">{score || "N/A"}</div>
     </div>
   );
 }
