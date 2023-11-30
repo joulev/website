@@ -27,7 +27,7 @@ function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCard
     case "completed":
       return (
         <div className="flex flex-row items-center divide-x divide-separator">
-          <Score score={item.score} />
+          <Score score={item.score} className="pr-3" />
           {item.repeat ? (
             <div
               className="pl-3 text-sm text-text-secondary"

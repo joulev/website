@@ -1,4 +1,12 @@
-export function Score({ score }: { score: number | null | undefined }) {
+import { cn } from "~/lib/cn";
+
+export function Score({
+  score,
+  className,
+}: {
+  score: number | null | undefined;
+  className?: string;
+}) {
   const d2r = (degree: number) => (degree * Math.PI) / 180;
   const sin = (degree: number) => Math.sin(d2r(degree));
   const cos = (degree: number) => Math.cos(d2r(degree));
@@ -18,7 +26,7 @@ export function Score({ score }: { score: number | null | undefined }) {
   const pathString = `M ${start[0]} ${start[1]} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${end0} ${end1}`;
 
   return (
-    <div className="flex flex-row items-center gap-1.5 pr-3">
+    <div className={cn("flex flex-row items-center gap-1.5", className)}>
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
         <circle cx={center} cy={center} r={radius} className="stroke-bg-idle" strokeWidth={width} />
         <path

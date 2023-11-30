@@ -46,8 +46,9 @@ export const SEARCH_ANIME = graphql(/* GraphQL */ `
           english
           romaji
         }
+        genres
         meanScore
-        format
+        season
         seasonYear
       }
     }

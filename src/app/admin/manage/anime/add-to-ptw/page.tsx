@@ -4,9 +4,8 @@ import { Link } from "~/components/ui/link";
 import { List, ListContent, ListItem } from "~/components/ui/lists";
 import { getAllLists } from "~/lib/anime/get-lists";
 import { SEARCH_ANIME } from "~/lib/anime/queries";
-import { getTitle } from "~/lib/anime/utils";
+import { convertSeason, getTitle } from "~/lib/anime/utils";
 import { getAuthenticatedGraphQLClient } from "~/lib/auth/helpers";
-import { MediaFormat } from "~/lib/gql/graphql";
 
 import type { PageProps } from "./$types";
 import { ActionButtons } from "./action-buttons";
@@ -23,27 +22,6 @@ async function search(query: string | undefined) {
   const data = await client.request(SEARCH_ANIME, { search: query, idNotIn: allIds });
   const items = data.Page?.media ?? [];
   return items;
-}
-
-function getMediaFormatText(format: MediaFormat | null | undefined) {
-  switch (format) {
-    case MediaFormat.Tv:
-      return "TV";
-    case MediaFormat.TvShort:
-      return "TV Short";
-    case MediaFormat.Movie:
-      return "Movie";
-    case MediaFormat.Special:
-      return "Special";
-    case MediaFormat.Ova:
-      return "OVA";
-    case MediaFormat.Ona:
-      return "ONA";
-    case MediaFormat.Music:
-      return "Music";
-    default:
-      return "Unknown format";
-  }
 }
 
 export default async function Page({ searchParams }: PageProps) {
@@ -68,10 +46,21 @@ export default async function Page({ searchParams }: PageProps) {
                     <div className="flex w-full flex-col gap-1.5">
                       <div className="truncate">{getTitle(item.title)}</div>
                       <div className="flex flex-row flex-wrap items-end gap-x-3">
-                        <div className="flex flex-grow flex-row items-center gap-3 text-sm text-text-secondary">
-                          {item.seasonYear ? <div>{item.seasonYear}</div> : null}
-                          <div>{getMediaFormatText(item.format)}</div>
-                          <Score score={item.meanScore ? item.meanScore / 10 : undefined} />
+                        <div className="flex flex-grow flex-row items-center divide-x divide-separator text-sm text-text-secondary">
+                          <Score
+                            score={item.meanScore ? item.meanScore / 10 : undefined}
+                            className="pr-3"
+                          />
+                          <div className="hidden pl-3 sm:block">
+                            {/* eslint-disable-next-line no-nested-ternary -- It's fine */}
+                            {item.genres && item.genres.length > 0 ? (
+                              <>{item.genres.slice(0, 3).join(", ")}</>
+                            ) : item.season && item.seasonYear ? (
+                              `${convertSeason(item.season)} ${item.seasonYear}`
+                            ) : (
+                              "Season N/A"
+                            )}
+                          </div>
                         </div>
                         <ActionButtons id={item.id} />
                       </div>
