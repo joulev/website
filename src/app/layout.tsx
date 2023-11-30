@@ -2,7 +2,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { Github } from "lucide-react";
 import type { Metadata } from "next";
 import { AxiomWebVitals } from "next-axiom";
-import { Hanken_Grotesk as HankenGrotesk, Inconsolata } from "next/font/google";
+import { Hanken_Grotesk as HankenGrotesk } from "next/font/google";
+import localFont from "next/font/local";
 
 import { Link } from "~/components/ui/link";
 import { cn } from "~/lib/cn";
@@ -11,7 +12,33 @@ import { Background } from "./background";
 import "./globals.css";
 
 const sans = HankenGrotesk({ subsets: ["latin"], variable: "--sans" });
-const mono = Inconsolata({ subsets: ["latin"], variable: "--mono" });
+const mono = localFont({
+  src: [
+    {
+      path: "../../assets/fonts/ia-writer-mono/iAWriterMonoS-Regular.woff2",
+      weight: "normal",
+      style: "normal",
+    },
+    {
+      path: "../../assets/fonts/ia-writer-mono/iAWriterMonoS-Bold.woff2",
+      weight: "bold",
+      style: "normal",
+    },
+    {
+      path: "../../assets/fonts/ia-writer-mono/iAWriterMonoS-Italic.woff2",
+      weight: "normal",
+      style: "italic",
+    },
+    {
+      path: "../../assets/fonts/ia-writer-mono/iAWriterMonoS-BoldItalic.woff2",
+      weight: "bold",
+      style: "italic",
+    },
+  ],
+  display: "swap",
+  declarations: [{ prop: "size-adjust", value: "90%" }],
+  variable: "--mono",
+});
 
 function VersionFooter() {
   const sha = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA;
