@@ -28,7 +28,12 @@ export default function Page() {
           </div>
         </div>
         <div className="flex flex-col">
-          <ShikiEditor theme="/admin/snippets/get-theme" value={code} onChange={setCode} />
+          <ShikiEditor
+            theme="/admin/snippets/get-theme"
+            language={language}
+            value={code}
+            onChange={setCode}
+          />
           <div className="flex flex-col gap-3 p-6 sm:flex-row sm:justify-between">
             <div>
               <Select value={language} onValueChange={val => setLanguage(val as Lang)}>
@@ -38,6 +43,7 @@ export default function Page() {
                 <SelectContent>
                   <SelectGroup>
                     {/* <SelectLabel>Preloaded</SelectLabel> */}
+                    <SelectItem value="plaintext">Plain text</SelectItem>
                     <SelectItem value="tsx">TypeScript JSX</SelectItem>
                     <SelectItem value="css">CSS</SelectItem>
                     <SelectItem value="html">HTML</SelectItem>

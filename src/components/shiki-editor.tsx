@@ -37,6 +37,7 @@ async function getShikiTheme(theme: string): Promise<IShikiTheme | Theme> {
 
 export function ShikiEditor({
   theme,
+  language,
   value,
   onChange,
 }: {
@@ -45,6 +46,8 @@ export function ShikiEditor({
    */
   // eslint-disable-next-line @typescript-eslint/ban-types -- This is an IDE hack for autocompletion yet allowing all strings
   theme: Theme | (string & {});
+  // eslint-disable-next-line @typescript-eslint/ban-types -- This is an IDE hack for autocompletion yet allowing all strings
+  language: Lang | (string & {});
   value: string;
   onChange: (value: string) => void;
 }) {
@@ -65,7 +68,10 @@ export function ShikiEditor({
         <div className="relative w-fit min-w-full">
           <div
             dangerouslySetInnerHTML={{
-              __html: shiki.highlighter.codeToHtml(`${value}\n`, { lang: "tsx", theme: themeName }),
+              __html: shiki.highlighter.codeToHtml(`${value}\n`, {
+                lang: language,
+                theme: themeName,
+              }),
             }}
             className="[&_pre]:p-6 [&_pre]:pl-[60px]"
           />
