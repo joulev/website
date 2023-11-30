@@ -32,7 +32,9 @@ setCDN("/vendored/shiki/");
 const preloadedLanguages: Lang[] = ["tsx", "css", "html", "json"];
 
 function LoadingScreen({ children }: { children: React.ReactNode }) {
-  return <div className="grid h-18 place-items-center text-sm text-text-secondary">{children}</div>;
+  return (
+    <div className="grid h-[68px] place-items-center text-sm text-text-secondary">{children}</div>
+  );
 }
 
 function Editor({
@@ -49,7 +51,7 @@ function Editor({
   if (!shiki) return <LoadingScreen>Loading shiki&hellip;</LoadingScreen>;
   if (shiki instanceof Error) return <LoadingScreen>Failed to load shiki.</LoadingScreen>;
   return (
-    <div className="flex flex-row bg-[--bg] font-mono" style={{ "--bg": shiki.theme.bg }}>
+    <div className="flex flex-row bg-[--bg] font-mono text-sm" style={{ "--bg": shiki.theme.bg }}>
       <div className="flex w-8 flex-col items-end py-6 text-text-tertiary">
         {value.split("\n").map((_, i) => (
           <span key={i}>{i + 1}</span>
