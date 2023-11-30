@@ -2,9 +2,10 @@
 
 import { Slot } from "@radix-ui/react-slot";
 import { ChevronDown } from "lucide-react";
-import { createContext, forwardRef, useCallback, useContext, useState } from "react";
+import { forwardRef, useCallback, useState } from "react";
 
 import { cn } from "~/lib/cn";
+import { generateContext } from "~/lib/hooks/generate-context";
 import type { BaseProps } from "~/types/utils";
 
 import { buttonVariants } from "./button";
@@ -45,16 +46,10 @@ export const SidebarHeaderTitle = forwardRef<HTMLDivElement, BaseProps<"h1">>(
   },
 );
 
-const SectionContext = createContext<{ isOpen: boolean; toggle: () => void } | null>(null);
-
-function useSectionContext() {
-  const context = useContext(SectionContext);
-  if (!context)
-    throw new Error(
-      "invariant(ui/sidebar): useSectionContext must be used within a SidebarSection",
-    );
-  return context;
-}
+const [SectionContext, useSectionContext] = generateContext<{
+  isOpen: boolean;
+  toggle: () => void;
+}>();
 
 export const SidebarSection = forwardRef<
   HTMLDivElement,
@@ -64,9 +59,9 @@ export const SidebarSection = forwardRef<
   const toggle = useCallback(() => setIsOpen(x => !x), []);
   const Component = asChild ? Slot : "div";
   return (
-    <SectionContext.Provider value={{ isOpen, toggle }}>
+    <SectionContext value={{ isOpen, toggle }}>
       <Component {...props} className={cn("flex flex-col p-3", className)} ref={ref} />
-    </SectionContext.Provider>
+    </SectionContext>
   );
 });
 
