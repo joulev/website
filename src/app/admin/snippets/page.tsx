@@ -13,6 +13,14 @@ import {
 import { Title } from "~/components/title";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
 
 interface Shiki {
   highlighter: Highlighter;
@@ -29,10 +37,12 @@ function LoadingScreen({ children }: { children: React.ReactNode }) {
 
 function Editor({
   shiki,
+  language,
   value,
   onChange,
 }: {
   shiki: Shiki | Error | null;
+  language: Lang;
   value: string;
   onChange: (value: string) => void;
 }) {
@@ -50,7 +60,7 @@ function Editor({
           <div
             dangerouslySetInnerHTML={{
               __html: shiki.highlighter.codeToHtml(`${value}\n`, {
-                lang: "tsx",
+                lang: language,
                 theme: shiki.theme.name,
               }),
             }}
@@ -72,6 +82,7 @@ function Editor({
 
 export default function Page() {
   const [code, setCode] = useState("");
+  const [language, setLanguage] = useState<Lang>("tsx");
   const [shiki, setShiki] = useState<Shiki | Error | null>(null);
   useEffect(() => {
     (async () => {
@@ -90,10 +101,36 @@ export default function Page() {
           </div>
         </div>
         <div className="flex flex-col">
-          <Editor shiki={shiki} value={code} onChange={setCode} />
-          <div className="flex flex-row justify-end gap-3 p-6">
-            <Button onClick={() => setCode("")}>Clear</Button>
-            <Button variants={{ variant: "primary" }}>Save</Button>
+          <Editor shiki={shiki} language={language} value={code} onChange={setCode} />
+          <div className="flex flex-col gap-3 p-6 sm:flex-row sm:justify-between">
+            <div>
+              <Select value={language} onValueChange={val => setLanguage(val as Lang)}>
+                <SelectTrigger className="w-full sm:w-64">
+                  <SelectValue placeholder="Select language" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {/* <SelectLabel>Preloaded</SelectLabel> */}
+                    <SelectItem value="tsx">TypeScript JSX</SelectItem>
+                    <SelectItem value="css">CSS</SelectItem>
+                    <SelectItem value="html">HTML</SelectItem>
+                    <SelectItem value="json">JSON</SelectItem>
+                  </SelectGroup>
+                  {/* <SelectSeparator />
+                  <SelectGroup>
+                    <SelectLabel>Others (none for now)</SelectLabel>
+                  </SelectGroup> */}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-row">
+              <Button className="w-full sm:w-auto" onClick={() => setCode("")}>
+                Clear
+              </Button>
+              <Button className="w-full sm:w-auto" variants={{ variant: "primary" }}>
+                Save
+              </Button>
+            </div>
           </div>
         </div>
       </Card>
