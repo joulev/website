@@ -22,3 +22,12 @@ export const shortLinks = pgTable("short_links", {
 });
 export type ShortLink = typeof shortLinks.$inferSelect;
 export type NewShortLink = typeof shortLinks.$inferInsert;
+
+export const codeSnippets = pgTable("code_snippets", {
+  id: serial("id").primaryKey(),
+  slug: varchar("slug", { length: 12 }).unique().notNull(),
+  language: varchar("language", { length: 16 }).notNull(),
+  code: varchar("code", { length: 65_536 }).notNull(),
+});
+export type CodeSnippet = typeof codeSnippets.$inferSelect;
+export type NewCodeSnippet = typeof codeSnippets.$inferInsert;
