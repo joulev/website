@@ -27,7 +27,7 @@ export const SelectTrigger = forwardRef<
 >(({ className, children, style, onMouseMove, ...props }, ref) => (
   <SelectPrimitive.Trigger
     className={cn(
-      "hover-bg recessed relative flex w-full items-center justify-between rounded-full px-4 py-[9px] placeholder:font-medium placeholder:text-text-secondary disabled:static disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none",
+      "hover-bg recessed relative flex min-h-[42px] w-full items-center justify-between rounded-full px-4 py-[9px] placeholder:font-medium placeholder:text-text-secondary disabled:static disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none",
       className,
     )}
     {...useHoverBackground({ style, onMouseMove })}
