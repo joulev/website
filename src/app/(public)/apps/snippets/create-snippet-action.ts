@@ -20,6 +20,11 @@ async function slugExists(slug: string) {
   return entries.length > 0;
 }
 
+function processCode(code: string) {
+  // remove preceding and trailing newlines, then add a trailing newline
+  return `${code.replace(/^\n+|\n+$/g, "")}\n`;
+}
+
 export async function createSnippet(formData: FormData) {
   const { code, language } = parse(createSnippetSchema, {
     code: formData.get("code") || "",
@@ -28,6 +33,6 @@ export async function createSnippet(formData: FormData) {
   let slug = generate();
   // eslint-disable-next-line no-await-in-loop -- Iterations are not independent
   while (await slugExists(slug)) slug = generate();
-  await db.insert(codeSnippets).values({ slug, code, language });
-  redirect(`https://p.joulev.dev/${slug}`);
+  await db.insert(codeSnippets).values({ slug, code: processCode(code), language });
+  redirect(`/p/${slug}`);
 }
