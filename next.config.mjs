@@ -23,6 +23,7 @@ const nextConfig = {
     { source: "/cv", destination: env.RESUME_URL },
     { source: "/cv.pdf", destination: env.RESUME_URL },
     { source: "/resume", destination: env.RESUME_URL },
+    { source: "/editor-theme", destination: env.EDITOR_THEME_URL },
   ],
   redirects: async () => [
     { source: "/sponsor", destination: "https://github.com/sponsors/joulev", permanent: false },

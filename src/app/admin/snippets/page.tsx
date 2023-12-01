@@ -28,12 +28,7 @@ export default function Page() {
           </div>
         </div>
         <div className="flex flex-col">
-          <ShikiEditor
-            theme="/admin/snippets/get-theme"
-            language={language}
-            value={code}
-            onChange={setCode}
-          />
+          <ShikiEditor theme="/editor-theme" language={language} value={code} onChange={setCode} />
           <div className="flex flex-col gap-3 p-6 sm:flex-row sm:justify-between">
             <div>
               <Select value={language} onValueChange={val => setLanguage(val as Lang)}>
