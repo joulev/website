@@ -52,6 +52,9 @@ export function ShikiEditor({
   onChange: (value: string) => void;
 }) {
   const [shiki, setShiki] = useState<Shiki | Error | null>(null);
+  const [loadedLanguages, setLoadedLanguages] = useState<string[]>(preloadedLanguages);
+  const [displayedLanguage, setDisplayedLanguage] = useState(language);
+
   useEffect(() => {
     (async () => {
       const resolvedTheme = await getShikiTheme(theme);
@@ -59,8 +62,29 @@ export function ShikiEditor({
       setShiki({ highlighter, theme: resolvedTheme });
     })().catch(() => setShiki(new Error()));
   }, [theme]);
+
+  useEffect(() => {
+    if (!shiki || shiki instanceof Error) return;
+    if (loadedLanguages.includes(language)) {
+      setDisplayedLanguage(language);
+      return;
+    }
+
+    void (async () => {
+      setDisplayedLanguage("plaintext");
+      try {
+        await shiki.highlighter.loadLanguage(language as Lang);
+        setLoadedLanguages([...loadedLanguages, language]);
+        setDisplayedLanguage(language);
+      } catch {
+        // Language is invalid, we just use plaintext
+      }
+    })();
+  }, [language, loadedLanguages, shiki]);
+
   if (!shiki) return <LoadingScreen>Loading shiki&hellip;</LoadingScreen>;
   if (shiki instanceof Error) return <LoadingScreen>Failed to load shiki.</LoadingScreen>;
+
   const themeName = typeof shiki.theme === "string" ? shiki.theme : shiki.theme.name;
   return (
     <div className="flex flex-row font-mono text-sm">
@@ -69,7 +93,7 @@ export function ShikiEditor({
           <div
             dangerouslySetInnerHTML={{
               __html: shiki.highlighter.codeToHtml(`${value}\n`, {
-                lang: language,
+                lang: displayedLanguage,
                 theme: themeName,
               }),
             }}
