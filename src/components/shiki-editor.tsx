@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   type Highlighter,
   type IShikiTheme,
@@ -35,6 +35,12 @@ async function getShikiTheme(theme: string): Promise<IShikiTheme | Theme> {
   }
 }
 
+async function delay(ms: number): Promise<void> {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+}
+
 export function ShikiEditor({
   theme,
   language,
@@ -49,11 +55,50 @@ export function ShikiEditor({
   // eslint-disable-next-line @typescript-eslint/ban-types -- This is an IDE hack for autocompletion yet allowing all strings
   language: Lang | (string & {});
   value: string;
-  onChange: (value: string) => void;
+  onChange: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [shiki, setShiki] = useState<Shiki | Error | null>(null);
   const [loadedLanguages, setLoadedLanguages] = useState<string[]>(preloadedLanguages);
   const [displayedLanguage, setDisplayedLanguage] = useState(language);
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const handleKeyDown = useCallback(
+    async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (!textareaRef.current) return;
+      const [start, end] = [e.currentTarget.selectionStart, e.currentTarget.selectionEnd];
+      if (e.key === "Tab") {
+        e.preventDefault();
+        onChange(curValue => `${curValue.substring(0, start)}  ${curValue.substring(end)}`);
+        await delay(1); // without this artificial delay, the cursor won't be set correctly
+        textareaRef.current.selectionStart = start + 2;
+        textareaRef.current.selectionEnd = start + 2;
+        return;
+      }
+
+      if (e.key === "Enter") {
+        e.preventDefault();
+        onChange(curValue => {
+          const lines = curValue.substring(0, start).split("\n");
+          const indent = /^\s*/.exec(lines[lines.length - 1])?.[0] ?? "";
+          return `${curValue.substring(0, start)}\n${indent}${curValue.substring(end)}`;
+        });
+      }
+
+      if (e.key === "Backspace") {
+        if (start !== end) return; // selection. fallback to default behavior
+        const line = e.currentTarget.value.substring(0, start).split("\n").pop();
+        if (!line) return; // empty ("") before cursor, fallback to default behavior
+        if (line.trim() !== "") return; // not empty before cursor, fallback to default behavior
+
+        e.preventDefault();
+        onChange(curValue => `${curValue.substring(0, start - 2)}${curValue.substring(end)}`);
+        await delay(1); // without this artificial delay, the cursor won't be set correctly
+        textareaRef.current.selectionStart = start - 2;
+        textareaRef.current.selectionEnd = start - 2;
+      }
+    },
+    [onChange],
+  );
 
   useEffect(() => {
     (async () => {
@@ -105,8 +150,10 @@ export function ShikiEditor({
             ))}
           </div>
           <textarea
+            ref={textareaRef}
             value={value}
             onChange={e => onChange(e.target.value)}
+            onKeyDown={handleKeyDown}
             className="absolute inset-0 resize-none bg-transparent p-6 pl-[60px] text-transparent caret-text-primary focus:outline-none"
             spellCheck={false}
             autoCorrect="off"
