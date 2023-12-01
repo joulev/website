@@ -9,6 +9,19 @@ import {
   toShikiTheme,
 } from "shiki";
 
+interface ShikiEditorProps {
+  /**
+   * URL to the theme JSON, or one of the default theme
+   */
+  // eslint-disable-next-line @typescript-eslint/ban-types -- This is an IDE hack for autocompletion yet allowing all strings
+  theme: Theme | (string & {});
+  // eslint-disable-next-line @typescript-eslint/ban-types -- This is an IDE hack for autocompletion yet allowing all strings
+  language: Lang | (string & {});
+  tabSize?: number;
+  value: string;
+  onChange: React.Dispatch<React.SetStateAction<string>>;
+}
+
 interface Shiki {
   highlighter: Highlighter;
   theme: IShikiTheme | Theme;
@@ -41,22 +54,7 @@ async function delay(ms: number): Promise<void> {
   });
 }
 
-export function ShikiEditor({
-  theme,
-  language,
-  value,
-  onChange,
-}: {
-  /**
-   * URL to the theme JSON, or one of the default theme
-   */
-  // eslint-disable-next-line @typescript-eslint/ban-types -- This is an IDE hack for autocompletion yet allowing all strings
-  theme: Theme | (string & {});
-  // eslint-disable-next-line @typescript-eslint/ban-types -- This is an IDE hack for autocompletion yet allowing all strings
-  language: Lang | (string & {});
-  value: string;
-  onChange: React.Dispatch<React.SetStateAction<string>>;
-}) {
+export function ShikiEditor({ theme, language, tabSize = 2, value, onChange }: ShikiEditorProps) {
   const [shiki, setShiki] = useState<Shiki | Error | null>(null);
   const [loadedLanguages, setLoadedLanguages] = useState<string[]>(preloadedLanguages);
   const [displayedLanguage, setDisplayedLanguage] = useState(language);
@@ -68,10 +66,13 @@ export function ShikiEditor({
       const [start, end] = [e.currentTarget.selectionStart, e.currentTarget.selectionEnd];
       if (e.key === "Tab") {
         e.preventDefault();
-        onChange(curValue => `${curValue.substring(0, start)}  ${curValue.substring(end)}`);
+        onChange(
+          curValue =>
+            `${curValue.substring(0, start)}${" ".repeat(tabSize)}${curValue.substring(end)}`,
+        );
         await delay(1); // without this artificial delay, the cursor won't be set correctly
-        textareaRef.current.selectionStart = start + 2;
-        textareaRef.current.selectionEnd = start + 2;
+        textareaRef.current.selectionStart = start + tabSize;
+        textareaRef.current.selectionEnd = start + tabSize;
         return;
       }
 
@@ -91,13 +92,13 @@ export function ShikiEditor({
         if (line.trim() !== "") return; // not empty before cursor, fallback to default behavior
 
         e.preventDefault();
-        onChange(curValue => `${curValue.substring(0, start - 2)}${curValue.substring(end)}`);
+        onChange(curValue => `${curValue.substring(0, start - tabSize)}${curValue.substring(end)}`);
         await delay(1); // without this artificial delay, the cursor won't be set correctly
-        textareaRef.current.selectionStart = start - 2;
-        textareaRef.current.selectionEnd = start - 2;
+        textareaRef.current.selectionStart = start - tabSize;
+        textareaRef.current.selectionEnd = start - tabSize;
       }
     },
-    [onChange],
+    [onChange, tabSize],
   );
 
   useEffect(() => {
