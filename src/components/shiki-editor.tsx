@@ -10,6 +10,7 @@ import {
 } from "shiki";
 
 interface ShikiEditorProps {
+  name: string;
   /**
    * URL to the theme JSON, or one of the default theme
    */
@@ -54,7 +55,14 @@ async function delay(ms: number): Promise<void> {
   });
 }
 
-export function ShikiEditor({ theme, language, tabSize = 2, value, onChange }: ShikiEditorProps) {
+export function ShikiEditor({
+  name,
+  theme,
+  language,
+  tabSize = 2,
+  value,
+  onChange,
+}: ShikiEditorProps) {
   const [shiki, setShiki] = useState<Shiki | Error | null>(null);
   const [loadedLanguages, setLoadedLanguages] = useState<string[]>(preloadedLanguages);
   const [displayedLanguage, setDisplayedLanguage] = useState(language);
@@ -152,6 +160,7 @@ export function ShikiEditor({ theme, language, tabSize = 2, value, onChange }: S
           </div>
           <textarea
             ref={textareaRef}
+            name={name}
             value={value}
             onChange={e => onChange(e.target.value)}
             onKeyDown={handleKeyDown}
