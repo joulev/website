@@ -106,13 +106,18 @@ export default function Page() {
                   nextjs-route-types
                 </Link>
               </ListItem>
+              <ListItem asChild>
+                <Link unstyled href="https://github.com/joulev/analyse-client-components">
+                  @joulev/analyse-client-components
+                </Link>
+              </ListItem>
             </ListContent>
           </List>
           <List>
             <ListHeader asChild>
               <h2>Apps</h2>
             </ListHeader>
-            <ListContent variants={{ withSeparator: false }}>
+            <ListContent>
               <ListItem asChild>
                 <Link unstyled href="https://nextjs-faq.com">
                   nextjs-faq
@@ -127,34 +132,21 @@ export default function Page() {
           </List>
           <List>
             <ListHeader asChild>
-              <h2>Apps at joulev.dev</h2>
+              <h2>Small-ish apps at joulev.dev</h2>
             </ListHeader>
-            <ListContent variants={{ withSeparator: false }}>
+            <ListContent>
               <ListItem asChild>
                 <Link unstyled href="/glui">
-                  The glui design component collection
+                  glui: Glassmorphic UI components
                 </Link>
               </ListItem>
-              <ListItem asChild>
-                <Link unstyled href="/apps/tategaki">
-                  tategaki
-                </Link>
-              </ListItem>
-              <ListItem asChild>
-                <Link unstyled href="/apps/anime">
-                  anime
-                </Link>
-              </ListItem>
-              <ListItem asChild>
-                <Link unstyled href="/apps/link">
-                  link
-                </Link>
-              </ListItem>
-              <ListItem asChild>
-                <Link unstyled href="/apps/irasuto">
-                  irasuto
-                </Link>
-              </ListItem>
+              {["anime", "cuid2", "irasuto", "link", "snippets", "tategaki"].map(app => (
+                <ListItem asChild key={app}>
+                  <Link unstyled href={`/apps/${app}`}>
+                    {app}
+                  </Link>
+                </ListItem>
+              ))}
             </ListContent>
           </List>
         </section>

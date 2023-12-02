@@ -16,9 +16,9 @@ import {
 
 const navItems: { title: string; href: string; description: string }[] = [
   {
-    title: "glui",
-    href: "/glui",
-    description: "A glassmorphic component system, based on visionOS UI design",
+    title: "anime",
+    href: "/apps/anime",
+    description: "My anime list using the AniList API. A different frontend of AniList for me",
   },
   {
     title: "cuid2",
@@ -26,14 +26,14 @@ const navItems: { title: string; href: string; description: string }[] = [
     description: "Online cuid2 generator",
   },
   {
-    title: "tategaki",
-    href: "/apps/tategaki",
-    description: "A website featuring text displayed in Japanese vertical writing style",
+    title: "glui",
+    href: "/glui",
+    description: "A glassmorphic component system, based on visionOS UI design",
   },
   {
-    title: "anime",
-    href: "/apps/anime",
-    description: "My anime list using the AniList API. A different frontend of AniList for me",
+    title: "irasuto",
+    href: "/apps/irasuto",
+    description: "A website featuring Japanese illustrations that I love",
   },
   {
     title: "link",
@@ -41,9 +41,14 @@ const navItems: { title: string; href: string; description: string }[] = [
     description: "A simple URL shortener",
   },
   {
-    title: "irasuto",
-    href: "/apps/irasuto",
-    description: "A website featuring Japanese illustrations that I love",
+    title: "snippets",
+    href: "/apps/snippets",
+    description: "Upload and share short code snippets",
+  },
+  {
+    title: "tategaki",
+    href: "/apps/tategaki",
+    description: "A website featuring text displayed in Japanese vertical writing style",
   },
 ];
 

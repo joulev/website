@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { Title } from "~/components/title";
 import { Card } from "~/components/ui/card";
 
@@ -9,7 +11,7 @@ export default function Page() {
       <Card className="flex flex-col p-0">
         <div className="bg-bg-darker py-6">
           <div className="container flex max-w-screen-md flex-col gap-6">
-            <Title title="snippets" subtitle="Upload short code snippets here." />
+            <Title title="snippets" subtitle="Upload and share short code snippets" />
           </div>
         </div>
         <Editor />
@@ -17,3 +19,13 @@ export default function Page() {
     </main>
   );
 }
+
+export const metadata: Metadata = {
+  title: "joulev.dev » snippets",
+  description: "Upload and share short code snippets",
+  openGraph: {
+    title: "joulev.dev » snippets",
+    description: "Upload and share short code snippets",
+    url: "/apps/snippets",
+  },
+};
