@@ -72,12 +72,10 @@ export function ShikiEditor({
     async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (!textareaRef.current) return;
       const [start, end] = [e.currentTarget.selectionStart, e.currentTarget.selectionEnd];
+      const curValue = e.currentTarget.value;
       if (e.key === "Tab") {
         e.preventDefault();
-        onChange(
-          curValue =>
-            `${curValue.substring(0, start)}${" ".repeat(tabSize)}${curValue.substring(end)}`,
-        );
+        onChange(`${curValue.substring(0, start)}${" ".repeat(tabSize)}${curValue.substring(end)}`);
         await delay(1); // without this artificial delay, the cursor won't be set correctly
         textareaRef.current.selectionStart = start + tabSize;
         textareaRef.current.selectionEnd = start + tabSize;
@@ -86,21 +84,22 @@ export function ShikiEditor({
 
       if (e.key === "Enter") {
         e.preventDefault();
-        onChange(curValue => {
-          const lines = curValue.substring(0, start).split("\n");
-          const indent = /^\s*/.exec(lines[lines.length - 1])?.[0] ?? "";
-          return `${curValue.substring(0, start)}\n${indent}${curValue.substring(end)}`;
-        });
+        const lines = curValue.substring(0, start).split("\n");
+        const indent = /^\s*/.exec(lines[lines.length - 1])?.[0] ?? "";
+        onChange(`${curValue.substring(0, start)}\n${indent}${curValue.substring(end)}`);
+        await delay(1); // without this artificial delay, the cursor won't be set correctly
+        textareaRef.current.selectionStart = start + indent.length + 1;
+        textareaRef.current.selectionEnd = start + indent.length + 1;
       }
 
       if (e.key === "Backspace") {
         if (start !== end) return; // selection. fallback to default behavior
-        const line = e.currentTarget.value.substring(0, start).split("\n").pop();
+        const line = curValue.substring(0, start).split("\n").pop();
         if (!line) return; // empty ("") before cursor, fallback to default behavior
         if (line.trim() !== "") return; // not empty before cursor, fallback to default behavior
 
         e.preventDefault();
-        onChange(curValue => `${curValue.substring(0, start - tabSize)}${curValue.substring(end)}`);
+        onChange(`${curValue.substring(0, start - tabSize)}${curValue.substring(end)}`);
         await delay(1); // without this artificial delay, the cursor won't be set correctly
         textareaRef.current.selectionStart = start - tabSize;
         textareaRef.current.selectionEnd = start - tabSize;
@@ -164,7 +163,7 @@ export function ShikiEditor({
             value={value}
             onChange={e => onChange(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="absolute inset-0 resize-none bg-transparent p-6 pl-[60px] text-transparent caret-text-primary focus:outline-none"
+            className="absolute inset-0 h-full w-full resize-none bg-transparent p-6 pl-[60px] text-transparent caret-text-primary focus:outline-none"
             spellCheck={false}
             autoCorrect="off"
             autoComplete="off"
