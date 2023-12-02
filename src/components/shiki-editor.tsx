@@ -32,12 +32,6 @@ setCDN("/vendored/shiki/");
 
 const preloadedLanguages: Lang[] = ["tsx", "css", "html", "json"];
 
-function LoadingScreen({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="grid h-[68px] place-items-center text-sm text-text-secondary">{children}</div>
-  );
-}
-
 async function getShikiTheme(theme: string): Promise<IShikiTheme | Theme> {
   try {
     const url = new URL(theme, window.location.href);
@@ -108,6 +102,7 @@ export function ShikiEditor({
     [onChange, tabSize],
   );
 
+  // Load Shiki
   useEffect(() => {
     (async () => {
       const resolvedTheme = await getShikiTheme(theme);
@@ -116,6 +111,7 @@ export function ShikiEditor({
     })().catch(() => setShiki(new Error()));
   }, [theme]);
 
+  // Load languages that are not preloaded
   useEffect(() => {
     if (!shiki || shiki instanceof Error) return;
     if (loadedLanguages.includes(language)) {
@@ -135,23 +131,28 @@ export function ShikiEditor({
     })();
   }, [language, loadedLanguages, shiki]);
 
-  if (!shiki) return <LoadingScreen>Loading shiki&hellip;</LoadingScreen>;
-  if (shiki instanceof Error) return <LoadingScreen>Failed to load shiki.</LoadingScreen>;
-
-  const themeName = typeof shiki.theme === "string" ? shiki.theme : shiki.theme.name;
+  const shikiIsLoaded = shiki && !(shiki instanceof Error);
   return (
     <div className="flex flex-row bg-bg-darker font-mono text-sm">
       <div className="flex-grow overflow-x-auto">
         <div className="relative w-fit min-w-full">
-          <div
-            dangerouslySetInnerHTML={{
-              __html: shiki.highlighter.codeToHtml(`${value}\n`, {
-                lang: displayedLanguage,
-                theme: themeName,
-              }),
-            }}
-            className="[&_pre]:!bg-transparent [&_pre]:p-6 [&_pre]:pl-[60px]"
-          />
+          {shikiIsLoaded ? (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: shiki.highlighter.codeToHtml(`${value}\n`, {
+                  lang: displayedLanguage,
+                  theme: typeof shiki.theme === "string" ? shiki.theme : shiki.theme.name,
+                }),
+              }}
+              className="[&_pre]:!bg-transparent [&_pre]:p-6 [&_pre]:pl-[60px]"
+            />
+          ) : (
+            <div>
+              <pre className="p-6 pl-[60px] text-text-primary">
+                <code>{`${value}\n`}</code>
+              </pre>
+            </div>
+          )}
           <div className="absolute inset-y-0 left-0 flex w-9 flex-col items-end py-6 text-text-tertiary">
             {value.split("\n").map((_, i) => (
               <span key={i}>{i + 1}</span>
