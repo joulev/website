@@ -109,9 +109,9 @@ export default async function Page({ params }: PageProps) {
   );
 }
 
-// TODO: Support the edge runtime by trying shikiji
-// export const runtime = "edge";
-export const revalidate = 0;
+export function generateStaticParams(): Params[] {
+  return [];
+}
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const snippet = await getSnippet(params.slug);
@@ -122,3 +122,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     description: "A code snippet created on joulev.dev/apps/snippets",
   };
 }
+
+// TODO: Support the edge runtime by trying shikiji
+// export const runtime = "edge";
+export const revalidate = 0;
