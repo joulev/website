@@ -53,14 +53,35 @@ export function Editor() {
             <SelectTrigger className="w-full sm:w-48">
               <SelectValue placeholder="Select language" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="max-h-56">
               <SelectGroup>
                 <SelectLabel>Languages</SelectLabel>
                 <SelectItem value="plaintext">Plain text</SelectItem>
-                <SelectItem value="tsx">TypeScript JSX</SelectItem>
+                <SelectItem value="astro">Astro</SelectItem>
+                <SelectItem value="cpp">C/C++</SelectItem>
+                <SelectItem value="csharp">C#</SelectItem>
                 <SelectItem value="css">CSS</SelectItem>
+                <SelectItem value="dart">Dart</SelectItem>
+                <SelectItem value="go">Go</SelectItem>
+                <SelectItem value="graphql">Graphql</SelectItem>
+                <SelectItem value="haskell">Haskell</SelectItem>
                 <SelectItem value="html">HTML</SelectItem>
-                <SelectItem value="json">JSON</SelectItem>
+                <SelectItem value="java">Java</SelectItem>
+                <SelectItem value="tsx">JS/TS</SelectItem>
+                <SelectItem value="json5">JSON</SelectItem>
+                <SelectItem value="julia">Julia</SelectItem>
+                <SelectItem value="kotlin">Kotlin</SelectItem>
+                <SelectItem value="tex">LaTeX/TeX</SelectItem>
+                <SelectItem value="perl">Perl</SelectItem>
+                <SelectItem value="php">PHP</SelectItem>
+                <SelectItem value="python">Python</SelectItem>
+                <SelectItem value="ruby">Ruby</SelectItem>
+                <SelectItem value="rust">Rust</SelectItem>
+                <SelectItem value="svelte">Svelte</SelectItem>
+                <SelectItem value="swift">Swift</SelectItem>
+                <SelectItem value="vue">Vue</SelectItem>
+                <SelectItem value="xml">XML</SelectItem>
+                <SelectItem value="yaml">YAML</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
