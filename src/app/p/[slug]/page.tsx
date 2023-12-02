@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
-import { type Lang, getHighlighter, toShikiTheme } from "shiki";
+import { type Lang, getHighlighter, setCDN, toShikiTheme } from "shiki";
 
 import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
 import { env } from "~/env.mjs";
@@ -8,6 +8,8 @@ import { db } from "~/lib/db";
 import { type CodeSnippet, codeSnippets } from "~/lib/db/schema";
 
 import type { PageProps } from "./$types";
+
+setCDN("https://joulev.dev/vendored/shiki/");
 
 async function getSnippet(slug: string) {
   const results = await db.select().from(codeSnippets).where(eq(codeSnippets.slug, slug)).limit(1);
