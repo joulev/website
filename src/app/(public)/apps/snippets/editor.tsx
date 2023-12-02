@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
-import type { Lang } from "shiki";
+import { BUNDLED_LANGUAGES, type ILanguageRegistration, type Lang } from "shiki";
 
 import { ShikiEditor } from "~/components/shiki-editor";
 import { Button } from "~/components/ui/button";
@@ -17,6 +17,14 @@ import {
 } from "~/components/ui/select";
 
 import { createSnippet } from "./create-snippet-action";
+
+function getDisplayNameOfLanguage(lang: ILanguageRegistration) {
+  return lang.displayName || lang.id;
+}
+
+const languages = BUNDLED_LANGUAGES.sort((a, b) =>
+  getDisplayNameOfLanguage(a).localeCompare(getDisplayNameOfLanguage(b)),
+);
 
 function SaveButton() {
   const { pending } = useFormStatus();
@@ -57,31 +65,11 @@ export function Editor() {
               <SelectGroup>
                 <SelectLabel>Languages</SelectLabel>
                 <SelectItem value="plaintext">Plain text</SelectItem>
-                <SelectItem value="astro">Astro</SelectItem>
-                <SelectItem value="cpp">C/C++</SelectItem>
-                <SelectItem value="csharp">C#</SelectItem>
-                <SelectItem value="css">CSS</SelectItem>
-                <SelectItem value="dart">Dart</SelectItem>
-                <SelectItem value="go">Go</SelectItem>
-                <SelectItem value="graphql">Graphql</SelectItem>
-                <SelectItem value="haskell">Haskell</SelectItem>
-                <SelectItem value="html">HTML</SelectItem>
-                <SelectItem value="java">Java</SelectItem>
-                <SelectItem value="tsx">JS/TS</SelectItem>
-                <SelectItem value="json5">JSON</SelectItem>
-                <SelectItem value="julia">Julia</SelectItem>
-                <SelectItem value="kotlin">Kotlin</SelectItem>
-                <SelectItem value="tex">LaTeX/TeX</SelectItem>
-                <SelectItem value="perl">Perl</SelectItem>
-                <SelectItem value="php">PHP</SelectItem>
-                <SelectItem value="python">Python</SelectItem>
-                <SelectItem value="ruby">Ruby</SelectItem>
-                <SelectItem value="rust">Rust</SelectItem>
-                <SelectItem value="svelte">Svelte</SelectItem>
-                <SelectItem value="swift">Swift</SelectItem>
-                <SelectItem value="vue">Vue</SelectItem>
-                <SelectItem value="xml">XML</SelectItem>
-                <SelectItem value="yaml">YAML</SelectItem>
+                {languages.map(lang => (
+                  <SelectItem key={lang.id} value={lang.id}>
+                    {getDisplayNameOfLanguage(lang)}
+                  </SelectItem>
+                ))}
               </SelectGroup>
             </SelectContent>
           </Select>
