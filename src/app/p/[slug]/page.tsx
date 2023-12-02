@@ -1,9 +1,11 @@
 import { eq } from "drizzle-orm";
+import { Code, Link } from "lucide-react";
 import { notFound } from "next/navigation";
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { type Lang, getHighlighter, toShikiTheme } from "shiki";
 
+import { CopyButton } from "~/components/copy-button";
 import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
 import { env } from "~/env.mjs";
 import { db } from "~/lib/db";
@@ -38,25 +40,51 @@ export default async function Page({ params }: PageProps) {
   if (!snippet) notFound();
   const [theme, html] = await highlightCodeSnippet(snippet);
   return (
-    <main className="container max-w-screen-lg py-12">
-      <div
-        className="flex w-full flex-row gap-6 overflow-hidden rounded-full bg-[--bg]"
-        style={{ "--bg": theme.bg }}
-      >
-        <div className="flex shrink-0 cursor-default select-none flex-col items-end py-6 pl-6 font-mono text-sm">
-          {snippet.code.split("\n").map((_, i) => (
-            <div key={i} className="text-text-tertiary">
-              {i + 1}
-            </div>
-          ))}
+    <main className="container max-w-screen-lg py-18">
+      <div className="overflow-hidden rounded-full bg-[--bg]" style={{ "--bg": theme.bg }}>
+        <div className="flex flex-row items-center justify-between px-6 py-4">
+          <div className="flex flex-row gap-2">
+            <div className="h-3 w-3 rounded-full bg-text-tertiary" />
+            <div className="h-3 w-3 rounded-full bg-text-tertiary" />
+            <div className="h-3 w-3 rounded-full bg-text-tertiary" />
+          </div>
+          <div className="flex flex-row gap-3">
+            <CopyButton
+              content={snippet.code}
+              variants={{ size: "sm" }}
+              copyChildren={
+                <>
+                  <Code /> Copy code
+                </>
+              }
+            />
+            <CopyButton
+              content={`https://joulev.dev/p/${snippet.slug}`}
+              variants={{ size: "sm" }}
+              copyChildren={
+                <>
+                  <Link /> Copy link
+                </>
+              }
+            />
+          </div>
         </div>
-        <ScrollArea className="flex-grow overflow-x-auto py-6">
-          <div
-            dangerouslySetInnerHTML={{ __html: html }}
-            className="inline-block text-sm selection:bg-bg-idle"
-          />
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+        <div className="flex w-full flex-row gap-6">
+          <div className="flex shrink-0 cursor-default select-none flex-col items-end pb-6 pl-6 font-mono text-sm">
+            {snippet.code.split("\n").map((_, i) => (
+              <div key={i} className="text-text-tertiary">
+                {i + 1}
+              </div>
+            ))}
+          </div>
+          <ScrollArea className="flex-grow overflow-x-auto pb-6">
+            <div
+              dangerouslySetInnerHTML={{ __html: html }}
+              className="inline-block pr-6 text-sm selection:bg-bg-idle"
+            />
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        </div>
       </div>
     </main>
   );
