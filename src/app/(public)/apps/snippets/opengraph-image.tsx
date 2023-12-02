@@ -3,7 +3,7 @@ import { getOpengraphImage } from "~/components/og";
 export default function Image() {
   return getOpengraphImage({
     title: "joulev.dev » snippets",
-    subtitle: "Upload and share short code snippets",
+    subtitle: "Upload and share code snippets",
   });
 }
 
