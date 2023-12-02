@@ -1,24 +1,27 @@
 import { eq } from "drizzle-orm";
-import { Code, Link } from "lucide-react";
+import { Code, Link, Plus } from "lucide-react";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
+import { cache } from "react";
 import { type Lang, getHighlighter, toShikiTheme } from "shiki";
 
 import { CopyButton } from "~/components/copy-button";
+import { LinkButton } from "~/components/ui/button";
 import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
 import { env } from "~/env.mjs";
 import { db } from "~/lib/db";
 import { type CodeSnippet, codeSnippets } from "~/lib/db/schema";
 
-import type { PageProps } from "./$types";
+import type { PageProps, Params } from "./$types";
 
 const shikiPath = join(process.cwd(), "public", "vendored", "shiki");
 
-async function getSnippet(slug: string) {
+const getSnippet = cache(async (slug: string) => {
   const results = await db.select().from(codeSnippets).where(eq(codeSnippets.slug, slug)).limit(1);
   return results.at(0);
-}
+});
 
 async function highlightCodeSnippet(snippet: CodeSnippet) {
   void readdir(shikiPath);
@@ -40,16 +43,25 @@ export default async function Page({ params }: PageProps) {
   if (!snippet) notFound();
   const [theme, html] = await highlightCodeSnippet(snippet);
   return (
-    <main className="container max-w-screen-lg py-18">
+    <main className="container max-w-[100ch] py-18">
       <div className="overflow-hidden rounded-full bg-[--bg]" style={{ "--bg": theme.bg }}>
-        <div className="flex flex-row items-center justify-between px-6 py-4">
-          <div className="flex flex-row gap-2">
-            <div className="h-3 w-3 rounded-full bg-text-tertiary" />
-            <div className="h-3 w-3 rounded-full bg-text-tertiary" />
-            <div className="h-3 w-3 rounded-full bg-text-tertiary" />
+        <div className="flex flex-row items-center justify-between px-6 py-4 font-mono text-sm">
+          <div className="flex flex-row items-center gap-6">
+            <div className="flex flex-row gap-2">
+              <div className="h-3 w-3 rounded-full bg-text-tertiary" />
+              <div className="h-3 w-3 rounded-full bg-text-tertiary" />
+              <div className="h-3 w-3 rounded-full bg-text-tertiary" />
+            </div>
+            <div className="flex cursor-default select-none flex-row text-text-secondary">
+              <div className="mr-3 border-r border-separator pr-3 max-md:hidden">
+                {snippet.slug}
+              </div>
+              <div>{snippet.language}</div>
+            </div>
           </div>
           <div className="flex flex-row gap-3">
             <CopyButton
+              className="[--button-gap:0.5rem] max-sm:hidden"
               content={snippet.code}
               variants={{ size: "sm" }}
               copyChildren={
@@ -59,6 +71,7 @@ export default async function Page({ params }: PageProps) {
               }
             />
             <CopyButton
+              className="[--button-gap:0.5rem]"
               content={`https://joulev.dev/p/${snippet.slug}`}
               variants={{ size: "sm" }}
               copyChildren={
@@ -67,6 +80,13 @@ export default async function Page({ params }: PageProps) {
                 </>
               }
             />
+            <LinkButton
+              className="[--button-gap:0.5rem]"
+              href="https://joulev.dev/apps/snippets"
+              variants={{ variant: "primary", size: "sm" }}
+            >
+              <Plus /> New
+            </LinkButton>
           </div>
         </div>
         <div className="flex w-full flex-row gap-6">
@@ -82,7 +102,7 @@ export default async function Page({ params }: PageProps) {
           <ScrollArea className="flex-grow overflow-x-auto pb-6">
             <div
               dangerouslySetInnerHTML={{ __html: html }}
-              className="inline-block pr-6 text-sm selection:bg-bg-idle"
+              className="inline-block min-w-full pr-6 text-sm selection:bg-bg-idle"
             />
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
@@ -95,3 +115,13 @@ export default async function Page({ params }: PageProps) {
 // TODO: Support the edge runtime by trying shikiji
 // export const runtime = "edge";
 export const revalidate = 0;
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const snippet = await getSnippet(params.slug);
+  if (!snippet) return {};
+  return {
+    robots: { index: false, follow: false },
+    title: `Code snippet ${snippet.slug}`,
+    description: "A code snippet created on joulev.dev/apps/snippets",
+  };
+}
