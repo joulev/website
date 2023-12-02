@@ -11,16 +11,22 @@ import { type CodeSnippet, codeSnippets } from "~/lib/db/schema";
 
 import type { PageProps } from "./$types";
 
+const shikiPath = join(process.cwd(), "public", "vendored", "shiki");
+
 async function getSnippet(slug: string) {
   const results = await db.select().from(codeSnippets).where(eq(codeSnippets.slug, slug)).limit(1);
   return results.at(0);
 }
 
 async function highlightCodeSnippet(snippet: CodeSnippet) {
-  void readdir(join(process.cwd(), "node_modules", "shiki"));
+  void readdir(shikiPath);
   const themeJson: unknown = await fetch(env.EDITOR_THEME_URL).then(r => r.json());
   const theme = toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
-  const highlighter = await getHighlighter({ theme, langs: [snippet.language as Lang] });
+  const highlighter = await getHighlighter({
+    theme,
+    langs: [snippet.language as Lang],
+    paths: { languages: `${shikiPath}/languages` },
+  });
   return [
     theme,
     highlighter.codeToHtml(snippet.code, { theme: theme.name, lang: snippet.language }),
