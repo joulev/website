@@ -70,12 +70,14 @@ export default async function Page({ params }: PageProps) {
           </div>
         </div>
         <div className="flex w-full flex-row gap-6">
-          <div className="flex shrink-0 cursor-default select-none flex-col items-end pb-6 pl-6 font-mono text-sm">
-            {snippet.code.split("\n").map((_, i) => (
-              <div key={i} className="text-text-tertiary">
-                {i + 1}
-              </div>
-            ))}
+          <div className="shrink-0 cursor-default select-none pb-6 pl-6">
+            <div className="flex flex-col items-end gap-1 py-0.5 font-mono text-sm">
+              {snippet.code.split("\n").map((_, i) => (
+                <div key={i} className="leading-4 text-text-tertiary">
+                  {i + 1}
+                </div>
+              ))}
+            </div>
           </div>
           <ScrollArea className="flex-grow overflow-x-auto pb-6">
             <div
