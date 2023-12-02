@@ -14,6 +14,7 @@ export default function Page() {
             <Title title="snippets" subtitle="Upload and share short code snippets" />
           </div>
         </div>
+        <hr />
         <Editor />
       </Card>
     </main>

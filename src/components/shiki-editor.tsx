@@ -140,7 +140,7 @@ export function ShikiEditor({
 
   const themeName = typeof shiki.theme === "string" ? shiki.theme : shiki.theme.name;
   return (
-    <div className="flex flex-row font-mono text-sm">
+    <div className="flex flex-row bg-bg-darker font-mono text-sm">
       <div className="flex-grow overflow-x-auto">
         <div className="relative w-fit min-w-full">
           <div
@@ -150,7 +150,7 @@ export function ShikiEditor({
                 theme: themeName,
               }),
             }}
-            className="[&_pre]:p-6 [&_pre]:pl-[60px]"
+            className="[&_pre]:!bg-transparent [&_pre]:p-6 [&_pre]:pl-[60px]"
           />
           <div className="absolute inset-y-0 left-0 flex w-9 flex-col items-end py-6 text-text-tertiary">
             {value.split("\n").map((_, i) => (

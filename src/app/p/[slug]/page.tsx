@@ -32,19 +32,16 @@ async function highlightCodeSnippet(snippet: CodeSnippet) {
     langs: [snippet.language as Lang],
     paths: { languages: `${shikiPath}/languages` },
   });
-  return [
-    theme,
-    highlighter.codeToHtml(snippet.code, { theme: theme.name, lang: snippet.language }),
-  ] as const;
+  return highlighter.codeToHtml(snippet.code, { theme: theme.name, lang: snippet.language });
 }
 
 export default async function Page({ params }: PageProps) {
   const snippet = await getSnippet(params.slug);
   if (!snippet) notFound();
-  const [theme, html] = await highlightCodeSnippet(snippet);
+  const html = await highlightCodeSnippet(snippet);
   return (
     <main className="container max-w-[100ch] py-18">
-      <div className="overflow-hidden rounded-full bg-[--bg]" style={{ "--bg": theme.bg }}>
+      <div className="card overflow-clip rounded-full bg-bg-darker backdrop-blur">
         <div className="flex flex-row items-center justify-between px-6 py-4 font-mono text-sm">
           <div className="flex flex-row items-center gap-6">
             <div className="flex flex-row gap-2">
@@ -102,7 +99,7 @@ export default async function Page({ params }: PageProps) {
           <ScrollArea className="flex-grow overflow-x-auto pb-6">
             <div
               dangerouslySetInnerHTML={{ __html: html }}
-              className="inline-block min-w-full pr-6 text-sm selection:bg-bg-idle"
+              className="inline-block min-w-full pr-6 text-sm selection:bg-bg-idle [&_pre]:!bg-transparent"
             />
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
