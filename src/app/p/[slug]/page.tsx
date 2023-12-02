@@ -1,6 +1,8 @@
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
-import { type Lang, getHighlighter, setCDN, toShikiTheme } from "shiki";
+import { readdir } from "node:fs/promises";
+import { join } from "node:path";
+import { type Lang, getHighlighter, toShikiTheme } from "shiki";
 
 import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
 import { env } from "~/env.mjs";
@@ -9,14 +11,13 @@ import { type CodeSnippet, codeSnippets } from "~/lib/db/schema";
 
 import type { PageProps } from "./$types";
 
-setCDN("https://joulev.dev/vendored/shiki/");
-
 async function getSnippet(slug: string) {
   const results = await db.select().from(codeSnippets).where(eq(codeSnippets.slug, slug)).limit(1);
   return results.at(0);
 }
 
 async function highlightCodeSnippet(snippet: CodeSnippet) {
+  void readdir(join(process.cwd(), "node_modules", "shiki"));
   const themeJson: unknown = await fetch(env.EDITOR_THEME_URL).then(r => r.json());
   const theme = toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
   const highlighter = await getHighlighter({ theme, langs: [snippet.language as Lang] });
