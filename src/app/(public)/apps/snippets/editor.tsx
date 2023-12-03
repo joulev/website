@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
-import type { Lang } from "shiki";
+import { BUNDLED_LANGUAGES, type ILanguageRegistration, type Lang } from "shiki";
 
 import { ShikiEditor } from "~/components/shiki-editor";
 import { Button } from "~/components/ui/button";
@@ -15,9 +15,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import { supportedLanguages } from "~/lib/snippets/supported-languages";
 
 import { createSnippet } from "./create-snippet-action";
+
+function getDisplayNameOfLanguage(lang: ILanguageRegistration) {
+  return lang.displayName || lang.id;
+}
+
+const languages = BUNDLED_LANGUAGES.sort((a, b) =>
+  getDisplayNameOfLanguage(a).localeCompare(getDisplayNameOfLanguage(b)),
+);
 
 function SaveButton() {
   const { pending } = useFormStatus();
@@ -58,9 +65,9 @@ export function Editor() {
               <SelectGroup>
                 <SelectLabel>Languages</SelectLabel>
                 <SelectItem value="plaintext">Plain text</SelectItem>
-                {supportedLanguages.map(lang => (
-                  <SelectItem key={lang.name} value={lang.name}>
-                    {lang.displayName}
+                {languages.map(lang => (
+                  <SelectItem key={lang.id} value={lang.id}>
+                    {getDisplayNameOfLanguage(lang)}
                   </SelectItem>
                 ))}
               </SelectGroup>

@@ -3,16 +3,12 @@ import { Code, Link, Plus } from "lucide-react";
 import type { Metadata } from "next";
 import { unstable_cache as cache } from "next/cache";
 import { notFound } from "next/navigation";
-import { getWasmInlined, toShikiTheme } from "shikiji";
-import { getHighlighterCore } from "shikiji/core";
 
 import { CopyButton } from "~/components/copy-button";
 import { LinkButton } from "~/components/ui/button";
 import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
-import { env } from "~/env.mjs";
 import { db } from "~/lib/db";
 import { codeSnippets } from "~/lib/db/schema";
-import { supportedLanguages } from "~/lib/snippets/supported-languages";
 
 import type { PageProps, Params } from "./$types";
 
@@ -21,21 +17,9 @@ const getSnippet = cache(async (slug: string) => {
   return results.at(0);
 });
 
-const highlightCodeSnippet = cache(async (code: string, language: string) => {
-  const themeJson: unknown = await fetch(env.EDITOR_THEME_URL).then(r => r.json());
-  const theme = toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
-  const highlighter = await getHighlighterCore({
-    themes: [theme],
-    langs: supportedLanguages.map(lang => lang.grammar),
-    loadWasm: getWasmInlined,
-  });
-  return highlighter.codeToHtml(code, { theme: theme.name, lang: language });
-});
-
 export default async function Page({ params }: PageProps) {
   const snippet = await getSnippet(params.slug);
   if (!snippet) notFound();
-  const html = await highlightCodeSnippet(snippet.code, snippet.language);
   return (
     <main className="container max-w-[100ch] py-18">
       <div className="card overflow-clip rounded-full bg-bg-darker backdrop-blur">
@@ -93,7 +77,7 @@ export default async function Page({ params }: PageProps) {
           </div>
           <ScrollArea className="flex-grow overflow-x-auto pb-6">
             <div
-              dangerouslySetInnerHTML={{ __html: html }}
+              dangerouslySetInnerHTML={{ __html: snippet.shikiOutput || "" }}
               className="inline-block min-w-full pr-6 text-sm selection:bg-bg-idle [&_pre]:!bg-transparent"
             />
             <ScrollBar orientation="horizontal" />
@@ -115,3 +99,4 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 }
 
 export const revalidate = 0;
+export const runtime = "edge";

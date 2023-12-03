@@ -3,17 +3,14 @@
 import { init } from "@paralleldrive/cuid2";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
+import { readdir } from "node:fs/promises";
+import { join } from "node:path";
+import { type Lang, getHighlighter, toShikiTheme } from "shiki";
 import { maxLength, object, parse, string } from "valibot";
 
+import { env } from "~/env.mjs";
 import { db } from "~/lib/db";
 import { codeSnippets } from "~/lib/db/schema";
-
-const createSnippetSchema = object({
-  code: string([maxLength(65_536)]),
-  language: string([maxLength(16)]),
-});
-
-const generate = init({ length: 12 });
 
 async function slugExists(slug: string) {
   const entries = await db.select().from(codeSnippets).where(eq(codeSnippets.slug, slug)).limit(1);
@@ -25,14 +22,41 @@ function processCode(code: string) {
   return `${code.replace(/^\n+|\n+$/g, "")}\n`;
 }
 
+async function highlightCode(code: string, language: string) {
+  const shikiPath = join(process.cwd(), "public", "vendored", "shiki");
+  void readdir(shikiPath);
+  const themeJson: unknown = await fetch(env.EDITOR_THEME_URL).then(r => r.json());
+  const theme = toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
+  const highlighter = await getHighlighter({
+    theme,
+    langs: [language as Lang],
+    paths: { languages: `${shikiPath}/languages` },
+  });
+  return highlighter.codeToHtml(code, { theme: theme.name, lang: language });
+}
+
+async function getAvailableSlug() {
+  const generate = init({ length: 12 });
+  let slug = generate();
+  // eslint-disable-next-line no-await-in-loop -- Iterations are not independent
+  while (await slugExists(slug)) slug = generate();
+  return slug;
+}
+
 export async function createSnippet(formData: FormData) {
+  const createSnippetSchema = object({
+    code: string([maxLength(65_536)]),
+    language: string([maxLength(16)]),
+  });
   const { code, language } = parse(createSnippetSchema, {
     code: formData.get("code") || "",
     language: formData.get("language") || "plaintext",
   });
-  let slug = generate();
-  // eslint-disable-next-line no-await-in-loop -- Iterations are not independent
-  while (await slugExists(slug)) slug = generate();
-  await db.insert(codeSnippets).values({ slug, code: processCode(code), language });
+  const processedCode = processCode(code);
+  const [slug, shikiOutput] = await Promise.all([
+    getAvailableSlug(),
+    highlightCode(processedCode, language),
+  ]);
+  await db.insert(codeSnippets).values({ slug, code: processedCode, language, shikiOutput });
   redirect(`/p/${slug}`);
 }

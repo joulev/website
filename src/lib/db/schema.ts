@@ -28,6 +28,7 @@ export const codeSnippets = pgTable("code_snippets", {
   slug: varchar("slug", { length: 12 }).unique().notNull(),
   language: varchar("language", { length: 16 }).notNull(),
   code: varchar("code", { length: 65_536 }).notNull(),
+  shikiOutput: varchar("shiki_output", { length: 10_485_760 }).notNull(),
 });
 export type CodeSnippet = typeof codeSnippets.$inferSelect;
 export type NewCodeSnippet = typeof codeSnippets.$inferInsert;
