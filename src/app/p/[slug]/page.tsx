@@ -1,16 +1,18 @@
 import { eq } from "drizzle-orm";
 import { Code, Link, Plus } from "lucide-react";
 import type { Metadata } from "next";
+import { unstable_cache as cache } from "next/cache";
 import { notFound } from "next/navigation";
-import { cache } from "react";
-import { getHighlighter, toShikiTheme } from "shikiji";
+import { getWasmInlined, toShikiTheme } from "shikiji";
+import { getHighlighterCore } from "shikiji/core";
 
 import { CopyButton } from "~/components/copy-button";
 import { LinkButton } from "~/components/ui/button";
 import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
 import { env } from "~/env.mjs";
 import { db } from "~/lib/db";
-import { type CodeSnippet, codeSnippets } from "~/lib/db/schema";
+import { codeSnippets } from "~/lib/db/schema";
+import { supportedLanguages } from "~/lib/snippets/supported-languages";
 
 import type { PageProps, Params } from "./$types";
 
@@ -19,17 +21,21 @@ const getSnippet = cache(async (slug: string) => {
   return results.at(0);
 });
 
-async function highlightCodeSnippet(snippet: CodeSnippet) {
+const highlightCodeSnippet = cache(async (code: string, language: string) => {
   const themeJson: unknown = await fetch(env.EDITOR_THEME_URL).then(r => r.json());
   const theme = toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
-  const highlighter = await getHighlighter({ themes: [theme], langs: [snippet.language] });
-  return highlighter.codeToHtml(snippet.code, { theme: theme.name, lang: snippet.language });
-}
+  const highlighter = await getHighlighterCore({
+    themes: [theme],
+    langs: supportedLanguages.map(lang => lang.grammar),
+    loadWasm: getWasmInlined,
+  });
+  return highlighter.codeToHtml(code, { theme: theme.name, lang: language });
+});
 
 export default async function Page({ params }: PageProps) {
   const snippet = await getSnippet(params.slug);
   if (!snippet) notFound();
-  const html = await highlightCodeSnippet(snippet);
+  const html = await highlightCodeSnippet(snippet.code, snippet.language);
   return (
     <main className="container max-w-[100ch] py-18">
       <div className="card overflow-clip rounded-full bg-bg-darker backdrop-blur">
@@ -108,5 +114,4 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-export const runtime = "edge";
 export const revalidate = 0;
