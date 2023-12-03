@@ -62,7 +62,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <body
         className={cn(sans.variable, mono.variable, "bg-[#334155] font-sans text-text-primary")}
       >
-        <Background position={Math.random()} />
+        <Background />
         {children}
         <VersionFooter />
         <Analytics />

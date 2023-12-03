@@ -96,8 +96,8 @@ function getColour(index: number) {
   return tw[keys[index]][800];
 }
 
-export function Background({ position }: { position: number }) {
-  const [index, setIndex] = useState(Math.floor(position * keys.length));
+export function Background() {
+  const [index, setIndex] = useState(6);
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex(cur => (cur + 1 < keys.length ? cur + 1 : 0));
