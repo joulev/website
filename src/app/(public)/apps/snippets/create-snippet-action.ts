@@ -3,8 +3,6 @@
 import { init } from "@paralleldrive/cuid2";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import { readdir } from "node:fs/promises";
-import { join } from "node:path";
 import { getHighlighter, toShikiTheme } from "shikiji";
 import { maxLength, object, parse, string } from "valibot";
 
@@ -23,8 +21,6 @@ function processCode(code: string) {
 }
 
 async function highlightCode(code: string, language: string) {
-  const shikiPath = join(process.cwd(), "public", "vendored", "shiki");
-  void readdir(shikiPath);
   const themeJson: unknown = await fetch(env.EDITOR_THEME_URL).then(r => r.json());
   const theme = toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
   const highlighter = await getHighlighter({ themes: [theme], langs: [language] });
