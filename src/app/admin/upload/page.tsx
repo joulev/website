@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { cn } from "~/lib/cn";
 
@@ -22,26 +22,29 @@ export default function Page() {
   const [isDragOver, setIsDragOver] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  async function handleUpload(file: File) {
-    try {
-      setIsUploading(true);
-      const WE_MESSED_UP = new Error("Failed to upload, please try again.");
-      const getPresignedUrlRes = await fetch("/admin/upload/generate-presigned-url", {
-        method: "POST",
-      });
-      if (!getPresignedUrlRes.ok) throw WE_MESSED_UP;
-      const { url: presignedUrl, key } = (await getPresignedUrlRes.json()) as {
-        url: string;
-        key: string;
-      };
-      const uploadRes = await fetch(presignedUrl, { method: "PUT", body: file });
-      if (!uploadRes.ok) throw WE_MESSED_UP;
-      router.push(`/admin/upload/success?key=${key}`);
-    } catch (e) {
-      setError((e as Error).message);
-      setIsUploading(false);
-    }
-  }
+  const handleUpload = useCallback(
+    async (file: File) => {
+      try {
+        setIsUploading(true);
+        const WE_MESSED_UP = new Error("Failed to upload, please try again.");
+        const getPresignedUrlRes = await fetch("/admin/upload/generate-presigned-url", {
+          method: "POST",
+        });
+        if (!getPresignedUrlRes.ok) throw WE_MESSED_UP;
+        const { url: presignedUrl, key } = (await getPresignedUrlRes.json()) as {
+          url: string;
+          key: string;
+        };
+        const uploadRes = await fetch(presignedUrl, { method: "PUT", body: file });
+        if (!uploadRes.ok) throw WE_MESSED_UP;
+        router.push(`/admin/upload/success?key=${key}`);
+      } catch (e) {
+        setError((e as Error).message);
+        setIsUploading(false);
+      }
+    },
+    [router],
+  );
   useEffect(() => {
     async function onPaste(e: ClipboardEvent) {
       const file = e.clipboardData?.files[0];
@@ -50,7 +53,7 @@ export default function Page() {
     }
     window.addEventListener("paste", onPaste);
     return () => window.removeEventListener("paste", onPaste);
-  });
+  }, [handleUpload]);
   return (
     <>
       {isUploading ? (

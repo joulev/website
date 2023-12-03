@@ -103,7 +103,7 @@ export function Background({ position }: { position: number }) {
       setIndex(cur => (cur + 1 < keys.length ? cur + 1 : 0));
     }, SLIDE_DURATION);
     return () => clearInterval(interval);
-  });
+  }, []);
   // useEffect(() => {
   //   function onEnter() {
   //     setIndex(cur => (cur + 1 < keys.length ? cur + 1 : 0));
