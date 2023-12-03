@@ -2,10 +2,8 @@ import { eq } from "drizzle-orm";
 import { Code, Link, Plus } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { readdir } from "node:fs/promises";
-import { join } from "node:path";
 import { cache } from "react";
-import { type Lang, getHighlighter, toShikiTheme } from "shiki";
+import { getHighlighter, toShikiTheme } from "shikiji";
 
 import { CopyButton } from "~/components/copy-button";
 import { LinkButton } from "~/components/ui/button";
@@ -16,22 +14,15 @@ import { type CodeSnippet, codeSnippets } from "~/lib/db/schema";
 
 import type { PageProps, Params } from "./$types";
 
-const shikiPath = join(process.cwd(), "public", "vendored", "shiki");
-
 const getSnippet = cache(async (slug: string) => {
   const results = await db.select().from(codeSnippets).where(eq(codeSnippets.slug, slug)).limit(1);
   return results.at(0);
 });
 
 async function highlightCodeSnippet(snippet: CodeSnippet) {
-  void readdir(shikiPath);
   const themeJson: unknown = await fetch(env.EDITOR_THEME_URL).then(r => r.json());
   const theme = toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
-  const highlighter = await getHighlighter({
-    theme,
-    langs: [snippet.language as Lang],
-    paths: { languages: `${shikiPath}/languages` },
-  });
+  const highlighter = await getHighlighter({ themes: [theme], langs: [snippet.language] });
   return highlighter.codeToHtml(snippet.code, { theme: theme.name, lang: snippet.language });
 }
 
@@ -49,16 +40,14 @@ export default async function Page({ params }: PageProps) {
               <div className="h-3 w-3 rounded-full bg-text-tertiary" />
               <div className="h-3 w-3 rounded-full bg-text-tertiary" />
             </div>
-            <div className="flex cursor-default select-none flex-row text-text-secondary">
-              <div className="mr-3 border-r border-separator pr-3 max-md:hidden">
-                {snippet.slug}
-              </div>
+            <div className="flex cursor-default select-none flex-row text-text-secondary max-sm:hidden">
+              <div className="mr-3 border-r border-separator pr-3">{snippet.slug}</div>
               <div>{snippet.language}</div>
             </div>
           </div>
           <div className="flex flex-row gap-3">
             <CopyButton
-              className="[--button-gap:0.5rem] max-sm:hidden"
+              className="[--button-gap:0.5rem] max-md:hidden"
               content={snippet.code}
               variants={{ size: "sm" }}
               copyChildren={
@@ -109,10 +98,6 @@ export default async function Page({ params }: PageProps) {
   );
 }
 
-export function generateStaticParams(): Params[] {
-  return [];
-}
-
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const snippet = await getSnippet(params.slug);
   if (!snippet) return {};
@@ -123,6 +108,5 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-// TODO: Support the edge runtime by trying shikiji
-// export const runtime = "edge";
+export const runtime = "edge";
 export const revalidate = 0;
