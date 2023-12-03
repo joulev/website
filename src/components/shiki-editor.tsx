@@ -1,23 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  type Highlighter,
-  type IShikiTheme,
-  type Lang,
-  type Theme,
-  getHighlighter,
-  setCDN,
-  toShikiTheme,
-} from "shiki";
+import { type Highlighter, type ThemeRegistration, getHighlighter, toShikiTheme } from "shikiji";
 
 interface ShikiEditorProps {
   name: string;
   /**
-   * URL to the theme JSON, or one of the default theme
+   * URL to the theme JSON
    */
-  // eslint-disable-next-line @typescript-eslint/ban-types -- This is an IDE hack for autocompletion yet allowing all strings
-  theme: Theme | (string & {});
-  // eslint-disable-next-line @typescript-eslint/ban-types -- This is an IDE hack for autocompletion yet allowing all strings
-  language: Lang | (string & {});
+  theme: string;
+  language: string;
   tabSize?: number;
   value: string;
   onChange: React.Dispatch<React.SetStateAction<string>>;
@@ -25,22 +15,14 @@ interface ShikiEditorProps {
 
 interface Shiki {
   highlighter: Highlighter;
-  theme: IShikiTheme | Theme;
+  theme: ThemeRegistration;
 }
 
-setCDN("/vendored/shiki/");
+const preloadedLanguages = ["tsx", "css", "html", "json"];
 
-const preloadedLanguages: Lang[] = ["tsx", "css", "html", "json"];
-
-async function getShikiTheme(theme: string): Promise<IShikiTheme | Theme> {
-  try {
-    const url = new URL(theme, window.location.href);
-    const themeJson: unknown = await fetch(url).then(r => r.json());
-    return toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
-  } catch {
-    // not an url, then should be a theme
-    return theme as Theme;
-  }
+async function getShikiTheme(theme: string) {
+  const themeJson: unknown = await fetch(theme).then(r => r.json());
+  return toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
 }
 
 async function delay(ms: number): Promise<void> {
@@ -106,7 +88,10 @@ export function ShikiEditor({
   useEffect(() => {
     (async () => {
       const resolvedTheme = await getShikiTheme(theme);
-      const highlighter = await getHighlighter({ theme: resolvedTheme, langs: preloadedLanguages });
+      const highlighter = await getHighlighter({
+        themes: [resolvedTheme],
+        langs: preloadedLanguages,
+      });
       setShiki({ highlighter, theme: resolvedTheme });
     })().catch(() => setShiki(new Error()));
   }, [theme]);
@@ -122,7 +107,8 @@ export function ShikiEditor({
     void (async () => {
       setDisplayedLanguage("plaintext");
       try {
-        await shiki.highlighter.loadLanguage(language as Lang);
+        // @ts-expect-error -- It is a valid language, don't worry
+        await shiki.highlighter.loadLanguage(language);
         setLoadedLanguages([...loadedLanguages, language]);
         setDisplayedLanguage(language);
       } catch {
@@ -141,7 +127,7 @@ export function ShikiEditor({
               dangerouslySetInnerHTML={{
                 __html: shiki.highlighter.codeToHtml(`${value}\n`, {
                   lang: displayedLanguage,
-                  theme: typeof shiki.theme === "string" ? shiki.theme : shiki.theme.name,
+                  theme: shiki.theme.name,
                 }),
               }}
               className="[&_pre]:!bg-transparent [&_pre]:p-6 [&_pre]:pl-[60px]"

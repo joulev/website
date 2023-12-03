@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
-import { BUNDLED_LANGUAGES, type ILanguageRegistration, type Lang } from "shiki";
+import { bundledLanguages } from "shikiji";
 
 import { ShikiEditor } from "~/components/shiki-editor";
 import { Button } from "~/components/ui/button";
@@ -18,13 +18,7 @@ import {
 
 import { createSnippet } from "./create-snippet-action";
 
-function getDisplayNameOfLanguage(lang: ILanguageRegistration) {
-  return lang.displayName || lang.id;
-}
-
-const languages = BUNDLED_LANGUAGES.sort((a, b) =>
-  getDisplayNameOfLanguage(a).localeCompare(getDisplayNameOfLanguage(b)),
-);
+const languages = Object.keys(bundledLanguages);
 
 function SaveButton() {
   const { pending } = useFormStatus();
@@ -43,7 +37,7 @@ function SaveButton() {
 export function Editor() {
   const [code, setCode] = useState("");
   const [tabSize, setTabSize] = useState(2);
-  const [language, setLanguage] = useState<Lang>("tsx");
+  const [language, setLanguage] = useState("tsx");
   return (
     <form action={createSnippet} className="flex flex-col">
       <input type="hidden" name="language" value={language} />
@@ -57,7 +51,7 @@ export function Editor() {
       />
       <div className="flex flex-col gap-3 p-6 sm:flex-row sm:justify-between">
         <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-row">
-          <Select value={language} onValueChange={val => setLanguage(val as Lang)}>
+          <Select value={language} onValueChange={setLanguage}>
             <SelectTrigger className="w-full sm:w-48">
               <SelectValue placeholder="Select language" />
             </SelectTrigger>
@@ -66,8 +60,8 @@ export function Editor() {
                 <SelectLabel>Languages</SelectLabel>
                 <SelectItem value="plaintext">Plain text</SelectItem>
                 {languages.map(lang => (
-                  <SelectItem key={lang.id} value={lang.id}>
-                    {getDisplayNameOfLanguage(lang)}
+                  <SelectItem key={lang} value={lang}>
+                    {lang}
                   </SelectItem>
                 ))}
               </SelectGroup>
