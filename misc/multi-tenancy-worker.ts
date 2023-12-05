@@ -16,7 +16,9 @@ export default {
       case "irasuto":
       case "link":
       case "tategaki":
-        return getRedirectResponse(`https://joulev.dev/apps/${subdomain}${url.pathname}${url.search}`);
+        return getRedirectResponse(
+          `https://joulev.dev/apps/${subdomain}${url.pathname}${url.search}`,
+        );
       case "chat":
         return getRedirectResponse("https://joulev.dev/admin/chat");
       case "l":

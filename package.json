@@ -2,14 +2,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "pnpm codegen && next build",
+    "build": "pnpm download-fonts && pnpm codegen && next build",
     "codegen": "graphql-codegen --config codegen.ts",
     "db:push": "drizzle-kit push:pg",
-    "dev": "concurrently \"pnpm codegen --watch\" \"next dev\"",
+    "deploy-worker": "wrangler deploy misc/multi-tenancy-worker.ts --name multi-tenant-on-website --compatibility-date 2023-12-05",
+    "dev": "pnpm download-fonts && concurrently \"pnpm codegen --watch\" \"next dev\"",
+    "download-fonts": "./scripts/download-fonts.sh",
     "format": "prettier --write .",
     "lint": "next lint",
-    "start": "next start",
-    "deploy-worker": "wrangler deploy misc/multi-tenancy-worker.ts --name multi-tenant-on-website --compatibility-date 2023-12-05"
+    "start": "next start"
   },
   "dependencies": {
     "@auth/core": "0.18.4",

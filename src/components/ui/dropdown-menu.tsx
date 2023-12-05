@@ -137,7 +137,7 @@ export const DropdownMenuRadioItem = forwardRef<
     {...useHoverBackground({ style, onMouseMove })}
   >
     <DropdownMenuPrimitive.ItemIndicator>
-      <Circle className="fill-current !h-2 !w-2" />
+      <Circle className="!h-2 !w-2 fill-current" />
     </DropdownMenuPrimitive.ItemIndicator>
     <div className="h-2 w-2 group-data-[state=checked]/dropdown-checkbox:hidden" />
     {children}
