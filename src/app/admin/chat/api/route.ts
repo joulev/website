@@ -1,19 +1,19 @@
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { OpenAI } from "openai";
-import { any, array, enumType, object, optional, safeParse, string } from "valibot";
+import * as v from "valibot";
 
 import { env } from "~/env.mjs";
 import { getSession } from "~/lib/auth/helpers";
 
 const openai = new OpenAI({ apiKey: env.OPENAI_API_KEY });
 
-const bodySchema = object({
-  messages: array(
-    object({
-      id: optional(string()),
-      createdAt: optional(any()),
-      content: string(),
-      role: enumType(["system", "user", "assistant"]),
+const bodySchema = v.object({
+  messages: v.array(
+    v.object({
+      id: v.optional(v.string()),
+      createdAt: v.optional(v.any()),
+      content: v.string(),
+      role: v.picklist(["system", "user", "assistant"]),
     }),
   ),
 });
@@ -37,7 +37,7 @@ TypeScript by default, unless that person asks you to use a different programmin
 export async function POST(req: Request) {
   await getSession();
 
-  const result = safeParse(bodySchema, (await req.json()) as unknown);
+  const result = v.safeParse(bodySchema, (await req.json()) as unknown);
   if (!result.success) return Response.json({}, { status: 400 });
   const { messages } = result.output;
 

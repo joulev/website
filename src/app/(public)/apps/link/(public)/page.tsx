@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { is as vIs } from "valibot";
+import * as v from "valibot";
 
 import { Input } from "~/components/ui/input";
 
@@ -12,7 +12,7 @@ import { SubmitButton } from "./submit-button";
 export default function Page() {
   const [slug, setSlug] = useState("");
   const [url, setUrl] = useState("");
-  const isValid = vIs(publicCreateSchema, { slug: slug || undefined, url });
+  const isValid = v.is(publicCreateSchema, { slug: slug || undefined, url });
   return (
     <form action={publicCreateLink} className="flex flex-col gap-6 p-6">
       <div className="flex flex-row items-center gap-3">

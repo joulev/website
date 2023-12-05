@@ -1,4 +1,4 @@
-import { number, object, parse, string } from "valibot";
+import * as v from "valibot";
 
 import type { MediaTitle } from "~/lib/gql/graphql";
 
@@ -26,7 +26,7 @@ function parseJwt(tok: string): unknown {
 }
 export function isCorrectUser(token: string) {
   try {
-    const { sub, exp } = parse(object({ sub: string(), exp: number() }), parseJwt(token));
+    const { sub, exp } = v.parse(v.object({ sub: v.string(), exp: v.number() }), parseJwt(token));
     return sub === "858763" && exp > Date.now() / 1000;
   } catch {
     return false;

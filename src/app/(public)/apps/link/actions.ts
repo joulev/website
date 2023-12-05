@@ -3,7 +3,7 @@
 import { init } from "@paralleldrive/cuid2";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import { parse } from "valibot";
+import * as v from "valibot";
 
 import { db } from "~/lib/db";
 import { shortLinks } from "~/lib/db/schema";
@@ -18,7 +18,7 @@ async function slugExists(slug: string) {
 }
 
 export async function publicCreateLink(formData: FormData) {
-  const { slug: rawSlug, url } = parse(publicCreateSchema, {
+  const { slug: rawSlug, url } = v.parse(publicCreateSchema, {
     slug: formData.get("slug") || undefined,
     url: formData.get("url"),
   });

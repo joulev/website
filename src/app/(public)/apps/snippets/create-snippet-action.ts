@@ -4,7 +4,7 @@ import { init } from "@paralleldrive/cuid2";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { getHighlighter, toShikiTheme } from "shikiji";
-import { maxLength, object, parse, string } from "valibot";
+import * as v from "valibot";
 
 import { env } from "~/env.mjs";
 import { db } from "~/lib/db";
@@ -36,11 +36,11 @@ async function getAvailableSlug() {
 }
 
 export async function createSnippet(formData: FormData) {
-  const createSnippetSchema = object({
-    code: string([maxLength(65_536)]),
-    language: string([maxLength(16)]),
+  const createSnippetSchema = v.object({
+    code: v.string([v.maxLength(65_536)]),
+    language: v.string([v.maxLength(16)]),
   });
-  const { code, language } = parse(createSnippetSchema, {
+  const { code, language } = v.parse(createSnippetSchema, {
     code: formData.get("code") || "",
     language: formData.get("language") || "plaintext",
   });

@@ -1,6 +1,6 @@
-import { maxLength, minLength, object, optional, regex, string, url } from "valibot";
+import * as v from "valibot";
 
-export const publicCreateSchema = object({
-  slug: optional(string([regex(/[a-zA-Z0-9-_]+/), minLength(1), maxLength(256)])),
-  url: string([url(), maxLength(4096)]),
+export const publicCreateSchema = v.object({
+  slug: v.optional(v.string([v.regex(/[a-zA-Z0-9-_]+/), v.minLength(1), v.maxLength(256)])),
+  url: v.string([v.url(), v.maxLength(4096)]),
 });
