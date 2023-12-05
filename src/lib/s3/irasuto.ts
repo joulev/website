@@ -1,4 +1,5 @@
 import { DeleteObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 import { BUCKET, S3 } from "./client";
 
@@ -27,10 +28,17 @@ export async function uploadPhotoToR2(twitterImageUrl: string, tweetUrl: string)
 }
 
 export async function removePhotoFromR2(storageKey: string) {
-  const result = await S3.send(
+  // The following doesn't work on the edge runtime
+  // https://github.com/aws/aws-sdk-js-v3/issues/4765
+  // const result = await S3.send(
+  //   new DeleteObjectCommand({ Bucket: BUCKET, Key: `irasuto/${storageKey}` }),
+  // );
+  const url = await getSignedUrl(
+    S3,
     new DeleteObjectCommand({ Bucket: BUCKET, Key: `irasuto/${storageKey}` }),
+    { expiresIn: 60 },
   );
+  const result = await fetch(url, { method: "DELETE" });
 
-  if (Number(result.$metadata.httpStatusCode) >= 400)
-    throw new Error(`Failed to remove photo for id=${storageKey}`);
+  if (!result.ok) throw new Error(`Failed to remove photo for id=${storageKey}`);
 }
