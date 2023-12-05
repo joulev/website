@@ -201,10 +201,10 @@ function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCard
     case "planning":
       return (
         <BottomPartTemplate text={season}>
-          <Button variants={{ size: "icon-sm" }} onClick={remove}>
+          <Button variants={{ size: "icon-sm" }} onClick={setAsWatching}>
             <Play />
           </Button>
-          <Button variants={{ size: "icon-sm" }} onClick={setAsRewatching}>
+          <Button variants={{ size: "icon-sm" }} onClick={remove}>
             <Trash />
           </Button>
         </BottomPartTemplate>

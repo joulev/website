@@ -1,8 +1,8 @@
 "use client";
 
-import { Plus } from "lucide-react";
+import { ExternalLink, Plus } from "lucide-react";
 
-import { Button } from "~/components/ui/button";
+import { Button, LinkButton } from "~/components/ui/button";
 import { addToPTW } from "~/lib/anime/actions";
 import { useTransitionWithNProgress } from "~/lib/hooks/use-transition-with-nprogress";
 
@@ -14,6 +14,9 @@ export function ActionButtons({ id }: { id: number }) {
       <Button variants={{ size: "icon-sm" }} onClick={add}>
         <Plus />
       </Button>
+      <LinkButton variants={{ size: "icon-sm" }} href={`https://anilist.co/anime/${id}`}>
+        <ExternalLink />
+      </LinkButton>
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import { type GraphQLClient } from "graphql-request";
 import { revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 import { type AnimeListItem } from "~/lib/anime/get-lists";
 import {
@@ -18,11 +19,13 @@ import { MediaListStatus } from "~/lib/gql/graphql";
 
 function generateAction<T extends unknown[] = []>(
   callback: (client: GraphQLClient, ...data: T) => Promise<void>,
+  redirectTo?: string,
 ): (...data: T) => Promise<void> {
   return async (...args: T) => {
     const client = await getAuthenticatedGraphQLClient();
     await callback(client, ...args);
     revalidateTag("anime-lists");
+    if (redirectTo) redirect(redirectTo);
   };
 }
 
@@ -54,4 +57,4 @@ export const removeFromList = generateAction(async (client, item: AnimeListItem)
 
 export const addToPTW = generateAction(async (client, itemId: number) => {
   await client.request(ADD_ANIME, { mediaId: itemId });
-});
+}, "/admin/manage/anime/planning");

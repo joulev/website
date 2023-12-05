@@ -1,6 +1,5 @@
 import { EmptyState } from "~/components/anime/empty-state";
 import { Score } from "~/components/anime/score";
-import { Link } from "~/components/ui/link";
 import { List, ListContent, ListItem } from "~/components/ui/lists";
 import { getAllLists } from "~/lib/anime/get-lists";
 import { SEARCH_ANIME } from "~/lib/anime/queries";
@@ -41,31 +40,29 @@ export default async function Page({ searchParams }: PageProps) {
           <ListContent>
             {items.map(item =>
               item ? (
-                <ListItem asChild key={item.id}>
-                  <Link href={`https://anilist.co/anime/${item.id}`} unstyled>
-                    <div className="flex w-full flex-col gap-1.5">
-                      <div className="truncate">{getTitle(item.title)}</div>
-                      <div className="flex flex-row flex-wrap items-end gap-x-3">
-                        <div className="flex flex-grow flex-row items-center divide-x divide-separator text-sm text-text-secondary">
-                          <Score
-                            score={item.meanScore ? item.meanScore / 10 : undefined}
-                            className="pr-3"
-                          />
-                          <div className="hidden pl-3 sm:block">
-                            {/* eslint-disable-next-line no-nested-ternary -- It's fine */}
-                            {item.genres && item.genres.length > 0 ? (
-                              <>{item.genres.slice(0, 3).join(", ")}</>
-                            ) : item.season && item.seasonYear ? (
-                              `${convertSeason(item.season)} ${item.seasonYear}`
-                            ) : (
-                              "Season N/A"
-                            )}
-                          </div>
+                <ListItem key={item.id}>
+                  <div className="flex w-full flex-col gap-1.5">
+                    <div className="truncate">{getTitle(item.title)}</div>
+                    <div className="flex flex-row flex-wrap items-end gap-x-3">
+                      <div className="flex flex-grow flex-row items-center divide-x divide-separator text-sm text-text-secondary">
+                        <Score
+                          score={item.meanScore ? item.meanScore / 10 : undefined}
+                          className="pr-3"
+                        />
+                        <div className="hidden pl-3 sm:block">
+                          {/* eslint-disable-next-line no-nested-ternary -- It's fine */}
+                          {item.genres && item.genres.length > 0 ? (
+                            <>{item.genres.slice(0, 3).join(", ")}</>
+                          ) : item.season && item.seasonYear ? (
+                            `${convertSeason(item.season)} ${item.seasonYear}`
+                          ) : (
+                            "Season N/A"
+                          )}
                         </div>
-                        <ActionButtons id={item.id} />
                       </div>
+                      <ActionButtons id={item.id} />
                     </div>
-                  </Link>
+                  </div>
                 </ListItem>
               ) : null,
             )}
