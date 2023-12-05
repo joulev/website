@@ -202,6 +202,9 @@ dependencies:
   valibot:
     specifier: 0.22.0
     version: 0.22.0
+  wrangler:
+    specifier: 3.18.0
+    version: 3.18.0
   ytmusic-api:
     specifier: 4.4.0
     version: 4.4.0(patch_hash=f3kahw6eczgoujoh5s4zhwljd4)
@@ -6351,7 +6354,7 @@ packages:
       json-diff: 0.9.0
       minimatch: 7.4.6
       semver: 7.5.4
-      wrangler: 3.17.1
+      wrangler: 3.18.0
       zod: 3.22.4
     transitivePeerDependencies:
       - bufferutil
@@ -9088,8 +9091,8 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
-  /miniflare@3.20231030.1:
-    resolution: {integrity: sha512-Y+EkgV/aFg/3Y/xfFtImK36sLZGXvNS45avVEz0cUCA2pGpg4hGdPu1Udmz5b06SyeUEFVf/dEDMJwdRYVEgLw==}
+  /miniflare@3.20231030.2:
+    resolution: {integrity: sha512-+DYdMqWlUaY4wBylIjewNu8OVsPFquYjQkxoSb2jGIMBmlKaef65Hn2Bu8sub5tQzQ8tLO0FRklmD2Upx0HCCQ==}
     engines: {node: '>=16.13'}
     hasBin: true
     dependencies:
@@ -11567,8 +11570,8 @@ packages:
       '@cloudflare/workerd-windows-64': 1.20231030.0
     dev: false
 
-  /wrangler@3.17.1:
-    resolution: {integrity: sha512-Pr9+/tjFkthzG63uoVm1NtVvgokT6p92fy1UsOgrntHyTu0pZMC1VJzG0NC8Vhs+z/+yTT8AqVV6AiJb3w8ZOQ==}
+  /wrangler@3.18.0:
+    resolution: {integrity: sha512-3UrmldsD84JDBa7HRZ5ACFr1nH+ZZs+Hth37Iv/mAaW2DiQOGcrevKwn4dofmTQO2qYP01u1vtfVJxLM0mq+1w==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     dependencies:
@@ -11578,7 +11581,7 @@ packages:
       blake3-wasm: 2.1.5
       chokidar: 3.5.3
       esbuild: 0.17.19
-      miniflare: 3.20231030.1
+      miniflare: 3.20231030.2
       nanoid: 3.3.7
       path-to-regexp: 6.2.1
       resolve.exports: 2.0.2
