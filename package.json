@@ -9,7 +9,7 @@
     "format": "prettier --write .",
     "lint": "next lint",
     "start": "next start",
-    "deploy-worker": "wrangler deploy misc/multi-tenancy-worker.ts --name multi-tenant-on-website"
+    "deploy-worker": "wrangler deploy misc/multi-tenancy-worker.ts --name multi-tenant-on-website --compatibility-date 2023-12-05"
   },
   "dependencies": {
     "@auth/core": "0.18.4",
