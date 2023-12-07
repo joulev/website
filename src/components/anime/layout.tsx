@@ -6,6 +6,7 @@ import {
   PlayCircle,
   PlusCircle,
   Repeat,
+  RotateCcw,
   Tv2,
   XCircle,
 } from "lucide-react";
@@ -28,7 +29,12 @@ function getNavbarItems(
     { icon: <PauseCircle />, status: "paused", count: lists.paused.length },
     { icon: <XCircle />, status: "dropped", count: lists.dropped.length },
     { icon: <Calendar />, status: "planning", count: lists.planning.length },
-    ...(isAdmin ? [{ icon: <PlusCircle />, status: "add-to-ptw" }] : []),
+    ...(isAdmin
+      ? [
+          { icon: <PlusCircle />, status: "add-to-ptw" },
+          { icon: <RotateCcw />, status: "refresh" },
+        ]
+      : []),
   ];
 }
 

@@ -14,7 +14,9 @@ import {
   SidebarSectionItemName,
   SidebarSectionItems,
 } from "~/components/ui/sidebar";
+import { forceRefresh } from "~/lib/anime/actions";
 import { getListTitleFromStatus } from "~/lib/anime/utils";
+import { useTransitionWithNProgress } from "~/lib/hooks/use-transition-with-nprogress";
 
 interface Item {
   icon: React.ReactNode;
@@ -24,27 +26,53 @@ interface Item {
 
 function Navigation({ basePath, items }: { basePath: string; items: Item[] }) {
   const pathname = usePathname();
+  const startTransition = useTransitionWithNProgress();
+  const refresh = () => startTransition(forceRefresh);
   return (
     <SidebarSection>
       <SidebarSectionItems>
-        {items.map(({ icon, status, count }) => (
-          <SidebarSectionItem
-            key={status}
-            active={
-              `${basePath}/${status}` === pathname ||
-              (status === "watching" && pathname === basePath)
-            }
-            asChild
-          >
-            <Link href={`${basePath}/${status}`} unstyled>
-              {icon}
-              <SidebarSectionItemName>
-                {status === "add-to-ptw" ? "Add to PTW" : getListTitleFromStatus(status)}
-              </SidebarSectionItemName>
-              {count ? <SidebarSectionItemCounter>{count}</SidebarSectionItemCounter> : null}
-            </Link>
-          </SidebarSectionItem>
-        ))}
+        {items.map(({ icon, status, count }) => {
+          if (status === "add-to-ptw") {
+            return (
+              <SidebarSectionItem
+                key={status}
+                active={`${basePath}/${status}` === pathname}
+                asChild
+              >
+                <Link href={`${basePath}/${status}`} unstyled>
+                  {icon}
+                  <SidebarSectionItemName>Add to PTW</SidebarSectionItemName>
+                </Link>
+              </SidebarSectionItem>
+            );
+          }
+          if (status === "refresh") {
+            return (
+              <SidebarSectionItem key={status} asChild>
+                <button type="button" className="text-left" onClick={refresh}>
+                  {icon}
+                  <SidebarSectionItemName>Force-refresh</SidebarSectionItemName>
+                </button>
+              </SidebarSectionItem>
+            );
+          }
+          return (
+            <SidebarSectionItem
+              key={status}
+              active={
+                `${basePath}/${status}` === pathname ||
+                (status === "watching" && pathname === basePath)
+              }
+              asChild
+            >
+              <Link href={`${basePath}/${status}`} unstyled>
+                {icon}
+                <SidebarSectionItemName>{getListTitleFromStatus(status)}</SidebarSectionItemName>
+                {count ? <SidebarSectionItemCounter>{count}</SidebarSectionItemCounter> : null}
+              </Link>
+            </SidebarSectionItem>
+          );
+        })}
       </SidebarSectionItems>
     </SidebarSection>
   );
