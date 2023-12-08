@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Github } from "lucide-react";
 import type { Metadata } from "next";
 import { AxiomWebVitals } from "next-axiom";
@@ -50,6 +51,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <VersionFooter />
         <Analytics />
+        <SpeedInsights />
         <AxiomWebVitals />
       </body>
     </html>
