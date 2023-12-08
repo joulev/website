@@ -3,7 +3,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Github } from "lucide-react";
 import type { Metadata } from "next";
 import { AxiomWebVitals } from "next-axiom";
-import { Hanken_Grotesk as HankenGrotesk } from "next/font/google";
+import { Quattrocento_Sans as QuattrocentoSans } from "next/font/google";
 import localFont from "next/font/local";
 
 import { Link } from "~/components/ui/link";
@@ -12,7 +12,7 @@ import { cn } from "~/lib/cn";
 import { Background } from "./background";
 import "./globals.css";
 
-const sans = HankenGrotesk({ subsets: ["latin"], variable: "--sans" });
+const sans = QuattrocentoSans({ subsets: ["latin"], weight: ["400", "700"], variable: "--sans" });
 const mono = localFont({
   src: [
     { path: "../../.fonts/ia-writer-mono/regular.woff2", weight: "normal", style: "normal" },

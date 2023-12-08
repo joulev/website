@@ -42,10 +42,10 @@ export async function getOpengraphImage({ title, subtitle }: { title: string; su
       fonts: await Promise.all(
         ([400, 700] as const).map(async weight => {
           const fontRes = await fetch(
-            `https://cdn.jsdelivr.net/fontsource/fonts/hanken-grotesk@latest/latin-${weight}-normal.woff`,
+            `https://cdn.jsdelivr.net/fontsource/fonts/quattrocento-sans@latest/latin-${weight}-normal.woff`,
           );
           const font = await fontRes.arrayBuffer();
-          return { name: "Hanken Grotesk", data: font, style: "normal", weight };
+          return { name: "quattrocento-sans", data: font, style: "normal", weight };
         }),
       ),
     },
