@@ -21,7 +21,7 @@ export function NavigateButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button>
+        <Button className="w-full sm:w-auto">
           <ArrowDownUp />
           {pathname === "/apps/irasuto" ? "Sorted by newest first" : "Randomised"}
           <ChevronDown />
