@@ -1,9 +1,9 @@
 "use client";
 
-import { ArrowDownUp, ChevronDown } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { startTransition } from "react";
 
+import { ArrowDownUp, ChevronDown } from "~/components/icons";
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,

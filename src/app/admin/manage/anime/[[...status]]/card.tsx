@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import {
   Move3d as Animation,
   User as Character,
@@ -14,9 +16,7 @@ import {
   AlignJustify as Story,
   Trash,
   X,
-} from "lucide-react";
-import { useState } from "react";
-
+} from "~/components/icons";
 import { Button } from "~/components/ui/button";
 import {
   Dialog,

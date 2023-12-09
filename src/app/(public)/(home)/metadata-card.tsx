@@ -1,5 +1,3 @@
-import type { LucideIcon } from "lucide-react";
-
 import { LinkButton } from "~/components/ui/button";
 
 export function MetadataCard({
@@ -12,7 +10,7 @@ export function MetadataCard({
   left: React.ReactNode;
   right: React.ReactNode;
   title: string;
-  icon: LucideIcon;
+  icon: (props: React.ComponentProps<"svg">) => JSX.Element;
   href: string;
 }) {
   return (

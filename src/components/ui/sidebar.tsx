@@ -1,9 +1,9 @@
 "use client";
 
 import { Slot } from "@radix-ui/react-slot";
-import { ChevronDown } from "lucide-react";
 import { forwardRef, useCallback, useState } from "react";
 
+import { ChevronDown } from "~/components/icons";
 import { cn } from "~/lib/cn";
 import { generateContext } from "~/lib/hooks/generate-context";
 import type { BaseProps } from "~/types/utils";

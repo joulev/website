@@ -1,11 +1,11 @@
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Github } from "lucide-react";
 import type { Metadata } from "next";
 import { AxiomWebVitals } from "next-axiom";
 import { Quattrocento_Sans as QuattrocentoSans } from "next/font/google";
 import localFont from "next/font/local";
 
+import { GitHub } from "~/components/icons";
 import { Link } from "~/components/ui/link";
 import { cn } from "~/lib/cn";
 
@@ -34,7 +34,7 @@ function VersionFooter() {
   return (
     <footer className="px-6 pb-12 text-center text-xs text-text-tertiary">
       <Link unstyled href={url} className="transition hover:text-text-secondary">
-        <Github className="inline h-3 w-3" /> joulev/website@
+        <GitHub className="inline h-3 w-3" /> joulev/website@
         <span className="font-mono">{label}</span>
       </Link>
     </footer>

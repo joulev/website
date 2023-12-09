@@ -1,6 +1,6 @@
-import { PlayCircle } from "lucide-react";
 import YTMusic from "ytmusic-api";
 
+import { PlayCircle } from "~/components/icons";
 import { env } from "~/env.mjs";
 
 import { MetadataCard } from "./metadata-card";

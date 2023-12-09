@@ -1,5 +1,4 @@
-import { Trash } from "lucide-react";
-
+import { Trash } from "~/components/icons";
 import { Button } from "~/components/ui/button";
 import { removePhoto } from "~/lib/irasuto/remove-photo";
 

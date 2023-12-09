@@ -1,8 +1,8 @@
 import { eq } from "drizzle-orm";
-import { ExternalLink, Pen, Plus } from "lucide-react";
 import { unstable_cache as cache } from "next/cache";
 
 import { CopyButton } from "~/components/copy-button";
+import { ExternalLink, Pencil, Plus } from "~/components/icons";
 import { Title } from "~/components/title";
 import { Button, LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
@@ -58,7 +58,7 @@ export default async function Page() {
                   />
                   <LinkUpdateModal link={link}>
                     <Button variants={{ size: "sm" }}>
-                      <Pen /> Edit
+                      <Pencil /> Edit
                     </Button>
                   </LinkUpdateModal>
                 </div>

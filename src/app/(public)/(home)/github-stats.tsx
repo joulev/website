@@ -1,5 +1,6 @@
-import { Github } from "lucide-react";
 import { unstable_cache as cache } from "next/cache";
+
+import { GitHub } from "~/components/icons";
 
 import { MetadataCard } from "./metadata-card";
 import { octokit } from "./octokit";
@@ -104,7 +105,7 @@ export async function GitHubStats() {
         </div>
       }
       title="GitHub Stats"
-      icon={Github}
+      icon={GitHub}
       href="https://github.com/joulev"
     />
   );

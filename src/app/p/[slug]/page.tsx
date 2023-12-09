@@ -1,10 +1,10 @@
 import { eq } from "drizzle-orm";
-import { Code, Link, Plus } from "lucide-react";
 import type { Metadata } from "next";
 import { unstable_cache as cache } from "next/cache";
 import { notFound } from "next/navigation";
 
 import { CopyButton } from "~/components/copy-button";
+import { Code, Link, Plus } from "~/components/icons";
 import { LinkButton } from "~/components/ui/button";
 import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
 import { db } from "~/lib/db";

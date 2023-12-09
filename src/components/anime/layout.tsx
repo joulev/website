@@ -9,8 +9,7 @@ import {
   RotateCcw,
   Tv2,
   XCircle,
-} from "lucide-react";
-
+} from "~/components/icons";
 import { Card } from "~/components/ui/card";
 import { getAllLists } from "~/lib/anime/get-lists";
 

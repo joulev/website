@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import {
   Atom,
   ChevronDown,
@@ -6,8 +8,8 @@ import {
   CreditCard,
   FlaskConical,
   Gamepad2,
-  Github,
-  ListIcon,
+  GitHub,
+  List as ListIcon,
   LogOut,
   Mail,
   MessageSquare,
@@ -17,9 +19,7 @@ import {
   Swords,
   User,
   UserPlus,
-} from "lucide-react";
-import type { Metadata } from "next";
-
+} from "~/components/icons";
 import { Title } from "~/components/title";
 import { Button, LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
@@ -566,7 +566,7 @@ export default function Page() {
           href="https://github.com/joulev/website/tree/main/src/components/ui"
           variants={{ variant: "primary" }}
         >
-          <Github />
+          <GitHub />
           See the components on GitHub
         </LinkButton>
       </section>

@@ -1,8 +1,8 @@
 "use client";
 
-import { X } from "lucide-react";
 import { forwardRef, useCallback } from "react";
 
+import { X } from "~/components/icons";
 import { cn } from "~/lib/cn";
 
 import { Button } from "./button";

@@ -1,8 +1,8 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
+import { ChevronDown } from "~/components/icons";
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,

@@ -1,8 +1,8 @@
-import { ChevronRight, Github, Mail } from "lucide-react";
 import { type Metadata } from "next";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+import { ChevronRight, GitHub, Mail } from "~/components/icons";
 import { LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
@@ -37,7 +37,7 @@ export default function Page() {
           </div>
           <div className="flex flex-row gap-3">
             <LinkButton href="https://github.com/joulev" target="_blank" rel="noreferrer noopener">
-              <Github /> GitHub
+              <GitHub /> GitHub
             </LinkButton>
             <LinkButton href="mailto:me@joulev.dev" target="_blank" rel="noreferrer noopener">
               <Mail /> Email

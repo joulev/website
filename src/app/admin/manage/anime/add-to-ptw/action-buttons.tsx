@@ -1,7 +1,6 @@
 "use client";
 
-import { ExternalLink, Plus } from "lucide-react";
-
+import { ExternalLink, Plus } from "~/components/icons";
 import { Button, LinkButton } from "~/components/ui/button";
 import { addToPTW } from "~/lib/anime/actions";
 import { useTransitionWithNProgress } from "~/lib/hooks/use-transition-with-nprogress";

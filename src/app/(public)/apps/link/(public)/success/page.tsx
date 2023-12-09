@@ -1,7 +1,7 @@
-import { Plus } from "lucide-react";
 import { redirect } from "next/navigation";
 
 import { CopyButton } from "~/components/copy-button";
+import { Plus } from "~/components/icons";
 import { LinkButton } from "~/components/ui/button";
 import { Link } from "~/components/ui/link";
 

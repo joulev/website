@@ -1,9 +1,9 @@
 "use client";
 
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
-import { ChevronDown } from "lucide-react";
 import { forwardRef } from "react";
 
+import { ChevronDown } from "~/components/icons";
 import { cn } from "~/lib/cn";
 
 import { useHoverBackground } from "./hooks/use-hover-background";
