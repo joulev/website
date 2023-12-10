@@ -68,6 +68,12 @@ const config: Config = {
           },
         },
       },
+      screens: {
+        "blog-lg": "1150px",
+      },
+      maxWidth: {
+        prose: "700px", // avoid this being influenced by text size
+      },
     },
   },
   plugins: [animate, typography],

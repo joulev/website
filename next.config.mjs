@@ -1,5 +1,6 @@
 // @ts-check
 import { withAxiom } from "next-axiom";
+import { withContentlayer } from "next-contentlayer";
 import { withNextJSRouteTypes } from "nextjs-route-types";
 
 import { env } from "./src/env.mjs";
@@ -29,4 +30,4 @@ const nextConfig = {
   ],
 };
 
-export default withAxiom(withNextJSRouteTypes(nextConfig));
+export default withContentlayer(withAxiom(withNextJSRouteTypes(nextConfig)));
