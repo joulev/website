@@ -37,6 +37,9 @@ dependencies:
   '@neondatabase/serverless':
     specifier: 0.6.0
     version: 0.6.0
+  '@octokit/types':
+    specifier: 12.4.0
+    version: 12.4.0
   '@paralleldrive/cuid2':
     specifier: 2.2.2
     version: 2.2.2

@@ -1,4 +1,4 @@
-import { octokit } from "./octokit";
+import { octokit } from "~/lib/octokit";
 
 export async function getGithubReadme() {
   const { data } = await octokit.rest.repos.getContent({

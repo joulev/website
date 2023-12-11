@@ -1,9 +1,9 @@
 import { unstable_cache as cache } from "next/cache";
 
 import { GitHub } from "~/components/icons";
+import { octokit } from "~/lib/octokit";
 
 import { MetadataCard } from "./metadata-card";
-import { octokit } from "./octokit";
 
 // Taken from https://github.com/anuraghazra/github-readme-stats
 const getStats = cache(

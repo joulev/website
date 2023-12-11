@@ -22,6 +22,7 @@
     "@graphql-typed-document-node/core": "3.2.0",
     "@mdx-js/mdx": "3.0.0",
     "@neondatabase/serverless": "0.6.0",
+    "@octokit/types": "12.4.0",
     "@paralleldrive/cuid2": "2.2.2",
     "@parcel/watcher": "2.3.0",
     "@radix-ui/react-dialog": "1.0.5",

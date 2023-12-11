@@ -1,4 +1,6 @@
 import { type Fragment, type Jsx, run } from "@mdx-js/mdx";
+import type { GetResponseDataTypeFromEndpointMethod } from "@octokit/types";
+import { cache } from "react";
 import { Balancer } from "react-wrap-balancer";
 import * as brokenRuntime from "react/jsx-runtime";
 
@@ -7,6 +9,7 @@ import { Check, Share } from "~/components/icons";
 import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
 import { getAllSlugs, getPost } from "~/lib/blogs";
+import { octokit } from "~/lib/octokit";
 
 import type { PageProps, Params } from "./$types";
 import { Figure, Pre } from "./components";
@@ -15,12 +18,27 @@ import { Figure, Pre } from "./components";
 // https://github.com/mdx-js/mdx/pull/2383
 const runtime: { Fragment: Fragment; jsx: Jsx; jsxs: Jsx } = brokenRuntime;
 
-function getGitHubData(slug: string) {
-  return {
-    updatedTimes: 3,
-    lastUpdated: new Date("2023-12-10"),
-  };
-}
+const getGitHubData = cache(async (slug: string) => {
+  let page = 1;
+  const commits: GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.repos.listCommits> = [];
+  const PER_PAGE = 100;
+  while (true) {
+    // eslint-disable-next-line no-await-in-loop -- Loops are not independent
+    const response = await octokit.rest.repos.listCommits({
+      owner: "joulev",
+      repo: "website",
+      path: `contents/blogs/${slug}.mdx`,
+      per_page: PER_PAGE,
+      page,
+    });
+    commits.concat(response.data);
+    if (response.data.length < PER_PAGE) break;
+    page++;
+  }
+  const updatedTimes = commits.length;
+  const lastUpdated = new Date(commits.at(0)?.commit.author?.date ?? new Date());
+  return { updatedTimes, lastUpdated };
+});
 
 function formatTime(date: Date) {
   // "10 December 2023"
