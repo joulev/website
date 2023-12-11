@@ -4,10 +4,8 @@ import { Share } from "~/components/icons";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
-import { cn } from "~/lib/cn";
 
 import type { LayoutProps } from "./$types";
-import styles from "./prose.module.css";
 
 export default function Layout({ children, title }: LayoutProps & { title: string }) {
   return (
@@ -38,7 +36,9 @@ export default function Layout({ children, title }: LayoutProps & { title: strin
           </div>
         </div>
         <div className="flex flex-col divide-y divide-separator blog-lg:flex-row blog-lg:divide-x blog-lg:divide-y-0">
-          <div className={cn("p-6 blog-lg:p-12", styles.proseWrapper)}>{children}</div>
+          <div className="prose -my-6 max-w-none p-6 blog-lg:p-12 [&>*]:mx-auto [&>*]:max-w-prose">
+            {children}
+          </div>
           <div className="flex flex-col p-6 text-text-secondary blog-lg:p-12">
             <div className="flex-grow max-blog-lg:hidden" />
             <div className="sticky bottom-12 mx-auto hidden max-w-prose flex-col gap-3 blog-lg:flex [&_div]:text-sm">
