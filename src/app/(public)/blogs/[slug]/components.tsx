@@ -1,3 +1,5 @@
+import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
+
 export function Figure(props: React.ComponentProps<"figure">) {
   return (
     <figure
@@ -8,5 +10,10 @@ export function Figure(props: React.ComponentProps<"figure">) {
 }
 
 export function Pre(props: React.ComponentProps<"pre">) {
-  return <pre {...props} className="mx-auto max-w-prose rounded-none bg-transparent px-0 py-3" />;
+  return (
+    <ScrollArea className="mx-auto max-w-prose overflow-x-auto px-0 py-3">
+      <pre {...props} className="m-0 rounded-none bg-transparent p-0" />
+      <ScrollBar orientation="horizontal" />
+    </ScrollArea>
+  );
 }
