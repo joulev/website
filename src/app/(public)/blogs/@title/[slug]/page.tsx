@@ -1,18 +1,15 @@
-import { allBlogPosts } from "contentlayer/generated";
-import { notFound } from "next/navigation";
+import { getAllSlugs, getPost } from "~/lib/blogs";
 
 import type { PageProps, Params } from "./$types";
 
-export default function Page({ params }: PageProps) {
-  const post = allBlogPosts.find(p => p._raw.flattenedPath === params.slug);
-  if (!post) notFound();
-  return post.title;
+export default async function Page({ params }: PageProps) {
+  const { title } = await getPost(params.slug);
+  return title;
 }
 
-export function generateMetadata({ params }: { params: Params }) {
-  const post = allBlogPosts.find(p => p._raw.flattenedPath === params.slug);
-  if (!post) return {};
-  return { title: post.title };
+export async function generateStaticParams(): Promise<Params[]> {
+  const slugs = await getAllSlugs();
+  return slugs.map(slug => ({ slug }));
 }
 
 export const dynamicParams = false;

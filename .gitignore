@@ -38,4 +38,3 @@ next-env.d.ts
 .next-types
 src/lib/gql
 .fonts
-.contentlayer
