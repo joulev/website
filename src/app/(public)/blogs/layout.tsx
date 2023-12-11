@@ -1,11 +1,9 @@
 import { Balancer } from "react-wrap-balancer";
 
-import { Share } from "~/components/icons";
-import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
-import { Link } from "~/components/ui/link";
 
 import type { LayoutProps } from "./$types";
+import { ArticleCopyButton, ViewHistoryLink, ViewSourceLink } from "./client-buttons";
 
 export default function Layout({ children, title }: LayoutProps & { title: string }) {
   return (
@@ -27,9 +25,7 @@ export default function Layout({ children, title }: LayoutProps & { title: strin
             </h1>
             <div className="flex flex-row items-center">
               <div className="mr-4 flex flex-row gap-3 border-r border-separator pr-4">
-                <Button variants={{ size: "sm" }}>
-                  <Share /> Share
-                </Button>
+                <ArticleCopyButton />
               </div>
               <div className="text-sm text-text-secondary">Posted 10 December 2023</div>
             </div>
@@ -45,9 +41,9 @@ export default function Layout({ children, title }: LayoutProps & { title: strin
               <div>This article was edited 3 times</div>
               <div>Last updated: 10 December 2023</div>
               <div className="flex flex-row gap-4">
-                <Link href="https://google.com">View source</Link>
+                <ViewSourceLink />
                 <div className="w-px bg-separator" />
-                <Link href="https://google.com">View history</Link>
+                <ViewHistoryLink />
               </div>
             </div>
             <div className="mx-auto flex w-full max-w-prose flex-col gap-3 blog-lg:hidden [&_div]:text-sm">
@@ -56,13 +52,9 @@ export default function Layout({ children, title }: LayoutProps & { title: strin
                 <span className="whitespace-nowrap">10 December 2023</span>.
               </div>
               <div className="flex flex-row gap-4">
-                <Link href="https://google.com">View source</Link>
+                <ViewSourceLink />
                 <div className="w-px bg-separator" />
-                <Link href="https://google.com">View history</Link>
-                <div className="w-px bg-separator" />
-                <button type="button" className="link">
-                  Share
-                </button>
+                <ViewHistoryLink />
               </div>
             </div>
           </div>
