@@ -18,7 +18,7 @@ export default function Layout({ children, title }: LayoutProps & { title: strin
             className="absolute inset-0 -z-10"
             style={{
               backgroundImage:
-                "url(\"data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg' %3E%3Ccircle cx='2' cy='2' r='2' fill='%238080804d' /%3E%3C/svg%3E\")",
+                "url(\"data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg' %3E%3Ccircle cx='2' cy='2' r='2' fill='%23afafaf70' /%3E%3C/svg%3E\")",
               backgroundPosition: "0px 16px",
               maskImage: "linear-gradient(to right, transparent, black)",
             }}
