@@ -4,6 +4,7 @@ import * as brokenRuntime from "react/jsx-runtime";
 import { getAllSlugs, getPost } from "~/lib/blogs";
 
 import type { PageProps, Params } from "./$types";
+import { Figure, Pre } from "./components";
 
 // @ts-expect-error: the automatic react runtime is untyped.
 // https://github.com/mdx-js/mdx/pull/2383
@@ -12,7 +13,7 @@ const runtime: { Fragment: Fragment; jsx: Jsx; jsxs: Jsx } = brokenRuntime;
 export default async function Page({ params }: PageProps) {
   const { mdxOutput } = await getPost(params.slug);
   const { default: Content } = await run(mdxOutput, { ...runtime, baseUrl: import.meta.url });
-  return <Content />;
+  return <Content components={{ pre: Pre, figure: Figure }} />;
 }
 
 export async function generateStaticParams(): Promise<Params[]> {

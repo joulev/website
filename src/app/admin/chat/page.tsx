@@ -12,7 +12,7 @@ import { Link } from "~/components/ui/link";
 import { TextArea } from "~/components/ui/textarea";
 
 function Pre(props: React.ComponentPropsWithoutRef<"pre">) {
-  return <pre {...props} className="-mx-6 rounded-[0] bg-bg-darker px-6 py-3 text-sm" />;
+  return <pre {...props} className="-mx-6 rounded-none bg-bg-darker px-6 py-3 text-sm" />;
 }
 
 function A({ href, ...props }: React.ComponentPropsWithoutRef<"a">) {

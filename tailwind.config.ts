@@ -11,7 +11,7 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    borderRadius: { DEFAULT: "1.25rem", full: "2rem" },
+    borderRadius: { DEFAULT: "1.25rem", full: "2rem", none: "0" },
     backdropBlur: { DEFAULT: "12px", lg: "24px" },
     container: { center: true, padding: "1.5rem" },
     colors: {

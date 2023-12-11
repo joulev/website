@@ -18,7 +18,7 @@ export default function Layout({ children, title }: LayoutProps & { title: strin
               backgroundImage:
                 "url(\"data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg' %3E%3Ccircle cx='2' cy='2' r='2' fill='%23afafaf70' /%3E%3C/svg%3E\")",
               backgroundPosition: "0px 16px",
-              maskImage: "linear-gradient(to right, transparent, black)",
+              maskImage: "linear-gradient(to top right, #0000 0%, #0003 50%, #000 100%)",
             }}
           />
           <div className="flex max-w-prose flex-col gap-6 max-blog-lg:mx-auto">
@@ -36,7 +36,7 @@ export default function Layout({ children, title }: LayoutProps & { title: strin
           </div>
         </div>
         <div className="flex flex-col divide-y divide-separator blog-lg:flex-row blog-lg:divide-x blog-lg:divide-y-0">
-          <div className="prose -my-6 max-w-none p-6 blog-lg:p-12 [&>*]:mx-auto [&>*]:max-w-prose">
+          <div className="prose max-w-none p-[--p] [--p:24px] blog-lg:[--p:48px] [&>*]:mx-auto [&>*]:max-w-prose">
             {children}
           </div>
           <div className="flex flex-col p-6 text-text-secondary blog-lg:p-12">
