@@ -1,0 +1,148 @@
+---
+title: Handling SVG Icon Path Opacity Overlap
+---
+
+## TL;DR
+
+1. Flatten your SVG icons so that there are no intersections between paths.
+2. If that is not possible and if you can afford to, convert all strokes to fills by using e.g. [Really Flatten Vectors](https://www.figma.com/community/plugin/1099596352042014853/really-flatten-vectors).
+3. If that is not possible, use SVG masks to render the icon (check the code at the end of the article).
+
+---
+
+## The Problem
+
+If you ever worked with colours whose [alpha (opacity) value](https://developer.mozilla.org/en-US/docs/Glossary/Alpha) is not 0 or 1 before, you probably faced this nasty problem where paths with a semi-transparent opacity creates areas of different opacity at intersection points. For example, let's take two icons from [Lucide](https://lucide.dev) that suffer from this problem:
+
+<Figure>
+  <LucideIconOpacityDemo />
+</Figure>
+
+The reason for this is that different paths are drawn separately and hence can overlay on existing semi-transparent paths, causing intersections where the opacity is "doubled". In the above figure, `flask-conical` has three paths (the flask shape and the two horizontal lines), while `atom` has two oval-shaped paths if we exclude the circle at the centre. The paths are drawn separately, hence all intersections between these paths are "whiter" than the rest of the icon.
+
+I faced this problem when [trying to handle icons](https://github.com/joulev/website/commit/987c4afb2718e468ee724230be6062cae6f860e5) in my personal website (the very website you're looking at), since most of the colours you're seeing here are semi-transparent. This article will describe the two ways I found to effectively solve this problem. **Note that this assumes the icon is in a single colour – it won't work if your icon is duotone.**
+
+## Flattening
+
+For most icons, this is the simplest and the best solution. Flattening is the process where you combine several paths into one. For example, for the [`chevrons-right`](https://lucide.dev/icons/chevrons-right) icon <ChevronsRight className="inline-block" />, the SVG paths are:
+
+```xml
+<path d="m6 17 5-5-5-5" />
+<path d="m13 17 5-5-5-5" />
+```
+
+but after flattening, they become one single path:
+
+```xml
+<path d="m6 17 5-5-5-5m7 10 5-5-5-5" />
+```
+
+Since the two paths have become one, they are drawn at the same time, hence there are no intersections for the opacity to overlap. The same applies for the `flask-conical` icon above, where the three paths can be flattened into one:
+
+```xml
+<path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2M8.5 2h7M7 16h10" />
+```
+
+<Figure>
+  <LucideIconFlaskConicalFlatteningDemo />
+</Figure>
+
+Although, clearly the paths are basically computer-generated unreadable gibberish now. If you want to be able to read and debug your icon SVG in code directly, you might want to also save an unflattened version of the icon. Kinda like the source code of a minified JavaScript file.
+
+It's pretty simple to perform this flattening. I think all vector graphic editors should have this feature. I use [Figma](https://www.figma.com) specifically for this – you can simply <kbd>CTRL</kbd>+<kbd>E</kbd> (or <kbd>⌘</kbd>+<kbd>E</kbd> on Mac) to flatten any selection. Other editors should have similar features, and online tools should probably do well too.
+
+## Convert Strokes to Fills ("Really" Flattening)
+
+Sometimes, however, simple flattening like above doesn't work. For the `atom` icon above, the two oval-shaped paths can't be flattened into one.
+
+If it is possible for you to do so, you can consider changing strokes to fills. A lot of CSS change may be needed to re-style the icons correctly, and you won't be able to customise stroke width and similar stuff with code anymore, but if all of those are not a problem for you, this is a good solution.
+
+For example, with the `atom` icon, by applying the [Really Flatten Vectors](https://www.figma.com/community/plugin/1099596352042014853/really-flatten-vectors) Figma plugin, and then put the SVG through [SVGOMG optimisations](https://jakearchibald.github.io/svgomg/), I get this absolutely crazy result:
+
+```xml
+<svg width="24" height="24" fill="none">
+  <path fill="currentcolor" d="M10 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0Z" />
+  <path
+    fill="currentcolor"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M12 4.076a16.77 16.77 0 0 1 2.837-1.421c1.156-.438 2.29-.68 3.317-.648 1.034.033 2.018.349 2.753 1.086.737.735 1.053 1.719 1.086 2.753.032 1.028-.21 2.161-.648 3.317-.346.914-.824 1.87-1.42 2.837a16.765 16.765 0 0 1 1.42 2.837c.438 1.156.68 2.29.648 3.317-.033 1.034-.349 2.018-1.086 2.753-.735.737-1.719 1.053-2.753 1.086-1.028.032-2.161-.21-3.317-.648A16.765 16.765 0 0 1 12 19.925a16.764 16.764 0 0 1-2.837 1.42c-1.156.438-2.29.68-3.317.648-1.034-.033-2.019-.349-2.753-1.086-.737-.735-1.053-1.719-1.086-2.753-.032-1.028.21-2.161.648-3.317A16.77 16.77 0 0 1 4.075 12a16.769 16.769 0 0 1-1.42-2.837c-.438-1.156-.68-2.29-.648-3.317.033-1.034.349-2.018 1.086-2.753.735-.737 1.719-1.053 2.753-1.086 1.028-.032 2.161.21 3.317.648.914.346 1.87.824 2.837 1.42Zm1.82 1.254a26.157 26.157 0 0 1 2.586 2.261l.003.003a26.16 26.16 0 0 1 2.262 2.587c.326-.596.595-1.175.804-1.726.377-.998.54-1.862.519-2.546-.022-.677-.218-1.12-.5-1.4l-.003-.004c-.28-.281-.723-.477-1.4-.499-.684-.021-1.548.142-2.546.52-.551.208-1.13.477-1.726.804Zm-8.49 4.85a13.704 13.704 0 0 1-.805-1.725c-.377-.998-.54-1.862-.519-2.546.022-.677.218-1.12.5-1.4l.003-.004c.28-.281.723-.477 1.4-.499.684-.021 1.548.142 2.546.52.551.208 1.13.477 1.726.804A26.149 26.149 0 0 0 7.594 7.59l-.003.003c-.835.84-1.593 1.71-2.261 2.587ZM6.474 12A23.677 23.677 0 0 1 12 6.474 23.677 23.677 0 0 1 17.526 12 23.68 23.68 0 0 1 12 17.526 23.685 23.685 0 0 1 6.474 12ZM5.33 13.82a13.704 13.704 0 0 0-.805 1.725c-.377.998-.54 1.862-.519 2.546.022.677.218 1.12.5 1.4l.003.004c.28.281.723.477 1.4.499.684.021 1.548-.142 2.546-.52.551-.208 1.13-.477 1.726-.803a26.16 26.16 0 0 1-2.587-2.262l-.003-.003a26.157 26.157 0 0 1-2.261-2.587Zm8.49 4.85c.595.327 1.174.596 1.725.805.998.377 1.862.54 2.546.519.677-.022 1.12-.218 1.4-.5l.004-.003c.281-.28.477-.723.499-1.4.021-.684-.142-1.548-.52-2.546a13.709 13.709 0 0 0-.803-1.726 26.168 26.168 0 0 1-2.262 2.587l-.003.003c-.84.835-1.71 1.593-2.587 2.262Z"
+  />
+</svg>
+```
+
+The `d` value is almost 2k characters long, but it does render the icon correctly!
+
+<Figure>
+  <LucideIconAtomReallyFlatteningDemo />
+</Figure>
+
+## SVG Masks
+
+If both of the above methods don't work for you, you can try using SVG masks.
+
+In this approach, instead of rendering the icon directly, we use it as a SVG mask for which part of the SVG we want to render (black pixel in the mask &rarr; render, white pixel in the mask &rarr; don't render). Then we simply apply that mask on a rectangle filling the size of the icon. Naturally a rectangle can't intersect itself, so we won't see that opacity issue.
+
+For example, this is the SVG for the original `atom` icon:
+
+```xml
+<svg width="24" height="24" fill="none">
+  <circle cx="12" cy="12" r="1" />
+  <path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z" />
+  <path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z" />
+</svg>
+```
+
+then you can use the paths of this icon to construct a mask (note that in this mask, the background is black and the foreground (icon paths) are white):
+
+```xml
+<mask id="a">
+  <!-- black background -->
+  <rect width="24" height="24" fill="black" />
+  <!-- the SVG of the `atom` icon, but with all paths shown in white instead of currentcolor -->
+  <circle stroke="white" cx="12" cy="12" r="1" />
+  <path
+    stroke="white"
+    d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z"
+  />
+  <path
+    stroke="white"
+    d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"
+  />
+</mask>
+```
+
+and then apply that mask on a rectangle filling the size of the icon:
+
+```xml
+<!-- Final result -->
+<svg width="24" height="24" fill="none">
+  <mask id="a">
+    <rect width="24" height="24" fill="black" />
+    <circle stroke="white" cx="12" cy="12" r="1" />
+    <path
+      stroke="white"
+      d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z"
+    />
+    <path
+      stroke="white"
+      d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"
+    />
+  </mask>
+  <rect width="24" height="24" fill="currentcolor" mask="url(#a)" />
+</svg>
+```
+
+<Figure>
+  <LucideIconAtomMaskDemo />
+</Figure>
+
+Now as you can see, we still use `fill="currentcolor"` here. But if you want, you can always use a stroke of width 24 to fill the rectangle, since it's only a simple rectangular shape and not a complex 2k-character shape now. Another good point is that you can customise the stroke width and similar stuff with code now.
+
+<Figure>
+  <LucideIconAtomMaskCustomiseStrokeWidthDemo />
+</Figure>
+
+Of course, this step is more complicated and there's actually [an apparent Safari bug](https://stackoverflow.com/q/74233827) where it makes the quality of the SVG drop when you pinch zoom in (if you are on a Mac with a touchpad right now, you can try pinch zooming the above figure and see). But if you really can't flatten your icon, such as the use of `atom` inside my website that you are looking at, this is the only solution that I can find.
+
+Happy coding!

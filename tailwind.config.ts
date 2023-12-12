@@ -29,6 +29,7 @@ const config: Config = {
       },
       separator: "var(--separator)",
       black: "black",
+      white: "white",
       transparent: "transparent",
       current: "currentColor",
       cyan: "var(--cyan)",

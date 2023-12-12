@@ -1,8 +1,6 @@
-import { type Fragment, type Jsx, run } from "@mdx-js/mdx";
 import type { GetResponseDataTypeFromEndpointMethod } from "@octokit/types";
 import { cache } from "react";
 import { Balancer } from "react-wrap-balancer";
-import * as brokenRuntime from "react/jsx-runtime";
 
 import { CopyButton } from "~/components/copy-button";
 import { Check, Share } from "~/components/icons";
@@ -12,11 +10,7 @@ import { getAllSlugs, getPost } from "~/lib/blogs";
 import { octokit } from "~/lib/octokit";
 
 import type { PageProps, Params } from "./$types";
-import { Figure, Pre } from "./components";
-
-// @ts-expect-error: the automatic react runtime is untyped.
-// https://github.com/mdx-js/mdx/pull/2383
-const runtime: { Fragment: Fragment; jsx: Jsx; jsxs: Jsx } = brokenRuntime;
+import * as mdxComponents from "./components";
 
 const getGitHubData = cache(async (slug: string) => {
   let page = 1;
@@ -46,11 +40,10 @@ function formatTime(date: Date) {
 }
 
 export default async function Page({ params }: PageProps) {
-  const [{ title, mdxOutput }, ghData] = await Promise.all([
+  const [{ title, Content }, ghData] = await Promise.all([
     getPost(params.slug),
     getGitHubData(params.slug),
   ]);
-  const { default: Content } = await run(mdxOutput, { ...runtime, baseUrl: import.meta.url });
 
   const sourceLink = `https://github.com/joulev/website/blob/main/contents/blogs/${params.slug}.mdx`;
   const historyLink = `https://github.com/joulev/website/commits/main/contents/blogs/${params.slug}.mdx`;
@@ -102,8 +95,8 @@ export default async function Page({ params }: PageProps) {
           </div>
         </div>
         <div className="flex flex-col divide-y divide-separator blog-lg:flex-row blog-lg:divide-x blog-lg:divide-y-0">
-          <article className="prose max-w-none p-[--p] [--p:24px] blog-lg:[--p:48px] [&>*]:mx-auto [&>*]:max-w-prose">
-            <Content components={{ pre: Pre, figure: Figure }} />
+          <article className="prose max-w-none px-[--p] py-12 [--p:24px] blog-lg:[--p:48px] [&>*]:mx-auto [&>*]:max-w-prose">
+            <Content components={mdxComponents} />
           </article>
           <div className="flex flex-col p-6 text-text-secondary blog-lg:p-12">
             <div className="flex-grow max-blog-lg:hidden" />

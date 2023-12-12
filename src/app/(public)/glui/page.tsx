@@ -80,6 +80,7 @@ import {
   SidebarSectionItemName,
   SidebarSectionItems,
 } from "~/components/ui/sidebar";
+import { Slider } from "~/components/ui/slider";
 import { cn } from "~/lib/cn";
 
 import {
@@ -539,6 +540,16 @@ function DialogShowcase() {
   );
 }
 
+function SliderShowcase() {
+  return (
+    <Showcase title="Slider">
+      <div className="mx-auto my-12 w-64">
+        <Slider defaultValue={[33]} max={100} step={1} />
+      </div>
+    </Showcase>
+  );
+}
+
 export default function Page() {
   return (
     <main className="container flex max-w-screen-md flex-col gap-9">
@@ -581,6 +592,7 @@ export default function Page() {
       <ProgressShowcase />
       <SelectShowcase />
       <SidebarShowcase />
+      <SliderShowcase />
       <TextAreaShowcase />
     </main>
   );
