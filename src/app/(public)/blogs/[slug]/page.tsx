@@ -52,9 +52,11 @@ export default async function Page({ params }: PageProps) {
         <div className="flex flex-col divide-y divide-separator blog-lg:flex-row blog-lg:divide-x blog-lg:divide-y-0">
           <article className="prose max-w-none px-[--p] py-12 [--p:24px] blog-lg:[--p:48px] [&>*]:mx-auto [&>*]:max-w-prose">
             <Content components={mdxComponents} />
-            <LinkButton href="/blogs" className="mt-6 no-underline">
-              <ChevronLeft /> Back to blogs
-            </LinkButton>
+            <div>
+              <LinkButton href="/blogs" className="mt-6 no-underline">
+                <ChevronLeft /> Back to blogs
+              </LinkButton>
+            </div>
           </article>
           <div className="flex flex-col p-6 text-text-secondary blog-lg:p-12">
             <div className="flex-grow max-blog-lg:hidden" />
@@ -110,8 +112,17 @@ export async function generateStaticParams(): Promise<Params[]> {
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { title, description, updatedTime, publishedTime } = await getPost(params.slug);
-  const ogImage = `/blogs/og?title=${encodeURIComponent(title)}`;
+  const {
+    title: postTitle,
+    description: postDescription,
+    updatedTime,
+    publishedTime,
+  } = await getPost(params.slug);
+  const ogImage = `/blogs/og?title=${encodeURIComponent(postTitle)}`;
+  const title = `${postTitle} | joulev.dev » blogs`;
+  const description = `${
+    postDescription.endsWith(".") ? postDescription.slice(0, -1) : postDescription
+  }. A blog post by @joulev.`;
   return {
     title,
     description,
