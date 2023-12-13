@@ -1,13 +1,15 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { Balancer } from "react-wrap-balancer";
 
 import { useCopyState } from "~/components/copy-button";
 import { Check, Share } from "~/components/icons";
 import { Button } from "~/components/ui/button";
 import { Link } from "~/components/ui/link";
-import { formatTime } from "~/lib/blogs";
+import { incrementViews } from "~/lib/blogs/increment-view";
+import { formatTime } from "~/lib/blogs/utils";
 
 import { meta } from "../meta";
 
@@ -81,4 +83,12 @@ export function ShareButton() {
       )}
     </Button>
   );
+}
+
+export function IncrementViews() {
+  const { slug } = useMetadata();
+  useEffect(() => {
+    incrementViews(slug).catch(console.error);
+  }, [slug]);
+  return null;
 }

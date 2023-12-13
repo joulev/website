@@ -3,7 +3,7 @@ import { Balancer } from "react-wrap-balancer";
 
 import { Title } from "~/components/title";
 import { Card } from "~/components/ui/card";
-import { formatTime } from "~/lib/blogs";
+import { formatTime } from "~/lib/blogs/utils";
 
 import { meta } from "./meta";
 import { PostCard } from "./post-card";

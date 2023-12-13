@@ -1,4 +1,12 @@
-import { boolean, pgTable, serial, smallint, timestamp, varchar } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  integer,
+  pgTable,
+  serial,
+  smallint,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 
 export const photos = pgTable("photos", {
   id: serial("id").primaryKey(),
@@ -32,3 +40,11 @@ export const codeSnippets = pgTable("code_snippets", {
 });
 export type CodeSnippet = typeof codeSnippets.$inferSelect;
 export type NewCodeSnippet = typeof codeSnippets.$inferInsert;
+
+export const blogPosts = pgTable("blog_posts", {
+  id: serial("id").primaryKey(),
+  slug: varchar("slug", { length: 512 }).unique().notNull(),
+  viewCount: integer("view_count").notNull().default(0),
+});
+export type BlogPost = typeof blogPosts.$inferSelect;
+export type NewBlogPost = typeof blogPosts.$inferInsert;

@@ -3,7 +3,13 @@ import { LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 
 import type { LayoutProps } from "./$types";
-import { PostTitle, PostedDate, ShareButton, ViewSourceHistory } from "./client-components";
+import {
+  IncrementViews,
+  PostTitle,
+  PostedDate,
+  ShareButton,
+  ViewSourceHistory,
+} from "./client-components";
 
 export default function Layout({ children }: LayoutProps) {
   return (
@@ -50,6 +56,7 @@ export default function Layout({ children }: LayoutProps) {
           </div>
         </div>
       </Card>
+      <IncrementViews />
     </main>
   );
 }
