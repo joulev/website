@@ -27,7 +27,3 @@ export function pre(props: React.ComponentPropsWithoutRef<"pre">) {
     </ScrollArea>
   );
 }
-
-export function code({ className, ...props }: React.ComponentPropsWithoutRef<"code">) {
-  return <code {...props} className={cn("font-normal", className)} />;
-}

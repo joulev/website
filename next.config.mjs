@@ -4,10 +4,11 @@ import { withAxiom } from "next-axiom";
 import { withNextJSRouteTypes } from "nextjs-route-types";
 import rehypePrettyCode from "rehype-pretty-code";
 
+import themeJson from "./.theme/theme.json" assert { type: "json" };
 import { env } from "./src/env.mjs";
 
 const withMDX = createMDX({
-  options: { rehypePlugins: [[rehypePrettyCode, { keepBackground: false, theme: "nord" }]] },
+  options: { rehypePlugins: [[rehypePrettyCode, { keepBackground: false, theme: themeJson }]] },
 });
 
 /** @type {import("next").NextConfig} */
