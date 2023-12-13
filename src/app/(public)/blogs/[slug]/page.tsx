@@ -2,8 +2,6 @@ import type { GetResponseDataTypeFromEndpointMethod } from "@octokit/types";
 import { cache } from "react";
 import { Balancer } from "react-wrap-balancer";
 
-import { CopyButton } from "~/components/copy-button";
-import { Check, Share } from "~/components/icons";
 import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
 import { getAllSlugs, getPost } from "~/lib/blogs";
@@ -11,6 +9,7 @@ import { octokit } from "~/lib/octokit";
 
 import type { PageProps, Params } from "./$types";
 import * as mdxComponents from "./components";
+import { ShareButton } from "./share-button";
 
 const getGitHubData = cache(async (slug: string) => {
   let page = 1;
@@ -57,7 +56,7 @@ export default async function Page({ params }: PageProps) {
             style={{
               backgroundImage:
                 "url(\"data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg' %3E%3Ccircle cx='2' cy='2' r='2' fill='%23afafaf70' /%3E%3C/svg%3E\")",
-              backgroundPosition: "0px 16px",
+              backgroundPosition: "13px 16px",
               maskImage: "linear-gradient(to top right, #0000 0%, #0003 50%, #000 100%)",
             }}
           />
@@ -67,20 +66,7 @@ export default async function Page({ params }: PageProps) {
             </h1>
             <div className="flex flex-row items-center">
               <div className="mr-4 flex flex-row gap-3 border-r border-separator pr-4">
-                <CopyButton
-                  content={`https://joulev.dev/blogs/${params.slug}`}
-                  variants={{ size: "sm" }}
-                  copyChildren={
-                    <>
-                      <Share /> Share
-                    </>
-                  }
-                  copiedChildren={
-                    <>
-                      <Check /> Link copied!
-                    </>
-                  }
-                />
+                <ShareButton />
               </div>
               <div className="text-sm text-text-secondary">
                 Posted{" "}
