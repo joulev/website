@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Balancer } from "react-wrap-balancer";
 
 import { Card } from "~/components/ui/card";
@@ -14,7 +15,9 @@ function formatTime(date: Date) {
 }
 
 export default async function Page({ params }: PageProps) {
-  const { title, Content, lastUpdated, updatedTimes } = await getPost(params.slug);
+  const { title, Content, publishedTime, updatedTime, updatedTimesCount } = await getPost(
+    params.slug,
+  );
 
   const sourceLink = `https://github.com/joulev/website/blob/main/contents/blogs/${params.slug}.mdx`;
   const historyLink = `https://github.com/joulev/website/commits/main/contents/blogs/${params.slug}.mdx`;
@@ -42,8 +45,8 @@ export default async function Page({ params }: PageProps) {
               </div>
               <div className="text-sm text-text-secondary">
                 Posted{" "}
-                <time dateTime={lastUpdated.toISOString()} title={lastUpdated.toISOString()}>
-                  {formatTime(lastUpdated)}
+                <time dateTime={publishedTime.toISOString()} title={publishedTime.toISOString()}>
+                  {formatTime(publishedTime)}
                 </time>
               </div>
             </div>
@@ -57,13 +60,13 @@ export default async function Page({ params }: PageProps) {
             <div className="flex-grow max-blog-lg:hidden" />
             <div className="sticky bottom-12 mx-auto hidden max-w-prose flex-col gap-3 blog-lg:flex [&_div]:text-sm">
               <div>
-                This article was edited {updatedTimes} time
-                {updatedTimes === 1 ? "" : "s"}.
+                This article was edited {updatedTimesCount} time
+                {updatedTimesCount === 1 ? "" : "s"}.
               </div>
               <div>
                 Last updated:{" "}
-                <time dateTime={lastUpdated.toISOString()} title={lastUpdated.toISOString()}>
-                  {formatTime(lastUpdated)}
+                <time dateTime={updatedTime.toISOString()} title={updatedTime.toISOString()}>
+                  {formatTime(updatedTime)}
                 </time>
                 .
               </div>
@@ -75,14 +78,14 @@ export default async function Page({ params }: PageProps) {
             </div>
             <div className="mx-auto flex w-full max-w-prose flex-col gap-3 blog-lg:hidden [&_div]:text-sm">
               <div>
-                This article was edited {updatedTimes} time
-                {updatedTimes === 1 ? "" : "s"}, last updated on{" "}
+                This article was edited {updatedTimesCount} time
+                {updatedTimesCount === 1 ? "" : "s"}, last updated on{" "}
                 <time
-                  dateTime={lastUpdated.toISOString()}
-                  title={lastUpdated.toISOString()}
+                  dateTime={updatedTime.toISOString()}
+                  title={updatedTime.toISOString()}
                   className="whitespace-nowrap"
                 >
-                  {formatTime(lastUpdated)}
+                  {formatTime(updatedTime)}
                 </time>
                 .
               </div>
@@ -104,9 +107,28 @@ export async function generateStaticParams(): Promise<Params[]> {
   return slugs.map(slug => ({ slug }));
 }
 
-export async function generateMetadata({ params }: { params: Params }) {
-  const { title, description } = await getPost(params.slug);
-  return { title, description };
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { title, description, updatedTime, publishedTime } = await getPost(params.slug);
+  const ogImage = `/blogs/og?title=${encodeURIComponent(title)}`;
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      publishedTime: publishedTime.toISOString(),
+      modifiedTime: updatedTime.toISOString(),
+      url: `/blogs/${params.slug}`,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+    },
+  };
 }
 
 export const dynamicParams = false;

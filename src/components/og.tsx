@@ -5,6 +5,18 @@ import { Logo } from "./logo";
 
 const [width, height] = [1200, 630];
 
+function getFont() {
+  return Promise.all(
+    ([400, 700] as const).map(async weight => {
+      const fontRes = await fetch(
+        `https://cdn.jsdelivr.net/fontsource/fonts/quattrocento-sans@latest/latin-${weight}-normal.woff`,
+      );
+      const font = await fontRes.arrayBuffer();
+      return { name: "quattrocento-sans", data: font, style: "normal", weight } as const;
+    }),
+  );
+}
+
 export async function getOpengraphImage({ title, subtitle }: { title: string; subtitle: string }) {
   return new ImageResponse(
     (
@@ -36,18 +48,36 @@ export async function getOpengraphImage({ title, subtitle }: { title: string; su
         </div>
       </div>
     ),
-    {
-      width,
-      height,
-      fonts: await Promise.all(
-        ([400, 700] as const).map(async weight => {
-          const fontRes = await fetch(
-            `https://cdn.jsdelivr.net/fontsource/fonts/quattrocento-sans@latest/latin-${weight}-normal.woff`,
-          );
-          const font = await fontRes.arrayBuffer();
-          return { name: "quattrocento-sans", data: font, style: "normal", weight };
-        }),
-      ),
-    },
+    { width, height, fonts: await getFont() },
+  );
+}
+
+export async function getBlogOpengraphImage({ title }: { title: string }) {
+  return new ImageResponse(
+    (
+      <div tw="flex" style={{ width, height, color: "#fffffff5" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element -- We are in Satori */}
+        <img
+          src="https://github.com/joulev/joulev/assets/44609036/7dfd6800-3349-4cd8-bdb9-ed2de9927c01"
+          alt=""
+          tw="absolute inset-0"
+        />
+        <div tw="flex flex-col justify-between min-w-0" style={{ padding: 128, fontSize: 64 }}>
+          {/* <Logo logoWidth={96} style={{ fill: "#afafaf70" }} /> */}
+          {/* <div tw="flex-grow" /> */}
+          <h1 tw="m-0 font-bold" style={{ fontSize: 84 }}>
+            {title}
+          </h1>
+          <div tw="m-0 flex flex-row items-center" style={{ color: "#aaaaaa9c", gap: 16 }}>
+            <Logo logoWidth={72} style={{ fill: "#afafaf70" }} />
+            <span tw="font-normal" style={{ marginLeft: 36 }}>
+              joulev.dev »{" "}
+            </span>
+            <span tw="font-bold">blog</span>
+          </div>
+        </div>
+      </div>
+    ),
+    { width, height, fonts: await getFont() },
   );
 }

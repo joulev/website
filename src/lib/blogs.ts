@@ -48,9 +48,10 @@ const getPostGitHubData = cache(async (slug: string) => {
     if (response.data.length < PER_PAGE) break;
     page++;
   }
-  const updatedTimes = commits.length;
-  const lastUpdated = new Date(commits.at(0)?.commit.author?.date ?? new Date());
-  return { updatedTimes, lastUpdated };
+  const updatedTimesCount = commits.length;
+  const publishedTime = new Date(commits.at(-1)?.commit.author?.date ?? new Date());
+  const updatedTime = new Date(commits.at(0)?.commit.author?.date ?? new Date());
+  return { updatedTimesCount, updatedTime, publishedTime };
 });
 
 const getPostMarkdownData = cache(async (slug: string) => {
