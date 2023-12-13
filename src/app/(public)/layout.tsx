@@ -88,13 +88,6 @@ function Navigation() {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuMainLink asChild>
-              <Link href="/" unstyled>
-                Home
-              </Link>
-            </NavigationMenuMainLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
             <NavigationMenuTrigger>Apps</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[500px] max-w-[calc(100vw-48px)] gap-3 p-3 md:grid-cols-2 lg:w-[600px]">
@@ -105,6 +98,13 @@ function Navigation() {
                 ))}
               </ul>
             </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuMainLink asChild>
+              <Link href="/blogs" unstyled>
+                Blog
+              </Link>
+            </NavigationMenuMainLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
             {session.status === "authenticated" ? (
