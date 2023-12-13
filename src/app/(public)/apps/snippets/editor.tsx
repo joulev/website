@@ -43,7 +43,6 @@ export function Editor() {
       <input type="hidden" name="language" value={language} />
       <ShikiEditor
         name="code"
-        theme="/editor-theme"
         language={language}
         tabSize={tabSize}
         value={code}
