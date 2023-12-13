@@ -74,10 +74,21 @@ export const getPost = cache(async (slug: string) => {
     getPostMarkdownData(slug),
     getPostGitHubData(slug),
   ]);
-  return { ...markdownData, ...gitHubData };
+  return { ...markdownData, ...gitHubData, slug };
 });
 
 export const getAllSlugs = cache(async () => {
   const slugs = await readdir(BLOGS_DIR);
   return slugs.map(slug => slug.replace(new RegExp(`\\.${EXT}$`), ""));
 });
+
+export const getAllPosts = cache(async () => {
+  const slugs = await getAllSlugs();
+  const posts = await Promise.all(slugs.map(getPost));
+  return posts.sort((a, b) => b.publishedTime.getTime() - a.publishedTime.getTime());
+});
+
+export function formatTime(date: Date) {
+  // "10 December 2023"
+  return date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+}

@@ -27,7 +27,7 @@ export async function getOpengraphImage({ title, subtitle }: { title: string; su
           alt=""
           tw="absolute inset-0"
         />
-        <div tw="flex flex-col justify-end min-w-0" style={{ padding: 128, fontSize: 64 }}>
+        <div tw="flex flex-col justify-end min-w-0" style={{ padding: 128, fontSize: 64, gap: 16 }}>
           <Logo logoWidth={96} style={{ fill: "#afafaf70" }} />
           <div tw="flex-grow" />
           <h1 tw="m-0" style={{ fontSize: 96 }}>
@@ -73,7 +73,7 @@ export async function getBlogOpengraphImage({ title }: { title: string }) {
             <span tw="font-normal" style={{ marginLeft: 36 }}>
               joulev.dev »{" "}
             </span>
-            <span tw="font-bold">blog</span>
+            <span tw="font-bold">blogs</span>
           </div>
         </div>
       </div>

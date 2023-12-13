@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
 import { Balancer } from "react-wrap-balancer";
 
+import { ChevronLeft } from "~/components/icons";
+import { LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
-import { getAllSlugs, getPost } from "~/lib/blogs";
+import { formatTime, getAllSlugs, getPost } from "~/lib/blogs";
 
 import type { PageProps, Params } from "./$types";
 import * as mdxComponents from "./components";
 import { ShareButton } from "./share-button";
-
-function formatTime(date: Date) {
-  // "10 December 2023"
-  return date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
-}
 
 export default async function Page({ params }: PageProps) {
   const { title, Content, publishedTime, updatedTime, updatedTimesCount } = await getPost(
@@ -55,10 +52,14 @@ export default async function Page({ params }: PageProps) {
         <div className="flex flex-col divide-y divide-separator blog-lg:flex-row blog-lg:divide-x blog-lg:divide-y-0">
           <article className="prose max-w-none px-[--p] py-12 [--p:24px] blog-lg:[--p:48px] [&>*]:mx-auto [&>*]:max-w-prose">
             <Content components={mdxComponents} />
+            <LinkButton href="/blogs" className="mt-6 no-underline">
+              <ChevronLeft /> Back to blogs
+            </LinkButton>
           </article>
           <div className="flex flex-col p-6 text-text-secondary blog-lg:p-12">
             <div className="flex-grow max-blog-lg:hidden" />
             <div className="sticky bottom-12 mx-auto hidden max-w-prose flex-col gap-3 blog-lg:flex [&_div]:text-sm">
+              <div>Unless explicitly noted, all opinions are personal.</div>
               <div>
                 This article was edited {updatedTimesCount} time
                 {updatedTimesCount === 1 ? "" : "s"}.
@@ -77,6 +78,7 @@ export default async function Page({ params }: PageProps) {
               </div>
             </div>
             <div className="mx-auto flex w-full max-w-prose flex-col gap-3 blog-lg:hidden [&_div]:text-sm">
+              <div>Unless explicitly noted, all opinions are personal.</div>
               <div>
                 This article was edited {updatedTimesCount} time
                 {updatedTimesCount === 1 ? "" : "s"}, last updated on{" "}
