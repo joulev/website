@@ -1,14 +1,21 @@
 // @ts-check
+import createMDX from "@next/mdx";
 import { withAxiom } from "next-axiom";
 import { withNextJSRouteTypes } from "nextjs-route-types";
+import rehypePrettyCode from "rehype-pretty-code";
 
 import { env } from "./src/env.mjs";
+
+const withMDX = createMDX({
+  options: { rehypePlugins: [[rehypePrettyCode, { keepBackground: false, theme: "nord" }]] },
+});
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   experimental: {
     webpackBuildWorker: true,
   },
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   images: {
     remotePatterns: [
       {
@@ -29,4 +36,4 @@ const nextConfig = {
   ],
 };
 
-export default withAxiom(withNextJSRouteTypes(nextConfig));
+export default withMDX(withAxiom(withNextJSRouteTypes(nextConfig)));

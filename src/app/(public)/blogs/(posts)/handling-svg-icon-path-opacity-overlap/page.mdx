@@ -1,7 +1,16 @@
----
-title: Handling SVG Icon Path Opacity Overlap
-description: How to handle SVG icons with semi-transparent colours having path opacity overlapping in intersections points
----
+import { ChevronsRight } from "~/components/icons";
+
+import { makeMetadata } from "~/lib/blogs";
+
+import {
+  AtomMask,
+  AtomMaskCustomiseStrokeWidth,
+  AtomReallyFlattening,
+  FlaskConicalFlattening,
+  Problem,
+} from "./components";
+
+export const metadata = makeMetadata("handling-svg-icon-path-opacity-overlap");
 
 ## TL;DR
 
@@ -16,7 +25,7 @@ description: How to handle SVG icons with semi-transparent colours having path o
 If you ever worked with colours whose [alpha (opacity) value](https://developer.mozilla.org/en-US/docs/Glossary/Alpha) is not 0 or 1 before, you probably faced this nasty problem where paths with a semi-transparent opacity creates areas of different opacity at intersection points. For example, let's take two icons from [Lucide](https://lucide.dev) that suffer from this problem:
 
 <Figure>
-  <LucideIconOpacityDemo />
+  <Problem />
 </Figure>
 
 The reason for this is that different paths are drawn separately and hence can overlay on existing semi-transparent paths, causing intersections where the opacity is "doubled". In the above figure, `flask-conical` has three paths (the flask shape and the two horizontal lines), while `atom` has two oval-shaped paths if we exclude the circle at the centre. The paths are drawn separately, hence all intersections between these paths are "whiter" than the rest of the icon.
@@ -45,7 +54,7 @@ Since the two paths have become one, they are drawn at the same time, hence ther
 ```
 
 <Figure>
-  <LucideIconFlaskConicalFlatteningDemo />
+  <FlaskConicalFlattening />
 </Figure>
 
 Although, clearly the paths are basically computer-generated unreadable gibberish now. If you want to be able to read and debug your icon SVG in code directly, you might want to also save an unflattened version of the icon. Kinda like the source code of a minified JavaScript file.
@@ -75,7 +84,7 @@ For example, with the `atom` icon, by applying the [Really Flatten Vectors](http
 The `d` value is almost 2k characters long, but it does render the icon correctly!
 
 <Figure>
-  <LucideIconAtomReallyFlatteningDemo />
+  <AtomReallyFlattening />
 </Figure>
 
 ## SVG Masks
@@ -135,13 +144,13 @@ and then apply that mask on a rectangle filling the size of the icon:
 ```
 
 <Figure>
-  <LucideIconAtomMaskDemo />
+  <AtomMask />
 </Figure>
 
 Now as you can see, we still use `fill="currentcolor"` here. But if you want, you can always use a stroke of width 24 to fill the rectangle, since it's only a simple rectangular shape and not a complex 2k-character shape now. Another good point is that you can customise the stroke width and similar stuff with code now.
 
 <Figure>
-  <LucideIconAtomMaskCustomiseStrokeWidthDemo />
+  <AtomMaskCustomiseStrokeWidth />
 </Figure>
 
 Of course, this step is more complicated and there's actually [an apparent Safari bug](https://stackoverflow.com/q/74233827) where it makes the quality of the SVG drop when you pinch zoom in (if you are on a Mac with a touchpad right now, you can try pinch zooming the above figure and see). But if you really can't flatten your icon, such as the use of `atom` inside my website that you are looking at, this is the only solution that I can find.
