@@ -1,37 +1,12 @@
-import type { GetResponseDataTypeFromEndpointMethod } from "@octokit/types";
-import { cache } from "react";
 import { Balancer } from "react-wrap-balancer";
 
 import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
 import { getAllSlugs, getPost } from "~/lib/blogs";
-import { octokit } from "~/lib/octokit";
 
 import type { PageProps, Params } from "./$types";
 import * as mdxComponents from "./components";
 import { ShareButton } from "./share-button";
-
-const getGitHubData = cache(async (slug: string) => {
-  let page = 1;
-  const commits: GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.repos.listCommits> = [];
-  const PER_PAGE = 100;
-  while (true) {
-    // eslint-disable-next-line no-await-in-loop -- Loops are not independent
-    const response = await octokit.rest.repos.listCommits({
-      owner: "joulev",
-      repo: "website",
-      path: `contents/blogs/${slug}.mdx`,
-      per_page: PER_PAGE,
-      page,
-    });
-    commits.concat(response.data);
-    if (response.data.length < PER_PAGE) break;
-    page++;
-  }
-  const updatedTimes = commits.length;
-  const lastUpdated = new Date(commits.at(0)?.commit.author?.date ?? new Date());
-  return { updatedTimes, lastUpdated };
-});
 
 function formatTime(date: Date) {
   // "10 December 2023"
@@ -39,10 +14,7 @@ function formatTime(date: Date) {
 }
 
 export default async function Page({ params }: PageProps) {
-  const [{ title, Content }, ghData] = await Promise.all([
-    getPost(params.slug),
-    getGitHubData(params.slug),
-  ]);
+  const { title, Content, lastUpdated, updatedTimes } = await getPost(params.slug);
 
   const sourceLink = `https://github.com/joulev/website/blob/main/contents/blogs/${params.slug}.mdx`;
   const historyLink = `https://github.com/joulev/website/commits/main/contents/blogs/${params.slug}.mdx`;
@@ -70,11 +42,8 @@ export default async function Page({ params }: PageProps) {
               </div>
               <div className="text-sm text-text-secondary">
                 Posted{" "}
-                <time
-                  dateTime={ghData.lastUpdated.toISOString()}
-                  title={ghData.lastUpdated.toISOString()}
-                >
-                  {formatTime(ghData.lastUpdated)}
+                <time dateTime={lastUpdated.toISOString()} title={lastUpdated.toISOString()}>
+                  {formatTime(lastUpdated)}
                 </time>
               </div>
             </div>
@@ -88,16 +57,13 @@ export default async function Page({ params }: PageProps) {
             <div className="flex-grow max-blog-lg:hidden" />
             <div className="sticky bottom-12 mx-auto hidden max-w-prose flex-col gap-3 blog-lg:flex [&_div]:text-sm">
               <div>
-                This article was edited {ghData.updatedTimes} time
-                {ghData.updatedTimes === 1 ? "" : "s"}.
+                This article was edited {updatedTimes} time
+                {updatedTimes === 1 ? "" : "s"}.
               </div>
               <div>
                 Last updated:{" "}
-                <time
-                  dateTime={ghData.lastUpdated.toISOString()}
-                  title={ghData.lastUpdated.toISOString()}
-                >
-                  {formatTime(ghData.lastUpdated)}
+                <time dateTime={lastUpdated.toISOString()} title={lastUpdated.toISOString()}>
+                  {formatTime(lastUpdated)}
                 </time>
                 .
               </div>
@@ -109,14 +75,14 @@ export default async function Page({ params }: PageProps) {
             </div>
             <div className="mx-auto flex w-full max-w-prose flex-col gap-3 blog-lg:hidden [&_div]:text-sm">
               <div>
-                This article was edited {ghData.updatedTimes} time
-                {ghData.updatedTimes === 1 ? "" : "s"}, last updated on{" "}
+                This article was edited {updatedTimes} time
+                {updatedTimes === 1 ? "" : "s"}, last updated on{" "}
                 <time
-                  dateTime={ghData.lastUpdated.toISOString()}
-                  title={ghData.lastUpdated.toISOString()}
+                  dateTime={lastUpdated.toISOString()}
+                  title={lastUpdated.toISOString()}
                   className="whitespace-nowrap"
                 >
-                  {formatTime(ghData.lastUpdated)}
+                  {formatTime(lastUpdated)}
                 </time>
                 .
               </div>
@@ -139,8 +105,8 @@ export async function generateStaticParams(): Promise<Params[]> {
 }
 
 export async function generateMetadata({ params }: { params: Params }) {
-  const { title } = await getPost(params.slug);
-  return { title };
+  const { title, description } = await getPost(params.slug);
+  return { title, description };
 }
 
 export const dynamicParams = false;
