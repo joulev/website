@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { getHighlighter, toShikiTheme } from "shikiji";
 import * as v from "valibot";
 
-import { env } from "~/env.mjs";
+import themeJson from "~/../.theme/theme.json";
 import { db } from "~/lib/db";
 import { codeSnippets } from "~/lib/db/schema";
 
@@ -21,8 +21,7 @@ function processCode(code: string) {
 }
 
 async function highlightCode(code: string, language: string) {
-  const themeJson: unknown = await fetch(env.EDITOR_THEME_URL).then(r => r.json());
-  const theme = toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
+  const theme = toShikiTheme(themeJson as unknown as Parameters<typeof toShikiTheme>[0]);
   const highlighter = await getHighlighter({ themes: [theme], langs: [language] });
   return highlighter.codeToHtml(code, { theme: theme.name, lang: language });
 }

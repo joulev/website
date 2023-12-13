@@ -1,12 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { type Highlighter, type ThemeRegistration, getHighlighter, toShikiTheme } from "shikiji";
 
+import themeJson from "~/../.theme/theme.json";
+
 interface ShikiEditorProps {
   name: string;
-  /**
-   * URL to the theme JSON
-   */
-  theme: string;
   language: string;
   tabSize?: number;
   value: string;
@@ -20,25 +18,13 @@ interface Shiki {
 
 const preloadedLanguages = ["tsx", "css", "html", "json"];
 
-async function getShikiTheme(theme: string) {
-  const themeJson: unknown = await fetch(theme).then(r => r.json());
-  return toShikiTheme(themeJson as Parameters<typeof toShikiTheme>[0]);
-}
-
 async function delay(ms: number): Promise<void> {
   return new Promise(resolve => {
     setTimeout(resolve, ms);
   });
 }
 
-export function ShikiEditor({
-  name,
-  theme,
-  language,
-  tabSize = 2,
-  value,
-  onChange,
-}: ShikiEditorProps) {
+export function ShikiEditor({ name, language, tabSize = 2, value, onChange }: ShikiEditorProps) {
   const [shiki, setShiki] = useState<Shiki | Error | null>(null);
   const [loadedLanguages, setLoadedLanguages] = useState<string[]>(preloadedLanguages);
   const [displayedLanguage, setDisplayedLanguage] = useState(language);
@@ -87,14 +73,16 @@ export function ShikiEditor({
   // Load Shiki
   useEffect(() => {
     (async () => {
-      const resolvedTheme = await getShikiTheme(theme);
+      const resolvedTheme = toShikiTheme(
+        themeJson as unknown as Parameters<typeof toShikiTheme>[0],
+      );
       const highlighter = await getHighlighter({
         themes: [resolvedTheme],
         langs: preloadedLanguages,
       });
       setShiki({ highlighter, theme: resolvedTheme });
     })().catch(() => setShiki(new Error()));
-  }, [theme]);
+  }, []);
 
   // Load languages that are not preloaded
   useEffect(() => {

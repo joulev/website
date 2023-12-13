@@ -2,12 +2,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "pnpm download-fonts && pnpm codegen && next build",
+    "build": "pnpm download-fonts && pnpm download-theme && pnpm codegen && next build",
     "codegen": "graphql-codegen --config codegen.ts",
     "db:push": "drizzle-kit push:pg",
     "deploy-worker": "wrangler deploy misc/multi-tenancy-worker.ts --name multi-tenant-on-website --compatibility-date 2023-12-05",
     "dev": "concurrently \"pnpm codegen --watch\" \"next dev\"",
     "download-fonts": "./scripts/download-fonts.sh",
+    "download-theme": "./scripts/download-theme.sh",
     "format": "prettier --write .",
     "lint": "next lint",
     "start": "next start"
