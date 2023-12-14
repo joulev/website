@@ -23,6 +23,7 @@ export default function Layout({ children }: LayoutProps) {
                 "url(\"data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg' %3E%3Ccircle cx='2' cy='2' r='2' fill='%23afafaf70' /%3E%3C/svg%3E\")",
               backgroundPosition: "13px 16px",
               maskImage: "linear-gradient(to top right, #0000 0%, #0003 50%, #000 100%)",
+              WebkitMaskImage: "linear-gradient(to top right, #0000 0%, #0003 50%, #000 100%)",
             }}
           />
           <div className="flex max-w-prose flex-col gap-6 max-blog-lg:mx-auto">
