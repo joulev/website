@@ -4,9 +4,8 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { Balancer } from "react-wrap-balancer";
 
-import { useCopyState } from "~/components/copy-button";
+import { CopyButton } from "~/components/copy-button";
 import { Check, Share } from "~/components/icons";
-import { Button } from "~/components/ui/button";
 import { Link } from "~/components/ui/link";
 import { incrementViews } from "~/lib/blogs/increment-view";
 import { formatTime } from "~/lib/blogs/utils";
@@ -57,31 +56,22 @@ export function ViewSourceHistory() {
 }
 
 export function ShareButton() {
-  const { showCopied, copy } = useCopyState();
+  const { slug } = useMetadata();
   return (
-    <Button
+    <CopyButton
+      content={`https://joulev.com/blogs/${slug}`}
       variants={{ size: "sm" }}
-      onClick={async () => {
-        try {
-          await navigator.share({ title: document.title, url: window.location.href });
-        } catch (e) {
-          // User simply cancelled the share, nothing to do here
-          if (e instanceof DOMException && e.name === "AbortError") return;
-          // Otherwise the share failed, we fallback to copying the link
-          await copy(window.location.href);
-        }
-      }}
-    >
-      {showCopied ? (
-        <>
-          <Check /> Link copied!
-        </>
-      ) : (
+      copyChildren={
         <>
           <Share /> Share
         </>
-      )}
-    </Button>
+      }
+      copiedChildren={
+        <>
+          <Check /> Link copied!
+        </>
+      }
+    />
   );
 }
 
