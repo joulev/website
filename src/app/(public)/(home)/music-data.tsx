@@ -8,7 +8,7 @@ import { MetadataCard } from "./metadata-card";
 export async function MusicData() {
   const client = await new YTMusic().initialize();
   if (!client) throw new Error("invariant: client is falsy");
-  const song = await client.getPlaylistVideos(env.RECENT_FAVOURITE_PLAYLIST_ID).then(a => a.at(0));
+  const song = await client.getPlaylistVideos(env.RECENT_FAVOURITE_PLAYLIST_ID).then(a => a.at(-1));
   if (!song) throw new Error("invariant: song is falsy");
   const thumbnail = song.thumbnails
     .sort((a, b) => a.width - b.width)
