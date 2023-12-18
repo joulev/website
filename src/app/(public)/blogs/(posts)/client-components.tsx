@@ -44,8 +44,8 @@ export function PostedDate() {
 
 export function ViewSourceHistory() {
   const { slug } = useMetadata();
-  const sourceLink = `https://github.com/joulev/website/blob/main/app/(public)/blogs/(posts)/${slug}/page.mdx`;
-  const historyLink = `https://github.com/joulev/website/commits/main/app/(public)/blogs/(posts)/${slug}/page.mdx`;
+  const sourceLink = `https://github.com/joulev/website/blob/main/src/app/(public)/blogs/(posts)/${slug}/page.mdx`;
+  const historyLink = `https://github.com/joulev/website/commits/main/src/app/(public)/blogs/(posts)/${slug}/page.mdx`;
   return (
     <div className="flex flex-row gap-4">
       <Link href={sourceLink}>View source</Link>
