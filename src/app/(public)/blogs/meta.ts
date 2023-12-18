@@ -8,7 +8,7 @@ export const meta: { slug: string; title: string; description: string; postedDat
   },
   {
     slug: "when-not-to-use-use-client-and-use-server",
-    title: 'When NOT to Use "use\u00A0client" and "use\u00A0server"',
+    title: 'When NOT to Use "use client" and "use server"',
     description:
       "It's surprisingly common to see people overusing these directives. This article explains when I would use or NOT use them.",
     postedDate: "2023-12-18",
