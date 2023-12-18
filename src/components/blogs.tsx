@@ -27,3 +27,19 @@ export function pre(props: React.ComponentPropsWithoutRef<"pre">) {
     </ScrollArea>
   );
 }
+
+export function code({ className, ...props }: React.ComponentPropsWithoutRef<"code">) {
+  return (
+    <code
+      {...props}
+      className={cn(
+        "rounded-[0.5em] bg-bg-darker p-1 [font-weight:inherit] before:content-[''] after:content-[''] [pre_&]:rounded-none [pre_&]:bg-transparent [pre_&]:p-0",
+        className,
+      )}
+    />
+  );
+}
+
+export function hr(props: React.ComponentPropsWithoutRef<"hr">) {
+  return <hr {...props} className="!-mx-[--p] !max-w-none" />;
+}

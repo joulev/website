@@ -137,6 +137,11 @@ export const GitHub = createIcon(
   <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85m0 0v4m0-4c-4.51 2-5-2-7-2" />,
 );
 
+export const Heart = createIcon(
+  "Heart",
+  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7 7-7Z" />,
+);
+
 export const Link = createIcon(
   "Link",
   <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />,
@@ -162,6 +167,11 @@ export const Menu = createIcon("Menu", <path d="M4 12h16M4 6h16M4 18h16" />);
 export const MessageSquare = createIcon(
   "MessageSquare",
   <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z" />,
+);
+
+export const MessageCircle = createIcon(
+  "MessageCircle",
+  <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22l5.9-2Z" />,
 );
 
 export const Move3d = createIcon(
@@ -208,6 +218,8 @@ export const Repeat = createIcon(
   <path d="m17 2 4 4m0 0-4 4m4-4H7a4 4 0 0 0-4 4v1m4 11-4-4m0 0 4-4m-4 4h14a4 4 0 0 0 4-4v-1" />,
 );
 
+export const Reply = createIcon("Reply", <path d="m9 17-5-5m0 0 5-5m-5 5h12a4 4 0 0 1 4 4v2" />);
+
 export const RotateCcw = createIcon(
   "RotateCcw",
   <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8m0 0V3m0 5h5" />,
@@ -241,6 +253,11 @@ export const Swords = createIcon(
 export const Trash = createIcon(
   "Trash",
   <path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />,
+);
+
+export const Twitter = createIcon(
+  "Twitter",
+  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2Z" />,
 );
 
 export const Tv2 = createIcon(

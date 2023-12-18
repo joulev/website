@@ -81,6 +81,7 @@ import {
   SidebarSectionItems,
 } from "~/components/ui/sidebar";
 import { Slider } from "~/components/ui/slider";
+import { Tweet } from "~/components/ui/tweet";
 import { cn } from "~/lib/cn";
 
 import {
@@ -550,6 +551,18 @@ function SliderShowcase() {
   );
 }
 
+function TweetShowcase() {
+  return (
+    <>
+      <hr />
+      <section className="flex flex-col gap-6">
+        <h2 className="text-xl font-bold">Tweet</h2>
+        <Tweet id="1736177027433316701" />
+      </section>
+    </>
+  );
+}
+
 export default function Page() {
   return (
     <main className="container flex max-w-screen-md flex-col gap-9">
@@ -594,6 +607,7 @@ export default function Page() {
       <SidebarShowcase />
       <SliderShowcase />
       <TextAreaShowcase />
+      <TweetShowcase />
     </main>
   );
 }

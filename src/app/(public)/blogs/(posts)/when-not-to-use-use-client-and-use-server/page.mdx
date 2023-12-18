@@ -1,0 +1,140 @@
+import { makeMetadata } from "~/lib/blogs/utils";
+
+export const metadata = makeMetadata("when-not-to-use-use-client-and-use-server");
+
+## TL;DR
+
+1. You should only use `"use client"` for client components that you intend to import to server components directly. For other client components, it's best to not use this directive.
+
+2. Use `"use server"` to mark [server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) only. Do NOT use it to mark server components.
+
+---
+
+Since the release of the [`app` router](https://nextjs.org/docs/app) in Next.js 13, and then the release of [server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations), React users have been able to use two brand new directives: `"use client"` and `"use server"`.
+
+It's hard to "under-use" these directives because whenever they are needed, they are _required_. So there are no cases where you should use them if not using them would still work. The reverse is not true, though – I've seen a lot of cases where these two directives are _overused_: people are using them where they should not be used.
+
+This article will explain my take, as a [Next.js contributor](https://github.com/vercel/next.js/commits?author=joulev) and a [community helper on the Next.js Discord server](https://nextjs-forum.com), on when you should, and should not, use these shiny new directives.
+
+## `"use client"`
+
+### What is it?
+
+React recently announced a new feature called [server components](https://react.dev/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components), and React developers as of now can use it in a number of frameworks, most notably the Next.js App Router.
+
+Server components are React components that only run on the server, and as far as the client-side code is concerned, these components are just static HTML. As a result, server components cannot be interactive, and they cannot use any client-side APIs. That means for 99% of apps, there need to be a way to define components that run on the client and behave like normal (old) React components. That's where `"use client"` comes in. It marks components, called _client components_, that should also be run and be interactive on the client.
+
+Basically, it is a network boundary where the server-side code ends and the client-side code begins.
+
+### When should you use it?
+
+When you have to. So if you use a framework that doesn't support React server components, then you can simply forget about this directive. But if you use, say, the Next.js App Router, then use this directive whenever you need a part of a page (could be a small button, but could also be a big WYSIWYG text editor) to be interactive.
+
+It's hard to go wrong on this front, because if you need to use this directive, you have to use it else there will be compilation errors.
+
+### When should you _not_ use it?
+
+This is where it gets interesting. To put it simply, **you should only use `"use client"` for client components that you intend to import to server components as well. For other client components, it's best to not use this directive.** Read on to know why.
+
+First, we need to remember when a component is considered a client component. It is [when it has `"use client"` at the top, or when it is imported to another client component](https://nextjs-faq.com/when-client-component-in-app-router). Hence, if you already have a client component, things _imported_ to it are already client components and you don't need `"use client"` – so we know the rule above is safe to use.
+
+But is it a good idea?
+
+Since client components marked with `"use client"` _can_ be imported directly to server components, I'd say these components should have the props as valid "entry points" for the network boundary: props should be serialisable and all functions passed to these props should be exclusively [server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations). Consider this example:
+
+```tsx
+export function Foo({ onClick }: { onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick}>
+      Click Me
+    </button>
+  );
+}
+```
+
+This component requires `onClick` which is a client-side event callback, so it cannot be imported directly to a server component – only other client components should consume it. But if you mark it with `"use client"`, that would notate that it is actually possible to directly import it to a server component (since you have `"use client"` anyway, regardless of where you import this function it is always a client component). That's not good.
+
+`Foo` is not a _valid entry point_ between the server-side parts and the client-side parts of your app. Hence it should not be marked with `"use client"`.
+
+If you set up the [TypeScript plugin](https://nextjs.org/docs/app/building-your-application/configuring/typescript#typescript-plugin) correctly, the function `Foo` above will actually give you a warning if you add `"use client"` to the top:
+
+> Props must be serializable for components in the `"use client"` entry file, `onClick` is invalid.
+
+which basically explains my point above.
+
+## `"use server"`
+
+### What is it?
+
+To quote the [React documentation](https://react.dev/reference/react/use-server),
+
+> `"use server"` marks server-side functions that can be called from client-side code.
+
+### When should you use it?
+
+Once again, it's hard to go wrong here. Server actions (marked by the `"use server"` directive) are basically a fancy way for you to do type-safe API calls that integrate tightly with the React router. So if you want to make an API call, where you want to run a certain function on the server (e.g. a database query, a call to a secret API with a secret API key, etc.) while having that function _importable_ to client-side logic as a regular `async` function, then time to use `"use server"`.
+
+### When should you _not_ use it?
+
+Contrary to what some people might think, `"use client"` and `"use server"` are not the opposite of each other. `"use server"` is not the directive to mark server components. In fact, the two directives are almost not related to each other at all.
+
+**Use `"use server"` to mark server actions only. Do NOT use it to mark server components.**
+
+First (and more obvious) reason is that, a `"use server"` file can only export asynchronous functions (because server actions must be asynchronous). So if you have this
+
+```tsx
+"use server";
+
+export default async function Page() {
+  return <div>Hello world</div>;
+}
+
+export const revalidate = 10;
+```
+
+you will get the following error:
+
+```
+  × Only async functions are allowed to be exported in a "use server" file.
+   ╭─[/Users/joulev/dev/www/debug/app/page.tsx:4:1]
+ 4 │   return <div>Hello world</div>;
+ 5 │ }
+ 6 │
+ 7 │ export const revalidate = 10;
+   · ─────────────────────────────
+   ╰────
+```
+
+But it's worse than just this and is actually a security vulnerability.
+
+Each server function (marked with `"use server"`) is given a server-side address that the client can call to trigger the function. For example, in this code
+
+```tsx
+<button
+  onClick={async () => {
+    await updateUser(); // a server function
+  }}
+>
+  Update
+</button>
+```
+
+what actually happens on the client-side is that there is a `POST` request to the same URL with the _server address_ of `updateUser` added to the request payload. The server then reads that address and triggers the function located at that address. So basically, all server functions have specific addresses that anyone can use to tell your server to trigger the action.
+
+So say you work at YouTube and want to display the dislike count. You make a server component for that. You only want the video creator to view the component, but since you already implemented authentication in the dashboard page, you decide you don't need to implement authentication in this component. Logically, since only the creator can view the dashboard page, that would mean the dislike count component is only viewable by the creator right?
+
+But if you mark that component with `"use server"`, it will then actually become a server action and will have a server address. Then, once an attacker somehow knows this address, they can run the component and get the (protected) content (in this case, the dislike count) without being the video creator.
+
+While I would fully support that YouTube somehow bring the dislike count back, if you make this vulnerability you would probably get fired.
+
+To conclude, I think it's worth it to repeat the rule: **Use `"use server"` to mark server actions only. Do NOT use it to mark server components.**
+
+## The two directives with very bad names
+
+As you can see, the opposite nature of the "server" and "client" words here have made the two directives very confusing. Far too many people are confused that the two directives are the exact opposite of each other, but it turns out they are not even related to each other. `"use client"` components [getting run and prerendered on the _server_](https://github.com/reactwg/server-components/discussions/4) also doesn't help with this confusion.
+
+Theo puts it nicely:
+
+<Tweet id="1736177027433316701" />
+
+But well, things are already set in stone. It's very hard to rename them now. So I guess we just have to live with these confusing names. And not use them where they should not be used.

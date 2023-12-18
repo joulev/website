@@ -9,6 +9,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./mdx-components.tsx",
   ],
   theme: {
     borderRadius: { DEFAULT: "1.25rem", full: "2rem", none: "0" },
