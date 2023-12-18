@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import tw from "tailwindcss/colors";
 
 const SLIDE_DURATION = 10000; // 10s
@@ -96,28 +93,19 @@ function getColour(index: number) {
   return tw[keys[index]][800];
 }
 
+function getRandomStartingIndex(seed: string) {
+  // accepted starting indices. 2-5 don't look good
+  const ARRAY = [0, 1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    // eslint-disable-next-line no-bitwise -- Gotta look fancy y'know
+    hash = (hash << 5) - hash + seed.charCodeAt(i);
+  }
+  return ARRAY[Math.abs(hash) % ARRAY.length];
+}
+
 export function Background() {
-  const [index, setIndex] = useState(6);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex(cur => (cur + 1 < keys.length ? cur + 1 : 0));
-    }, SLIDE_DURATION);
-    return () => clearInterval(interval);
-  }, []);
-  // useEffect(() => {
-  //   function onEnter() {
-  //     setIndex(cur => (cur + 1 < keys.length ? cur + 1 : 0));
-  //   }
-  //   function onBackspace() {
-  //     setIndex(cur => (cur - 1 >= 0 ? cur - 1 : keys.length - 1));
-  //   }
-  //   function onKeyDown(e: KeyboardEvent) {
-  //     if (e.key === "Enter") onEnter();
-  //     if (e.key === "Backspace") onBackspace();
-  //   }
-  //   window.addEventListener("keydown", onKeyDown);
-  //   return () => window.removeEventListener("keydown", onKeyDown);
-  // }, []);
+  const index = getRandomStartingIndex(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ?? "unknown");
   return (
     <ColouredBackground
       colours={[getColour(index), getColour(index + 2), getColour(index - 1), getColour(index - 2)]}
