@@ -23,7 +23,7 @@ function useMetadata() {
 export function PostTitle() {
   const { title } = useMetadata();
   return (
-    <h1 className="text-3xl font-bold md:text-4xl blog-lg:text-5xl">
+    <h1 className="text-3xl font-medium md:text-4xl blog-lg:text-5xl">
       <Balancer>{title}</Balancer>
     </h1>
   );

@@ -25,7 +25,7 @@ export default function Page() {
               return (
                 <PostCard slug={post.slug} key={post.slug}>
                   <div className="mx-auto flex w-full max-w-xl flex-col gap-3 p-6">
-                    <h2 className="text-lg font-bold md:text-xl">
+                    <h2 className="text-lg font-semibold md:text-xl">
                       <Balancer>{post.title}</Balancer>
                     </h2>
                     <p className="text-text-secondary">{post.description}</p>
