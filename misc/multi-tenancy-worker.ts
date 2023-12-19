@@ -19,6 +19,10 @@ export default {
         return getRedirectResponse(
           `https://joulev.dev/apps/${subdomain}${url.pathname}${url.search}`,
         );
+      case "lr":
+        return getRedirectResponse(
+          `https://joulev.dev/apps/live-reaction${url.pathname}${url.search}`,
+        );
       case "chat":
         return getRedirectResponse("https://joulev.dev/admin/chat");
       case "l":
