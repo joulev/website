@@ -18,6 +18,7 @@ const config: Config = {
     colors: {
       text: {
         primary: "var(--text-primary)",
+        prose: "var(--text-prose)",
         secondary: "var(--text-secondary)",
         tertiary: "var(--text-tertiary)",
       },
@@ -49,7 +50,7 @@ const config: Config = {
       typography: {
         DEFAULT: {
           css: {
-            "--tw-prose-body": "var(--text-primary)",
+            "--tw-prose-body": "var(--text-prose)",
             "--tw-prose-headings": "var(--text-primary)",
             "--tw-prose-lead": "var(--text-secondary)",
             "--tw-prose-links": "var(--text-primary)",

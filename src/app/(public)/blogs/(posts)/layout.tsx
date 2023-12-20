@@ -37,7 +37,7 @@ export default function Layout({ children }: LayoutProps) {
           </div>
         </div>
         <div className="flex flex-col divide-y divide-separator blog-lg:flex-row blog-lg:divide-x blog-lg:divide-y-0">
-          <article className="prose max-w-none px-[--p] py-12 text-[#ffffffba] [--p:24px] blog-lg:[--p:48px] [&>*]:mx-auto [&>*]:max-w-prose">
+          <article className="prose max-w-none px-[--p] py-12 [--p:24px] blog-lg:[--p:48px] [&>*]:mx-auto [&>*]:max-w-prose">
             {children}
             <div className="not-prose">
               <LinkButton href="/blogs" className="mt-6 text-text-primary no-underline">

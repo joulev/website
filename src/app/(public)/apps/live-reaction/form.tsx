@@ -15,7 +15,7 @@ export function Form() {
   const [input, setInput] = useState("");
   const emoteId = getEmoteIdFromInput(input);
   return (
-    <div className="flex flex-col gap-6 p-6 text-[#ffffffba]">
+    <div className="flex flex-col gap-6 p-6 text-text-prose">
       <div>
         Enter the emote ID (a number), or type a message containing only the emote and paste the
         message content here.

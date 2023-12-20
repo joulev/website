@@ -91,7 +91,7 @@ function TweetInReplyTo({ tweet }: { tweet: EnrichedTweet }) {
 
 function TweetBody({ tweet }: { tweet: EnrichedTweet }) {
   return (
-    <div className="prose text-[#ffffffba]">
+    <div className="prose">
       {tweet.entities.map((item, i) => {
         switch (item.type) {
           case "hashtag":
