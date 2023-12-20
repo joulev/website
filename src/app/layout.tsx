@@ -23,6 +23,7 @@ const mono = localFont({
   display: "swap",
   declarations: [{ prop: "size-adjust", value: "90%" }],
   variable: "--mono",
+  adjustFontFallback: false,
 });
 
 function VersionFooter() {

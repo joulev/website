@@ -1,4 +1,4 @@
-import { type EnrichedTweet, enrichTweet, formatNumber } from "react-tweet";
+import { type EnrichedTweet, enrichTweet } from "react-tweet";
 import { getTweet } from "react-tweet/api";
 
 import { ExternalLink, Heart, MessageCircle, Reply, Twitter } from "~/components/icons";
@@ -124,15 +124,13 @@ function TweetBody({ tweet }: { tweet: EnrichedTweet }) {
 }
 
 function TweetActions({ tweet }: { tweet: EnrichedTweet }) {
-  const favoriteCount = formatNumber(tweet.favorite_count);
-  const commentCount = formatNumber(tweet.conversation_count);
   return (
     <div className="flex flex-row flex-wrap gap-3">
-      <LinkButton href={tweet.like_url} variants={{ size: "sm" }}>
-        <Heart /> {favoriteCount}
+      <LinkButton href={tweet.like_url} variants={{ size: "icon-sm" }}>
+        <Heart />
       </LinkButton>
-      <LinkButton href={tweet.reply_url} variants={{ size: "sm" }}>
-        <MessageCircle /> {commentCount}
+      <LinkButton href={tweet.reply_url} variants={{ size: "icon-sm" }}>
+        <MessageCircle />
       </LinkButton>
       <LinkButton href={tweet.url} variants={{ size: "sm" }}>
         <ExternalLink /> Go to tweet
