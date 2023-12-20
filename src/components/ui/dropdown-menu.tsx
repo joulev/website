@@ -38,14 +38,14 @@ export const DropdownMenuSubTrigger = forwardRef<
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
     className={cn(
-      "hover-bg relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active [&_svg]:h-4 [&_svg]:w-4",
+      "hover-bg relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active [&_svg]:size-4",
       className,
     )}
     {...props}
     {...useHoverBackground({ style, onMouseMove })}
   >
     {children}
-    <ChevronRight className="ml-auto h-4 w-4" />
+    <ChevronRight className="ml-auto size-4" />
   </DropdownMenuPrimitive.SubTrigger>
 ));
 DropdownMenuSubTrigger.displayName = DropdownMenuPrimitive.SubTrigger.displayName;
@@ -57,7 +57,7 @@ export const DropdownMenuSubContent = forwardRef<
   <DropdownMenuPrimitive.SubContent ref={ref} sideOffset={sideOffset} asChild>
     <Card
       className={cn(
-        "z-50 flex min-w-[8rem] flex-col gap-1 overflow-hidden rounded-full border p-3 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        "z-50 flex min-w-32 flex-col gap-1 overflow-hidden rounded-full border p-3 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         className,
       )}
       {...props}
@@ -74,7 +74,7 @@ export const DropdownMenuContent = forwardRef<
     <DropdownMenuPrimitive.Content ref={ref} sideOffset={sideOffset} asChild>
       <Card
         className={cn(
-          "z-50 flex min-w-[8rem] flex-col gap-1 overflow-hidden rounded-full border p-3 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+          "z-50 flex min-w-32 flex-col gap-1 overflow-hidden rounded-full border p-3 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
           className,
         )}
         {...props}
@@ -91,7 +91,7 @@ export const DropdownMenuItem = forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "hover-bg relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-[disabled]:pointer-events-none data-[disabled]:text-text-tertiary [&_svg]:h-4 [&_svg]:w-4",
+      "hover-bg relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-[disabled]:pointer-events-none data-[disabled]:text-text-tertiary [&_svg]:size-4",
       className,
     )}
     {...props}
@@ -107,7 +107,7 @@ export const DropdownMenuCheckboxItem = forwardRef<
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      "hover-bg group/dropdown-checkbox relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:h-4 [&_svg]:w-4",
+      "hover-bg group/dropdown-checkbox relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:size-4",
       className,
     )}
     checked={checked}
@@ -117,7 +117,7 @@ export const DropdownMenuCheckboxItem = forwardRef<
     <DropdownMenuPrimitive.ItemIndicator>
       <Check />
     </DropdownMenuPrimitive.ItemIndicator>
-    <div className="h-4 w-4 group-data-[state=checked]/dropdown-checkbox:hidden" />
+    <div className="size-4 group-data-[state=checked]/dropdown-checkbox:hidden" />
     {children}
   </DropdownMenuPrimitive.CheckboxItem>
 ));
@@ -130,16 +130,16 @@ export const DropdownMenuRadioItem = forwardRef<
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      "hover-bg group/dropdown-checkbox relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:h-4 [&_svg]:w-4",
+      "hover-bg group/dropdown-checkbox relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:size-4",
       className,
     )}
     {...props}
     {...useHoverBackground({ style, onMouseMove })}
   >
     <DropdownMenuPrimitive.ItemIndicator>
-      <Circle className="!h-2 !w-2 fill-current" />
+      <Circle className="!size-2 fill-current" />
     </DropdownMenuPrimitive.ItemIndicator>
-    <div className="h-2 w-2 group-data-[state=checked]/dropdown-checkbox:hidden" />
+    <div className="size-2 group-data-[state=checked]/dropdown-checkbox:hidden" />
     {children}
   </DropdownMenuPrimitive.RadioItem>
 ));

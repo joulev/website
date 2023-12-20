@@ -26,7 +26,7 @@ export function MetadataCard({
             variants={{ variant: "ghost", size: "icon-sm" }}
             className="-m-1.5 text-text-secondary hover:text-text-primary"
           >
-            <Icon className="h-4 w-4" />
+            <Icon className="size-4" />
           </LinkButton>
         </div>
         {right}

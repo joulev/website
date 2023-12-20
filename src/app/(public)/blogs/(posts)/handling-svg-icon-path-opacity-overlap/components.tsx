@@ -13,7 +13,7 @@ export function Problem() {
       <div className="grid grid-cols-2 divide-x divide-separator">
         <div className="flex flex-col items-center gap-3 pr-6">
           <svg
-            className="h-24 w-24"
+            className="size-24"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -45,7 +45,7 @@ export function Problem() {
         </div>
         <div className="flex flex-col items-center gap-3 pl-6">
           <svg
-            className="h-24 w-24"
+            className="size-24"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -100,7 +100,7 @@ export function FlaskConicalFlattening() {
       <div className="grid grid-cols-2 divide-x divide-separator">
         <div className="flex flex-col items-center gap-3 pr-6">
           <svg
-            className="h-24 w-24"
+            className="size-24"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -130,7 +130,7 @@ export function FlaskConicalFlattening() {
         </div>
         <div className="flex flex-col items-center gap-3 pl-6">
           <svg
-            className="h-24 w-24"
+            className="size-24"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -170,7 +170,7 @@ export function AtomReallyFlattening() {
       <div className="grid grid-cols-2 divide-x divide-separator">
         <div className="flex flex-col items-center gap-3 pr-6">
           <svg
-            className="h-24 w-24"
+            className="size-24"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -203,7 +203,7 @@ export function AtomReallyFlattening() {
         </div>
         <div className="flex flex-col items-center gap-3 pl-6">
           <svg
-            className="h-24 w-24"
+            className="size-24"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -253,7 +253,7 @@ export function AtomMask() {
       <div className="grid grid-cols-2 divide-x divide-separator">
         <div className="flex flex-col items-center gap-3 pr-6">
           <svg
-            className="h-24 w-24"
+            className="size-24"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -283,7 +283,7 @@ export function AtomMask() {
         </div>
         <div className="flex flex-col items-center gap-3 pl-6">
           <svg
-            className="h-24 w-24"
+            className="size-24"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -333,7 +333,7 @@ export function AtomMaskCustomiseStrokeWidth() {
       <div className="grid grid-cols-2 divide-x divide-separator">
         <div className="flex flex-col items-center gap-3 pr-6">
           <svg
-            className="h-24 w-24"
+            className="size-24"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -360,7 +360,7 @@ export function AtomMaskCustomiseStrokeWidth() {
         </div>
         <div className="flex flex-col items-center gap-3 pl-6">
           <svg
-            className="h-24 w-24"
+            className="size-24"
             width="24"
             height="24"
             viewBox="0 0 24 24"

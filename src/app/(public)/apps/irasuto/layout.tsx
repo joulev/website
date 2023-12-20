@@ -23,7 +23,7 @@ function CreditDialog() {
           転載について <span className="text-xs">(ja)</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-[80vh] overflow-y-auto sm:max-w-[600px]">
+      <DialogContent className="max-h-[80vh] overflow-y-auto sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle>絵の転載について</DialogTitle>
         </DialogHeader>

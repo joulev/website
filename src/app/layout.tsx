@@ -35,7 +35,7 @@ function VersionFooter() {
   return (
     <footer className="px-6 pb-12 text-center text-xs text-text-tertiary">
       <Link unstyled href={url} className="transition hover:text-text-secondary">
-        <GitHub className="inline h-3 w-3" /> joulev/website@
+        <GitHub className="inline size-3" /> joulev/website@
         <span className="font-mono">{label}</span>
       </Link>
     </footer>

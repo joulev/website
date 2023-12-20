@@ -30,7 +30,7 @@ export function LinkUpdateModal({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{link?.slug ?? "Create a new link"}</DialogTitle>
           <DialogDescription>Manage the URL of this short link.</DialogDescription>

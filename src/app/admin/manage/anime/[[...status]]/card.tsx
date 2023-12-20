@@ -72,7 +72,7 @@ function UpdateItemScore({ item }: { item: AnimeListItem }) {
           <Pencil />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{getTitle(item.media?.title)}</DialogTitle>
           <DialogDescription>Update component scores of this anime</DialogDescription>

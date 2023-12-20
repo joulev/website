@@ -26,9 +26,9 @@ export default async function Page({ params }: PageProps) {
         <div className="flex flex-row items-center justify-between px-6 py-4 font-mono text-sm">
           <div className="flex flex-row items-center gap-6">
             <div className="flex flex-row gap-2">
-              <div className="h-3 w-3 rounded-full bg-text-tertiary" />
-              <div className="h-3 w-3 rounded-full bg-text-tertiary" />
-              <div className="h-3 w-3 rounded-full bg-text-tertiary" />
+              <div className="size-3 rounded-full bg-text-tertiary" />
+              <div className="size-3 rounded-full bg-text-tertiary" />
+              <div className="size-3 rounded-full bg-text-tertiary" />
             </div>
             <div className="flex cursor-default select-none flex-row text-text-secondary max-sm:hidden">
               <div className="mr-3 border-r border-separator pr-3">{snippet.slug}</div>

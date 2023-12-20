@@ -98,7 +98,7 @@ export const NavigationMenuTrigger = forwardRef<
   >
     {children}{" "}
     <ChevronDown
-      className="relative ml-2 h-4 w-4 transition-transform group-data-[state=open]/menu-trigger:rotate-180"
+      className="relative ml-2 size-4 transition-transform group-data-[state=open]/menu-trigger:rotate-180"
       aria-hidden="true"
     />
   </NavigationMenuPrimitive.Trigger>

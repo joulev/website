@@ -514,7 +514,7 @@ function DialogShowcase() {
         <DialogTrigger asChild>
           <Button>About Lipsum</Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>Lipsum</DialogTitle>
             <DialogDescription>

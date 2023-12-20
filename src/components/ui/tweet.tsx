@@ -77,7 +77,7 @@ function TweetInReplyTo({ tweet }: { tweet: EnrichedTweet }) {
   if (!tweet.in_reply_to_url) return null;
   return (
     <div className="text-sm text-text-secondary">
-      <Reply className="inline-block h-4 w-4" /> Replying to{" "}
+      <Reply className="inline-block size-4" /> Replying to{" "}
       <Link
         href={tweet.in_reply_to_url}
         className="text-text-primary underline-offset-4 hover:underline"

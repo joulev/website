@@ -62,9 +62,9 @@ function BackgroundPattern() {
     .fill(null)
     .map(_ => colours[Math.floor(seededRandom() * colours.length)]);
   return (
-    <div className="grid-rows-7 absolute -left-6 -top-6 -z-10 grid grid-cols-7 gap-1">
+    <div className="absolute -left-6 -top-6 -z-10 grid grid-cols-7 grid-rows-7 gap-1">
       {days.map((c, i) => (
-        <div key={i} className="h-3 w-3 rounded-[0.2rem]" style={{ background: c }} />
+        <div key={i} className="size-3 rounded-[0.2rem]" style={{ background: c }} />
       ))}
     </div>
   );
@@ -86,7 +86,7 @@ export async function GitHubStats() {
       left={
         <>
           <BackgroundPattern />
-          <div className="h-18 w-18 shrink-0" />
+          <div className="size-18 shrink-0" />
         </>
       }
       right={

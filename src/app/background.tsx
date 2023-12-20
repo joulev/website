@@ -10,7 +10,7 @@ function getBackgroundCSS(hex: string) {
 function ColouredBackground({ colours }: { colours: string[] }) {
   return (
     <div
-      className="fixed left-1/2 top-1/2 -z-50 min-h-[100lvh] min-w-full origin-center -translate-x-1/2 -translate-y-1/2 overflow-hidden"
+      className="fixed left-1/2 top-1/2 -z-50 min-h-lvh min-w-full origin-center -translate-x-1/2 -translate-y-1/2 overflow-hidden"
       style={{ aspectRatio: `${W} / ${H}` }}
     >
       <div

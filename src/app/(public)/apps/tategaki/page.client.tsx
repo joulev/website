@@ -34,7 +34,7 @@ function Furigana({ furigana }: { furigana: string }) {
 function Character({ character: { char, furigana, count } }: { character: Type.Character }) {
   return (
     <span
-      className="relative mr-6 grid h-6 w-6 place-items-center animate-in fade-in slide-in-from-top-1 fill-mode-both"
+      className="relative mr-6 grid size-6 place-items-center animate-in fade-in slide-in-from-top-1 fill-mode-both"
       style={{ animationDelay: `${count * 3}ms` }}
     >
       {char[0]}

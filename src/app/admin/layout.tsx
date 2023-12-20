@@ -64,7 +64,7 @@ function Navigation() {
     <div className="fixed left-1/2 top-12 -translate-x-1/2">
       <NavigationMenu>
         <NavigationMenuList>
-          <NavigationMenuItem className="grid h-10 w-10 place-items-center rounded-full">
+          <NavigationMenuItem className="grid size-10 place-items-center rounded-full">
             <Link href="/" className="group/logo-link" unstyled>
               <Logo
                 logoWidth={18}

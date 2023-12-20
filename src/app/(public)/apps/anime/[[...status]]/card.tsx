@@ -61,7 +61,7 @@ export function Card({ item, variant }: { item: AnimeListItem; variant: AnimeCar
             <BottomPart item={item} variant={variant} />
           </div>
           {item.media?.coverImage?.medium ? (
-            <div className="relative hidden min-h-[64px] w-12 shrink-0 overflow-clip rounded-[0.5rem] sm:block">
+            <div className="relative hidden min-h-16 w-12 shrink-0 overflow-clip rounded-[0.5rem] sm:block">
               <Image
                 src={item.media.coverImage.medium}
                 alt="cover"
@@ -71,7 +71,7 @@ export function Card({ item, variant }: { item: AnimeListItem; variant: AnimeCar
               />
             </div>
           ) : (
-            <div className="bg-daw-main-200 hidden min-h-[96px] w-18 shrink-0 rounded sm:block" />
+            <div className="bg-daw-main-200 hidden min-h-24 w-18 shrink-0 rounded sm:block" />
           )}
         </div>
       </Link>

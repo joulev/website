@@ -125,7 +125,7 @@ export const SidebarSectionItem = forwardRef<
     <Component
       {...props}
       className={cn(
-        "flex flex-row items-center gap-3 px-3 py-2 [&_svg]:h-6 [&_svg]:w-6 [&_svg]:shrink-0 [&_svg]:text-text-secondary",
+        "flex flex-row items-center gap-3 px-3 py-2 [&_svg]:size-6 [&_svg]:shrink-0 [&_svg]:text-text-secondary",
         "hover-bg relative rounded transition hover:bg-bg-idle active:bg-bg-active",
         active && "bg-bg-idle",
         className,
