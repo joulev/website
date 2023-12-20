@@ -21,8 +21,11 @@ export const Figure = figure;
 
 export function pre(props: React.ComponentPropsWithoutRef<"pre">) {
   return (
-    <ScrollArea className="mx-auto max-w-prose overflow-x-auto px-0 py-3">
-      <pre {...props} className="m-0 rounded-none bg-transparent p-0" />
+    // These overflow-y-hidden are needed to prevent y-direction scrolling, which doesn't occur on
+    // Chromium-based browsers and Safari, but somehow shows up on Firefox. Why it even shows up, I
+    // don't know...
+    <ScrollArea className="mx-auto max-w-prose overflow-x-auto overflow-y-hidden px-0 py-3">
+      <pre {...props} className="m-0 overflow-y-hidden rounded-none bg-transparent p-0" />
       <ScrollBar orientation="horizontal" />
     </ScrollArea>
   );
