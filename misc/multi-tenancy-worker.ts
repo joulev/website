@@ -25,6 +25,8 @@ export default {
         );
       case "chat":
         return getRedirectResponse("https://joulev.dev/admin/chat");
+      case "ma":
+        return getRedirectResponse("https://joulev.dev/admin/manage/anime");
       case "l":
         if (url.pathname === "/") return getRedirectResponse("https://joulev.dev/apps/link");
         return getRedirectResponse(`https://joulev.dev/apps/link/l${url.pathname}${url.search}`);
