@@ -225,6 +225,11 @@ export const RotateCcw = createIcon(
   <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8m0 0V3m0 5h5" />,
 );
 
+export const Save = createIcon(
+  "Save",
+  <path d="M17 21v-8H7v8M7 3v5h8m4 13H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" />,
+);
+
 export const Share = createIcon(
   "Share",
   <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8m-4-6-4-4m0 0L8 6m4-4v13" />,
