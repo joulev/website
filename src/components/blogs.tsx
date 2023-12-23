@@ -36,7 +36,7 @@ export function code({ className, ...props }: React.ComponentPropsWithoutRef<"co
     <code
       {...props}
       className={cn(
-        "rounded-[0.5em] bg-bg-darker p-1 [font-weight:inherit] before:content-[''] after:content-[''] [pre_&]:rounded-none [pre_&]:bg-transparent [pre_&]:p-0",
+        "inline-block rounded-[0.5em] bg-bg-darker px-1 [font-weight:inherit] before:content-[''] after:content-[''] [pre_&]:rounded-none [pre_&]:bg-transparent [pre_&]:p-0",
         className,
       )}
     />
