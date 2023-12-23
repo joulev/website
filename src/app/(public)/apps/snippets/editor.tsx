@@ -175,11 +175,11 @@ function SaveButton() {
       type="submit"
       // The button is ever so slightly a bit shorter than the select (intentional), so we add self-center
       // to not make it higher than it should be
-      className="w-full self-center sm:w-auto"
+      className="self-center"
       variants={{ variant: "primary", size: "sm" }}
       disabled={pending}
     >
-      <Save /> Save
+      <Save className="max-sm:hidden" /> Save
     </Button>
   );
 }
@@ -203,7 +203,7 @@ export function Editor() {
         </div>
         <div className="flex flex-row gap-3">
           <Select name="language" value={language} onValueChange={setLanguage}>
-            <SelectTrigger className="min-h-8 w-full px-3 py-1 sm:w-40">
+            <SelectTrigger className="min-h-8 w-32 px-3 py-1 sm:w-40">
               <SelectValue placeholder="Select language" />
             </SelectTrigger>
             <SelectContent className="max-h-56">
@@ -219,7 +219,7 @@ export function Editor() {
             </SelectContent>
           </Select>
           <Select value={tabSize.toString()} onValueChange={val => setTabSize(parseInt(val))}>
-            <SelectTrigger className="min-h-8 w-full px-3 py-1 sm:w-36">
+            <SelectTrigger className="min-h-8 w-36 px-3 py-1 max-sm:hidden">
               <SelectValue placeholder="Select tabsize" />
             </SelectTrigger>
             <SelectContent>

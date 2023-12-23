@@ -34,9 +34,9 @@ export const SelectTrigger = forwardRef<
     {...props}
     ref={ref}
   >
-    {children}
+    <span className="truncate">{children}</span>
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className="size-4 text-text-tertiary" />
+      <ChevronDown className="size-4 shrink-0 text-text-tertiary" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));
