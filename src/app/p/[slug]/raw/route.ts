@@ -11,6 +11,9 @@ export const GET: RouteHandler = async (_, { params }) => {
       // idc
       "Content-Type": "text/plain; charset=utf-8",
       "Cache-Control": "public, max-age=31536000, immutable",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
     },
   });
 };
