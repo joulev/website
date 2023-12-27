@@ -255,6 +255,8 @@ export const Swords = createIcon(
   <path d="M14.5 17.5 3 6V3h3l11.5 11.5M13 19l6-6m-3 3 4 4m-1 1 2-2M14.5 6.5 18 3h3v3l-3.5 3.5M5 14l4 4m-2-1-3 3m-1-1 2 2" />,
 );
 
+export const Text = createIcon("Text", <path d="M17 6.1H3m18 6H3M15.1 18H3" />);
+
 export const Trash = createIcon(
   "Trash",
   <path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />,

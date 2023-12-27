@@ -1,21 +1,18 @@
-import { eq } from "drizzle-orm";
 import type { Metadata } from "next";
-import { unstable_cache as cache } from "next/cache";
 import { notFound } from "next/navigation";
 
-import { CopyButton } from "~/components/copy-button";
-import { Code, Link, Plus } from "~/components/icons";
-import { LinkButton } from "~/components/ui/button";
+import { Code, Link, Plus, Share, Text } from "~/components/icons";
+import { Button, LinkButton } from "~/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
 import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
-import { db } from "~/lib/db";
-import { codeSnippets } from "~/lib/db/schema";
 
 import type { PageProps, Params } from "./$types";
-
-const getSnippet = cache(async (slug: string) => {
-  const results = await db.select().from(codeSnippets).where(eq(codeSnippets.slug, slug)).limit(1);
-  return results.at(0);
-});
+import { DropdownMenuItemCopyButton } from "./dropdown-menu-item-copy-button";
+import { getSnippet } from "./get-snippet";
 
 export default async function Page({ params }: PageProps) {
   const snippet = await getSnippet(params.slug);
@@ -36,26 +33,31 @@ export default async function Page({ params }: PageProps) {
             </div>
           </div>
           <div className="flex flex-row gap-3">
-            <CopyButton
-              className="[--button-gap:0.5rem] max-md:hidden"
-              content={snippet.code}
-              variants={{ size: "sm" }}
-              copyChildren={
-                <>
-                  <Code /> Copy code
-                </>
-              }
-            />
-            <CopyButton
-              className="[--button-gap:0.5rem]"
-              content={`https://joulev.dev/p/${snippet.slug}`}
-              variants={{ size: "sm" }}
-              copyChildren={
-                <>
-                  <Link /> Copy link
-                </>
-              }
-            />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variants={{ size: "sm" }}>
+                  <Share />
+                  Share
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-44 font-mono">
+                <DropdownMenuItemCopyButton content={snippet.code} icon={<Code />}>
+                  Copy code
+                </DropdownMenuItemCopyButton>
+                <DropdownMenuItemCopyButton
+                  content={`https://joulev.dev/p/${snippet.slug}`}
+                  icon={<Link />}
+                >
+                  Copy link
+                </DropdownMenuItemCopyButton>
+                <DropdownMenuItemCopyButton
+                  content={`https://joulev.dev/p/${snippet.slug}/raw`}
+                  icon={<Text />}
+                >
+                  Copy link raw
+                </DropdownMenuItemCopyButton>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <LinkButton
               className="[--button-gap:0.5rem]"
               href="https://joulev.dev/apps/snippets"
