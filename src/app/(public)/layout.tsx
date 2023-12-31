@@ -13,6 +13,7 @@ import {
   NavigationMenuMainLink,
   NavigationMenuTrigger,
 } from "~/components/ui/navigation-menu";
+import { VersionFooter } from "~/components/version-footer";
 
 const navItems: { title: string; href: string; description: string }[] = [
   {
@@ -129,6 +130,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <SessionProvider>
       <div className="pb-12 pt-[152px]">{children}</div>
+      <VersionFooter />
       <Navigation />
     </SessionProvider>
   );

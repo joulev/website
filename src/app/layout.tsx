@@ -5,8 +5,6 @@ import { AxiomWebVitals } from "next-axiom";
 import { Hanken_Grotesk as HankenGrotesk } from "next/font/google";
 import localFont from "next/font/local";
 
-import { GitHub } from "~/components/icons";
-import { Link } from "~/components/ui/link";
 import { cn } from "~/lib/cn";
 
 import { Background } from "./background";
@@ -26,22 +24,6 @@ const mono = localFont({
   adjustFontFallback: false,
 });
 
-function VersionFooter() {
-  const sha = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA;
-  const url = sha
-    ? `https://github.com/joulev/website/commit/${sha}`
-    : "https://github.com/joulev/website";
-  const label = sha ? sha.slice(0, 7) : "unknown";
-  return (
-    <footer className="px-6 pb-12 text-center text-xs text-text-tertiary">
-      <Link unstyled href={url} className="transition hover:text-text-secondary">
-        <GitHub className="inline size-3" /> joulev/website@
-        <span className="font-mono">{label}</span>
-      </Link>
-    </footer>
-  );
-}
-
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -50,7 +32,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         <Background />
         {children}
-        <VersionFooter />
         <Analytics />
         <SpeedInsights />
         <AxiomWebVitals />
