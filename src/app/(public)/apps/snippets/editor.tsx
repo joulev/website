@@ -2,8 +2,14 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
-import { bundledLanguages } from "shikiji";
-import { type Highlighter, type ThemeRegistration, getHighlighter, toShikiTheme } from "shikiji";
+import {
+  type Highlighter,
+  type ThemeRegistrationAny,
+  type ThemeRegistrationResolved,
+  bundledLanguages,
+  getHighlighter,
+  normalizeTheme,
+} from "shikiji";
 
 import themeJson from "~/../.theme/theme.json";
 import { Save } from "~/components/icons";
@@ -31,7 +37,7 @@ interface ShikiEditorProps {
 
 interface Shiki {
   highlighter: Highlighter;
-  theme: ThemeRegistration;
+  theme: ThemeRegistrationResolved;
 }
 
 const preloadedLanguages = ["tsx", "css", "html", "json"];
@@ -91,9 +97,7 @@ function ShikiEditor({ name, language, tabSize = 2, value, onChange }: ShikiEdit
   // Load Shiki
   useEffect(() => {
     (async () => {
-      const resolvedTheme = toShikiTheme(
-        themeJson as unknown as Parameters<typeof toShikiTheme>[0],
-      );
+      const resolvedTheme = normalizeTheme(themeJson as unknown as ThemeRegistrationAny);
       const highlighter = await getHighlighter({
         themes: [resolvedTheme],
         langs: preloadedLanguages,
