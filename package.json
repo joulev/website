@@ -85,7 +85,7 @@
     "typescript": "5.3.3",
     "valibot": "0.25.0",
     "wrangler": "3.22.1",
-    "ytmusic-api": "4.4.0",
+    "ytmusic-api": "5.0.1",
     "zod": "3.22.4"
   }
 }
