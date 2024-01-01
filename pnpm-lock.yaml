@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  ytmusic-api@4.4.0:
-    hash: f3kahw6eczgoujoh5s4zhwljd4
-    path: patches/ytmusic-api@4.4.0.patch
-
 dependencies:
   '@auth/core':
     specifier: 0.19.0
@@ -225,7 +220,7 @@ dependencies:
     version: 3.22.1
   ytmusic-api:
     specifier: 4.4.0
-    version: 4.4.0(patch_hash=f3kahw6eczgoujoh5s4zhwljd4)
+    version: 4.4.0
   zod:
     specifier: 3.22.4
     version: 3.22.4
@@ -12760,7 +12755,7 @@ packages:
       stacktracey: 2.1.8
     dev: false
 
-  /ytmusic-api@4.4.0(patch_hash=f3kahw6eczgoujoh5s4zhwljd4):
+  /ytmusic-api@4.4.0:
     resolution: {integrity: sha512-nfpaCWryHFN7b/RHagjEX60giF92lGIbos/UJVibLhPgpBe2/Co1ezmh1+6TKxCo4CgHTPL/+mrQZWu6NzEHYA==}
     dependencies:
       axios: 0.27.2
@@ -12770,7 +12765,6 @@ packages:
     transitivePeerDependencies:
       - debug
     dev: false
-    patched: true
 
   /zod-to-json-schema@3.22.1(zod@3.22.4):
     resolution: {integrity: sha512-bVSWQ2JF3ZglQefafkM+Kk9KQ2fqqSi4VhxWaup1NJX9FS5jDg0EkEioVCWui0PiIQvcXJUjmN71bg672+a+tA==}

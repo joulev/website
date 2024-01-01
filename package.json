@@ -87,10 +87,5 @@
     "wrangler": "3.22.1",
     "ytmusic-api": "4.4.0",
     "zod": "3.22.4"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "ytmusic-api@4.4.0": "patches/ytmusic-api@4.4.0.patch"
-    }
   }
 }
