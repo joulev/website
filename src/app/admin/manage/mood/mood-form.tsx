@@ -74,6 +74,7 @@ export function MoodForm() {
         <TextArea required value={comment} onValueChange={setComment} className="h-48" />
       </div>
       <Button
+        type="submit"
         variants={{ variant: "primary" }}
         className="w-full"
         disabled={!canSubmit || isSubmitting}
