@@ -1,6 +1,7 @@
 import {
   boolean,
   integer,
+  pgEnum,
   pgTable,
   serial,
   smallint,
@@ -48,3 +49,14 @@ export const blogPosts = pgTable("blog_posts", {
 });
 export type BlogPost = typeof blogPosts.$inferSelect;
 export type NewBlogPost = typeof blogPosts.$inferInsert;
+
+export const mood = pgEnum("mood", ["horrible", "bad", "meh", "good", "wonderful"]);
+export const dailyMoods = pgTable("daily_moods", {
+  id: serial("id").primaryKey(),
+  date: timestamp("date").notNull().unique(),
+  mood: mood("mood").notNull(),
+  comment: varchar("comment", { length: 65_536 }).notNull(),
+});
+export type DailyMood = typeof dailyMoods.$inferSelect;
+export type NewDailyMood = typeof dailyMoods.$inferInsert;
+export type Mood = DailyMood["mood"];

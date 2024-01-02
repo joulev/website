@@ -22,9 +22,7 @@ export async function MusicData() {
       right={
         <>
           <div className="truncate text-lg font-semibold">{song.name}</div>
-          <div className="truncate text-sm text-text-secondary">
-            {song.artists.map(artist => artist.name).join(" & ")}
-          </div>
+          <div className="truncate text-sm text-text-secondary">{song.artist.name}</div>
         </>
       }
       title="Recent favourite"
