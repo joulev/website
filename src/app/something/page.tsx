@@ -320,7 +320,7 @@ function Map() {
 
 export default function Page() {
   return (
-    <MapWrapper config={{ mapWidth: MAP_WIDTH, mapHeight: MAP_HEIGHT, maximumAllowedOffset: 300 }}>
+    <MapWrapper>
       <Map />
     </MapWrapper>
   );
