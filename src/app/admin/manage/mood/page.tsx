@@ -21,13 +21,9 @@ import { MoodForm } from "./mood-form";
 
 const getHistoricalMoods = cache(() => db.select().from(dailyMoods), [], { tags: ["daily-moods"] });
 
-function renderDate(date: Date) {
-  const formatter = new Intl.DateTimeFormat("en-GB", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  });
-  return formatter.format(date);
+function renderDate(date: Date | string) {
+  const formatter = new Intl.DateTimeFormat("en-US", { day: "2-digit", month: "long" });
+  return formatter.format(new Date(date));
 }
 
 export default async function Page() {
