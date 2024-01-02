@@ -15,9 +15,13 @@
     --bg-disabled: #afafaf0c;
     --bg-button-hover-bg: #afafaf30;
     --separator: #afafaf1c;
+    --red: #ff453a;
+    --orange: #ff9f0a;
+    --yellow: #ffd60a;
+    --green: #32d74b;
+    --mint: #66c4df;
     --cyan: #5ac8f5;
     --blue: #0a84ff;
-    --red: #ff453a;
   }
 }
 
