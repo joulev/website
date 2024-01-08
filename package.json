@@ -75,6 +75,7 @@
     "react-markdown": "9.0.1",
     "react-tweet": "3.2.0",
     "react-wrap-balancer": "1.1.0",
+    "react-zoom-pan-pinch": "3.3.0",
     "rehype-pretty-code": "0.12.3",
     "remark-gfm": "4.0.0",
     "sharp": "0.33.1",

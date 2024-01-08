@@ -188,6 +188,9 @@ dependencies:
   react-wrap-balancer:
     specifier: 1.1.0
     version: 1.1.0(react@18.2.0)
+  react-zoom-pan-pinch:
+    specifier: 3.3.0
+    version: 3.3.0(react-dom@18.2.0)(react@18.2.0)
   rehype-pretty-code:
     specifier: 0.12.3
     version: 0.12.3(shikiji@0.9.15)
@@ -13550,6 +13553,17 @@ packages:
       react: '>=16.8.0 || ^17.0.0 || ^18'
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /react-zoom-pan-pinch@3.3.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-vy1h8aenDzXye+HRqANZaSA8IPHoqOiuDPFBkswoyPUH8uMfsmbeH6gFI4r4BhEJa0xIlcA+FbvhidRWKGUrOg==}
+    engines: {node: '>=8', npm: '>=5'}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react@18.2.0:

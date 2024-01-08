@@ -1,4 +1,15 @@
+import localFont from "next/font/local";
+
+import { cn } from "~/lib/cn";
+
 import { MapWrapper } from "./map-wrapper";
+
+const gt2 = localFont({
+  src: [{ path: "../../../.fonts/gt2/gt2.ttf", weight: "normal", style: "normal" }],
+  display: "swap",
+  // declarations: [{ prop: "size-adjust", value: "90%" }],
+  variable: "--gt2",
+});
 
 // Size of the SVG. Do not change
 const [MAP_WIDTH, MAP_HEIGHT] = [1200, 2349.2];
@@ -848,8 +859,11 @@ function Map() {
 
 export default function Page() {
   return (
-    <MapWrapper>
-      <Map />
-    </MapWrapper>
+    <div className={cn(gt2.variable, "fixed inset-0")}>
+      <MapWrapper>
+        <Map />
+      </MapWrapper>
+      <div className="absolute left-12 top-12 font-gt2">BẢN ĐỒ HỆ THỐNG ĐƯỜNG CAO TỐC VIỆT NAM</div>
+    </div>
   );
 }

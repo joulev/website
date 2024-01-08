@@ -14,3 +14,11 @@ for type in "${types[@]}"; do
   echo " done"
 done
 cd ..
+
+# gt2
+mkdir -p gt2
+cd gt2
+echo -n "Downloading gt2.ttf..."
+curl -L "https://r2.joulev.dev/files/top3x1b2tnafu3wyrsvrjepi" -o "gt2.ttf" -s
+echo " done"
+cd ..
