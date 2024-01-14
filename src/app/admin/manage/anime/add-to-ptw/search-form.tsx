@@ -30,7 +30,7 @@ export function SearchForm({ query }: { query: string | undefined }) {
           spellCheck={false}
         />
       </div>
-      <Button variants={{ variant: "primary" }} disabled={!value}>
+      <Button type="submit" variants={{ variant: "primary" }} disabled={!value}>
         Search
       </Button>
     </form>
