@@ -30,7 +30,7 @@ export default function Page() {
   return (
     <main className="container max-w-screen-md">
       <Card className="flex flex-col p-0">
-        <section className="flex flex-col items-start gap-6 bg-bg-darker p-6 sm:flex-row sm:items-end sm:justify-between">
+        <section className="flex flex-col items-start gap-6 bg-bg-darker p-6 sm:flex-row sm:items-end sm:justify-between sm:p-9">
           <div>
             <h1 className="text-3xl font-medium">Vu Van Dung</h1>
             <div className="text-text-secondary">@joulev</div>
@@ -46,7 +46,7 @@ export default function Page() {
         </section>
         <hr />
         <section className="flex flex-col bg-bg-darker sm:flex-row">
-          <div className="flex flex-col items-start gap-6 p-6 sm:w-2/3">
+          <div className="flex flex-col items-start gap-6 p-6 sm:w-2/3 sm:p-9">
             <h2 className="text-lg font-bold">Current project</h2>
             <p>
               I am building a glassmorphic component system based on{" "}
@@ -62,7 +62,7 @@ export default function Page() {
             </LinkButton>
           </div>
           <div
-            className="relative min-h-[120px] flex-grow bg-[1.5rem_0px] sm:bg-[0px_1.5rem]"
+            className="relative min-h-[120px] flex-grow bg-[1.5rem_0px] sm:bg-[0px_2.5rem]"
             style={{
               backgroundImage:
                 "url(\"data:image/svg+xml,%3Csvg width='54' height='54' viewBox='0 0 54 54' fill='none' xmlns='http://www.w3.org/2000/svg' %3E%3Crect x='5' y='5' width='36' height='36' rx='4' stroke='%238080804d' strokeWidth='2' /%3E%3C/svg%3E\")",
@@ -82,7 +82,7 @@ export default function Page() {
             />
           </div>
         </section>
-        <section className="flex flex-col gap-6 p-6">
+        <section className="flex flex-col gap-6 p-6 sm:p-9">
           <ReadmeContent />
           <div className="grid grid-cols-1 grid-rows-2 gap-6 sm:grid-cols-2 sm:grid-rows-1">
             <GitHubStats />
@@ -90,7 +90,7 @@ export default function Page() {
           </div>
         </section>
         <hr />
-        <section className="mx-auto flex w-full max-w-lg flex-col gap-6 p-6">
+        <section className="mx-auto flex w-full max-w-lg flex-col gap-6 p-6 sm:p-9">
           <List>
             <ListHeader asChild>
               <h2>Packages</h2>
