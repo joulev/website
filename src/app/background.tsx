@@ -86,11 +86,12 @@ const keys = [
   "pink",
   "rose",
 ] as const satisfies readonly (keyof typeof tw)[];
+const colourShade = 900;
 
 function getColour(index: number) {
-  if (index < 0) return tw[keys[keys.length + index]][800];
-  if (index >= keys.length) return tw[keys[index - keys.length]][800];
-  return tw[keys[index]][800];
+  if (index < 0) return tw[keys[keys.length + index]][colourShade];
+  if (index >= keys.length) return tw[keys[index - keys.length]][colourShade];
+  return tw[keys[index]][colourShade];
 }
 
 function getRandomStartingIndex(seed: string) {
