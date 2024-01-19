@@ -59,11 +59,6 @@ function Navigation() {
       href: "/admin/manage/link",
       description: "Manage personal short links",
     },
-    {
-      title: "mood",
-      href: "/admin/manage/mood",
-      description: "How are you doing?",
-    },
   ];
   return (
     <div className="fixed left-1/2 top-12 -translate-x-1/2">
