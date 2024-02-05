@@ -7,7 +7,4 @@ declare module "next-auth" {
   interface Profile {
     id: string;
   }
-  interface User {
-    id: string;
-  }
 }
