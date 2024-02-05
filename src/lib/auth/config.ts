@@ -44,9 +44,10 @@ export const {
       if (account) token.accessToken = account.access_token;
       return token;
     },
-    session: ({ session, token }) => {
-      if (typeof token.accessToken === "string") session.accessToken = token.accessToken;
-      return session;
+    session: props => {
+      if ("token" in props && typeof props.token.accessToken === "string")
+        props.session.accessToken = props.token.accessToken;
+      return props.session;
     },
     signIn: ({ profile }) => {
       const JOULEV_USER_ID = "858763";
