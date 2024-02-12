@@ -2,5 +2,5 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base", "schedule:weekly", "group:allNonMajor"],
   "timezone": "Asia/Singapore",
-  "ignoreDeps": ["sharp"]
+  "ignoreDeps": ["sharp", "@auth/core", "next-auth"]
 }
