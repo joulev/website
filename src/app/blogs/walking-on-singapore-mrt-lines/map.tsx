@@ -1,7 +1,17 @@
 "use client";
 
 import { GoogleMap, Polyline, TransitLayer, useJsApiLoader } from "@react-google-maps/api";
-import { createContext, memo, useCallback, useContext, useMemo, useState } from "react";
+import { type ParserBuilder, type SetValues, parseAsInteger, useQueryStates } from "nuqs";
+import {
+  createContext,
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import { ChevronLeft, ChevronRight, Home, Play } from "~/components/icons";
 import { Button, LinkButton } from "~/components/ui/button";
@@ -16,9 +26,16 @@ import "./map-control.css";
 type Line = (typeof data)[number];
 type Session = Line["sessions"][number];
 type Coordinate = Session["coordinates"][number];
+interface ActiveSessionContextValue {
+  lineIndex: number;
+  sessionIndex: number;
+}
 interface ActiveSessionContextType {
-  activeSession: [number, number] | null;
-  setActiveSession: React.Dispatch<React.SetStateAction<[number, number] | null>>;
+  activeSession: ActiveSessionContextValue | null;
+  setActiveSession: SetValues<{
+    lineIndex: ParserBuilder<number>;
+    sessionIndex: ParserBuilder<number>;
+  }>;
 }
 
 const center = { lat: 1.352, lng: 103.811 };
@@ -77,7 +94,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-SG", {
   day: "numeric",
   hour: "numeric",
   minute: "2-digit",
-  hour12: true,
+  hour12: false,
   timeZone: "Asia/Singapore",
   timeZoneName: "short",
 });
@@ -88,9 +105,16 @@ function renderDate(date: Date) {
 const ActiveSessionContext = createContext<ActiveSessionContextType | null>(null);
 
 function ActiveSessionContextProvider({ children }: { children: React.ReactNode }) {
-  const [activeSession, setActiveSession] = useState<[number, number] | null>(null);
+  const [rawSession, setRawSession] = useQueryStates(
+    { lineIndex: parseAsInteger, sessionIndex: parseAsInteger },
+    { history: "push" },
+  );
+  const activeSession =
+    rawSession.lineIndex === null || rawSession.sessionIndex === null
+      ? null
+      : { lineIndex: rawSession.lineIndex, sessionIndex: rawSession.sessionIndex };
   return (
-    <ActiveSessionContext.Provider value={{ activeSession, setActiveSession }}>
+    <ActiveSessionContext.Provider value={{ activeSession, setActiveSession: setRawSession }}>
       {children}
     </ActiveSessionContext.Provider>
   );
@@ -122,10 +146,21 @@ function ContentWrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
+function LineBadge({ line }: { line: Line }) {
+  return (
+    <span
+      className="rounded bg-[--bg] px-2 py-0.5 text-base font-medium text-[--fg]"
+      style={{ "--bg": line.colour, "--fg": line.textColour }}
+    >
+      {line.lineCode}
+    </span>
+  );
+}
+
 function SessionStats() {
   const { activeSession, setActiveSession } = useActiveSession();
   const stats = useMemo(
-    () => (activeSession ? getLineStats(data[activeSession[0]]) : null),
+    () => (activeSession ? getLineStats(data[activeSession.lineIndex]) : null),
     [activeSession],
   );
   if (!activeSession || !stats)
@@ -164,7 +199,7 @@ function SessionStats() {
           </LinkButton>
           <Button
             variants={{ size: "sm", variant: "primary" }}
-            onClick={() => setActiveSession([0, 0])}
+            onClick={() => setActiveSession({ lineIndex: 0, sessionIndex: 0 })}
           >
             <Play /> CCL session 1
           </Button>
@@ -172,7 +207,7 @@ function SessionStats() {
       </ContentWrapper>
     );
 
-  const [lineIndex, sessionIndex] = activeSession;
+  const { lineIndex, sessionIndex } = activeSession;
   const date = new Date(data[lineIndex].sessions[sessionIndex].time);
   return (
     <ContentWrapper>
@@ -193,50 +228,68 @@ function SessionStats() {
           <Stat label="Average pace" value={convertMinToMinSec(stats.pace)} />
         </div>
         <hr />
-        <div className="flex flex-col gap-1.5 bg-bg-darker p-6 py-3">
-          <div className="text-center text-lg font-semibold">
-            {data[lineIndex].lineCode} session {sessionIndex + 1}
+        <div className="flex flex-col gap-6 bg-bg-darker p-6">
+          <div className="flex flex-row items-center gap-3">
+            <LineBadge line={data[lineIndex]} />
+            <div className="flex flex-col">
+              <div className="text-lg font-semibold">Session {sessionIndex + 1}</div>
+              <time
+                dateTime={date.toISOString()}
+                title={date.toISOString()}
+                className="text-sm text-text-secondary"
+              >
+                {renderDate(date)}
+              </time>
+            </div>
           </div>
-          <div className="flex flex-row items-center justify-between gap-3 text-sm text-text-secondary">
-            <div>{data[lineIndex].sessions[sessionIndex].start}</div>
-            <hr
-              className="flex-grow border-[--border-colour]"
-              style={{ "--border-colour": data[lineIndex].colour }}
+          <div className="grid grid-cols-2 gap-6">
+            <Stat
+              label="Distance"
+              value={data[lineIndex].sessions[sessionIndex].distance.toFixed(2)}
+              unit="km"
             />
-            <div>{data[lineIndex].sessions[sessionIndex].end}</div>
+            <Stat
+              label="Average pace"
+              value={convertMinToMinSec(data[lineIndex].sessions[sessionIndex].pace)}
+            />
           </div>
         </div>
-        <div className="flex flex-col gap-6 p-6 py-6 text-text-prose">
+        <hr />
+        <div className="flex flex-col gap-6 p-6 text-text-prose">
           {data[lineIndex].sessions[sessionIndex].description.split("\n\n").map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
           ))}
-          <div className="flex flex-col text-sm text-text-tertiary">
-            <time dateTime={date.toISOString()} title={date.toISOString()}>
-              {renderDate(date)}
-            </time>
-            <div>
-              {data[lineIndex].sessions[sessionIndex].distance.toFixed(2)}&nbsp;km,{" "}
-              {convertMinToMinSec(data[lineIndex].sessions[sessionIndex].pace)}&nbsp;min/km
-            </div>
-          </div>
         </div>
       </ScrollArea>
       <hr />
       <div className="flex flex-row gap-3 bg-bg-darker p-6 py-3">
-        <Button variants={{ size: "sm" }} onClick={() => setActiveSession(null)}>
+        <Button
+          variants={{ size: "sm" }}
+          onClick={() => setActiveSession({ lineIndex: null, sessionIndex: null })}
+        >
           <Home className="max-sm:hidden" /> Project home
         </Button>
         <div className="flex-grow" />
         <Button
           variants={{ size: "sm" }}
-          onClick={() => setActiveSession(s => (s ? [s[0], s[1] - 1] : null))}
+          onClick={() =>
+            setActiveSession(s => ({
+              lineIndex: s.lineIndex,
+              sessionIndex: s.sessionIndex !== null ? s.sessionIndex - 1 : null,
+            }))
+          }
           disabled={sessionIndex === 0}
         >
           <ChevronLeft className="max-sm:hidden" /> Prev
         </Button>
         <Button
           variants={{ size: "sm" }}
-          onClick={() => setActiveSession(s => (s ? [s[0], s[1] + 1] : null))}
+          onClick={() =>
+            setActiveSession(s => ({
+              lineIndex: s.lineIndex,
+              sessionIndex: s.sessionIndex !== null ? s.sessionIndex + 1 : null,
+            }))
+          }
           disabled={sessionIndex === data[lineIndex].sessions.length - 1}
         >
           Next <ChevronRight className="max-sm:hidden" />
@@ -246,8 +299,6 @@ function SessionStats() {
   );
 }
 
-// There is a subtle bug here that prevents polyline from "unactive" itself if the initial value of
-// `activeSession` is non-null. Not gonna fix it though unless it comes to bite.
 function MapPolyline({
   coordinates,
   lineIndex,
@@ -257,26 +308,40 @@ function MapPolyline({
   lineIndex: number;
   sessionIndex: number;
 }) {
+  const polylineRef = useRef<google.maps.Polyline | null>(null);
+
   const { activeSession } = useActiveSession();
-  const isActive = activeSession?.[0] === lineIndex && activeSession[1] === sessionIndex;
+  const isActive =
+    activeSession?.lineIndex === lineIndex && activeSession.sessionIndex === sessionIndex;
   const [isHover, setIsHover] = useState(false);
 
   const { setActiveSession } = useActiveSession();
   const onHoverEnter = useCallback(() => setIsHover(true), []);
   const onHoverLeave = useCallback(() => setIsHover(false), []);
   const onClick = useCallback(
-    () => setActiveSession([lineIndex, sessionIndex]),
+    () => setActiveSession({ lineIndex, sessionIndex }),
     [setActiveSession, lineIndex, sessionIndex],
   );
+
+  const refreshStyling = useCallback(() => {
+    if (!polylineRef.current) return;
+    polylineRef.current.setOptions({
+      strokeColor: isActive || isHover ? "#ffffff" : "#777777",
+      zIndex: isActive || isHover ? 9999 : 0,
+      strokeOpacity: 0.9,
+      strokeWeight: 6,
+    });
+  }, [isActive, isHover]);
+
+  useEffect(refreshStyling, [refreshStyling]);
+
   return (
     <Polyline
-      path={coordinates}
-      options={{
-        strokeColor: isActive || isHover ? "#ffffff" : "#777777",
-        strokeOpacity: 0.9,
-        strokeWeight: 6,
-        zIndex: isActive || isHover ? 9999 : undefined,
+      onLoad={polyline => {
+        polylineRef.current = polyline;
+        refreshStyling();
       }}
+      path={coordinates}
       onMouseOver={onHoverEnter}
       onMouseOut={onHoverLeave}
       onClick={onClick}
