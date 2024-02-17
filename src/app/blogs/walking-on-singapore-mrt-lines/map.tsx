@@ -3,6 +3,7 @@
 import { GoogleMap, Polyline, TransitLayer, useJsApiLoader } from "@react-google-maps/api";
 import { type ParserBuilder, type SetValues, parseAsInteger, useQueryStates } from "nuqs";
 import {
+  Suspense,
   createContext,
   memo,
   useCallback,
@@ -362,8 +363,9 @@ const MapContent = memo(function MapContent() {
   });
   if (!isLoaded)
     return (
-      <div className="grid h-full w-full place-items-center text-text-tertiary">
-        Loading map&hellip;
+      <div className="flex h-full w-full flex-col items-center justify-center gap-3 text-text-tertiary">
+        <div>Loading&hellip;</div>
+        <div>Please ensure that JavaScript is enabled.</div>
       </div>
     );
   return (
@@ -383,11 +385,20 @@ const MapContent = memo(function MapContent() {
 
 export function Map() {
   return (
-    <ActiveSessionContextProvider>
-      <div className="fixed inset-0">
-        <MapContent />
-        <SessionStats />
-      </div>
-    </ActiveSessionContextProvider>
+    <div className="fixed inset-0">
+      <Suspense
+        fallback={
+          <div className="flex h-full w-full flex-col items-center justify-center gap-3 text-text-tertiary">
+            <div>Loading&hellip;</div>
+            <div>Please ensure that JavaScript is enabled.</div>
+          </div>
+        }
+      >
+        <ActiveSessionContextProvider>
+          <MapContent />
+          <SessionStats />
+        </ActiveSessionContextProvider>
+      </Suspense>
+    </div>
   );
 }

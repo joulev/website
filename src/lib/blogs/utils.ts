@@ -33,5 +33,8 @@ export function makeMetadata(slug: string): Metadata {
       description,
       images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
+    alternates: {
+      canonical: `/blogs/${slug}`,
+    },
   };
 }
