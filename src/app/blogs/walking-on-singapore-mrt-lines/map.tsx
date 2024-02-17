@@ -239,7 +239,7 @@ function SessionStats() {
           onClick={() => setActiveSession(s => (s ? [s[0], s[1] + 1] : null))}
           disabled={sessionIndex === data[lineIndex].sessions.length - 1}
         >
-          <ChevronRight className="max-sm:hidden" /> Next
+          Next <ChevronRight className="max-sm:hidden" />
         </Button>
       </div>
     </ContentWrapper>
