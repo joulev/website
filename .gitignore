@@ -39,3 +39,5 @@ next-env.d.ts
 src/lib/gql
 .fonts
 .theme
+
+.ignored

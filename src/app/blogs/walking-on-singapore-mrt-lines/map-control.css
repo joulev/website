@@ -1,0 +1,30 @@
+.gm-control-active {
+  background-color: #161b2c !important;
+  border: 1px solid #1f2840 !important;
+}
+
+.gm-control-active[aria-label="Zoom in"] + div {
+  background-color: #1f2840 !important;
+}
+
+/* The background div of the zoom in/out buttons */
+div:has(> [aria-label="Zoom in"]) {
+  background-color: #1f2840 !important;
+}
+
+.gm-style > div:last-child * {
+  background-color: #1f2840 !important;
+  color: #ffffffba !important;
+}
+
+/* https://stackoverflow.com/a/67656246 */
+.gm-style iframe + div {
+  border: none !important;
+}
+
+@media not all and (min-width: 640px) {
+  .gm-control-active,
+  div:has(> [aria-label="Zoom in"]) {
+    display: none !important;
+  }
+}

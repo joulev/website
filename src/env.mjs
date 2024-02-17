@@ -29,5 +29,10 @@ export const env = createEnv({
     ANILIST_CLIENT_SECRET: z.string().min(1),
     NEXTAUTH_SECRET: z.string().min(1),
   },
-  experimental__runtimeEnv: {},
+  client: {
+    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z.string().startsWith("AIza"),
+  },
+  experimental__runtimeEnv: {
+    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+  },
 });
