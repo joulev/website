@@ -281,7 +281,7 @@ function SessionStats() {
           }
           disabled={sessionIndex === 0}
         >
-          <ChevronLeft className="max-sm:hidden" /> Prev
+          <ChevronLeft /> Prev
         </Button>
         <Button
           variants={{ size: "sm" }}
@@ -293,7 +293,7 @@ function SessionStats() {
           }
           disabled={sessionIndex === data[lineIndex].sessions.length - 1}
         >
-          Next <ChevronRight className="max-sm:hidden" />
+          Next <ChevronRight />
         </Button>
       </div>
     </ContentWrapper>
