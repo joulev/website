@@ -23,6 +23,8 @@ async function main() {
       lng: parseFloat(trackpoint.Position.LongitudeDegrees),
     }));
   await fs.writeFile(outputFile, JSON.stringify(coordinates), "utf8");
+
+  await fs.unlink(inputFile);
 }
 
 main();

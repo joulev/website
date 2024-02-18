@@ -150,7 +150,7 @@ function ContentWrapper({ children }: { children: React.ReactNode }) {
 function LineBadge({ line }: { line: Line }) {
   return (
     <span
-      className="rounded bg-[--bg] px-2 py-0.5 text-base font-medium text-[--fg]"
+      className="inline-block w-12 rounded bg-[--bg] py-0.5 text-center text-base font-medium text-[--fg]"
       style={{ "--bg": line.colour, "--fg": line.textColour }}
     >
       {line.lineCode}
@@ -161,7 +161,12 @@ function LineBadge({ line }: { line: Line }) {
 function SessionStats() {
   const { activeSession, setActiveSession } = useActiveSession();
   const stats = useMemo(
-    () => (activeSession ? getLineStats(data[activeSession.lineIndex]) : null),
+    () =>
+      activeSession &&
+      data.at(activeSession.lineIndex) &&
+      data[activeSession.lineIndex].sessions.at(activeSession.sessionIndex)
+        ? getLineStats(data[activeSession.lineIndex])
+        : null,
     [activeSession],
   );
   if (!activeSession || !stats)
@@ -274,24 +279,39 @@ function SessionStats() {
         <Button
           variants={{ size: "sm" }}
           onClick={() =>
-            setActiveSession(s => ({
-              lineIndex: s.lineIndex,
-              sessionIndex: s.sessionIndex !== null ? s.sessionIndex - 1 : null,
-            }))
+            setActiveSession(s => {
+              if (s.sessionIndex === null || s.lineIndex === null) return s;
+              if (s.sessionIndex === 0 && s.lineIndex === 0) return s;
+              if (s.sessionIndex === 0)
+                return {
+                  lineIndex: s.lineIndex - 1,
+                  sessionIndex: data[s.lineIndex - 1].sessions.length - 1,
+                };
+              return { lineIndex: s.lineIndex, sessionIndex: s.sessionIndex - 1 };
+            })
           }
-          disabled={sessionIndex === 0}
+          disabled={sessionIndex === 0 && lineIndex === 0}
         >
           <ChevronLeft /> Prev
         </Button>
         <Button
           variants={{ size: "sm" }}
           onClick={() =>
-            setActiveSession(s => ({
-              lineIndex: s.lineIndex,
-              sessionIndex: s.sessionIndex !== null ? s.sessionIndex + 1 : null,
-            }))
+            setActiveSession(s => {
+              if (s.sessionIndex === null || s.lineIndex === null) return s;
+              if (
+                s.sessionIndex === data[s.lineIndex].sessions.length - 1 &&
+                s.lineIndex === data.length - 1
+              )
+                return s;
+              if (s.sessionIndex === data[s.lineIndex].sessions.length - 1)
+                return { lineIndex: s.lineIndex + 1, sessionIndex: 0 };
+              return { lineIndex: s.lineIndex, sessionIndex: s.sessionIndex + 1 };
+            })
           }
-          disabled={sessionIndex === data[lineIndex].sessions.length - 1}
+          disabled={
+            sessionIndex === data[lineIndex].sessions.length - 1 && lineIndex === data.length - 1
+          }
         >
           Next <ChevronRight />
         </Button>
