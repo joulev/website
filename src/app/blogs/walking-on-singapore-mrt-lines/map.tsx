@@ -347,12 +347,12 @@ function MapPolyline({
   const refreshStyling = useCallback(() => {
     if (!polylineRef.current) return;
     polylineRef.current.setOptions({
-      strokeColor: isActive || isHover ? "#ffffff" : "#777777",
+      strokeColor: isActive || isHover ? "#ffffff" : data[lineIndex].colour,
       zIndex: isActive || isHover ? 9999 : 0,
-      strokeOpacity: 0.9,
+      strokeOpacity: 0.8,
       strokeWeight: 6,
     });
-  }, [isActive, isHover]);
+  }, [isActive, isHover, lineIndex]);
 
   useEffect(refreshStyling, [refreshStyling]);
 
