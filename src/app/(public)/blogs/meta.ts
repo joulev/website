@@ -18,6 +18,6 @@ export const meta: { slug: string; title: string; description: string; postedDat
     title: "Walking on Singapore MRT Lines",
     description:
       "I am on a project of walking on all Singapore MRT lines. This page shows the progress and the routes I have walked.",
-    postedDate: "2024-02-17",
+    postedDate: "2024-01-28",
   },
 ];
