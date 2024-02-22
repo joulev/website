@@ -1,7 +1,7 @@
 [
   {
     "lineName": "Circle Line",
-    "lineCode": "CCL",
+    "lineCode": "CC",
     "colour": "#f99d25",
     "textColour": "black",
     "sessions": [
@@ -3263,7 +3263,7 @@
   },
   {
     "lineName": "North East Line",
-    "lineCode": "NEL",
+    "lineCode": "NE",
     "colour": "#8f4199",
     "textColour": "white",
     "sessions": [
@@ -4766,5 +4766,47 @@
         ]
       }
     ]
+  },
+  {
+    "lineName": "Thomson–East Coast Line",
+    "lineCode": "TE",
+    "colour": "#9d5b24",
+    "textColour": "white",
+    "sessions": []
+  },
+  {
+    "lineName": "Downtown Line",
+    "lineCode": "DT",
+    "colour": "#015ca7",
+    "textColour": "white",
+    "sessions": []
+  },
+  {
+    "lineName": "North–South Line",
+    "lineCode": "NS",
+    "colour": "#e22726",
+    "textColour": "white",
+    "sessions": []
+  },
+  {
+    "lineName": "East–West Line",
+    "lineCode": "EW",
+    "colour": "#01964c",
+    "textColour": "white",
+    "sessions": []
+  },
+  {
+    "lineName": "Jurong Region Line",
+    "lineCode": "JR",
+    "colour": "#00b0bd",
+    "textColour": "white",
+    "sessions": []
+  },
+  {
+    "lineName": "Cross Island Line",
+    "lineCode": "CR",
+    "colour": "#94c73d",
+    "textColour": "black",
+    "sessions": []
   }
 ]

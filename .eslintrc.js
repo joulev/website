@@ -23,6 +23,7 @@ module.exports = {
     "import/no-default-export": "off",
     "no-console": "off",
     "no-constant-condition": ["error", { checkLoops: false }],
+    "no-nested-ternary": "off",
     "react/jsx-sort-props": "off",
     "react/no-array-index-key": "off",
   },
