@@ -17,4 +17,6 @@ export interface ActiveSessionContextType {
     lineIndex: ParserBuilder<number>;
     sessionIndex: ParserBuilder<number>;
   }>;
+  panelIsExpanded: boolean;
+  setPanelIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { parseAsInteger, useQueryStates } from "nuqs";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 import type { ActiveSessionContextType } from "./types";
 
@@ -10,10 +10,13 @@ const ActiveSessionContext = createContext<ActiveSessionContextType | null>(null
 export function ActiveSessionContextProvider({ children }: { children: React.ReactNode }) {
   const [activeSession, setActiveSession] = useQueryStates(
     { lineIndex: parseAsInteger, sessionIndex: parseAsInteger },
-    { history: "push" },
+    { history: "replace" },
   );
+  const [panelIsExpanded, setPanelIsExpanded] = useState(false);
   return (
-    <ActiveSessionContext.Provider value={{ activeSession, setActiveSession }}>
+    <ActiveSessionContext.Provider
+      value={{ activeSession, setActiveSession, panelIsExpanded, setPanelIsExpanded }}
+    >
       {children}
     </ActiveSessionContext.Provider>
   );

@@ -53,17 +53,17 @@ function MapPolyline({
 }) {
   const polylineRef = useRef<google.maps.Polyline | null>(null);
 
-  const { activeSession, setActiveSession } = useActiveSession();
+  const { activeSession, setActiveSession, setPanelIsExpanded } = useActiveSession();
   const lineIsActive = activeSession.lineIndex === lineIndex;
   const isActive = lineIsActive && activeSession.sessionIndex === sessionIndex;
   const [isHover, setIsHover] = useState(false);
 
   const onHoverEnter = useCallback(() => setIsHover(true), []);
   const onHoverLeave = useCallback(() => setIsHover(false), []);
-  const onClick = useCallback(
-    () => setActiveSession({ lineIndex, sessionIndex }),
-    [setActiveSession, lineIndex, sessionIndex],
-  );
+  const onClick = useCallback(() => {
+    setPanelIsExpanded(true);
+    setActiveSession({ lineIndex, sessionIndex }).catch(() => null);
+  }, [setPanelIsExpanded, setActiveSession, lineIndex, sessionIndex]);
 
   const refreshStyling = useCallback(() => {
     if (!polylineRef.current) return;
@@ -99,12 +99,13 @@ function MapLine({ line, lineIndex }: { line: Line; lineIndex: number }) {
 }
 
 export const Map = memo(function Map() {
-  const { setActiveSession } = useActiveSession();
+  const { setActiveSession, setPanelIsExpanded } = useActiveSession();
   const { isLoaded } = useJsApiLoader({ googleMapsApiKey: env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY });
-  const onClick = useCallback(
-    () => setActiveSession({ lineIndex: null, sessionIndex: null }),
-    [setActiveSession],
-  );
+  const onClick = useCallback(() => {
+    setPanelIsExpanded(true);
+    setActiveSession({ lineIndex: null, sessionIndex: null }).catch(() => null);
+  }, [setPanelIsExpanded, setActiveSession]);
+  const collapsePanel = useCallback(() => setPanelIsExpanded(false), [setPanelIsExpanded]);
 
   if (!isLoaded) return <LoadingScreen />;
 
@@ -115,6 +116,9 @@ export const Map = memo(function Map() {
       zoom={12}
       options={{ clickableIcons: false, disableDefaultUI: true, styles: mapStyles }}
       onClick={onClick}
+      onZoomChanged={collapsePanel}
+      onBoundsChanged={collapsePanel}
+      onCenterChanged={collapsePanel}
     >
       {/* <TransitLayer /> */}
       {data.map((line, i) => (

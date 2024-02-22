@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 
-import { Home } from "~/components/icons";
+import { ChevronDown, Home } from "~/components/icons";
 import { Button, LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { useHoverBackground } from "~/components/ui/hooks/use-hover-background";
@@ -269,28 +269,52 @@ function LineSelector() {
   );
 }
 
-function ReturnToHomeButton() {
-  const { setActiveSession } = useActiveSession();
+function PanelTopButtons() {
+  const { setActiveSession, panelIsExpanded, setPanelIsExpanded } = useActiveSession();
   return (
-    <div className="absolute right-6 top-6">
+    <div className="absolute right-6 top-6 flex flex-row gap-1.5">
       <Button
         variants={{ size: "icon-sm" }}
-        onClick={() => setActiveSession({ lineIndex: null, sessionIndex: null })}
+        onClick={() => {
+          setPanelIsExpanded(true);
+          setActiveSession({ lineIndex: null, sessionIndex: null }).catch(() => null);
+        }}
       >
         <Home />
+      </Button>
+      <Button
+        variants={{ size: "icon-sm" }}
+        onClick={() => setPanelIsExpanded(x => !x)}
+        className="md:hidden"
+      >
+        <ChevronDown className={cn("transition", panelIsExpanded ? "rotate-0" : "rotate-180")} />
       </Button>
     </div>
   );
 }
 
+function Wrapper({ children }: { children: React.ReactNode }) {
+  const { panelIsExpanded } = useActiveSession();
+  return (
+    <Card
+      className={cn(
+        panelIsExpanded ? "translate-y-0" : "translate-y-[60%] md:translate-y-0",
+        "fixed inset-x-0 -bottom-12 top-1/2 flex flex-col p-0 sm:inset-x-6 sm:max-w-96 md:inset-y-6 md:left-6 md:right-auto md:w-96",
+      )}
+    >
+      {children}
+      <PanelTopButtons />
+      <div className="h-12 shrink-0 md:hidden" />
+    </Card>
+  );
+}
+
 export function Panel() {
   return (
-    <Card className="fixed inset-x-0 -bottom-12 top-1/2 flex max-w-96 flex-col p-0 sm:inset-x-6 md:inset-y-6 md:left-6 md:right-auto md:w-96">
+    <Wrapper>
       <PanelContent />
       <SessionSelector />
       <LineSelector />
-      <ReturnToHomeButton />
-      <div className="h-12 shrink-0 md:hidden" />
-    </Card>
+    </Wrapper>
   );
 }
