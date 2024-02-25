@@ -69,12 +69,16 @@ function MapPolyline({
     if (!polylineRef.current) return;
     polylineRef.current.setOptions({
       strokeColor:
-        isActive || isHover ? "#ffffff" : lineIsActive ? data[lineIndex].colour : "#555555",
+        isActive || isHover
+          ? "#ffffff"
+          : lineIsActive || activeSession.lineIndex === null
+            ? data[lineIndex].colour
+            : "#555555",
       zIndex: isActive || isHover ? 9999 : lineIsActive ? 9998 : 0,
       strokeOpacity: 1,
       strokeWeight: 6,
     });
-  }, [isActive, isHover, lineIsActive, lineIndex]);
+  }, [isActive, isHover, lineIsActive, lineIndex, activeSession.lineIndex]);
 
   useEffect(refreshStyling, [refreshStyling]);
 
