@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 
 import { ChevronDown, Home } from "~/components/icons";
 import { Button, LinkButton } from "~/components/ui/button";
@@ -62,7 +62,7 @@ function Stat({ label, value, unit }: { label: string; value: React.ReactNode; u
 function LineBadge({ line }: { line: Line }) {
   return (
     <span
-      className="inline-block w-12 rounded bg-[--bg] py-0.5 text-center text-base font-medium text-[--fg]"
+      className="inline-block w-12 rounded-[0.6em/50%] border border-text-secondary bg-[--bg] py-0.5 text-center text-base font-medium text-[--fg]"
       style={{ "--bg": line.colour, "--fg": line.textColour }}
     >
       {line.lineCode}L
@@ -70,11 +70,58 @@ function LineBadge({ line }: { line: Line }) {
   );
 }
 
+const StationBadge = memo(function StationBadge({ station }: { station: string }) {
+  const codes = station
+    .split(" ")
+    .filter(x => x.length > 0 && x.toUpperCase() === x)
+    .map(x => {
+      const match = /(?<line>[A-Z]+)(?<num>\d*)/.exec(x);
+      if (!match?.groups) return null;
+      const line = match.groups.line;
+      const lineDetails = data.find(
+        val =>
+          val.lineCode === line ||
+          (val.lineCode === "EW" && line === "CG") ||
+          (val.lineCode === "CC" && line === "CE"),
+      );
+      return { line, num: match.groups.num, lineDetails };
+    })
+    .filter((x): x is { line: string; num: string; lineDetails: Line | undefined } => Boolean(x));
+  const stationName = station
+    .split(" ")
+    .filter(x => x.toUpperCase() !== x)
+    .join(" ");
+  return (
+    <>
+      <span className="flex flex-row overflow-clip rounded-[0.6em/50%] border border-text-secondary text-[0.7em] font-medium">
+        {codes.map((code, i) => (
+          <span
+            key={i}
+            className="flex h-[1.8em] w-[3.2em] flex-row items-center justify-center gap-[0.1em] bg-[--bg] leading-none text-[--fg]"
+            style={{
+              "--bg": code.lineDetails?.colour ?? "#718573",
+              "--fg": code.lineDetails?.textColour ?? "white",
+            }}
+          >
+            <span>{code.line}</span>
+            <span>{code.num}</span>
+          </span>
+        ))}
+      </span>
+      <span className="min-w-0 max-w-full truncate">{stationName}</span>
+    </>
+  );
+});
+
 function Overview() {
   return (
     <ScrollArea className="flex flex-grow flex-col gap-6 overflow-y-auto px-6">
       <div className="prose py-6">
-        <h2>Walking on Singapore&nbsp;MRT&nbsp;Lines</h2>
+        <h2>
+          Walking on
+          <br />
+          Singapore MRT Lines
+        </h2>
         <p>
           After some years living in Singapore, I basically went to all places that captured my
           interests already, be it attractions, parks, beaches, malls or lakes.
@@ -150,11 +197,28 @@ function SessionOverview({ line, session }: { line: Line; session: Session }) {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-x-6 gap-y-3">
-          <Stat label="Start" value={session.start} />
-          <Stat label="End" value={session.end} />
           <Stat label="Distance" value={session.distance.toFixed(2)} unit="km" />
           <Stat label="Average pace" value={convertMinToMinSec(session.pace)} />
         </div>
+      </div>
+      <hr />
+      <div className="grid grid-cols-2 gap-6 p-6">
+        <div className="flex flex-col items-start gap-1 text-lg font-medium">
+          <div className="mb-0.5 text-sm font-normal text-text-secondary">From</div>
+          <StationBadge station={session.start} />
+        </div>
+        <div className="flex flex-col items-end gap-1 text-lg font-medium">
+          <div className="mb-0.5 text-sm font-normal text-text-secondary">To</div>
+          <StationBadge station={session.end} />
+        </div>
+        {session.via ? (
+          <div className="col-span-full flex flex-row items-center justify-center gap-2 text-center text-sm text-text-secondary">
+            <span>via</span>
+            <span className="flex flex-row items-center gap-1.5 font-medium text-text-primary">
+              <StationBadge station={session.via} />
+            </span>
+          </div>
+        ) : null}
       </div>
       <hr />
       <div className="flex flex-col gap-6 p-6 text-text-prose">
