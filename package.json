@@ -48,7 +48,7 @@
     "@vercel/analytics": "1.2.0",
     "@vercel/speed-insights": "1.0.10",
     "@vercel/style-guide": "5.2.0",
-    "ai": "2.2.35",
+    "ai": "3.0.2",
     "autoprefixer": "10.4.17",
     "concurrently": "8.2.2",
     "cva": "1.0.0-beta.1",
