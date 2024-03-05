@@ -76,7 +76,7 @@ function MapPolyline({
             : "#555555",
       zIndex: isActive || isHover ? 9999 : lineIsActive ? 9998 : 0,
       strokeOpacity: 1,
-      strokeWeight: 6,
+      strokeWeight: 4,
     });
   }, [isActive, isHover, lineIsActive, lineIndex, activeSession.lineIndex]);
 

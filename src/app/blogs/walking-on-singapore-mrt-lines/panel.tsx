@@ -149,13 +149,9 @@ const StationBadge = memo(function StationBadge({ station }: { station: string }
 
 function Overview() {
   return (
-    <ScrollArea className="flex flex-grow flex-col gap-6 overflow-y-auto px-6">
+    <ScrollArea className="overflow-y-auto px-6">
       <div className="prose py-6">
-        <h2>
-          Walking on
-          <br />
-          Singapore MRT Lines
-        </h2>
+        <h2>Walking on Singapore&nbsp;MRT&nbsp;Lines</h2>
         <p>
           After some years living in Singapore, I basically went to all places that captured my
           interests already, be it attractions, parks, beaches, malls or lakes.
@@ -176,9 +172,6 @@ function Overview() {
           others soon. Hopefully I can finish all lines before I leave Singapore.
         </p>
       </div>
-      <LinkButton href="/" className="mb-6">
-        <Home /> Back to home
-      </LinkButton>
     </ScrollArea>
   );
 }
@@ -255,7 +248,7 @@ function SessionOverview({ line, session }: { line: Line; session: Session }) {
         ) : null}
       </div>
       <hr />
-      <div className="flex flex-col gap-6 p-6 text-text-prose">
+      <div className="prose p-6">
         {session.description.split("\n\n").map((paragraph, i) => (
           <p key={i}>{paragraph}</p>
         ))}
@@ -368,18 +361,26 @@ function LineSelector() {
 }
 
 function PanelTopButtons() {
-  const { setActiveSession, panelIsExpanded, setPanelIsExpanded } = useActiveSession();
+  const { activeSession, setActiveSession, panelIsExpanded, setPanelIsExpanded } =
+    useActiveSession();
   return (
-    <div className="absolute right-6 top-6 flex flex-row gap-1.5">
-      <Button
-        variants={{ size: "icon-sm" }}
-        onClick={() => {
-          setPanelIsExpanded(true);
-          setActiveSession({ lineIndex: null, sessionIndex: null }).catch(() => null);
-        }}
-      >
-        <Home />
-      </Button>
+    <div className="flex flex-row justify-between bg-bg-darker px-6 py-3">
+      <div className="flex flex-row gap-3">
+        <LinkButton variants={{ size: "sm" }} href="/">
+          <Home /> joulev.dev
+        </LinkButton>
+        {activeSession.lineIndex !== null && (
+          <Button
+            variants={{ size: "sm" }}
+            onClick={() => {
+              setPanelIsExpanded(true);
+              setActiveSession({ lineIndex: null, sessionIndex: null }).catch(() => null);
+            }}
+          >
+            Project overview
+          </Button>
+        )}
+      </div>
       <Button
         variants={{ size: "icon-sm" }}
         onClick={() => setPanelIsExpanded(x => !x)}
@@ -400,8 +401,9 @@ function Wrapper({ children }: { children: React.ReactNode }) {
         "fixed inset-x-0 -bottom-12 top-1/2 flex flex-col p-0 sm:inset-x-6 sm:max-w-96 md:inset-y-6 md:left-6 md:right-auto md:w-96",
       )}
     >
-      {children}
       <PanelTopButtons />
+      <hr />
+      {children}
       <div className="h-12 shrink-0 md:hidden" />
     </Card>
   );
