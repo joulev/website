@@ -62,7 +62,7 @@ function Stat({ label, value, unit }: { label: string; value: React.ReactNode; u
 function LineBadge({ line }: { line: Line }) {
   return (
     <span
-      className="inline-block w-12 rounded-[0.6em/50%] border border-text-secondary bg-[--bg] py-0.5 text-center text-base font-medium text-[--fg]"
+      className="inline-block w-12 rounded-[0.6em/50%] border border-text-secondary bg-[--bg] py-0.5 text-center font-lta text-base font-medium tracking-wider text-[--fg]"
       style={{ "--bg": line.colour, "--fg": line.textColour }}
     >
       {line.lineCode}L
@@ -102,14 +102,14 @@ const StationBadge = memo(function StationBadge({ station }: { station: string }
   const { name, parts } = useMemo(() => getStationDetails(station), [station]);
   return (
     <>
-      <span className="flex flex-row items-center">
+      <span className="flex flex-row items-center font-lta tracking-wide">
         {parts.map((part, i) => (
           <Fragment key={i}>
             <span className="flex flex-row overflow-hidden rounded-[0.6em/50%] border border-text-secondary text-[0.7em] font-medium">
               {part.map((code, j) => (
                 <span
                   key={j}
-                  className="flex h-[1.8em] w-[3.2em] flex-row items-center justify-center gap-[0.1em] bg-[--bg] leading-none text-[--fg]"
+                  className="flex h-[1.8em] w-[3.2em] flex-row items-center justify-center gap-[0.2em] bg-[--bg] leading-none text-[--fg]"
                   style={{
                     "--bg": code.lineDetails?.colour ?? LRT_BG,
                     "--fg": code.lineDetails?.textColour ?? LRT_FG,

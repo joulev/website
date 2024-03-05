@@ -14,3 +14,11 @@ for type in "${types[@]}"; do
   echo " done"
 done
 cd ..
+
+# LTA Identity Font (unofficial)
+mkdir -p lta-identity
+cd lta-identity
+echo -n "Downloading LTAIdentity-Medium.woff2..."
+curl -L "https://github.com/jglim/IdentityFont/raw/main/font/LTAIdentity-Medium.woff2" -o "font.woff2" -s
+echo " done"
+cd ..
