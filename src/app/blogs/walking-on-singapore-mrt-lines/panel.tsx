@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useMemo } from "react";
+import { Fragment, memo, useMemo } from "react";
 
 import { ChevronDown, Home } from "~/components/icons";
 import { Button, LinkButton } from "~/components/ui/button";
@@ -70,47 +70,79 @@ function LineBadge({ line }: { line: Line }) {
   );
 }
 
-const StationBadge = memo(function StationBadge({ station }: { station: string }) {
-  const codes = station
-    .split(" ")
-    .map(x => x.split("-"))
-    .flat()
-    .filter(x => x.length > 0 && x.toUpperCase() === x)
-    .map(x => {
-      const match = /(?<line>[A-Z]+)(?<num>\d*)/.exec(x);
-      if (!match?.groups) return null;
-      const line = match.groups.line;
-      const lineDetails = data.find(
-        val =>
-          val.lineCode === line ||
-          (val.lineCode === "EW" && line === "CG") ||
-          (val.lineCode === "CC" && line === "CE"),
-      );
-      return { line, num: match.groups.num, lineDetails };
-    })
-    .filter((x): x is { line: string; num: string; lineDetails: Line | undefined } => Boolean(x));
+function getStationDetails(station: string) {
   const stationName = station
     .split(" ")
     .filter(x => x.toUpperCase() !== x)
     .join(" ");
+  const stationCodes = station.replace(stationName, "").trim();
+  const parts = stationCodes.split("-").map(connectedPart =>
+    connectedPart
+      .split(" ")
+      .map(code => {
+        const match = /(?<line>[A-Z]+)(?<num>\d*)/.exec(code);
+        if (!match?.groups) return null;
+        const line = match.groups.line;
+        const lineDetails = data.find(
+          val =>
+            val.lineCode === line ||
+            (val.lineCode === "EW" && line === "CG") ||
+            (val.lineCode === "CC" && line === "CE"),
+        );
+        return { line, num: match.groups.num, lineDetails };
+      })
+      .filter((x): x is { line: string; num: string; lineDetails: Line | undefined } => Boolean(x)),
+  );
+  return { name: stationName, parts };
+}
+
+const LRT_BG = "#718573";
+const LRT_FG = "white";
+const StationBadge = memo(function StationBadge({ station }: { station: string }) {
+  const { name, parts } = useMemo(() => getStationDetails(station), [station]);
   return (
     <>
-      <span className="flex flex-row overflow-clip rounded-[0.6em/50%] border border-text-secondary text-[0.7em] font-medium">
-        {codes.map((code, i) => (
-          <span
-            key={i}
-            className="flex h-[1.8em] w-[3.2em] flex-row items-center justify-center gap-[0.1em] bg-[--bg] leading-none text-[--fg]"
-            style={{
-              "--bg": code.lineDetails?.colour ?? "#718573",
-              "--fg": code.lineDetails?.textColour ?? "white",
-            }}
-          >
-            <span>{code.line}</span>
-            <span>{code.num}</span>
-          </span>
+      <span className="flex flex-row items-center">
+        {parts.map((part, i) => (
+          <Fragment key={i}>
+            <span className="flex flex-row overflow-hidden rounded-[0.6em/50%] border border-text-secondary text-[0.7em] font-medium">
+              {part.map((code, j) => (
+                <span
+                  key={j}
+                  className="flex h-[1.8em] w-[3.2em] flex-row items-center justify-center gap-[0.1em] bg-[--bg] leading-none text-[--fg]"
+                  style={{
+                    "--bg": code.lineDetails?.colour ?? LRT_BG,
+                    "--fg": code.lineDetails?.textColour ?? LRT_FG,
+                  }}
+                >
+                  <span>{code.line}</span>
+                  <span>{code.num}</span>
+                </span>
+              ))}
+            </span>
+            {i < parts.length - 1 ? (
+              <span className="relative z-10 -mx-0.5 flex h-2 w-4 shrink-0 flex-row">
+                <span
+                  className="mt-px h-1.5 w-[10px] shrink-0 bg-[--bg]"
+                  style={{
+                    "--bg": parts[i][parts[i].length - 1].lineDetails?.colour ?? LRT_BG,
+                    clipPath: "polygon(0 0, 10px 0, 6px 100%, 0 100%)",
+                  }}
+                />
+                <span
+                  className="-ml-1 mt-px h-1.5 w-[10px] shrink-0 bg-[--bg]"
+                  style={{
+                    "--bg": parts[i + 1][parts[i + 1].length - 1].lineDetails?.colour ?? LRT_BG,
+                    clipPath: "polygon(4px 0, 10px 0, 10px 100%, 0 100%)",
+                  }}
+                />
+                <span className="absolute inset-x-[0.8px] inset-y-0 border-y border-text-secondary" />
+              </span>
+            ) : null}
+          </Fragment>
         ))}
       </span>
-      <span className="min-w-0 max-w-full truncate">{stationName}</span>
+      <span className="min-w-0 max-w-full truncate">{name}</span>
     </>
   );
 });
