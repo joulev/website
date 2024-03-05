@@ -369,17 +369,18 @@ function PanelTopButtons() {
         <LinkButton variants={{ size: "sm" }} href="/">
           <Home /> joulev.dev
         </LinkButton>
-        {activeSession.lineIndex !== null && (
-          <Button
-            variants={{ size: "sm" }}
-            onClick={() => {
-              setPanelIsExpanded(true);
-              setActiveSession({ lineIndex: null, sessionIndex: null }).catch(() => null);
-            }}
-          >
-            Project overview
-          </Button>
-        )}
+        <Button
+          variants={{ size: "sm" }}
+          onClick={() => {
+            setPanelIsExpanded(true);
+            setActiveSession({ lineIndex: null, sessionIndex: null }).catch(() => null);
+          }}
+          className={cn(
+            activeSession.lineIndex === null ? "pointer-events-none opacity-0" : "opacity-100",
+          )}
+        >
+          Project overview
+        </Button>
       </div>
       <Button
         variants={{ size: "icon-sm" }}
