@@ -73,6 +73,8 @@ function LineBadge({ line }: { line: Line }) {
 const StationBadge = memo(function StationBadge({ station }: { station: string }) {
   const codes = station
     .split(" ")
+    .map(x => x.split("-"))
+    .flat()
     .filter(x => x.length > 0 && x.toUpperCase() === x)
     .map(x => {
       const match = /(?<line>[A-Z]+)(?<num>\d*)/.exec(x);
