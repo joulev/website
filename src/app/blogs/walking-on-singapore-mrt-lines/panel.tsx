@@ -62,7 +62,7 @@ function Stat({ label, value, unit }: { label: string; value: React.ReactNode; u
 function LineBadge({ line }: { line: Line }) {
   return (
     <span
-      className="inline-block w-12 rounded-[0.6em/50%] border border-text-secondary bg-[--bg] py-0.5 text-center font-lta text-base font-medium tracking-wider text-[--fg]"
+      className="inline-block w-12 rounded-[0.6em/50%] border border-text-secondary bg-[--bg] py-0.5 text-center font-lta text-base font-medium tracking-wide text-[--fg]"
       style={{ "--bg": line.colour, "--fg": line.textColour }}
     >
       {line.lineCode}L
