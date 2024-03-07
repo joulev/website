@@ -14,13 +14,14 @@ import { GitHubStats } from "./github-stats";
 import { MusicData } from "./music-data";
 import styles from "./page.module.css";
 
+function ReadmeA({ href, ...rest }: React.ComponentPropsWithoutRef<"a">) {
+  return <Link href={href ?? "/"} {...rest} />;
+}
+
 async function ReadmeContent() {
   const markdown = await getGithubReadme();
   return (
-    <Markdown
-      remarkPlugins={[remarkGfm]}
-      components={{ a: ({ href, ref: _, ...rest }) => <Link href={href ?? "/"} {...rest} /> }}
-    >
+    <Markdown remarkPlugins={[remarkGfm]} components={{ a: ReadmeA }}>
       {markdown}
     </Markdown>
   );
