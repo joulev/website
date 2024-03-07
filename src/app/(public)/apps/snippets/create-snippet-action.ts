@@ -3,7 +3,7 @@
 import { init } from "@paralleldrive/cuid2";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import { type ThemeRegistrationAny, getHighlighter, normalizeTheme } from "shikiji";
+import { type ThemeRegistrationAny, getHighlighter, normalizeTheme } from "shiki";
 import * as v from "valibot";
 
 import themeJson from "~/../.theme/theme.json";

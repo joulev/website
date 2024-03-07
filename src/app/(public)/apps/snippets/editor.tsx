@@ -9,7 +9,7 @@ import {
   bundledLanguages,
   getHighlighter,
   normalizeTheme,
-} from "shikiji";
+} from "shiki";
 
 import themeJson from "~/../.theme/theme.json";
 import { Save } from "~/components/icons";
