@@ -36,14 +36,13 @@ export function LazyImage({
 
   return (
     <div ref={ref} className="bg-daw-main-100">
-      {/* eslint-disable-next-line @next/next/no-img-element -- We already implement manual lazy loading */}
       <img
         src={
           dataUrl ||
           `data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${props.width} ${props.height}'%3e%3c/svg%3e`
         }
-        alt={alt}
         {...props}
+        alt={alt}
         className={cn("transition duration-600", dataUrl ? "opacity-100" : "opacity-0", className)}
       />
     </div>

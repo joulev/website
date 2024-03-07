@@ -4,6 +4,7 @@ export function Logo({
 }: { logoWidth?: number } & React.ComponentPropsWithoutRef<"path">) {
   return (
     <svg width={logoWidth} height={(logoWidth / 38) * 49} viewBox="0 0 38 49">
+      <title>joulev.dev logo</title>
       <path
         d="M2.17167 33.0266C1.21948 33.5975 0.00854497 32.9115 0.00854497 31.8014V17.2957C0.00854497 16.187 1.21653 15.5009 2.16877 16.0687L14.2992 23.3021C15.2272 23.8554 15.2288 25.1988 14.3021 25.7543L2.17167 33.0266Z"
         {...props}

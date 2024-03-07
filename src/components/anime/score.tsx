@@ -14,7 +14,7 @@ export function Score({
   const center = 12;
   const width = 4;
 
-  const f = (x: number) => 65.8656 * Math.pow(1.2035, x) - 60.8656; // f(0) = 5, f(7) = 180, f(10) ≈ 359
+  const f = (x: number) => 65.8656 * 1.2035 ** x - 60.8656; // f(0) = 5, f(7) = 180, f(10) ≈ 359
   const angle = f(score ?? 0);
 
   const radius = center - width / 2;
@@ -28,6 +28,7 @@ export function Score({
   return (
     <div className={cn("flex flex-row items-center gap-1.5", className)}>
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+        <title>Score icon</title>
         <circle cx={center} cy={center} r={radius} className="stroke-bg-idle" strokeWidth={width} />
         <path
           className="stroke-text-secondary"

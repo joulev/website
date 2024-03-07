@@ -29,7 +29,6 @@ async function highlightCode(code: string, language: string) {
 async function getAvailableSlug() {
   const generate = init({ length: 12 });
   let slug = generate();
-  // eslint-disable-next-line no-await-in-loop -- Iterations are not independent
   while (await slugExists(slug)) slug = generate();
   return slug;
 }

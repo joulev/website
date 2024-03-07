@@ -3,18 +3,18 @@
 import { useState } from "react";
 
 import {
-  Move3d as Animation,
-  User as Character,
+  AlignJustify as Story,
   ChevronsRight,
-  Smile as Enjoyment,
+  Move3d as Animation,
   Music,
   Pause,
   Pencil,
   Play,
   Repeat,
+  Smile as Enjoyment,
   StopCircle,
-  AlignJustify as Story,
   Trash,
+  User as Character,
   X,
 } from "~/components/icons";
 import { Button } from "~/components/ui/button";

@@ -31,6 +31,7 @@ function createIcon(name: string, svgContent: React.ReactNode, withStrokeCurrent
         withStrokeCurrent && "[&_path]:stroke-current",
       )}
     >
+      <title>{name} icon</title>
       {svgContent}
     </svg>
   );

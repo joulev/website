@@ -59,7 +59,6 @@ export const addToPTW = generateAction(async (client, itemId: number) => {
   await client.request(ADD_ANIME, { mediaId: itemId });
 }, "/admin/manage/anime/planning");
 
-// eslint-disable-next-line @typescript-eslint/require-await -- Server actions must be async
 export async function forceRefresh() {
   revalidateTag("anime-lists");
 }

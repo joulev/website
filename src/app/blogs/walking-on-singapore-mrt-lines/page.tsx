@@ -7,7 +7,7 @@ import { cn } from "~/lib/cn";
 
 import { ActiveSessionContextProvider } from "./context";
 import { LoadingScreen } from "./loading-screen";
-import { Map } from "./map";
+import { WalkingMap } from "./map";
 import { Panel } from "./panel";
 
 // Unofficial font, https://github.com/jglim/IdentityFont
@@ -22,7 +22,7 @@ export default function Page() {
     <div className={cn("fixed inset-0", ltaIdentity.variable)}>
       <Suspense fallback={<LoadingScreen />}>
         <ActiveSessionContextProvider>
-          <Map />
+          <WalkingMap />
           <Panel />
         </ActiveSessionContextProvider>
       </Suspense>

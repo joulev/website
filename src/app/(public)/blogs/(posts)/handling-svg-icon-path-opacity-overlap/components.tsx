@@ -24,6 +24,7 @@ export function Problem() {
             strokeLinecap="round"
             strokeLinejoin="round"
           >
+            <title>Path opacity overlap problem demonstration with the flask-conical icon</title>
             <path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2" />
             <path d="M8.5 2h7" />
             <path d="M7 16h10" />
@@ -56,6 +57,7 @@ export function Problem() {
             strokeLinecap="round"
             strokeLinejoin="round"
           >
+            <title>Path opacity overlap problem demonstration with the atom icon</title>
             <circle cx="12" cy="12" r="1" />
             <path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z" />
             <path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z" />
@@ -111,6 +113,7 @@ export function FlaskConicalFlattening() {
             strokeLinecap="round"
             strokeLinejoin="round"
           >
+            <title>Flattening example: flask conical icon, original problematic version</title>
             <path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2" />
             <path d="M8.5 2h7" />
             <path d="M7 16h10" />
@@ -141,6 +144,7 @@ export function FlaskConicalFlattening() {
             strokeLinecap="round"
             strokeLinejoin="round"
           >
+            <title>Flattening example: flask conical icon, flattened version</title>
             <path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2M8.5 2h7M7 16h10" />
           </svg>
           <div className="text-lg">Flattened ✅</div>
@@ -181,6 +185,7 @@ export function AtomReallyFlattening() {
             strokeLinecap="round"
             strokeLinejoin="round"
           >
+            <title>"Really flattening" example: atom icon, original problematic version</title>
             <circle cx="12" cy="12" r="1" />
             <path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z" />
             <path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z" />
@@ -210,6 +215,7 @@ export function AtomReallyFlattening() {
             fill="none"
             stroke="none"
           >
+            <title>"Really flattening" example: atom icon, flattened version</title>
             <path
               fill="currentcolor"
               fillOpacity={opacity}
@@ -264,6 +270,7 @@ export function AtomMask() {
             strokeLinecap="round"
             strokeLinejoin="round"
           >
+            <title>Mask example: atom icon, original problematic version</title>
             <circle cx="12" cy="12" r="1" />
             <path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z" />
             <path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z" />
@@ -292,6 +299,7 @@ export function AtomMask() {
             strokeLinecap="round"
             strokeLinejoin="round"
           >
+            <title>Mask example: atom icon, fixed version with SVG mask</title>
             <mask id="a">
               <rect width="24" height="24" fill="black" />
               <circle stroke="white" cx="12" cy="12" r="1" />
@@ -344,6 +352,10 @@ export function AtomMaskCustomiseStrokeWidth() {
             strokeLinecap="round"
             strokeLinejoin="round"
           >
+            <title>
+              Example of the masked atom icon with customisable stroke width: original problematic
+              atom icon with varying stroke width depending on user input
+            </title>
             <circle cx="12" cy="12" r="1" />
             <path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z" />
             <path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z" />
@@ -369,6 +381,10 @@ export function AtomMaskCustomiseStrokeWidth() {
             strokeLinecap="round"
             strokeLinejoin="round"
           >
+            <title>
+              Example of the masked atom icon with customisable stroke width: atom icon with varying
+              stroke width depending on user input
+            </title>
             <mask id="a">
               <rect width="24" height="24" fill="black" />
               <circle stroke="white" cx="12" cy="12" r="1" />

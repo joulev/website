@@ -84,6 +84,7 @@ export function Sidebar({ isAdmin, items }: { isAdmin?: boolean; items: Item[] }
   const basePath = isAdmin ? "/admin/manage/anime" : "/apps/anime";
   const normalisedPathname = pathname === basePath ? `${basePath}/watching` : pathname;
   useEffect(() => {
+    normalisedPathname;
     setExpanded(x => !x);
   }, [normalisedPathname]);
   return (

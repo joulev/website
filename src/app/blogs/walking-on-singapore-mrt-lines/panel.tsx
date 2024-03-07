@@ -17,7 +17,7 @@ import type { Line, Session } from "./types";
 function convertMinToMinSec(min: number) {
   const minInt = Math.floor(min);
   const sec = Math.round((min - minInt) * 60);
-  return isNaN(minInt) ? "N/A" : `${minInt}:${sec < 10 ? "0" : ""}${sec}`;
+  return Number.isNaN(minInt) ? "N/A" : `${minInt}:${sec < 10 ? "0" : ""}${sec}`;
 }
 
 function getLineStats(line: Line) {

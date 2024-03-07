@@ -28,7 +28,6 @@ function TweetHeader({ tweet }: { tweet: EnrichedTweet }) {
   return (
     <div className="flex flex-row gap-3">
       <Link href={user.url} unstyled className="shrink-0">
-        {/* eslint-disable-next-line @next/next/no-img-element -- It's ok */}
         <img
           src={user.profile_image_url_https}
           alt={user.name}

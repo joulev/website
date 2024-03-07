@@ -3,7 +3,6 @@ import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
 import { cn } from "~/lib/cn";
 
 export function a({ href, className, ...props }: React.ComponentPropsWithoutRef<"a">) {
-  // eslint-disable-next-line jsx-a11y/anchor-has-content -- content is passed as children
   if (!href) return <a {...props} className={cn("link", className)} />;
   return <Link href={href} {...props} className={className} />;
 }

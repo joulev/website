@@ -30,7 +30,6 @@ export default function Page() {
       await append({ role: "user", content: prompt });
       setPrompt("");
     } catch {
-      // eslint-disable-next-line no-alert -- I (as the only user) am fine with it
       alert("Fetch failed, please try again later.");
     }
     setIsLoading(false);
@@ -50,7 +49,7 @@ export default function Page() {
     <main className="container max-w-screen-lg">
       <Card className="flex flex-col p-0 md:flex-row">
         <div className="border-b border-separator bg-bg-darker p-6 md:w-64 md:shrink-0 md:border-r">
-          <Title title="chat" subtitle={<>Current model: GPT&#8209;4&nbsp;Turbo</>} />
+          <Title title="chat" subtitle="Current model: GPT&#8209;4&nbsp;Turbo" />
         </div>
         <div className="flex max-w-full flex-grow flex-col divide-y divide-separator overflow-x-auto">
           {messages.map((m, index) => (

@@ -16,7 +16,6 @@ export async function MusicData() {
   return (
     <MetadataCard
       left={
-        // eslint-disable-next-line @next/next/no-img-element -- lh3.googleusercontent.com is too large for us to allow
         <img src={thumbnail?.url} alt={song.name} className="size-18 rounded-[0.5rem] opacity-80" />
       }
       right={

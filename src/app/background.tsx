@@ -99,7 +99,6 @@ function getRandomStartingIndex(seed: string) {
   const ARRAY = [0, 1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
   let hash = 0;
   for (let i = 0; i < seed.length; i++) {
-    // eslint-disable-next-line no-bitwise -- Gotta look fancy y'know
     hash = (hash << 5) - hash + seed.charCodeAt(i);
   }
   return ARRAY[Math.abs(hash) % ARRAY.length];

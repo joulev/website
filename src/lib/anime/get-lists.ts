@@ -121,7 +121,6 @@ export async function getList(status: AnimeAllowedStatus) {
   const [list, variant] = await getListNotSorted(status);
   const sortedList = sortList(
     list,
-    // eslint-disable-next-line no-nested-ternary -- does this look *that* unreadable?
     variant === "planning" ? "planning" : variant.includes("completed") ? "completed" : "others",
   ).filter((item): item is NonNullable<(typeof list)[number]> => item !== null);
   return [sortedList, variant] as const;

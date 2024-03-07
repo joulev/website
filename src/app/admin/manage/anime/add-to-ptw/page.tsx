@@ -14,10 +14,7 @@ async function search(query: string | undefined) {
   if (!query) return [];
   const client = await getAuthenticatedGraphQLClient();
   const { lists } = await getAllLists();
-  const allIds = lists
-    .map(list => list?.entries)
-    .flat()
-    .map(entry => entry?.mediaId ?? 0);
+  const allIds = lists.flatMap(list => list?.entries).map(entry => entry?.mediaId ?? 0);
   const data = await client.request(SEARCH_ANIME, { search: query, idNotIn: allIds });
   const items = data.Page?.media ?? [];
   return items;
@@ -50,7 +47,6 @@ export default async function Page({ searchParams }: PageProps) {
                           className="pr-3"
                         />
                         <div className="hidden pl-3 sm:block">
-                          {/* eslint-disable-next-line no-nested-ternary -- It's fine */}
                           {item.genres && item.genres.length > 0 ? (
                             <>{item.genres.slice(0, 3).join(", ")}</>
                           ) : item.season && item.seasonYear ? (

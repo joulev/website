@@ -78,9 +78,9 @@ function MapPolyline({
       strokeOpacity: 1,
       strokeWeight: 4,
     });
-  }, [isActive, isHover, lineIsActive, lineIndex, activeSession.lineIndex]);
+  }, [isActive, isHover, lineIsActive, activeSession.lineIndex, data[lineIndex].colour]);
 
-  useEffect(refreshStyling, [refreshStyling]);
+  useEffect(() => refreshStyling(), [refreshStyling]);
 
   return (
     <Polyline
@@ -102,7 +102,7 @@ function MapLine({ line, lineIndex }: { line: Line; lineIndex: number }) {
   ));
 }
 
-export const Map = memo(function Map() {
+export const WalkingMap = memo(function WalkingMap() {
   const { setActiveSession, setPanelIsExpanded } = useActiveSession();
   const { isLoaded } = useJsApiLoader({ googleMapsApiKey: env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY });
   const onClick = useCallback(() => {
