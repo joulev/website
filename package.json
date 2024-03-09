@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "check": "biome check .",
+    "check:ci": "biome ci .",
     "build": "pnpm download-fonts && pnpm download-theme && pnpm codegen && next build",
     "codegen": "graphql-codegen --config codegen.ts",
     "db:push": "drizzle-kit push:pg",
