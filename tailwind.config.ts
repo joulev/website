@@ -45,7 +45,6 @@ const config: Config = {
     fontFamily: {
       sans: ["var(--sans)", ...defaultTheme.fontFamily.sans],
       mono: ["var(--mono)", ...defaultTheme.fontFamily.mono],
-      lta: ["var(--lta)", "var(--sans)", ...defaultTheme.fontFamily.sans],
     },
     transitionDuration: { DEFAULT: "300ms", 600: "600ms" },
     extend: {

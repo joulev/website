@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, memo, useMemo } from "react";
+import { useMemo } from "react";
 
 import { ChevronDown, Home } from "~/components/icons";
 import { Button, LinkButton } from "~/components/ui/button";
@@ -61,91 +61,37 @@ function Stat({ label, value, unit }: { label: string; value: React.ReactNode; u
 
 function LineBadge({ line }: { line: Line }) {
   return (
-    <span
-      className="inline-block w-12 rounded-[0.6em/50%] border border-text-secondary bg-[--bg] py-0.5 text-center font-lta text-base font-medium tracking-wide text-[--fg]"
-      style={{ "--bg": line.colour, "--fg": line.textColour }}
-    >
-      {line.lineCode}L
-    </span>
+    <img
+      key={line.lineCode}
+      src={`https://mrt-badges.joulev.dev/${line.lineCode}L`}
+      alt={line.lineName}
+      className="h-8 w-[52px]"
+    />
   );
 }
 
-function getStationDetails(station: string) {
-  const stationName = station
+function StationBadge({ station }: { station: string }) {
+  const name = station
     .split(" ")
     .filter(x => x.toUpperCase() !== x)
     .join(" ");
-  const stationCodes = station.replace(stationName, "").trim();
-  const parts = stationCodes.split("-").map(connectedPart =>
-    connectedPart
-      .split(" ")
-      .map(code => {
-        const match = /(?<line>[A-Z]+)(?<num>\d*)/.exec(code);
-        if (!match?.groups) return null;
-        const line = match.groups.line;
-        const lineDetails = data.find(
-          val =>
-            val.lineCode === line ||
-            (val.lineCode === "EW" && line === "CG") ||
-            (val.lineCode === "CC" && line === "CE"),
-        );
-        return { line, num: match.groups.num, lineDetails };
-      })
-      .filter((x): x is { line: string; num: string; lineDetails: Line | undefined } => Boolean(x)),
-  );
-  return { name: stationName, parts };
-}
+  const identifier = station
+    .split(" ")
+    .filter(x => x.toUpperCase() === x)
+    .join(":");
 
-const LRT_BG = "#718573";
-const LRT_FG = "white";
-const StationBadge = memo(function StationBadge({ station }: { station: string }) {
-  const { name, parts } = useMemo(() => getStationDetails(station), [station]);
   return (
     <>
-      <span className="flex flex-row items-center font-lta tracking-wide">
-        {parts.map((part, i) => (
-          <Fragment key={i}>
-            <span className="flex flex-row overflow-hidden rounded-[0.6em/50%] border border-text-secondary text-[0.7em] font-medium">
-              {part.map((code, j) => (
-                <span
-                  key={j}
-                  className="flex h-[1.8em] w-[3.2em] flex-row items-center justify-center gap-[0.2em] bg-[--bg] leading-none text-[--fg]"
-                  style={{
-                    "--bg": code.lineDetails?.colour ?? LRT_BG,
-                    "--fg": code.lineDetails?.textColour ?? LRT_FG,
-                  }}
-                >
-                  <span>{code.line}</span>
-                  <span>{code.num}</span>
-                </span>
-              ))}
-            </span>
-            {i < parts.length - 1 ? (
-              <span className="relative z-10 -mx-0.5 flex h-2 w-4 shrink-0 flex-row">
-                <span
-                  className="mt-px h-1.5 w-[10px] shrink-0 bg-[--bg]"
-                  style={{
-                    "--bg": parts[i][parts[i].length - 1].lineDetails?.colour ?? LRT_BG,
-                    clipPath: "polygon(0 0, 10px 0, 6px 100%, 0 100%)",
-                  }}
-                />
-                <span
-                  className="-ml-1 mt-px h-1.5 w-[10px] shrink-0 bg-[--bg]"
-                  style={{
-                    "--bg": parts[i + 1][parts[i + 1].length - 1].lineDetails?.colour ?? LRT_BG,
-                    clipPath: "polygon(4px 0, 10px 0, 10px 100%, 0 100%)",
-                  }}
-                />
-                <span className="absolute inset-x-[0.8px] inset-y-0 border-y border-text-secondary" />
-              </span>
-            ) : null}
-          </Fragment>
-        ))}
-      </span>
+      <img
+        key={identifier}
+        src={`https://mrt-badges.joulev.dev/${identifier}`}
+        alt={name}
+        className="h-[1.5em]"
+      />
       <span className="min-w-0 max-w-full truncate">{name}</span>
     </>
   );
-});
+}
 
 function Overview() {
   return (
