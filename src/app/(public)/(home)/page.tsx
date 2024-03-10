@@ -133,6 +133,23 @@ export default function Page() {
           </List>
           <List>
             <ListHeader asChild>
+              <h2>Small services</h2>
+            </ListHeader>
+            <ListContent>
+              <ListItem asChild>
+                <Link unstyled href="https://github.com/joulev/latex2svg-service">
+                  latex2svg
+                </Link>
+              </ListItem>
+              <ListItem asChild>
+                <Link unstyled href="https://github.com/joulev/mrt-badges">
+                  mrt-badges
+                </Link>
+              </ListItem>
+            </ListContent>
+          </List>
+          <List>
+            <ListHeader asChild>
               <h2>Small-ish apps at joulev.dev</h2>
             </ListHeader>
             <ListContent>
