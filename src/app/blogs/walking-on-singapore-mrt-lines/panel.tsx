@@ -63,7 +63,7 @@ function LineBadge({ line }: { line: Line }) {
   return (
     <img
       key={line.lineCode}
-      src={`https://mrt-badges.joulev.dev/${line.lineCode}L`}
+      src={`https://mrt-badges.joulev.dev/${line.lineCode}L?border=2`}
       alt={line.lineName}
       className="h-8 w-[52px]"
     />
@@ -84,7 +84,7 @@ function StationBadge({ station }: { station: string }) {
     <>
       <img
         key={identifier}
-        src={`https://mrt-badges.joulev.dev/${identifier}`}
+        src={`https://mrt-badges.joulev.dev/${identifier}?border=2`}
         alt={name}
         className="h-[1.5em]"
       />
