@@ -4250,7 +4250,7 @@
         "kcal": 462,
         "description": "Decided to finish NEL within today. Was it a good decision? I’d say yes. But as expected it was tiring as heck. My body ran out of water to convert to sweat before I reached the interchange with TPE.\n\nFor some reasons the map tracking app stopped working midway, so the part around Hougang MRT is inaccurate. I fixed the distance count by measuring the distance on Google Maps, but the pace and calories counts are not as accurate as other sessions.",
         "start": "NE12 CC13 Serangoon",
-        "end": "NE17 PTC Punggol",
+        "end": "NE17 CP4 PTC Punggol",
         "coordinates": [
           { "lat": 1.349896592607764, "lng": 103.87355342529693 },
           { "lat": 1.349986369426492, "lng": 103.87361061600144 },
@@ -10186,7 +10186,7 @@
         "pace": 11.67,
         "kcal": 506,
         "description": "First impression has to be that the East has a LOT of cycling paths, public space and children playground. Which seems to be partially due to the overground train viaduct, as you cannot build anything under the viaducts so you might as well make them public green space.\n\nThe porridge in Pasir Ris Central Hawker Centre is fantastic. A really good way to start the session. The hawker centre was slightly further away from the station than I would like it to, however.\n\nAnother thing I noticed is that the gap between stations is quite large. Unlike other newer lines, it takes a lot of time to go from Tanah Merah MRT to Bedok MRT. And I really should have stopped at Tanah Merah MRT. My legs are trembling as I type these lines on a train heading away from Bedok MRT.",
-        "start": "EW1 Pasir Ris",
+        "start": "EW1 CR5 CP1 Pasir Ris",
         "end": "EW5 Bedok",
         "coordinates": [
           { "lat": 1.3727155169161418, "lng": 103.94947378327501 },

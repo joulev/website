@@ -62,7 +62,7 @@ function Stat({ label, value, unit }: { label: string; value: React.ReactNode; u
 function LineBadge({ line }: { line: Line }) {
   return (
     <span
-      className="inline-block w-12 rounded-[0.6em/50%] border border-text-secondary bg-[--bg] py-0.5 text-center font-lta text-base font-medium tracking-wide text-[--fg]"
+      className="inline-block w-12 rounded-[0.6em/50%] border border-white bg-[--bg] py-0.5 text-center font-lta text-base font-medium tracking-wide text-[--fg]"
       style={{ "--bg": line.colour, "--fg": line.textColour }}
     >
       {line.lineCode}L
@@ -87,7 +87,9 @@ function getStationDetails(station: string) {
           val =>
             val.lineCode === line ||
             (val.lineCode === "EW" && line === "CG") ||
-            (val.lineCode === "CC" && line === "CE"),
+            (val.lineCode === "CC" && line === "CE") ||
+            (val.lineCode === "JR" && ["JS", "JW", "JE"].includes(line)) ||
+            (val.lineCode === "CR" && line === "CP"),
         );
         return { line, num: match.groups.num, lineDetails };
       })
@@ -105,19 +107,24 @@ const StationBadge = memo(function StationBadge({ station }: { station: string }
       <span className="flex flex-row items-center font-lta tracking-wide">
         {parts.map((part, i) => (
           <Fragment key={i}>
-            <span className="flex flex-row overflow-hidden rounded-[0.6em/50%] border border-text-secondary text-[0.7em] font-medium">
+            <span className="flex flex-row overflow-hidden rounded-[0.6em/50%] border border-white text-[0.7em] font-medium">
               {part.map((code, j) => (
-                <span
-                  key={j}
-                  className="flex h-[1.8em] w-[3.2em] flex-row items-center justify-center gap-[0.2em] bg-[--bg] leading-none text-[--fg]"
-                  style={{
-                    "--bg": code.lineDetails?.colour ?? LRT_BG,
-                    "--fg": code.lineDetails?.textColour ?? LRT_FG,
-                  }}
-                >
-                  <span>{code.line}</span>
-                  <span>{code.num}</span>
-                </span>
+                <Fragment key={j}>
+                  <span
+                    className="flex h-[1.8em] w-[3.2em] flex-row items-center justify-center gap-[0.2em] bg-[--bg] leading-none text-[--fg]"
+                    style={{
+                      "--bg": code.lineDetails?.colour ?? LRT_BG,
+                      "--fg": code.lineDetails?.textColour ?? LRT_FG,
+                    }}
+                  >
+                    <span>{code.line}</span>
+                    <span>{code.num}</span>
+                  </span>
+                  {j < part.length - 1 &&
+                  code.lineDetails?.colour === part[j + 1].lineDetails?.colour ? (
+                    <span className="self-stretch w-px bg-white" />
+                  ) : null}
+                </Fragment>
               ))}
             </span>
             {i < parts.length - 1 ? (
@@ -136,7 +143,7 @@ const StationBadge = memo(function StationBadge({ station }: { station: string }
                     clipPath: "polygon(4px 0, 10px 0, 10px 100%, 0 100%)",
                   }}
                 />
-                <span className="absolute inset-x-[0.8px] inset-y-0 border-y border-text-secondary" />
+                <span className="absolute inset-x-[0.8px] inset-y-0 border-y border-white" />
               </span>
             ) : null}
           </Fragment>
