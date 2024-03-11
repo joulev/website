@@ -1,6 +1,6 @@
 // @ts-check
+import fs from "node:fs/promises";
 import { XMLParser } from "fast-xml-parser";
-import fs from "fs/promises";
 
 async function main() {
   const inputFile = process.argv[2];
@@ -19,8 +19,8 @@ async function main() {
   )
     .filter((_, index) => index % 10 === 0)
     .map(trackpoint => ({
-      lat: parseFloat(trackpoint.Position.LatitudeDegrees),
-      lng: parseFloat(trackpoint.Position.LongitudeDegrees),
+      lat: Number.parseFloat(trackpoint.Position.LatitudeDegrees),
+      lng: Number.parseFloat(trackpoint.Position.LongitudeDegrees),
     }));
   await fs.writeFile(outputFile, JSON.stringify(coordinates), "utf8");
 

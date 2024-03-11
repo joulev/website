@@ -1,10 +1,10 @@
 "use server";
 
-import { type GraphQLClient } from "graphql-request";
+import type { GraphQLClient } from "graphql-request";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { type AnimeListItem } from "~/lib/anime/get-lists";
+import type { AnimeListItem } from "~/lib/anime/get-lists";
 import {
   ADD_ANIME,
   DELETE_ANIME,
