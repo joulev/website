@@ -106,7 +106,7 @@ export const WalkingMap = memo(function WalkingMap() {
   const { setActiveSession, setPanelIsExpanded } = useActiveSession();
   const { isLoaded } = useJsApiLoader({ googleMapsApiKey: env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY });
   const onClick = useCallback(() => {
-    setPanelIsExpanded(true);
+    setPanelIsExpanded(false);
     setActiveSession({ lineIndex: null, sessionIndex: null }).catch(() => null);
   }, [setPanelIsExpanded, setActiveSession]);
   const collapsePanel = useCallback(() => setPanelIsExpanded(false), [setPanelIsExpanded]);
