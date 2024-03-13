@@ -1333,6 +1333,28 @@
           { "lng": 103.9151287, "lat": 1.3212892 },
           { "lng": 103.9129938, "lat": 1.3208924 }
         ]
+      },
+      {
+        "time": "2024-03-13T19:51:00+08:00",
+        "distance": 5.95,
+        "pace": 11.27,
+        "kcal": 328,
+        "description": "After resting and not going to class today, I found myself feeling much better towards the afternoon, so decided to give it a try. And indeed, I was fit enough to continue this project. I only stopped at Lavender MRT because I had something to do at 10pm sharp that I must not miss.\n\nThe weather was good and the route was clear. I also faced surprisingly many green lights. That doesn’t excuse me of that moment I stopped a car by walking into the red light once at the Sims Ave–Sims Way junction though. While I genuinely thought it was a zebra crossing at first (and only realised I messed up after that car honked me as I made it halfway), I was still 100% wrong here, and my sincerest apologies to whoever drove that car at that moment.",
+        "start": "EW6 Kembangan",
+        "end": "EW11 Lavender",
+        "coordinates": [
+          { "lng": -256.0867153, "lat": 1.3209487 },
+          { "lng": -256.0922631, "lat": 1.3197876 },
+          { "lng": -256.0954069, "lat": 1.3193157 },
+          { "lng": -256.1035434, "lat": 1.3176853 },
+          { "lng": -256.1074691, "lat": 1.3171061 },
+          { "lng": -256.1214137, "lat": 1.3144461 },
+          { "lng": -256.125886, "lat": 1.3130088 },
+          { "lng": -256.1280226, "lat": 1.3116466 },
+          { "lng": -256.1290687, "lat": 1.3107885 },
+          { "lng": -256.1357034, "lat": 1.3089972 },
+          { "lng": -256.1373219, "lat": 1.3075036 }
+        ]
       }
     ]
   },
