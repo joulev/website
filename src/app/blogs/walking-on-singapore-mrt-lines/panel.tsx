@@ -62,7 +62,7 @@ function Stat({ label, value, unit }: { label: string; value: React.ReactNode; u
 function LineBadge({ line }: { line: Line }) {
   return (
     <span
-      className="inline-block w-12 rounded-[0.6em/50%] border border-white bg-[--bg] py-0.5 text-center font-lta text-base font-medium tracking-wide text-[--fg]"
+      className="inline-block w-12 rounded-[0.6em/50%] border border-white bg-[--bg] py-0.5 text-center font-lta text-base font-medium text-[--fg]"
       style={{ "--bg": line.colour, "--fg": line.textColour }}
     >
       {line.lineCode}L
@@ -104,7 +104,7 @@ const StationBadge = memo(function StationBadge({ station }: { station: string }
   const { name, parts } = useMemo(() => getStationDetails(station), [station]);
   return (
     <>
-      <span className="flex flex-row items-center font-lta tracking-wide">
+      <span className="flex flex-row items-center font-lta">
         {parts.map((part, i) => (
           <Fragment key={i}>
             <span className="flex flex-row overflow-hidden rounded-[0.6em/50%] border border-white text-[0.7em] font-medium">
