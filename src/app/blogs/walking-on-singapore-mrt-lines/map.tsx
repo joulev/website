@@ -42,6 +42,18 @@ const mapStyles: google.maps.MapTypeStyle[] = [
   { featureType: "transit.line", elementType: "geometry", stylers: [{ invert_lightness: true }] },
 ];
 
+// Order at which lines are opened
+const lineZIndex = {
+  NS: 0,
+  EW: 1,
+  NE: 2,
+  CC: 3,
+  DT: 4,
+  TE: 5,
+  JR: 6,
+  CR: 7,
+};
+
 function MapPolyline({
   coordinates,
   lineIndex,
@@ -52,10 +64,12 @@ function MapPolyline({
   sessionIndex: number;
 }) {
   const polylineRef = useRef<google.maps.Polyline | null>(null);
+  const thinFillAreaPolylineRef = useRef<google.maps.Polyline | null>(null);
 
   const { activeSession, setActiveSession, setPanelIsExpanded } = useActiveSession();
   const lineIsActive = activeSession.lineIndex === lineIndex;
   const isActive = lineIsActive && activeSession.sessionIndex === sessionIndex;
+  const isOutlined = lineIndex === 4 && sessionIndex === 6; // Changi Airport branch
   const [isHover, setIsHover] = useState(false);
 
   const onHoverEnter = useCallback(() => setIsHover(true), []);
@@ -74,25 +88,60 @@ function MapPolyline({
           : lineIsActive || activeSession.lineIndex === null
             ? data[lineIndex].colour
             : "#555555",
-      zIndex: isActive || isHover ? 9999 : lineIsActive ? 9998 : 0,
+      zIndex:
+        isActive || isHover
+          ? 9999
+          : lineIsActive
+            ? 9997
+            : lineZIndex[data[lineIndex].lineCode as keyof typeof lineZIndex],
       strokeOpacity: 1,
-      strokeWeight: 4,
+      strokeWeight: 3,
     });
-  }, [isActive, isHover, lineIsActive, activeSession.lineIndex, data[lineIndex].colour]);
+    if (!thinFillAreaPolylineRef.current) return;
+    thinFillAreaPolylineRef.current.setOptions({
+      strokeColor: "black",
+      zIndex: lineIsActive
+        ? 9998
+        : lineZIndex[data[lineIndex].lineCode as keyof typeof lineZIndex] + 1,
+      strokeOpacity: 1,
+      strokeWeight: 1,
+    });
+  }, [
+    isActive,
+    isHover,
+    lineIsActive,
+    activeSession.lineIndex,
+    data[lineIndex].colour,
+    data[lineIndex].lineCode,
+  ]);
 
   useEffect(() => refreshStyling(), [refreshStyling]);
 
   return (
-    <Polyline
-      onLoad={polyline => {
-        polylineRef.current = polyline;
-        refreshStyling();
-      }}
-      path={coordinates}
-      onMouseOver={onHoverEnter}
-      onMouseOut={onHoverLeave}
-      onClick={onClick}
-    />
+    <>
+      <Polyline
+        onLoad={polyline => {
+          polylineRef.current = polyline;
+          refreshStyling();
+        }}
+        path={coordinates}
+        onMouseOver={onHoverEnter}
+        onMouseOut={onHoverLeave}
+        onClick={onClick}
+      />
+      {isOutlined ? (
+        <Polyline
+          onLoad={polyline => {
+            thinFillAreaPolylineRef.current = polyline;
+            refreshStyling();
+          }}
+          path={coordinates}
+          onMouseOver={onHoverEnter}
+          onMouseOut={onHoverLeave}
+          onClick={onClick}
+        />
+      ) : null}
+    </>
   );
 }
 

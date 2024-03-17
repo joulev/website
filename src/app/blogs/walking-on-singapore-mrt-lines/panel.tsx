@@ -2,7 +2,7 @@
 
 import { Fragment, memo, useMemo } from "react";
 
-import { ChevronDown, Home } from "~/components/icons";
+import { BusFront, ChevronDown, Home } from "~/components/icons";
 import { Button, LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { useHoverBackground } from "~/components/ui/hooks/use-hover-background";
@@ -102,6 +102,31 @@ const LRT_BG = "#718573";
 const LRT_FG = "white";
 const StationBadge = memo(function StationBadge({ station }: { station: string }) {
   const { name, parts } = useMemo(() => getStationDetails(station), [station]);
+
+  if (parts.length === 1 && parts[0].length === 1 && parts[0][0].line === "BUS") {
+    // It is a bus stop
+    return (
+      // I'd love to use Stroudley here, but it is not freely-legally available.
+      //
+      // Dear author of Stroudley, if you somehow come across this, could you give me the license to
+      // use Stroudley free of charge for the 0-9 digits only? I only use it here and it is not for
+      // any commercial purposes.
+      <>
+        <span className="bg-[#91d50b] text-black flex flex-row font-lta rounded-[4px] h-6">
+          <span className="size-6 grid place-items-center">
+            <BusFront className="size-4" />
+          </span>
+          <span className="p-[2px] pl-0">
+            <span className="bg-white h-full inline-block rounded-[2px] px-1">
+              <span>{parts[0][0].num}</span>
+            </span>
+          </span>
+        </span>
+        <span className="min-w-0 max-w-full truncate">{name}</span>
+      </>
+    );
+  }
+
   return (
     <>
       <span className="flex flex-row items-center font-lta">
@@ -211,6 +236,26 @@ function LineOverview({ line }: { line: Line }) {
   );
 }
 
+function SessionTerminusDisplay({
+  title,
+  position,
+  sm,
+  children,
+}: { title: string; position: "left" | "right"; sm?: boolean; children: React.ReactNode }) {
+  return (
+    <div
+      className={cn(
+        "flex flex-col gap-1 font-medium",
+        position === "left" ? "items-start" : "items-end",
+        sm ? "text-sm" : "text-lg",
+      )}
+    >
+      <div className="mb-0.5 text-sm font-normal text-text-secondary">{title}</div>
+      {children}
+    </div>
+  );
+}
+
 function SessionOverview({ line, session }: { line: Line; session: Session }) {
   const sessionIndex = useActiveSession().activeSession.sessionIndex;
   const date = new Date(session.time);
@@ -237,13 +282,20 @@ function SessionOverview({ line, session }: { line: Line; session: Session }) {
       </div>
       <hr />
       <div className="grid grid-cols-2 gap-6 p-6">
-        <div className="flex flex-col items-start gap-1 text-lg font-medium">
-          <div className="mb-0.5 text-sm font-normal text-text-secondary">From</div>
+        <SessionTerminusDisplay position="left" title="From">
           <StationBadge station={session.start} />
-        </div>
-        <div className="flex flex-col items-end gap-1 text-lg font-medium">
-          <div className="mb-0.5 text-sm font-normal text-text-secondary">To</div>
-          <StationBadge station={session.end} />
+        </SessionTerminusDisplay>
+        <div className="flex flex-col gap-6">
+          <SessionTerminusDisplay position="right" title="To">
+            <StationBadge
+              station={typeof session.end === "string" ? session.end : session.end.target}
+            />
+          </SessionTerminusDisplay>
+          {typeof session.end === "object" ? (
+            <SessionTerminusDisplay position="right" title="Actual" sm>
+              <StationBadge station={session.end.actual} />
+            </SessionTerminusDisplay>
+          ) : null}
         </div>
         {session.via ? (
           <div className="col-span-full flex flex-row items-center justify-center gap-2 text-center text-sm text-text-secondary">
