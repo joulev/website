@@ -4,7 +4,7 @@ const SLIDE_DURATION = 10000; // 10s
 const [W, H] = [2000, 1400];
 
 function getBackgroundCSS(hex: string) {
-  return `radial-gradient(50% 50% at 50% 50%, ${hex}80 0%, ${hex}00 100%)`;
+  return `radial-gradient(50% 50% at 50% 50%, ${hex} 0%, ${hex}00 100%)`;
 }
 
 function ColouredBackground({ colours }: { colours: string[] }) {
@@ -62,6 +62,13 @@ function ColouredBackground({ colours }: { colours: string[] }) {
         }}
       />
       <div className="absolute inset-0 backdrop-blur" />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='1920' height='1080'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='1920' height='1080' filter='url(%23n)' opacity='0.40'/%3E%3C/svg%3E\")",
+        }}
+      />
     </div>
   );
 }
@@ -95,8 +102,8 @@ function getColour(index: number) {
 }
 
 function getRandomStartingIndex(seed: string) {
-  // accepted starting indices. 2-5 don't look good
-  const ARRAY = [0, 1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+  // accepted starting indices
+  const ARRAY = [0, 1, 2, 3, 7, 8, 9, 10, 11, 12, 13, 14, 15];
   let hash = 0;
   for (let i = 0; i < seed.length; i++) {
     hash = (hash << 5) - hash + seed.charCodeAt(i);
@@ -108,7 +115,7 @@ export function Background() {
   const index = getRandomStartingIndex(process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ?? "unknown");
   return (
     <ColouredBackground
-      colours={[getColour(index), getColour(index + 2), getColour(index - 1), getColour(index - 2)]}
+      colours={[getColour(index), getColour(index + 3), getColour(index - 1), getColour(index - 4)]}
     />
   );
 }
