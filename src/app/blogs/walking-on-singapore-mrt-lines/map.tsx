@@ -7,7 +7,6 @@ import { env } from "~/env.mjs";
 
 import { useActiveSession } from "./context";
 import data from "./data.json";
-import { LoadingScreen } from "./loading-screen";
 import "./map-control.css";
 import type { Coordinate, Line } from "./types";
 
@@ -151,6 +150,15 @@ function MapLine({ line, lineIndex }: { line: Line; lineIndex: number }) {
   ));
 }
 
+function LoadingScreen() {
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-center gap-3 text-text-tertiary">
+      <div>Loading map&hellip;</div>
+      <div>Please ensure that JavaScript is enabled.</div>
+    </div>
+  );
+}
+
 export const WalkingMap = memo(function WalkingMap() {
   const { setActiveSession, setPanelIsExpanded } = useActiveSession();
   const { isLoaded } = useJsApiLoader({ googleMapsApiKey: env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY });
@@ -167,7 +175,13 @@ export const WalkingMap = memo(function WalkingMap() {
       mapContainerClassName="w-full h-full"
       center={center}
       zoom={12}
-      options={{ clickableIcons: false, disableDefaultUI: true, styles: mapStyles }}
+      options={{
+        clickableIcons: false,
+        disableDefaultUI: true,
+        styles: mapStyles,
+        backgroundColor: "#161b2c",
+        // backgroundColor: "transparent",
+      }}
       onClick={onClick}
       onZoomChanged={collapsePanel}
       onBoundsChanged={collapsePanel}

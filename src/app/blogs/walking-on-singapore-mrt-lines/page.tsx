@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Suspense } from "react";
 
 import { makeMetadata } from "~/lib/blogs/utils";
 import { cn } from "~/lib/cn";
 
 import { ActiveSessionContextProvider } from "./context";
-import { LoadingScreen } from "./loading-screen";
 import { WalkingMap } from "./map";
 import { Panel } from "./panel";
 
@@ -20,14 +18,14 @@ const ltaIdentity = localFont({
 export default function Page() {
   return (
     <div className={cn("fixed inset-0", ltaIdentity.variable)}>
-      <Suspense fallback={<LoadingScreen />}>
-        <ActiveSessionContextProvider>
-          <WalkingMap />
-          <Panel />
-        </ActiveSessionContextProvider>
-      </Suspense>
+      <ActiveSessionContextProvider>
+        <WalkingMap />
+        <Panel />
+      </ActiveSessionContextProvider>
     </div>
   );
 }
 
 export const metadata: Metadata = makeMetadata("walking-on-singapore-mrt-lines");
+export const revalidate = 0;
+export const runtime = "edge";
