@@ -2,7 +2,7 @@
 
 import { Fragment, memo, useMemo } from "react";
 
-import { BusFront, ChevronDown, Home } from "~/components/icons";
+import { ChevronDown, Home } from "~/components/icons";
 import { Button, LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { useHoverBackground } from "~/components/ui/hooks/use-hover-background";
@@ -112,12 +112,20 @@ const StationBadge = memo(function StationBadge({ station }: { station: string }
       // use Stroudley free of charge for the 0-9 digits only? I only use it here and it is not for
       // any commercial purposes.
       <>
-        <span className="bg-[#91d50b] text-black flex flex-row font-lta rounded-[4px] h-6">
-          <span className="size-6 grid place-items-center">
-            <BusFront className="size-4" />
+        <span className="bg-[#94D600] text-[#2D2A26] flex flex-row font-lta rounded-[4px] h-[25px]">
+          <span className="size-[25px] grid place-items-center">
+            <svg width="18" height="15" fill="none">
+              <title>Bus icon</title>
+              <path
+                fill="#323131"
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M14.508 1.293h2.238v4.61h-2.238v-4.61ZM16.965 0h-2.676a.252.252 0 0 0-.25.25V15h.469v-4.156h2.238V15h.469V.25a.25.25 0 0 0-.25-.25ZM10.906 9.633c0 .37-.394.996-4.558.996-4.168 0-4.563-.625-4.563-.996V4.617c0-.222.18-.402.399-.402h8.328c.218 0 .394.18.394.402v5.016Zm-.433 2.168-.121.605a.25.25 0 0 1-.235.196h-1.59a.2.2 0 0 1-.199-.2v-.597c0-.11.09-.2.2-.2h1.784c.11 0 .18.086.16.196Zm-6.11.601c0 .11-.086.2-.195.2h-1.59a.254.254 0 0 1-.238-.196l-.117-.605c-.024-.11.05-.196.16-.196h1.785c.11 0 .195.09.195.2v.597ZM2.777 3.02c0-.11.09-.2.2-.2h6.742c.105 0 .199.09.199.2v.398c0 .11-.094.2-.2.2H2.978a.2.2 0 0 1-.2-.2V3.02Zm9.52 2.394h-.625l-.012-.2-.117-2.198a.845.845 0 0 0-.832-.797H1.984a.851.851 0 0 0-.836.797l-.113 2.199-.012.2H.398A.4.4 0 0 0 0 5.811v1.204c0 .113.023.289.05.394l.102.406a.271.271 0 0 0 .246.196h.594v-.004V13c0 .441.36.8.793.8h.203-.004v1c0 .11.09.2.2.2h1.191a.2.2 0 0 0 .195-.2v-1h-.004 5.559-.004v1c0 .11.09.2.195.2h1.196a.2.2 0 0 0 .199-.2v-1h-.004.2c.437 0 .792-.359.792-.8V8.012h.598c.11 0 .219-.09.246-.196l.102-.406c.027-.105.046-.281.046-.394V5.812a.397.397 0 0 0-.394-.398Z"
+              />
+            </svg>
           </span>
           <span className="p-[2px] pl-0">
-            <span className="bg-white h-full inline-block rounded-[2px] px-1">
+            <span className="bg-white h-full inline-flex rounded-[2px] px-1 flex-row items-center justify-center">
               <span>{parts[0][0].num}</span>
             </span>
           </span>

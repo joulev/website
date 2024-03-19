@@ -66,11 +66,6 @@ export const Atom = createIcon(
   false,
 );
 
-export const BusFront = createIcon(
-  "BusFront",
-  <path d="M4 6 2 7m8-1h4m8 1-2-1m-2 13a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2m12 0H6m12 0v2M6 19v2M4 11h16M8 15h.01M16 15h.01" />,
-);
-
 export const Calendar = createIcon(
   "Calendar",
   <path d="M16 2v4M8 2v4m-5 4h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />,
