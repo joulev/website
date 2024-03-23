@@ -13,6 +13,8 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 
+import { opengraphImage } from "~/app/opengraph";
+
 import { NavigateButton } from "./navigate-button";
 
 function CreditDialog() {
@@ -87,5 +89,6 @@ export const metadata: Metadata = {
     title: "joulev.dev » irasuto",
     description: "My collection of illustrations",
     url: "/apps/irasuto",
+    ...opengraphImage,
   },
 };

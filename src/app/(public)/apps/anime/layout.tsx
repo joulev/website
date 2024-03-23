@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import { AnimeLayout } from "~/components/anime/layout";
 
+import { opengraphImage } from "~/app/opengraph";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <AnimeLayout>{children}</AnimeLayout>;
 }
@@ -16,5 +18,6 @@ export const metadata: Metadata = {
     title: "joulev.dev » anime",
     description: "joulev's anime list",
     url: "/apps/anime",
+    ...opengraphImage,
   },
 };

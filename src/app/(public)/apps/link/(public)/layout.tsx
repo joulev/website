@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Title } from "~/components/title";
 import { Card } from "~/components/ui/card";
 
+import { opengraphImage } from "~/app/opengraph";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className="container max-w-screen-sm">
@@ -25,5 +27,6 @@ export const metadata: Metadata = {
     title: "joulev.dev » link",
     description: "A simple URL shortener",
     url: "/apps/link",
+    ...opengraphImage,
   },
 };

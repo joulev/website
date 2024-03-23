@@ -9,6 +9,8 @@ import { Link } from "~/components/ui/link";
 import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
 import { cn } from "~/lib/cn";
 
+import { opengraphImage } from "~/app/opengraph";
+
 import { getGithubReadme } from "./get-github-readme";
 import { GitHubStats } from "./github-stats";
 import { MusicData } from "./music-data";
@@ -180,5 +182,6 @@ export const metadata: Metadata = {
     title: "Vu Van Dung",
     description: "Software developer. I build things for the web.",
     url: "/",
+    ...opengraphImage,
   },
 };

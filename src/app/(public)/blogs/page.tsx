@@ -5,6 +5,8 @@ import { Title } from "~/components/title";
 import { Card } from "~/components/ui/card";
 import { formatTime } from "~/lib/blogs/utils";
 
+import { opengraphImage } from "~/app/opengraph";
+
 import { meta } from "./meta";
 import { PostCard } from "./post-card";
 
@@ -55,5 +57,6 @@ export const metadata: Metadata = {
     title: "joulev.dev » blogs",
     description: "My collection of weird knowledge",
     url: "/blogs",
+    ...opengraphImage,
   },
 };

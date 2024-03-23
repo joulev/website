@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Title } from "~/components/title";
 import { Card } from "~/components/ui/card";
 
+import { opengraphImage } from "~/app/opengraph";
+
 import { Form } from "./form";
 
 export default function Page() {
@@ -30,5 +32,6 @@ export const metadata: Metadata = {
     title: "joulev.dev » live-reaction",
     description: "Generate live reaction stickers from Discord emotes",
     url: "/apps/live-reaction",
+    ...opengraphImage,
   },
 };
