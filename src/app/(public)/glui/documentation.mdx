@@ -1,0 +1,107 @@
+import {
+  ButtonShowcase,
+  CardShowcase,
+  DialogShowcase,
+  DropdownShowcase,
+  InputShowcase,
+  LinkShowcase,
+  ListShowcase,
+  NavigationMenuShowcase,
+  ProgressShowcase,
+  SelectShowcase,
+  SidebarShowcase,
+  SliderShowcase,
+  TextAreaShowcase,
+  TweetShowcase
+} from "./components";
+
+## Prerequisites
+
+glui is a component collection based on [shadcn/ui](https://ui.shadcn.com). As such, all prerequisites of shadcn/ui apply to glui as well. In other words, you have to use [Next.js](https://nextjs.org), [React](https://react.dev) and [Tailwind CSS](https://tailwindcss.com). Support for other frameworks and libraries is not planned.
+
+You are advised to be familiar with Tailwind CSS before using this collection.
+
+It is also recommended that you use TypeScript. Only basic understanding of TypeScript is required. All the components are written in TypeScript, and I don't provide the JavaScript versions for them, so if for some reasons you don't know basic TypeScript and are not willing to learn it, at least you should learn how to remove typings to convert the provided TypeScript files into JavaScript.
+
+## Installation
+
+### This collection is not a published package
+
+This collection is distributed via copy-paste, not via a central package registry such as NPM. In other words, you do **not** do something like `npm install @joulev/glui` to add the collection to your project. You just need to copy-paste the necessary components to use it as your own components. This is the same distribution method as shadcn/ui.
+
+Why copy-paste? You as the user will own the components and can make changes to them as you like. You can also easily remove the components you don't need. This means you have complete control over all glui components. For more information, check [shadcn/ui's reasons behind this distribution method](https://ui.shadcn.com/docs#faq).
+
+### Installation from scratch
+
+You can simply use [this starter repository](https://github.com/joulev/glui-starter) to get started. It has all the necessary configurations and basic setups, with two components preinstalled (link and card). Other components can then be installed normally by copy-pasting.
+
+### Installation to an existing project
+
+**Warning:** It is not easy and you need some level of experience with Tailwind CSS custom configurations to continue.
+
+1. Ensure that project meets the prerequisites above.
+
+   I will assume you use the `src` directory in your Next.js app. If you don't use `src`, simply remove it from the paths in the following steps.
+
+2. Install the necessary dependencies: `npm install cva@1.0.0-beta.1 tailwind-merge tailwindcss-animate` – you can use yarn, pnpm or bun if you prefer.
+
+3. If you already have the following files in your project, modify them to also integrate the corresponding files from [the starter repository](https://github.com/joulev/glui-starter). If you do not have those files in your project yet, copy the files from the starter repository to your project.
+
+   * `tailwind.config.ts` or an equivalent Tailwind CSS configuration file
+
+   * `postcss.config.js` – glui requires you to configure PostCSS to also [allow CSS nesting](https://tailwindcss.com/docs/using-with-preprocessors#nesting)
+
+   * Global CSS file, which is most likely placed in `src/app/globals.css`
+
+3. Copy the following files from [the starter repository](https://github.com/joulev/glui-starter):
+
+   * `src/types/fix/react.ts`: This file is a patch to the React typings to make TypeScript accept CSS variables in the `style` prop of HTML elements. If you don't use TypeScript, you can ignore this file.
+
+   * `src/lib/cn.ts`
+
+   * `src/components/ui/hooks/use-hover-background.ts`
+
+4. Add the `text-text-primary` class to your `body` element, or by other means ensure that `text-text-primary` is applied to the text colour of glui components.
+
+5. Fix import statements in the copied files to match your project's directory structure.
+
+6. Now you can start copy-pasting the components and use them in your project.
+
+### Copy-pasting components
+
+The component sources can be found in [the repository for this website](https://github.com/joulev/website/tree/main/src/components/ui). Select the one you want, then copy the file to under `src/components/ui` in your project.
+
+For example, to install the `Link` component, simply create `src/components/ui/link.tsx` with the same content as [the source file](https://github.com/joulev/website/blob/main/src/components/ui/link.tsx).
+
+You might need to update the import statements in the copied files to match your project's directory structure.
+
+Note that some components have dependencies. For example, `Button` depends on `Link`, so if you want to install `Button` you also need to ensure `Link` has been installed. Another example would be the `Tweet` component, which requires [`react-tweet`](https://react-tweet.vercel.app), so you need to install this package for the component to work.
+
+## Components
+
+You can check [the example usage of all components](https://github.com/joulev/website/blob/main/src/app/(public)/glui/components.tsx) to see how to use them. Yeah I should put the source code of the examples here, but I'm too lazy to do that. Maybe later.
+
+Anyway, most components are based on shadcn/ui, hence the usage should be identical to the shadcn/ui counterparts.
+
+<ButtonShowcase />
+<CardShowcase />
+<DialogShowcase />
+<DropdownShowcase />
+<InputShowcase />
+<LinkShowcase />
+<ListShowcase />
+<NavigationMenuShowcase />
+<ProgressShowcase />
+<SelectShowcase />
+<SidebarShowcase />
+<SliderShowcase />
+<TextAreaShowcase />
+<TweetShowcase />
+
+## Future components
+
+There are no planned new components at the moment. I will add new ones if I need them in this joulev.dev website. In the meantime, if you want to suggest a new component, feel free to contact me, or even better, create a pull request with the new component. All contributions are welcome.
+
+## License
+
+MIT

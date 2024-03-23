@@ -76,7 +76,9 @@ export function DropdownRadioGroupShowcase() {
 }
 
 export function ControlledInputShowcase() {
-  const [value, setValue] = useState("Controlled input");
+  const [value, setValue] = useState(
+    "This component must be controlled by a client-side React state to work properly.",
+  );
   return (
     <>
       <Input type="text" placeholder="Text" value={value} onValueChange={setValue} />
@@ -86,6 +88,8 @@ export function ControlledInputShowcase() {
 }
 
 export function ControlledTextAreaShowcase() {
-  const [value, setValue] = useState("Controlled input");
+  const [value, setValue] = useState(
+    "This component must be controlled by a client-side React state to work properly.",
+  );
   return <TextArea placeholder="Text" value={value} onValueChange={setValue} />;
 }
