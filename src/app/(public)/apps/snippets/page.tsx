@@ -22,6 +22,3 @@ export const metadata: Metadata = {
     ...opengraphImage,
   },
 };
-
-// Somehow Shiki needs this for normalizeTheme to work
-export const runtime = "edge";
