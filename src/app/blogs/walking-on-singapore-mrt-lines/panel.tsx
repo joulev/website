@@ -65,7 +65,7 @@ function LineBadge({ line }: { line: Line }) {
       className="inline-block w-12 rounded-[0.6em/50%] border border-white bg-[--bg] py-0.5 text-center font-lta text-base font-medium text-[--fg]"
       style={{ "--bg": line.colour, "--fg": line.textColour }}
     >
-      {line.lineCode}L
+      {line.lineCode === "LRT" ? line.lineCode : `${line.lineCode}L`}
     </span>
   );
 }
