@@ -355,6 +355,7 @@ function SessionSelectorButton({
   const { activeSession, setActiveSession } = useActiveSession();
   const isActive =
     activeSession.lineIndex === lineIndex && activeSession.sessionIndex === sessionIndex;
+  const session = data[lineIndex].sessions[sessionIndex];
   return (
     <button
       type="button"
@@ -362,7 +363,8 @@ function SessionSelectorButton({
       className={cn("hover-bg py-2 font-medium text-text-primary", isActive && "bg-bg-active")}
       onClick={() => setActiveSession({ lineIndex, sessionIndex })}
     >
-      {sessionIndex + 1}
+      {/* @ts-ignore */}
+      {session.label ?? sessionIndex + 1}
     </button>
   );
 }
