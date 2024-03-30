@@ -43,14 +43,15 @@ const mapStyles: google.maps.MapTypeStyle[] = [
 
 // Order at which lines are opened
 const lineZIndex = {
-  NS: 0,
-  EW: 1,
-  NE: 2,
-  CC: 3,
-  DT: 4,
-  TE: 5,
-  JR: 6,
-  CR: 7,
+  LRT: 0,
+  NS: 1,
+  EW: 2,
+  NE: 3,
+  CC: 4,
+  DT: 5,
+  TE: 6,
+  JR: 7,
+  CR: 8,
 };
 
 function MapPolyline({
