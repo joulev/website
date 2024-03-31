@@ -151,7 +151,7 @@ const StationBadge = memo(function StationBadge({ station }: { station: string }
                     }}
                   >
                     <span>{code.line}</span>
-                    <span>{code.num}</span>
+                    {code.num ? <span>{code.num}</span> : null}
                   </span>
                   {j < part.length - 1 &&
                   code.lineDetails?.colour === part[j + 1].lineDetails?.colour ? (
