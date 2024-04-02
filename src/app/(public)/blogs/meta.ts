@@ -16,8 +16,7 @@ export const meta: { slug: string; title: string; description: string; postedDat
   {
     slug: "walking-on-singapore-mrt-lines",
     title: "Walking on Singapore MRT Lines",
-    description:
-      "I am on a project of walking on all Singapore MRT lines. This page shows the progress and the routes I have walked.",
-    postedDate: "2024-01-28",
+    description: "I walked on all Singapore MRT lines. Yes!!!",
+    postedDate: "2024-04-02",
   },
 ];

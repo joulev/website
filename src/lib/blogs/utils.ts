@@ -8,7 +8,7 @@ export function formatTime(date: Date) {
   return date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 }
 
-export function makeMetadata(slug: string): Metadata {
+export function makeMetadata(slug: string, overrideOg = false): Metadata {
   const metadata = meta.find(m => m.slug === slug);
   if (!metadata) throw new Error(`No metadata found for slug: ${slug}`);
 
@@ -25,7 +25,7 @@ export function makeMetadata(slug: string): Metadata {
       description,
       type: "article",
       url: `/blogs/${slug}`,
-      ...opengraphImage,
+      ...(overrideOg ? {} : opengraphImage),
     },
     twitter: {
       card: "summary_large_image",

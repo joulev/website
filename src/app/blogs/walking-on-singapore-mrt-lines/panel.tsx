@@ -14,14 +14,20 @@ import { useActiveSession } from "./context";
 import data from "./data.json";
 import type { Line, Session } from "./types";
 
+import Image from "next/image";
+import systemMap from "./system-map.png";
+
+const allSessions: Session[] = data.flatMap(x => x.sessions as Session[]);
+const stats = getStats(allSessions);
+
 function convertMinToMinSec(min: number) {
   const minInt = Math.floor(min);
   const sec = Math.round((min - minInt) * 60);
   return Number.isNaN(minInt) ? "N/A" : `${minInt}:${sec < 10 ? "0" : ""}${sec}`;
 }
 
-function getLineStats(line: Line) {
-  const stats = line.sessions.reduce(
+function getStats(sessions: Session[]) {
+  const stats = sessions.reduce(
     (acc, workout) => ({
       distance: acc.distance + workout.distance,
       kcal: acc.kcal + workout.kcal,
@@ -189,9 +195,15 @@ const StationBadge = memo(function StationBadge({ station }: { station: string }
 
 function Overview() {
   return (
-    <ScrollArea className="overflow-y-auto px-6">
-      <div className="prose py-6">
+    <ScrollArea className="overflow-y-auto">
+      <div className="prose p-6">
         <h2>Walking on Singapore&nbsp;MRT&nbsp;Lines</h2>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-3 not-prose text-text-primary px-6 -mx-6 pb-6 border-b border-separator">
+          <Stat label="Sessions" value={allSessions.length} />
+          <Stat label="Distance" value={stats.distance.toFixed(2)} unit="km" />
+          <Stat label="Average pace" value={convertMinToMinSec(stats.pace)} />
+          <Stat label="Kcal" value={stats.kcal.toFixed(0)} unit="kcal" />
+        </div>
         <p>
           After some years living in Singapore, I basically went to all places that captured my
           interests already, be it attractions, parks, beaches, malls or lakes.
@@ -208,16 +220,73 @@ function Overview() {
           a good way for some exercising.
         </p>
         <p>
-          It’s not gonna be easy to finish this. But I already got Circle Line done. And I’ll try
-          others soon. Hopefully I can finish all lines before I leave Singapore.
+          And after 40 sessions spread over a bit more than 2 months, from 28 January to 1 April
+          2024, I have finally conquered all opened sections of the MRT/LRT system of Singapore.
+          Every single line, every line termini, and a whole lot of stations. Of course, a lot of
+          money was spent on fares too, I think I spent at least a hundred dollar on this whole
+          project. I should have bought a concession card before I started, but silly me forgot
+          concession cards existed until much later.
         </p>
+        <p>
+          Throughout the project, my performance actually increased as well. Initially I, just like
+          any terminally online university student, wasn’t able to do much, and I only had some 5km
+          sessions at around 5km/h. A 7km sounded like a crazy amount to me back then. Well, some
+          280km later, now 8km sessions are the norm and I can even consistently do them at around
+          5.5–6km/h. Practice makes perfect, I guess.
+        </p>
+        <h3>System map</h3>
+        <p>
+          Presenting: The MRT system map of Singapore, with only stations that are termini of my
+          walking sessions. You can also download a{" "}
+          <Link href="https://r2.joulev.dev/files/kaqn4mpytbdvl7x3cpxddjwr">
+            higher quality version (1.17MB)
+          </Link>
+          .
+        </p>
+        <div className="-mx-6">
+          <Image
+            src={systemMap}
+            alt="System map with only stations that are termini of my walking sessions"
+          />
+        </div>
+        <h3>The future</h3>
+        <p>
+          I think I will continue doing this for sections that are still under construction. It will
+          be hard though and for many places, it’s just impossible. For example the Tengah region is
+          just a giant construction zone at the moment I heard – so I cannot do a lot of the JRL
+          sections there. So, I dunno&hellip; perhaps the new sessions will be a lot more disjointed
+          and messy than this nice little map we currently have of opened sections.
+        </p>
+        <h3>If you want to do the same</h3>
+        <p>Please do! It will be very satisfying and energising.</p>
+        <p>Just note a few things:</p>
+        <ul>
+          <li>
+            My tracks here are not necessarily the best track. Do use{" "}
+            <Link href="https://onemap.gov.sg">OneMap</Link>,{" "}
+            <Link href="https://www.openstreetmap.org/#map=13/1.2952/103.7911">OpenStreetMap</Link>{" "}
+            and your device’s map app to plan the track carefully in advance. Especially
+            OpenStreetMap, it’s really helpful and I wish I had known about it when I started – I
+            would be able to optimise a lot more for my tracks.
+          </li>
+          <li>
+            Most of the tracks here are friendly to cyclists, but not all. Some parts do involve
+            stairs, so if you cycle instead of walk, you may have to take alternative routes or
+            diversions in certain places.
+          </li>
+          <li>
+            Be absolutely careful around expressways. You could face a long detour. @Government
+            Please add pedestrian sidewalks on the sides of expressways, or at least more pedestrian
+            bridges 🙏
+          </li>
+        </ul>
       </div>
     </ScrollArea>
   );
 }
 
 function LineOverview({ line }: { line: Line }) {
-  const stats = useMemo(() => getLineStats(line), [line]);
+  const stats = useMemo(() => getStats(line.sessions), [line.sessions]);
   return (
     <ScrollArea className="flex flex-grow flex-col overflow-y-auto">
       <div className="flex flex-col gap-6 p-6">

@@ -26,6 +26,6 @@ export default function Page() {
   );
 }
 
-export const metadata: Metadata = makeMetadata("walking-on-singapore-mrt-lines");
+export const metadata: Metadata = makeMetadata("walking-on-singapore-mrt-lines", true);
 export const revalidate = 0;
 export const runtime = "edge";
