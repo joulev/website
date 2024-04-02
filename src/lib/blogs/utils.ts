@@ -13,9 +13,7 @@ export function makeMetadata(slug: string, overrideOg = false): Metadata {
   if (!metadata) throw new Error(`No metadata found for slug: ${slug}`);
 
   const title = `${metadata.title} | joulev.dev » blogs`;
-  const description = `${
-    metadata.description.endsWith(".") ? metadata.description.slice(0, -1) : metadata.description
-  }. A blog post by @joulev.`;
+  const description = `${metadata.description} A blog post by @joulev.`;
 
   return {
     title,
