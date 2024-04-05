@@ -280,6 +280,7 @@ function Overview() {
             bridges 🙏
           </li>
         </ul>
+        <p className="text-text-secondary text-sm">(Posted on 2 April 2024)</p>
       </div>
     </ScrollArea>
   );
@@ -384,6 +385,15 @@ function SessionOverview({ line, session }: { line: Line; session: Session }) {
         ) : null}
       </div>
       <hr />
+      {/* @ts-ignore */}
+      {session.underConstruction ? (
+        <>
+          <div className="p-6 text-center bg-bg-darker text-text-secondary">
+            This&nbsp;section&nbsp;of&nbsp;the&nbsp;MRT is&nbsp;not&nbsp;yet&nbsp;open
+          </div>
+          <hr />
+        </>
+      ) : null}
       <div className="prose p-6">
         {session.description.split("\n\n").map((paragraph, i) => (
           <p key={i}>{paragraph}</p>

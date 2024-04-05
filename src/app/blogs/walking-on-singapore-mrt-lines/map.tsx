@@ -1,7 +1,7 @@
 "use client";
 
 import { GoogleMap, Polyline, useJsApiLoader } from "@react-google-maps/api";
-import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { env } from "~/env.mjs";
 
@@ -67,9 +67,14 @@ function MapPolyline({
   const thinFillAreaPolylineRef = useRef<google.maps.Polyline | null>(null);
 
   const { activeSession, setActiveSession, setPanelIsExpanded } = useActiveSession();
+
+  const session = useMemo(() => data[lineIndex].sessions[sessionIndex], [lineIndex, sessionIndex]);
+
   const lineIsActive = activeSession.lineIndex === lineIndex;
   const isActive = lineIsActive && activeSession.sessionIndex === sessionIndex;
   const isOutlined = lineIndex === 4 && sessionIndex === 6; // Changi Airport branch
+  // @ts-ignore
+  const isUnderConstruction: boolean = session.underConstruction;
   const [isHover, setIsHover] = useState(false);
 
   const onHoverEnter = useCallback(() => setIsHover(true), []);
@@ -94,7 +99,7 @@ function MapPolyline({
           : lineIsActive
             ? 9997
             : lineZIndex[data[lineIndex].lineCode as keyof typeof lineZIndex],
-      strokeOpacity: 1,
+      strokeOpacity: !isActive && !isHover && isUnderConstruction ? 0.5 : 1,
       strokeWeight: 3,
     });
     if (!thinFillAreaPolylineRef.current) return;
@@ -106,14 +111,7 @@ function MapPolyline({
       strokeOpacity: 1,
       strokeWeight: 1,
     });
-  }, [
-    isActive,
-    isHover,
-    lineIsActive,
-    activeSession.lineIndex,
-    data[lineIndex].colour,
-    data[lineIndex].lineCode,
-  ]);
+  }, [isActive, isHover, lineIsActive, activeSession.lineIndex, lineIndex, isUnderConstruction]);
 
   useEffect(() => refreshStyling(), [refreshStyling]);
 
