@@ -385,7 +385,6 @@ function SessionOverview({ line, session }: { line: Line; session: Session }) {
         ) : null}
       </div>
       <hr />
-      {/* @ts-ignore */}
       {session.underConstruction ? (
         <>
           <div className="p-6 text-center bg-bg-darker text-text-secondary">
@@ -442,7 +441,6 @@ function SessionSelectorButton({
       className={cn("hover-bg py-2 font-medium text-text-primary", isActive && "bg-bg-active")}
       onClick={() => setActiveSession({ lineIndex, sessionIndex })}
     >
-      {/* @ts-ignore */}
       {session.label ?? sessionIndex + 1}
     </button>
   );

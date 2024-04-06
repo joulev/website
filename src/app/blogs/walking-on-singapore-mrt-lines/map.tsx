@@ -73,8 +73,6 @@ function MapPolyline({
   const lineIsActive = activeSession.lineIndex === lineIndex;
   const isActive = lineIsActive && activeSession.sessionIndex === sessionIndex;
   const isOutlined = lineIndex === 4 && sessionIndex === 6; // Changi Airport branch
-  // @ts-ignore
-  const isUnderConstruction: boolean = session.underConstruction;
   const [isHover, setIsHover] = useState(false);
 
   const onHoverEnter = useCallback(() => setIsHover(true), []);
@@ -99,7 +97,7 @@ function MapPolyline({
           : lineIsActive
             ? 9997
             : lineZIndex[data[lineIndex].lineCode as keyof typeof lineZIndex],
-      strokeOpacity: !isActive && !isHover && isUnderConstruction ? 0.5 : 1,
+      strokeOpacity: !isActive && !isHover && session.underConstruction ? 0.5 : 1,
       strokeWeight: 3,
     });
     if (!thinFillAreaPolylineRef.current) return;
@@ -111,7 +109,14 @@ function MapPolyline({
       strokeOpacity: 1,
       strokeWeight: 1,
     });
-  }, [isActive, isHover, lineIsActive, activeSession.lineIndex, lineIndex, isUnderConstruction]);
+  }, [
+    isActive,
+    isHover,
+    lineIsActive,
+    activeSession.lineIndex,
+    lineIndex,
+    session.underConstruction,
+  ]);
 
   useEffect(() => refreshStyling(), [refreshStyling]);
 

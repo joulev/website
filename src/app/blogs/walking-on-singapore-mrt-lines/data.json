@@ -7,12 +7,15 @@
     "sessions": [
       {
         "time": "2024-01-28T19:57:00+08:00",
+        "label": null,
         "distance": 3.2,
         "pace": 12.18,
         "kcal": 172,
         "description": "I was in VivoCity for food, so I thought why not, let’s try walking on that seaside hiking trail. The view was awesome, highly recommended. A good place to view sunset. Don’t take this route at night though if you are scared of the dark.\n\nDidn’t walk all the way to Pasir Panjang MRT where I lived because I was a bit sick on that day.",
         "start": "CC29 NE1 HarbourFront",
+        "via": null,
         "end": "CC27 Labrador Park",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8215924, "lat": 1.265181 },
           { "lng": 103.8181615, "lat": 1.2654813 },
@@ -56,12 +59,15 @@
       },
       {
         "time": "2024-01-29T18:04:00+08:00",
+        "label": null,
         "distance": 6.5,
         "pace": 12.63,
         "kcal": 347,
         "description": "This trip was when I decided to start this walk-on-CCL project. “Soft-skipped” Haw Par Villa MRT however, since if I went there, I would have to walk a long detour to reach Kent Ridge MRT.\n\n500m was spent when I walked the wrong way on Dover Road.",
         "start": "CC26 Pasir Panjang",
+        "via": null,
         "end": "CC21 Holland Village",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.791666, "lat": 1.2765266 },
           { "lng": 103.7861356, "lat": 1.2784493 },
@@ -164,12 +170,15 @@
       },
       {
         "time": "2024-02-01T19:21:00+08:00",
+        "label": null,
         "distance": 1.26,
         "pace": 12.07,
         "kcal": 68,
         "description": "Went from my place of residence near Pasir Panjang MRT to the Fairprice near Labrador Park MRT to buy milk. Literally. I bought two litres of milk on this day.",
         "start": "CC26 Pasir Panjang",
+        "via": null,
         "end": "CC27 Labrador Park",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.7916693, "lat": 1.2765347 },
           { "lng": 103.7999615, "lat": 1.273703 },
@@ -180,12 +189,15 @@
       },
       {
         "time": "2024-02-03T17:29:00+08:00",
+        "label": null,
         "distance": 3.11,
         "pace": 13.17,
         "kcal": 167,
         "description": "Wanted to reach Caldecott MRT in this section, but a heavy rain came right when I was near Botanic Gardens MRT, so I just called it a day and went there instead. A rare time that I ended the walk when the sky was still bright.",
         "start": "CC21 Holland Village",
+        "via": null,
         "end": "CC19 DT9 Botanic Gardens",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.7960349, "lat": 1.3110137 },
           { "lng": 103.7960939, "lat": 1.3115983 },
@@ -214,12 +226,15 @@
       },
       {
         "time": "2024-02-04T18:21:00+08:00",
+        "label": null,
         "distance": 7.05,
         "pace": 11.9,
         "kcal": 381,
         "description": "It was honestly a very challenging section, because there wasn’t a lot of houses around and Google Maps got me inside the cemeteries here. The path Google Maps told me, by which I would reach the unconstructed Bukit Brown MRT, wasn’t even cemented, and it was already dark then, so I just went ahead and got out of the cemetery to continue on Lornie Highway.\n\nNow thinking back, I should’ve just followed Lornie Highway all the way, and I would’ve got to Marymount MRT in 5km rather than Caldecott MRT in 7km.\n\nThe chicken rice at Adam Food Centre was very yummy, by the way.",
         "start": "CC19 DT9 Botanic Gardens",
+        "via": null,
         "end": "CC17 TE9 Caldecott",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.81506, "lat": 1.3225066 },
           { "lng": 103.8147061, "lat": 1.3227104 },
@@ -300,6 +315,7 @@
       },
       {
         "time": "2024-02-10T18:11:00+08:00",
+        "label": null,
         "distance": 4.39,
         "pace": 11.2,
         "kcal": 242,
@@ -307,6 +323,7 @@
         "start": "CC1 NS24 NE6 Dhoby Ghaut",
         "via": "CC4 DT15 Promenade",
         "end": "CE2 NS27 TE20 Marina Bay",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8447685, "lat": 1.2995261 },
           { "lng": 103.8470213, "lat": 1.2987753 },
@@ -336,12 +353,15 @@
       },
       {
         "time": "2024-02-11T18:21:00+08:00",
+        "label": null,
         "distance": 6.8,
         "pace": 12.4,
         "kcal": 362,
         "description": "Second day of the new year. Thankfully I still managed to find chicken rice when I passed by Bishan.\n\nPlanned to turn left to Upper Serangoon Road to get to Serangoon MRT as the destination, then take NEL to get home, but since Bartley MRT isn’t that far away, decided to continue straight ahead on Bartley Road for Bartley MRT instead.",
         "start": "CC17 TE9 Caldecott",
+        "via": null,
         "end": "CC12 Bartley",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.839543, "lat": 1.3372226 },
           { "lng": 103.8394948, "lat": 1.3378876 },
@@ -426,12 +446,15 @@
       },
       {
         "time": "2024-02-13T20:19:00+08:00",
+        "label": null,
         "distance": 6.19,
         "pace": 11.83,
         "kcal": 335,
         "description": "The trip with probably one of the latest starting time and ending time in the entire project. I planned to only finish in Paya Lebar MRT but when I passed it, I thought it was still early so why not continue.\n\nWanted to even finish the entire CCL by going straight to Promenade MRT but it was 10:40pm when I reached Mountbatten MRT and I decided to end here because I didn’t know if I could finish the next three stations before CCL closing time.\n\nThe section from Paya Lebar MRT doesn’t follow roads but instead a park connector along Geylang River. This is part of my favourite biking path in Singapore, which goes from Paya Lebar MRT, along the left side of the river, to reach Marina Barrage and Gardens by the Bay MRT.",
         "start": "CC12 Bartley",
+        "via": null,
         "end": "CC7 Mountbatten",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8788598, "lat": 1.3434866 },
           { "lng": 103.8818799, "lat": 1.3419742 },
@@ -472,12 +495,15 @@
       },
       {
         "time": "2024-02-16T19:07:00+08:00",
+        "label": null,
         "distance": 5.49,
         "pace": 12.23,
         "kcal": 294,
         "description": "Rochor Road unexpectedly did not have a pedestrian path from the other side of Nicoll Highway, so had to go inside Suntec City and get lost there. The second mall in the project, the first that was intentional.\n\nDropped by Golden Mile Food Centre for dinner.\n\nCCL is completed other than the CCL6 that is still under construction.",
         "start": "CC7 Mountbatten",
+        "via": null,
         "end": "CC4 DT15 Promenade",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.883017, "lat": 1.3061387 },
           { "lng": 103.8824807, "lat": 1.3059939 },
@@ -534,12 +560,15 @@
     "sessions": [
       {
         "time": "2024-02-18T17:47:00+08:00",
+        "label": null,
         "distance": 6.68,
         "pace": 11.95,
         "kcal": 361,
         "description": "First trip on NEL. Apple Map had me walk on grass by the exit ramp of AYE for a good while. It wanted me to touch some grass maybe. Not sure if I broke any laws by walking like that, my apologises if I did.\n\nHad dinner in Chinatown. Most food stalls are closing at 6:45pm when I was in the food court, so I decided to have Vietnamese food in the nearby Vietnamese restaurant instead. S$12.90 for a bún riêu, crazy expensive compared to the same thing in Hanoi, but it was good and the price is expected for a Singaporean restaurant.\n\nWanted to reach Little India MRT via Fort Canning Park, but that was a hill 😭 and my legs understandably protested. So ended up finishing in Dhoby Ghaut MRT instead.",
         "start": "NE1 CC29 HarbourFront",
+        "via": null,
         "end": "NE6 NS24 CC1 Dhoby Ghaut",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8214662, "lat": 1.2659104 },
           { "lng": 103.8248125, "lat": 1.2661356 },
@@ -591,12 +620,15 @@
       },
       {
         "time": "2024-02-20T19:44:00+08:00",
+        "label": null,
         "distance": 7.13,
         "pace": 11.78,
         "kcal": 387,
         "description": "That was a relatively calm walk, since the line thankfully goes pretty straight and there's road right up above so I just needed to go straight ahead without looking at my map or scrambling for pedestrian paths much.\n\nPassed by Little India and I was amazed at how many jewellery shops there were. Like, maybe 60% of all the shops that I saw were jewellery shops, which is absolutely unreal.\n\nPlanned to end at Potong Pasir MRT since it looks like a good midpoint of the whole line (I want to do NEL in 4 sessions), but the road was not hilly and it was pretty easy, so decided to walk until CCL so I could get home without transferring trains.\n\nThe remaining section is still too long (about 8.12\u00A0km) for one single session, but the two remaining planned sessions will probably be pretty short. Or should I go wild and do the 8\u00A0km walk?",
         "start": "NE6 NS24 CC1 Dhoby Ghaut",
+        "via": null,
         "end": "NE12 CC13 Serangoon",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8447806, "lat": 1.2995208 },
           { "lng": 103.8470533, "lat": 1.2987538 },
@@ -622,12 +654,15 @@
       },
       {
         "time": "2024-02-21T18:20:00+08:00",
+        "label": null,
         "distance": 8.52,
         "pace": 11.82,
         "kcal": 462,
         "description": "Decided to finish NEL within today. Was it a good decision? I’d say yes. But as expected it was tiring as heck. My body ran out of water to convert to sweat before I reached the interchange with TPE.\n\nFor some reasons the map tracking app stopped working midway, so the part around Hougang MRT is inaccurate. I fixed the distance count by measuring the distance on Google Maps, but the pace and calories counts are not as accurate as other sessions.",
         "start": "NE12 CC13 Serangoon",
+        "via": null,
         "end": "NE17 CP4 PTC Punggol",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8734457, "lat": 1.3497719 },
           { "lng": 103.8751731, "lat": 1.35159 },
@@ -660,12 +695,15 @@
     "sessions": [
       {
         "time": "2024-02-23T19:24:00+08:00",
+        "label": null,
         "distance": 4.86,
         "pace": 11.58,
         "kcal": 265,
         "description": "Initially planned to go through Republic Poly, but the gate was closed so I just assumed the campus wasn’t open to the public and so took the loooong detour to Admiralty Road. I think this detour made the trip at least 30% longer.\n\nA portion of Admiralty Park being closed certainly didn’t help make the detour shorter.\n\nI probably could have just asked a nearby student if the campus was open, then went to security to get myself the shortcut, but the trip was planned to be short anyway so the detour is fine. That said, coming to the southern gate of the polytechnic, I noticed the campus might be open to the public after all. The gates and fences were nowhere to be found, compared to the gate neat Woodlands North MRT.\n\nThe next trip is gonna be hard. The distance between Woodlands South MRT and Springleaf MRT is really long and I’m expecting myself to go deep into Ulu Sembawang Park. Any obstacles happen and I could be sent back all the way to Woodlands South MRT.",
         "start": "TE1 Woodlands North",
+        "via": null,
         "end": "TE3 Woodlands South",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.7854001, "lat": 1.448008 },
           { "lng": 103.7847565, "lat": 1.4477399 },
@@ -712,12 +750,15 @@
       },
       {
         "time": "2024-02-24T16:25:00+08:00",
+        "label": null,
         "distance": 11.52,
         "pace": 11.7,
         "kcal": 627,
         "description": "Holy cow. Well, I don’t think I will do a 10km+ session again during this project.\n\nInitially planned to finish in Springleaf MRT, but had a good meal and two Milo’s near the station, and it was still bright then, so decided to continue to Lentor MRT. My legs were mayday’ing as I went into the final kilometre.\n\nWalking with a Protected Area (Mandai Depot) to the left and a military training area to the right was certainly fun. Thankfully I decided to start earlier than usual (thanks weather), since the park connector is not illuminated.\n\nThe view of Upper Seletar Resevoir Lake was awesome. Will come back there again. There were no water stations or vending machines nearby though which was unfortunate.\n\nI don’t think I will have another session where I cross an expressway (SLE) three times like this one.",
         "start": "TE3 Woodlands South",
+        "via": null,
         "end": "TE5 Lentor",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.7929547, "lat": 1.4274098 },
           { "lng": 103.7941238, "lat": 1.4270773 },
@@ -786,12 +827,15 @@
       },
       {
         "time": "2024-03-02T19:28:00+08:00",
+        "label": null,
         "distance": 6.59,
         "pace": 11.6,
         "kcal": 360,
         "description": "The burning Phuket probably affected the way my body sweats, because just 1km into the session and I was already sweating drops of water all over my face. The entire session was a lot more sweaty than average.\n\nThankfully my leg still remembered how to walk after the one week break, because I only needed to rest once (for that sweating, 1km in) throughout the entire session.",
         "start": "TE5 Lentor",
+        "via": null,
         "end": "TE9 CC17 Caldecott",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8373733, "lat": 1.38366 },
           { "lng": 103.8375342, "lat": 1.3835796 },
@@ -885,12 +929,15 @@
       },
       {
         "time": "2024-03-03T18:20:00+08:00",
+        "label": null,
         "distance": 9.19,
         "pace": 11.75,
         "kcal": 499,
         "description": "The stretch between Caldecott MRT and Orchard MRT, especially the stretch from Newtons MRT, is probably the richest area in Singapore. Tons of luxury hotels and apartments. And not a single food court, to the dismay of my screaming stomach.\n\nPlanned to finish at Orchard MRT, but it was still relatively early at the time, and my leg was still good, so decided to extend until Outram Park MRT.\n\nThankfully it didn’t rain during the entire session. The weather had been very cloudy and it looked like it could rain any time for the whole day.",
         "start": "TE9 CC17 Caldecott",
+        "via": null,
         "end": "TE17 EW16 NE3 Outram Park",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8395361, "lat": 1.337228 },
           { "lng": 103.8394985, "lat": 1.337893 },
@@ -964,12 +1011,15 @@
       },
       {
         "time": "2024-03-04T19:04:00+08:00",
+        "label": null,
         "distance": 5.05,
         "pace": 11.88,
         "kcal": 273,
         "description": "Hurray, that’s TEL finished. Until a few months later when more stations are opened east of Gardens by the Bay MRT…\n\nWhile this session was relatively short (compared to recent sessions), I was caught in the rain multiple times… The session also went over downtown streets which meant traffic light junctions were everywhere, so there were a lot of breaks.\n\nMarina Mall was closed for some construction project so there was one weird detour near the closed Marina South MRT, as I attempted to walk on that road but failed.\n\nThe pedestrian sidewalk to the south of Marina Gardens Drive was absolutely creepy. It was not illuminated, the ground was filled with fallen leaves and there were animals jumping around in the dark. The rain and my fear of snakes didn’t help at all. Ah well, I still got out of it intact.",
         "start": "TE17 EW16 NE3 Outram Park",
+        "via": null,
         "end": "TE22 Gardens by the Bay",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8396504, "lat": 1.2804122 },
           { "lng": 103.8396782, "lat": 1.280026 },
@@ -1008,13 +1058,14 @@
       },
       {
         "time": "2024-04-05T18:34:00+08:00",
+        "label": null,
         "distance": 7.91,
         "pace": 10.47,
         "kcal": 445,
         "description": "The first session on under-construction sections of the MRT system. As expected, a… lot of things were under construction and it was quite hard to get past some sections that should have been easy to breeze over. Especially around Marine Parade MRT – there were construction zones everywhere; was the station even completed as reported by the news yet?\n\nGBTB East was magnificent as ever, but at the same time, crowded as ever. They were putting up illustrations of the future memorial, it looks really nice – more green space!\n\nMeyer Road was really quiet, perhaps one of the most peaceful and quiet roads that the MRT system directly goes through. There were barely anyone or anything on the road except some cars passing by. While that may sound chill, to my unpleasant surprise there wasn’t any convenience stores either. I heavily depended on these stores to stay hydrated, so not a single drop of water from GBTB MRT until Marine Parade MRT really fried my throat. Bring enough water guys.",
         "start": "TE22 Gardens by the Bay",
-        "end": "TE26 Marine Parade",
         "via": null,
+        "end": "TE26 Marine Parade",
         "underConstruction": true,
         "coordinates": [
           { "lng": 103.8689658, "lat": 1.2808037 },
@@ -1090,12 +1141,15 @@
     "sessions": [
       {
         "time": "2024-03-05T19:20:00+08:00",
+        "label": null,
         "distance": 9.79,
         "pace": 10.8,
         "kcal": 547,
         "description": "It was a very pleasant day today. I found that in a happy day, even when Apple Weather told me there would be no rain causing me to be soaked in light rain the entire way, my mood would still not be dampened.\n\nThe track today was pretty easy, there weren’t many traffic light crossings, so I didn’t have to stop for red light a lot of times. There weren’t many turns either, so I didn’t have to stop to look at the map. I think that partially contributed to my pace today, as this is the first time I reached sub-11 pace – my slowest kilometre is still higher than all averages of previous sessions. Wow. Not sure if I can keep up with this pace in future sessions – to get any faster I think I would have to run rather than walk.\n\nFormer Bukit Timah Fire Station was not lighted and the buildings looked unmaintained, so in the dark it looked a bit scary. But the pedestrian sidewalk was well illuminated so it was completely fine.\n\nSo despite the rain, that was a great start for Downtown Line.",
         "start": "DT1-BP6 Bukit Panjang",
+        "via": null,
         "end": "DT9 CC19 Botanic Gardens",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.7620147, "lat": 1.378694 },
           { "lng": 103.7623579, "lat": 1.377777 },
@@ -1132,12 +1186,15 @@
       },
       {
         "time": "2024-03-06T19:03:00+08:00",
+        "label": null,
         "distance": 7.54,
         "pace": 10.63,
         "kcal": 423,
         "description": "Yesterday it said no rain, didn’t bring umbrella, got soaked in rain the entire session. Today it said there would be rain, brought umbrella, not a single drop of rain appeared. Ah well… The umbrella made it not so easy and comfortable anymore to swing the arms, but dropped by a 7-11 to grab two bottles of drinks (thanks, discount), drank one and used one to counter the weight of the umbrella, so it became comfortable to walk again.\n\nHalf the session I had to take detours due to the construction of the North–South Corridor. Construction projects have been the number one cause of unplanned detours in this project.\n\nThings were going well and I wanted to stop in Bayfront MRT, but somehow just when I was approaching Promenade MRT my right foot’s toes started to hurt, so decided to call it a day and stop one station early. Tomorrow I have an exam anyway, it doesn’t hurt to stop earlier than planned.",
         "start": "DT9 CC19 Botanic Gardens",
+        "via": null,
         "end": "DT15 CC4 Promenade",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8149962, "lat": 1.3224584 },
           { "lng": 103.8152429, "lat": 1.3226407 },
@@ -1173,12 +1230,15 @@
       },
       {
         "time": "2024-03-08T19:00:00+08:00",
+        "label": null,
         "distance": 12.94,
         "pace": 11.37,
         "kcal": 711,
         "description": "I said I would not do a 10km+ session again after the TE3–TE5 session on TEL. Well, I just did it again!\n\nInitially I intended to stop at Geylang Bahru MRT, but eventually decided to extend until I reached CCL. Why? I am not under time pressure today (unlike most other days when I have something to do at around 10pm), and I live near CCL.\n\nThe session was relatively uneventful, with the roads pretty easy to navigate. However I walked on the wrong side of the road on the exit ramp of PIE near Geylang Bahru MRT. So I lost about 200m there having to turn around to cross the road (you don’t want to jaywalk into vehicles travelling at expressway speed), so that I could use the pedestrian overpass crossing PIE. Lesson learned, be extra careful and never mess with expressways…\n\nThat 200m was won back after I found a shortcut via the HDB blocks between Mattar MRT and MacPherson MRT. Really lucky that HDB common grounds are publicly accessible. I should use this trick more.",
         "start": "DT15 CC4 Promenade",
+        "via": null,
         "end": "DT26 CC10 MacPherson",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8603043, "lat": 1.2940773 },
           { "lng": 103.8602239, "lat": 1.2938842 },
@@ -1251,12 +1311,15 @@
       },
       {
         "time": "2024-03-09T19:20:00+08:00",
+        "label": null,
         "distance": 8.41,
         "pace": 10.87,
         "kcal": 469,
         "description": "Another relatively simple session as the line just followed a single road for almost the entire distance. I didn’t have to look at the map for directions until I was about to reach the destination (Tampines MRT). That MRT station is huge though, surprisingly big for a two-line interchange (I guess it’s due to me having to cross a bus interchange as well).\n\nThe first one third of the session, I walked alongside a Bangladeshi man. He seems frustrated with his current work and the rising cost of living. All the best to him, though I must admit I couldn’t listen to at least half of what he said because his accent was too heavy for my ears, historically scoring badly in listening tests.\n\nBedok Reservoir was a bit smaller than I thought. Just a lake and that’s it? Compared to the huge central reservoirs that make my legs protest before I even attempt to hike across them, this one feels too small to be given the reservoir title…",
         "start": "DT26 CC10 MacPherson",
+        "via": null,
         "end": "DT32-EW2 Tampines",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8884828, "lat": 1.3262768 },
           { "lng": 103.8885793, "lat": 1.3260301 },
@@ -1290,12 +1353,15 @@
       },
       {
         "time": "2024-03-10T19:42:00+08:00",
+        "label": null,
         "distance": 4.22,
         "pace": 11.12,
         "kcal": 234,
         "description": "No comments today. Towards the end today has been terrible and I am tired.",
         "start": "DT32-EW2 Tampines",
+        "via": null,
         "end": "DT35 CG1 Expo",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.9447582, "lat": 1.353778 },
           { "lng": 103.9448869, "lat": 1.3538477 },
@@ -1337,12 +1403,15 @@
     "sessions": [
       {
         "time": "2024-03-11T18:55:00+08:00",
+        "label": null,
         "distance": 9.28,
         "pace": 11.67,
         "kcal": 506,
         "description": "First impression has to be that the East has a LOT of cycling paths, public space and children playground. Which seems to be partially due to the overground train viaduct, as you cannot build anything under the viaducts so you might as well make them public green space.\n\nThe porridge in Pasir Ris Central Hawker Centre is fantastic. A really good way to start the session. The hawker centre was slightly further away from the station than I would like it to, however.\n\nAnother thing I noticed is that the gap between stations is quite large. Unlike other newer lines, it takes a lot of time to go from Tanah Merah MRT to Bedok MRT. And I really should have stopped at Tanah Merah MRT. My legs are trembling as I type these lines on a train heading away from Bedok MRT.",
         "start": "EW1 CR5 CP1 Pasir Ris",
+        "via": null,
         "end": "EW5 Bedok",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.9493421, "lat": 1.3727841 },
           { "lng": 103.9491973, "lat": 1.3721942 },
@@ -1393,12 +1462,15 @@
       },
       {
         "time": "2024-03-12T18:30:00+08:00",
+        "label": null,
         "distance": 1.92,
         "pace": 11.65,
         "kcal": 105,
         "description": "Planned to finish at Kallang MRT, but I felt a bit sick. I also observed that even in the first kilometre, I couldn’t maintain the pace I wanted to have, and I would only become slower as I continued further. I also had to take an abnormally long break only 500m in. Considering everything, I decided to end the session VERY prematurely.\n\nI guess, after several days of consecutive long walking sessions, my legs have reached some kind of critical points. Maybe I should take a rest for a few days before continuing again, this time perhaps aiming for City Hall MRT.",
         "start": "EW5 Bedok",
+        "via": null,
         "end": "EW6 Kembangan",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.9299633, "lat": 1.3242496 },
           { "lng": 103.9243818, "lat": 1.3232414 },
@@ -1410,12 +1482,15 @@
       },
       {
         "time": "2024-03-13T19:51:00+08:00",
+        "label": null,
         "distance": 5.95,
         "pace": 11.27,
         "kcal": 328,
         "description": "After resting and not going to class today, I found myself feeling much better towards the afternoon, so decided to give it a try. And indeed, I was fit enough to continue this project. I only stopped at Lavender MRT because I had something to do at 10pm sharp that I must not miss.\n\nThe weather was good and the route was clear. I also faced surprisingly many green lights. That doesn’t excuse me of that moment I stopped a car by walking into the red light once at the Sims Ave–Sims Way junction though. While I genuinely thought it was a zebra crossing at first (and only realised I messed up after that car honked me as I made it halfway), I was still 100% wrong here, and my sincerest apologies to whoever drove that car at that moment.",
         "start": "EW6 Kembangan",
+        "via": null,
         "end": "EW11 Lavender",
+        "underConstruction": false,
         "coordinates": [
           { "lng": -256.0867153, "lat": 1.3209487 },
           { "lng": -256.0922631, "lat": 1.3197876 },
@@ -1432,12 +1507,15 @@
       },
       {
         "time": "2024-03-14T18:44:00+08:00",
+        "label": null,
         "distance": 7.95,
         "pace": 11.22,
         "kcal": 439,
         "description": "Another session through downtown and the Central Business District. As expected, and just like countless times I have passed by this place, the trip was filled with traffic light.\n\nOther than that, everyone knows about downtown Singapore already, so I have nothing to add. The weather was nice and Marina Bay was just like the Marina Bay we all know.",
         "start": "EW11 Lavender",
+        "via": null,
         "end": "EW17 Tiong Bahru",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8627739, "lat": 1.307576 },
           { "lng": 103.8581895, "lat": 1.3035806 },
@@ -1537,12 +1615,15 @@
       },
       {
         "time": "2024-03-15T18:23:00+08:00",
+        "label": null,
         "distance": 8.01,
         "pace": 11.5,
         "kcal": 438,
         "description": "Awesome weather these days. Not burning hot, not sunny, but also not a single drop of rain. Just the perfect weather for a long session (reminding me of the Woodlands South MRT – Lentor MRT stretch). A shame I have an exam tomorrow so I cannot continue this until my physical limit is reached.\n\nLeng Kee Road seems to be the car centre of Singapore? Both sides of the road were filled with car shops, from normal cars to very luxurious cars. Some supercars were even parked outside. It was a treat to the eye, though I doubt I’ll ever buy one in the future, when public transportation is this good and the CoE alone could plunge you into bankruptcy.",
         "start": "EW17 Tiong Bahru",
+        "via": null,
         "end": "EW23 CR17 Clementi",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8269021, "lat": 1.2858932 },
           { "lng": 103.8260494, "lat": 1.2860407 },
@@ -1646,12 +1727,15 @@
       },
       {
         "time": "2024-03-16T19:21:00+08:00",
+        "label": null,
         "distance": 8.11,
         "pace": 10.72,
         "kcal": 454,
         "description": "The dinner at Clementi was surprisingly cheap. Meals typically cost S$5 or more these days in food centres, but the mixed vegetarian rice I got was only S$3.3. It was not bad either… had I known the price in advance I would’ve ordered even more.\n\nWhen I passed by Jurong East MRT, a guy walked past me at around 7km/h. Just… wow! I thought that was only possible in competitive walking – I tried to keep up in vain, the guy kept breezing forward in ease while my legs crumbled. During this entire project, this is the first time I’ve been overtaken by someone walking when I was already cruising at my top speed. At least, that kinda made me walk faster than usual and we have another sub-11 session after a while.\n\nAnd… where are the JRL viaducts in Jurong East MRT and Boon Lay MRT? I was looking forward to seeing them but they seemed to just not be built yet.",
         "start": "EW23 CR17 Clementi",
+        "via": null,
         "end": "EW27 JS8 Boon Lay",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.7654238, "lat": 1.3139687 },
           { "lng": 103.7654935, "lat": 1.314017 },
@@ -1767,6 +1851,7 @@
       },
       {
         "time": "2024-03-17T19:24:00+08:00",
+        "label": null,
         "distance": 6.12,
         "pace": 11,
         "kcal": 340,
@@ -1774,6 +1859,7 @@
         "start": "EW4 CG Tanah Merah",
         "via": null,
         "end": { "actual": "BUS97321 Aft Compass Green", "target": "CG2 Changi Airport" },
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.9461591, "lat": 1.3266764 },
           { "lng": 103.946269, "lat": 1.3267783 },
@@ -1846,12 +1932,15 @@
       },
       {
         "time": "2024-03-18T19:01:00+08:00",
+        "label": null,
         "distance": 4.2,
         "pace": 10.7,
         "kcal": 235,
         "description": "Oh GOSH I got soaked in thunderstorm rain the whole time.\n\nWhere I live, the sky was crystal clear and the sun was shining brightly when I went to the station. During the entire trip nothing was indicative of any potential rain. But the moment I stepped out of Boon Lay MRT to start the session, rain started pouring down.\n\nAt first I thought it would be quick, the sky to the East was still clear anyway, the glowing red sunset was still visible in the horizon. How wrong I was… it only went worse from there.\n\nThe entire session was some 100 minutes and only 45 minutes were me walking. The remaining time was spent in sheltered bus stops or under the rail viaduct, for the rain was too heavy for me to even walk under (for reference, the first DTL session was rainy too but it was just light rain so I could still go far).\n\nPlanned to reach Tuas Link MRT, so left home early. Then shifted aim to Gul Circle MRT. And eventually Joo Koon MRT.  What choice did I have anyway…",
         "start": "EW27 JS8 Boon Lay",
+        "via": null,
         "end": "EW29 Joo Koon",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.7060581, "lat": 1.3385097 },
           { "lng": 103.7050393, "lat": 1.338125 },
@@ -1911,12 +2000,15 @@
       },
       {
         "time": "2024-03-19T18:43:00+08:00",
+        "label": null,
         "distance": 7.35,
         "pace": 10.53,
         "kcal": 413,
         "description": "That's EWL done. Wow, the line was so challenging.\n\nI found a technique to significantly make me faster (around 9:30/km pace). It's pretty simple, I just make longer steps… though it is obviously very tiring. I also reduced my step frequency because, well, humans have limits, but even so I was still soaked in sweat about 1km in. So the entire session I just alternated between normal walking and this way of walking. The result? My fastest session yet. I believe if I can keep this up and learn how to walk that way for a long time period, I might have a chance to beat the guy I met at Jurong East in a rematch. Though obviously such a rematch will never come…\n\nEWL from Pioneer MRT no longer has residential areas around it, and from Joo Koon MRT it is basically just port warehouses, shipping companies and the port infrastructure itself. The pros is that traffic lights are less plentiful and the roads are overall pretty empty. The cons is that I really struggled to find a convenience store to get more drinks.\n\nJust a fun fact, but after the train trip home, I now have taken the entire length of the MRT network (excluding LRT). The Joo Koon MRT–Tuas Link MRT stretch was the only stretch I'd never been to until today. This Tuas Link extension is pretty interesting actually, I didn't expect it to just go over another road viaduct, and Gul Circle with its unused platforms was certainly fascinating to see with my own eyes.",
         "start": "EW29 Joo Koon",
+        "via": null,
         "end": "EW33 Tuas Link",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.6785787, "lat": 1.3279286 },
           { "lng": 103.6770021, "lat": 1.3278911 },
@@ -1980,12 +2072,15 @@
     "sessions": [
       {
         "time": "2024-03-20T19:45:00+08:00",
+        "label": null,
         "distance": 7.65,
         "pace": 10.75,
         "kcal": 426,
         "description": "We start with the final opened line.\n\nMarina South Pier MRT was still as empty as ever. I wonder if there will ever be a time that the station becomes busy. Even when there are residential projects in Marina South, I suspect people will utilise Marina Bay MRT and Marina South MRT instead of this one which is too far into the coastline.\n\nTried to avoid Orchard Road because there are a lot of people there, slowing me down. But literally all traffic lights in the area pointed me away from Somerset Road into Orchard Road… so walking directly through the heart of Orchard it is, then.",
         "start": "NS28 Marina South Pier",
+        "via": null,
         "end": "NS21-DT11 Newton",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8624541, "lat": 1.2704422 },
           { "lng": 103.8622825, "lat": 1.270705 },
@@ -2069,12 +2164,15 @@
       },
       {
         "time": "2024-03-21T19:13:00+08:00",
+        "label": null,
         "distance": 5.5,
         "pace": 11.35,
         "kcal": 302,
         "description": "It is the 14th day in a row that I have a session, and I believe in all but one of them, I walked a substantial distance. Today, my legs finally felt that, probably it would be a good idea to stop the streak at 14 days.\n\nMe having 9 hours worth of class earlier in the day certainly didn't help, ha. The 11:21 pace is relatively worse than recent sessions, but considering everything, I'm surprised I could even go faster than 5km/h on average. When I reached Bishan, I felt the same way I did when I completed the 11km Woodlands South MRT–Lentor MRT stretch on the TEL.\n\nAnyway, this session we concluded the underground part of the (opened) MRT system. The remaining of NSL are all overground! That would make navigating a lot easier.\n\nI passed one expressway and two canals this time, but thankfully bridges are conveniently placed almost exactly where I need them, so I didn't have to go off-course too much.\n\nAnd what the heck, Newton Food Court? How come you didn't have a single stall selling chicken rice when I came?",
         "start": "NS21-DT11 Newton",
+        "via": null,
         "end": "NS17 CC15 Bishan",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.838088, "lat": 1.3121614 },
           { "lng": 103.8382649, "lat": 1.3122794 },
@@ -2172,12 +2270,15 @@
       },
       {
         "time": "2024-03-24T18:23:00+08:00",
+        "label": null,
         "distance": 10.18,
         "pace": 10.58,
         "kcal": 572,
         "description": "Another 10km+ session. It is so refreshing after two days of rest, and my legs functioned very well today.\n\nToday we have another long stretch of no MRT stations, between Yio Chu Kang MRT and Khatib MRT. Thankfully, the MRT line follows a road closely, and the road itself is very pedestrian friendly, despite having a construction project (North South Corridor) along it, so I didn’t have any considerable difficulties in navigating.\n\nThat being said, it’s surprising there wasn’t much in the viaduct part of NSC yet. Considering the busy-looking tunnel construction sites, I imagined the viaducts to be a lot more “visible” already – but at the moment there were just a handful of viaduct piers, mainly near the interchange with SLE.\n\nIt seemed it was close to the middle of the lunar month. The moon was very bright, and its reflection on Lower Seletar Reservoir was picturesque.",
         "start": "NS17 CC15 Bishan",
+        "via": null,
         "end": "NS13 Yishun",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8479754, "lat": 1.3511207 },
           { "lng": 103.8483941, "lat": 1.3531881 },
@@ -2283,12 +2384,15 @@
       },
       {
         "time": "2024-03-25T19:00:00+08:00",
+        "label": null,
         "distance": 7.09,
         "pace": 10.14,
         "kcal": 401,
         "description": "Pace 10:08… holy moly!!! This is definitely my fastest session thus far, and the first time I could maintain 6km/h for an extended period of time (at least 4km). Practice makes perfect I guess, this is the result of hundreds of kilometres of walking over the last 2 months. Still work to be done to beat that Jurong East guy in a potential (hypothetical) rematch, though.\n\nI actually wanted to reach Marsiling MRT, but I started the session later than I wanted, and my time was running out, so decided to stop here. Good luck to myself for the upcoming 9km stretch between Woodlands MRT and Choa Chu Kang MRT. (Will have to skip Yew Tee MRT because there are no bridges connecting it with the Kranji region that don’t require some crazy detours.)",
         "start": "NS13 Yishun",
+        "via": null,
         "end": "NS9 TE2 Woodlands",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8351515, "lat": 1.4291125 },
           { "lng": 103.8351971, "lat": 1.431271 },
@@ -2355,12 +2459,15 @@
       },
       {
         "time": "2024-03-26T18:25:00+08:00",
+        "label": null,
         "distance": 9.38,
         "pace": 10.77,
         "kcal": 524,
         "description": "Since the Rail Corridor is not illuminated at night, I decided to reverse the direction for this session so that I could finish the stretch before night falls. That was indeed the right decision, I finished the corridor at Kranji MRT just when the last rays of light from the West were fading away.\n\nI don’t know how I expected the Rail Corridor to be, before I started the trip, but the trail certainly exceeded that expectation. Wide, clean, quiet, straight path, traffic was very light, birds flew by all the way. There were even road signs and kilometre markers, making it feel like a whole expressway for pedestrians and cyclists. Would definitely want to do the remaining 17.9km of the corridor, all the way to Tanjong Pagar Station.\n\nAlso, lesson learned: drink tea or water, not milk, on the way. Also don’t be like me and drink like 700ml of milk in one go at Marsiling MRT. Hydration is good but I think I over-hydrated myself at that part.",
         "start": "NS4 JS1 BP1 Choa Chu Kang",
+        "via": null,
         "end": "NS9 TE2 Woodlands",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.743913, "lat": 1.3862422 },
           { "lng": 103.7439155, "lat": 1.3863964 },
@@ -2500,12 +2607,15 @@
       },
       {
         "time": "2024-03-27T18:54:00+08:00",
+        "label": null,
         "distance": 7.49,
         "pace": 11.07,
         "kcal": 415,
         "description": "All opened MRT lines are done! Whooh!\n\nI honestly have nothing to say today. Everything was as planned and went normally. Though, honestly, the gaps between stations were a bit bigger than I would expect them to be, considering there are relatively dense residential areas along the track (except the hill between the two Bukit stations).\n\nNext, I will do LRT lines, then maybe, just maybe, I’ll do the under construction sections as well.",
         "start": "NS4 JS1 BP1 Choa Chu Kang",
+        "via": null,
         "end": "NS1 EW24 JE5 Jurong East",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.7439128, "lat": 1.3863978 },
           { "lng": 103.7436392, "lat": 1.3863844 },
@@ -2652,6 +2762,7 @@
         "start": "BP1 NS4 JS1 Choa Chu Kang",
         "via": "BP10 Fajar",
         "end": "BP6-DT1 Bukit Panjang",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.7446532, "lat": 1.3848854 },
           { "lng": 103.7446988, "lat": 1.3845476 },
@@ -2744,7 +2855,9 @@
         "kcal": 592,
         "description": "Another LRT line done in one go. I initially wanted to do each loop in a separate session, but today I was bored and didn’t want to work, so I went early and had the fourth 10km session! Well… to think I wanted to stop having 10km sessions after my first one, this is surely an achievement.\n\nI didn’t realise Fernvale was that crowded. It honestly felt like a town of its own. Seriously, a two-car Light Rail Transit service is not enough for this. Someone needs to build the Seletar Line to connect Fernvale to CBD as soon as possible, this place is in dire need of its own MRT station.\n\nThe food at Food Paradise near the Sengkang Central–Sengkang East Avenue was cheap and Milo was still as delicious as ever. I gotta buy another bag of Milo to bring home when I go back to Vietnam.",
         "start": "STC NE16 Sengkang",
+        "via": null,
         "end": "STC NE16 Sengkang",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8956592, "lat": 1.3924202 },
           { "lng": 103.8957853, "lat": 1.3927474 },
@@ -2838,8 +2951,9 @@
         "kcal": 473,
         "description": "YAYYY… THAT’S ALL OPENED PARTS OF THE MRT/LRT SYSTEM DONE!!\n\nA surprising portion of Punggol is still under construction. Well, many parts of it are already done but still closed to the public. Sentul Walk seems to be done already but still fenced so it was not viable to walk between Sam Kee LRT and Punggol Point LRT. So I had to come up with this track which doesn’t cover the west loop fully. Well, what could I have done anyway.\n\nAs an enthusiast of UI design and the MRT system, there was one big bombshell surprise today: Sam Kee LRT exit D has a sign that follows TEL-era design, which is probably the only instance of that design system throughout the LRT network. It was a pleasant surprise.\n\nAnd near Nibong LRT, there was a fire so big it glowed up the sky. I was initially quite worried, but seeing people not displaying any interests at all and even a firetruck speeding on literally the opposite direction, maybe the fire was intentional and not a cause of concern after all.",
         "start": "PW3 Punngol Point",
-        "end": "PTC NE17 Punggol",
         "via": "PW1 Sam Kee",
+        "end": "PTC NE17 Punggol",
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.9066511, "lat": 1.4166628 },
           { "lng": 103.9055239, "lat": 1.4172313 },
