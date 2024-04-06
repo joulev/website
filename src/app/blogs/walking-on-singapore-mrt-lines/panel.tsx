@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { Fragment, memo, useMemo } from "react";
 
-import { ChevronDown, Home } from "~/components/icons";
+import { ChevronDown, ChevronLeft, ChevronRight, Home } from "~/components/icons";
 import { Button, LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { useHoverBackground } from "~/components/ui/hooks/use-hover-background";
@@ -12,10 +13,8 @@ import { cn } from "~/lib/cn";
 
 import { useActiveSession } from "./context";
 import data from "./data.json";
-import type { Line, Session } from "./types";
-
-import Image from "next/image";
 import systemMap from "./system-map.png";
+import type { Line, Session } from "./types";
 
 const allSessions: Session[] = data.flatMap(x => x.sessions as Session[]);
 const stats = getStats(allSessions);
@@ -459,6 +458,34 @@ function SessionSelectorButton({
   );
 }
 
+function SessionPrevNextButton({ next }: { next?: boolean }) {
+  const { activeSession, setActiveSession } = useActiveSession();
+  const targetSessionIndex = useMemo(() => {
+    if (activeSession.lineIndex === null || activeSession.sessionIndex === null) return null;
+    const newIndex = activeSession.sessionIndex + (next ? 1 : -1);
+    if (newIndex < 0 || newIndex >= data[activeSession.lineIndex].sessions.length) return null;
+    return newIndex;
+  }, [activeSession.lineIndex, activeSession.sessionIndex, next]);
+  return (
+    <button
+      type="button"
+      {...useHoverBackground({})}
+      className={cn(
+        "w-6 shrink-0 grid place-items-center transition [&_svg]:size-5",
+        targetSessionIndex !== null
+          ? "opacity-100 hover-bg text-text-secondary hover:text-text-primary active:bg-bg-active"
+          : "opacity-0",
+      )}
+      disabled={targetSessionIndex === null}
+      onClick={() =>
+        targetSessionIndex !== null && setActiveSession({ sessionIndex: targetSessionIndex })
+      }
+    >
+      {next ? <ChevronRight /> : <ChevronLeft />}
+    </button>
+  );
+}
+
 function SessionSelector() {
   const { activeSession } = useActiveSession();
   const lineIndex = activeSession.lineIndex;
@@ -469,15 +496,17 @@ function SessionSelector() {
   return (
     <>
       <hr />
-      <div className="bg-bg-darker">
+      <div className="bg-bg-darker flex flex-row">
+        <SessionPrevNextButton />
         <div
-          className="mx-6 grid grid-cols-[repeat(var(--num),minmax(0,1fr))] divide-x divide-separator border-x border-separator"
+          className="flex-grow grid grid-cols-[repeat(var(--num),minmax(0,1fr))] divide-x divide-separator border-x border-separator"
           style={{ "--num": line.sessions.length }}
         >
           {line.sessions.map((_, i) => (
             <SessionSelectorButton key={i} lineIndex={lineIndex} sessionIndex={i} />
           ))}
         </div>
+        <SessionPrevNextButton next />
       </div>
     </>
   );
