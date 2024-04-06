@@ -97,7 +97,7 @@ function MapPolyline({
           : lineIsActive
             ? 9997
             : lineZIndex[data[lineIndex].lineCode as keyof typeof lineZIndex],
-      strokeOpacity: !isActive && !isHover && session.underConstruction ? 0.5 : 1,
+      strokeOpacity: 1,
       strokeWeight: 3,
     });
     if (!thinFillAreaPolylineRef.current) return;
@@ -109,14 +109,7 @@ function MapPolyline({
       strokeOpacity: 1,
       strokeWeight: 1,
     });
-  }, [
-    isActive,
-    isHover,
-    lineIsActive,
-    activeSession.lineIndex,
-    lineIndex,
-    session.underConstruction,
-  ]);
+  }, [isActive, isHover, lineIsActive, activeSession.lineIndex, lineIndex]);
 
   useEffect(() => refreshStyling(), [refreshStyling]);
 
