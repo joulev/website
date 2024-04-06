@@ -434,14 +434,27 @@ function SessionSelectorButton({
   const isActive =
     activeSession.lineIndex === lineIndex && activeSession.sessionIndex === sessionIndex;
   const session = data[lineIndex].sessions[sessionIndex];
+  const label = session.label ?? sessionIndex + 1;
   return (
     <button
       type="button"
       {...useHoverBackground({})}
-      className={cn("hover-bg py-2 font-medium text-text-primary", isActive && "bg-bg-active")}
+      className={cn(
+        "hover-bg font-medium text-text-primary h-9 flex flex-col justify-center items-center",
+        isActive && "bg-bg-active",
+      )}
       onClick={() => setActiveSession({ lineIndex, sessionIndex })}
     >
-      {session.label ?? sessionIndex + 1}
+      {session.underConstruction ? (
+        <>
+          <span className="leading-none">{label}</span>
+          <span className="leading-none text-xs scale-75 text-text-tertiary translate-y-px">
+            U/C
+          </span>
+        </>
+      ) : (
+        <span>{label}</span>
+      )}
     </button>
   );
 }
@@ -478,7 +491,7 @@ function LineSelectorButton({ line, index }: { line: Line; index: number }) {
       type="button"
       {...useHoverBackground({ style: { "--bg": line.colour, "--fg": line.textColour } })}
       className={cn(
-        "py-2 font-medium",
+        "font-medium h-9 flex flex-col justify-center items-center",
         lineIsActive ? "bg-[--bg] text-[--fg]" : "hover-bg text-text-primary",
       )}
       onClick={() => setActiveSession({ lineIndex: index, sessionIndex: null })}
