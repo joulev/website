@@ -461,9 +461,13 @@ function SessionSelectorButton({
 function SessionPrevNextButton({ next }: { next?: boolean }) {
   const { activeSession, setActiveSession } = useActiveSession();
   const targetSessionIndex = useMemo(() => {
-    if (activeSession.lineIndex === null || activeSession.sessionIndex === null) return null;
+    if (activeSession.lineIndex === null) return null;
+    const max = data[activeSession.lineIndex].sessions.length - 1;
+    if (activeSession.sessionIndex === null) return next ? 0 : max;
+
     const newIndex = activeSession.sessionIndex + (next ? 1 : -1);
-    if (newIndex < 0 || newIndex >= data[activeSession.lineIndex].sessions.length) return null;
+    if (newIndex < 0) return max;
+    if (newIndex > max) return 0;
     return newIndex;
   }, [activeSession.lineIndex, activeSession.sessionIndex, next]);
   return (
