@@ -7,6 +7,7 @@
     "sessions": [
       {
         "time": "2024-01-28T19:57:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 3.2,
         "pace": 12.18,
@@ -59,6 +60,7 @@
       },
       {
         "time": "2024-01-29T18:04:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 6.5,
         "pace": 12.63,
@@ -170,6 +172,7 @@
       },
       {
         "time": "2024-02-01T19:21:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 1.26,
         "pace": 12.07,
@@ -189,6 +192,7 @@
       },
       {
         "time": "2024-02-03T17:29:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 3.11,
         "pace": 13.17,
@@ -226,6 +230,7 @@
       },
       {
         "time": "2024-02-04T18:21:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 7.05,
         "pace": 11.9,
@@ -315,6 +320,7 @@
       },
       {
         "time": "2024-02-10T18:11:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 4.39,
         "pace": 11.2,
@@ -353,6 +359,7 @@
       },
       {
         "time": "2024-02-11T18:21:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 6.8,
         "pace": 12.4,
@@ -446,6 +453,7 @@
       },
       {
         "time": "2024-02-13T20:19:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 6.19,
         "pace": 11.83,
@@ -495,6 +503,7 @@
       },
       {
         "time": "2024-02-16T19:07:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 5.49,
         "pace": 12.23,
@@ -560,6 +569,7 @@
     "sessions": [
       {
         "time": "2024-02-18T17:47:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 6.68,
         "pace": 11.95,
@@ -620,6 +630,7 @@
       },
       {
         "time": "2024-02-20T19:44:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 7.13,
         "pace": 11.78,
@@ -654,6 +665,7 @@
       },
       {
         "time": "2024-02-21T18:20:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 8.52,
         "pace": 11.82,
@@ -687,6 +699,7 @@
       },
       {
         "time": "2024-04-08T17:03:00+08:00",
+        "doneWith": { "lineIndex": 6, "sessionIndex": 0 },
         "label": null,
         "distance": 1.82,
         "pace": 11.5,
@@ -729,6 +742,7 @@
     "sessions": [
       {
         "time": "2024-02-23T19:24:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 4.86,
         "pace": 11.58,
@@ -784,6 +798,7 @@
       },
       {
         "time": "2024-02-24T16:25:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 11.52,
         "pace": 11.7,
@@ -861,6 +876,7 @@
       },
       {
         "time": "2024-03-02T19:28:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 6.59,
         "pace": 11.6,
@@ -963,6 +979,7 @@
       },
       {
         "time": "2024-03-03T18:20:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 9.19,
         "pace": 11.75,
@@ -1045,6 +1062,7 @@
       },
       {
         "time": "2024-03-04T19:04:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 5.05,
         "pace": 11.88,
@@ -1092,6 +1110,7 @@
       },
       {
         "time": "2024-04-05T18:34:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 7.91,
         "pace": 10.47,
@@ -1168,6 +1187,7 @@
       },
       {
         "time": "2024-04-06T19:39:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 4.26,
         "pace": 10.5,
@@ -1216,6 +1236,7 @@
       },
       {
         "time": "2024-04-07T19:24:00+08:00",
+        "doneWith": { "lineIndex": 3, "sessionIndex": 5 },
         "label": null,
         "distance": 2,
         "pace": 10.58,
@@ -1258,6 +1279,7 @@
     "sessions": [
       {
         "time": "2024-03-05T19:20:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 9.79,
         "pace": 10.8,
@@ -1303,6 +1325,7 @@
       },
       {
         "time": "2024-03-06T19:03:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 7.54,
         "pace": 10.63,
@@ -1347,6 +1370,7 @@
       },
       {
         "time": "2024-03-08T19:00:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 12.94,
         "pace": 11.37,
@@ -1428,6 +1452,7 @@
       },
       {
         "time": "2024-03-09T19:20:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 8.41,
         "pace": 10.87,
@@ -1470,6 +1495,7 @@
       },
       {
         "time": "2024-03-10T19:42:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 4.22,
         "pace": 11.12,
@@ -1512,6 +1538,7 @@
       },
       {
         "time": "2024-04-07T19:49:00+08:00",
+        "doneWith": { "lineIndex": 2, "sessionIndex": 7 },
         "label": null,
         "distance": 4.53,
         "pace": 10.98,
@@ -1575,6 +1602,7 @@
     "sessions": [
       {
         "time": "2024-03-11T18:55:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 9.28,
         "pace": 11.67,
@@ -1634,6 +1662,7 @@
       },
       {
         "time": "2024-03-12T18:30:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 1.92,
         "pace": 11.65,
@@ -1654,6 +1683,7 @@
       },
       {
         "time": "2024-03-13T19:51:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 5.95,
         "pace": 11.27,
@@ -1679,6 +1709,7 @@
       },
       {
         "time": "2024-03-14T18:44:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 7.95,
         "pace": 11.22,
@@ -1787,6 +1818,7 @@
       },
       {
         "time": "2024-03-15T18:23:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 8.01,
         "pace": 11.5,
@@ -1899,6 +1931,7 @@
       },
       {
         "time": "2024-03-16T19:21:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 8.11,
         "pace": 10.72,
@@ -2023,6 +2056,7 @@
       },
       {
         "time": "2024-03-17T19:24:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 6.12,
         "pace": 11,
@@ -2104,6 +2138,7 @@
       },
       {
         "time": "2024-03-18T19:01:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 4.2,
         "pace": 10.7,
@@ -2172,6 +2207,7 @@
       },
       {
         "time": "2024-03-19T18:43:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 7.35,
         "pace": 10.53,
@@ -2244,6 +2280,7 @@
     "sessions": [
       {
         "time": "2024-03-20T19:45:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 7.65,
         "pace": 10.75,
@@ -2336,6 +2373,7 @@
       },
       {
         "time": "2024-03-21T19:13:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 5.5,
         "pace": 11.35,
@@ -2442,6 +2480,7 @@
       },
       {
         "time": "2024-03-24T18:23:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 10.18,
         "pace": 10.58,
@@ -2556,6 +2595,7 @@
       },
       {
         "time": "2024-03-25T19:00:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 7.09,
         "pace": 10.14,
@@ -2631,6 +2671,7 @@
       },
       {
         "time": "2024-03-26T18:25:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 9.38,
         "pace": 10.77,
@@ -2779,6 +2820,7 @@
       },
       {
         "time": "2024-03-27T18:54:00+08:00",
+        "doneWith": null,
         "label": null,
         "distance": 7.49,
         "pace": 11.07,
@@ -2912,6 +2954,7 @@
     "sessions": [
       {
         "time": "2024-04-08T18:31:00+08:00",
+        "doneWith": { "lineIndex": 1, "sessionIndex": 3 },
         "label": null,
         "distance": 7.5,
         "pace": 10.5,
@@ -2981,6 +3024,7 @@
     "sessions": [
       {
         "time": "2024-03-30T19:24:00+08:00",
+        "doneWith": null,
         "label": "BPLRT",
         "distance": 7.96,
         "pace": 10.05,
@@ -3076,6 +3120,7 @@
       },
       {
         "time": "2024-03-31T17:50:00+08:00",
+        "doneWith": null,
         "label": "SKLRT",
         "distance": 10.52,
         "pace": 10.43,
@@ -3172,6 +3217,7 @@
       },
       {
         "time": "2024-04-01T19:25:00+08:00",
+        "doneWith": null,
         "label": "PGLRT",
         "distance": 8.4,
         "pace": 10.35,

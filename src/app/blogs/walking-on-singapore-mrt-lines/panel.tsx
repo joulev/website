@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Fragment, memo, useMemo } from "react";
 
-import { ChevronDown, ChevronLeft, ChevronRight, Home } from "~/components/icons";
+import { ChevronDown, ChevronLeft, ChevronRight, Construction, Home } from "~/components/icons";
 import { Button, LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { useHoverBackground } from "~/components/ui/hooks/use-hover-background";
@@ -67,10 +67,10 @@ function Stat({ label, value, unit }: { label: string; value: React.ReactNode; u
 function LineBadge({ line }: { line: Line }) {
   return (
     <span
-      className="inline-block w-12 rounded-[0.6em/50%] border border-white bg-[--bg] py-0.5 text-center font-lta text-base font-medium text-[--fg]"
+      className="w-[3em] h-[1.8em] rounded-[0.6em/50%] border border-white bg-[--bg] text-center font-lta text-[0.7em] font-medium text-[--fg] inline-flex justify-center items-center"
       style={{ "--bg": line.colour, "--fg": line.textColour }}
     >
-      {line.lineCode === "LRT" ? line.lineCode : `${line.lineCode}L`}
+      <span>{line.lineCode === "LRT" ? line.lineCode : `${line.lineCode}L`}</span>
     </span>
   );
 }
@@ -291,7 +291,9 @@ function LineOverview({ line }: { line: Line }) {
     <ScrollArea className="flex flex-grow flex-col overflow-y-auto">
       <div className="flex flex-col gap-6 p-6">
         <div className="flex flex-row items-center gap-3">
-          <LineBadge line={line} />
+          <span className="text-2xl">
+            <LineBadge line={line} />
+          </span>
           <div className="flex flex-col">
             <div className="text-lg font-semibold">{line.lineName}</div>
             <span className="text-sm text-text-secondary">Walking stats</span>
@@ -332,13 +334,16 @@ function SessionTerminusDisplay({
 }
 
 function SessionOverview({ line, session }: { line: Line; session: Session }) {
-  const sessionIndex = useActiveSession().activeSession.sessionIndex;
+  const { activeSession, setActiveSession } = useActiveSession();
+  const sessionIndex = activeSession.sessionIndex;
   const date = new Date(session.time);
   return (
     <ScrollArea className="flex flex-grow flex-col overflow-y-auto">
       <div className="flex flex-col gap-6 p-6">
         <div className="flex flex-row items-center gap-3">
-          <LineBadge line={line} />
+          <span className="text-2xl">
+            <LineBadge line={line} />
+          </span>
           <div className="flex flex-col">
             <div className="text-lg font-semibold">Session {(sessionIndex ?? -1) + 1}</div>
             <time
@@ -357,6 +362,11 @@ function SessionOverview({ line, session }: { line: Line; session: Session }) {
       </div>
       <hr />
       <div className="grid grid-cols-2 gap-6 p-6">
+        {session.underConstruction ? (
+          <span className="text-text-secondary col-span-full text-sm flex flex-row items-center justify-center gap-1.5">
+            <Construction className="size-4" /> Under construction
+          </span>
+        ) : null}
         <SessionTerminusDisplay position="left" title="From">
           <StationBadge station={session.start} />
         </SessionTerminusDisplay>
@@ -382,11 +392,24 @@ function SessionOverview({ line, session }: { line: Line; session: Session }) {
         ) : null}
       </div>
       <hr />
-      {session.underConstruction ? (
+      {session.doneWith ? (
         <>
-          <div className="p-6 text-center bg-bg-darker text-text-secondary">
-            This&nbsp;section&nbsp;of&nbsp;the&nbsp;MRT is&nbsp;not&nbsp;yet&nbsp;open
-          </div>
+          <button
+            type="button"
+            className="flex flex-row justify-between items-center w-full bg-bg-darker px-6 py-3 text-left text-text-secondary text-sm group"
+            onClick={() => setActiveSession(session.doneWith)}
+          >
+            <div className="flex flex-col gap-1">
+              <span>Also done in the same trip</span>
+              <span className="flex flex-row items-center gap-1.5 text-text-primary font-medium text-base">
+                <LineBadge line={data[session.doneWith.lineIndex]} /> Session{" "}
+                {(session.doneWith.sessionIndex ?? -1) + 1}
+              </span>
+            </div>
+            <span className="group-hover:text-text-primary group-hover:translate-x-1 transition">
+              <ChevronRight />
+            </span>
+          </button>
           <hr />
         </>
       ) : null}

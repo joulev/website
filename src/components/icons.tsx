@@ -98,6 +98,11 @@ export const Cloud = createIcon(
 
 export const Code = createIcon("Code", <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />);
 
+export const Construction = createIcon(
+  "Construction",
+  <path d="M17 14v7M7 14v7M17 3v3M7 3v3m3 8L2.3 6.3M14 6l7.7 7.7M8 6l8 8M3 6h18a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z" />,
+);
+
 export const Copy = createIcon(
   "Copy",
   <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2m-6 4h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2Z" />,
