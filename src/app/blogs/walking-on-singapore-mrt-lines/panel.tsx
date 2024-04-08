@@ -303,9 +303,7 @@ function LineOverview({ line }: { line: Line }) {
           <Stat label="Kcal" value={stats.kcal.toFixed(0)} unit="kcal" />
           <Stat label="Average pace" value={convertMinToMinSec(stats.pace)} />
         </div>
-        {line.lineCode === "JR" || line.lineCode === "CR" ? (
-          <div className="text-text-secondary">The line hasn’t opened yet.</div>
-        ) : line.sessions.length === 0 ? (
+        {line.sessions.length === 0 ? (
           <div className="text-text-secondary">I haven’t walked on this line yet.</div>
         ) : null}
       </div>
