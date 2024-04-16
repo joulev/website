@@ -608,7 +608,8 @@
           { "lng": 103.8214391, "lat": 1.2653794 }
         ]
       }
-    ]
+    ],
+    "inaccessibleSections": []
   },
   {
     "lineName": "North East Line",
@@ -781,7 +782,8 @@
           { "lng": 103.902216, "lat": 1.404449 }
         ]
       }
-    ]
+    ],
+    "inaccessibleSections": []
   },
   {
     "lineName": "Thomson–East Coast Line",
@@ -1318,7 +1320,8 @@
           { "lng": 103.9556823, "lat": 1.320222 }
         ]
       }
-    ]
+    ],
+    "inaccessibleSections": []
   },
   {
     "lineName": "Downtown Line",
@@ -1641,7 +1644,8 @@
           { "lng": 103.9621147, "lat": 1.3351954 }
         ]
       }
-    ]
+    ],
+    "inaccessibleSections": []
   },
   {
     "lineName": "East–West Line",
@@ -2319,6 +2323,9 @@
           { "lng": 103.6372151, "lat": 1.3405664 }
         ]
       }
+    ],
+    "inaccessibleSections": [
+      [{ "lng": 103.9745821, "lat": 1.3604924 }, { "lng": 103.9885816, "lat": 1.3574087 }]
     ]
   },
   {
@@ -2993,7 +3000,8 @@
           { "lng": 103.7422712, "lat": 1.3335383 }
         ]
       }
-    ]
+    ],
+    "inaccessibleSections": []
   },
   {
     "lineName": "Cross Island Line",
@@ -3621,7 +3629,8 @@
           { "lng": 103.7392251, "lat": 1.3269874 }
         ]
       }
-    ]
+    ],
+    "inaccessibleSections": []
   },
   {
     "lineName": "Jurong Region Line",
@@ -3697,7 +3706,8 @@
           { "lng": 103.6890983, "lat": 1.3559554 }
         ]
       }
-    ]
+    ],
+    "inaccessibleSections": []
   },
   {
     "lineName": "Light Rail Transit",
@@ -3965,6 +3975,16 @@
           { "lng": 103.9022066, "lat": 1.4044544 }
         ]
       }
+    ],
+    "inaccessibleSections": [
+      [
+        { "lng": 103.9066511, "lat": 1.4166628 },
+        { "lng": 103.9070694, "lat": 1.4164966 },
+        { "lng": 103.9081819, "lat": 1.4163035 },
+        { "lng": 103.9078987, "lat": 1.4151988 },
+        { "lng": 103.9075283, "lat": 1.4140779 },
+        { "lng": 103.905131, "lat": 1.4099137 }
+      ]
     ]
   }
 ]

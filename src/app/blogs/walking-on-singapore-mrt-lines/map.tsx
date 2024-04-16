@@ -141,10 +141,40 @@ function MapPolyline({
   );
 }
 
+function InaccessiblePolyline({ coordinates }: { coordinates: Coordinate[] }) {
+  return (
+    <Polyline
+      path={coordinates}
+      options={{
+        strokeColor: "#555555",
+        strokeOpacity: 0,
+        strokeWeight: 3,
+        zIndex: 0,
+        icons: [
+          { icon: { path: "M 0,-1 0,1", strokeOpacity: 1, scale: 2 }, offset: "0", repeat: "10px" },
+        ],
+        clickable: false,
+      }}
+    />
+  );
+}
+
 function MapLine({ line, lineIndex }: { line: Line; lineIndex: number }) {
-  return line.sessions.map((workout, i) => (
-    <MapPolyline key={i} coordinates={workout.coordinates} lineIndex={lineIndex} sessionIndex={i} />
-  ));
+  return (
+    <>
+      {line.inaccessibleSections.map((section, i) => (
+        <InaccessiblePolyline key={i} coordinates={section} />
+      ))}
+      {line.sessions.map((workout, i) => (
+        <MapPolyline
+          key={i}
+          coordinates={workout.coordinates}
+          lineIndex={lineIndex}
+          sessionIndex={i}
+        />
+      ))}
+    </>
+  );
 }
 
 function LoadingScreen() {
