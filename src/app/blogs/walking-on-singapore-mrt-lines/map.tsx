@@ -64,17 +64,11 @@ function MapPolyline({
   sessionIndex: number;
 }) {
   const polylineRef = useRef<google.maps.Polyline | null>(null);
-  const thinFillAreaPolylineRef = useRef<google.maps.Polyline | null>(null);
 
   const { activeSession, setActiveSession, setPanelIsExpanded } = useActiveSession();
 
-  const session = useMemo(() => data[lineIndex].sessions[sessionIndex], [lineIndex, sessionIndex]);
-
   const lineIsActive = activeSession.lineIndex === lineIndex;
   const isActive = lineIsActive && activeSession.sessionIndex === sessionIndex;
-  const isOutlined =
-    (lineIndex === 4 && sessionIndex === 6) || // Changi Airport branch
-    (lineIndex === 7 && sessionIndex === 3); // JRL East branch
   const [isHover, setIsHover] = useState(false);
 
   const onHoverEnter = useCallback(() => setIsHover(true), []);
@@ -100,46 +94,23 @@ function MapPolyline({
             ? 9997
             : lineZIndex[data[lineIndex].lineCode as keyof typeof lineZIndex],
       strokeOpacity: 1,
-      strokeWeight: 3,
-    });
-    if (!thinFillAreaPolylineRef.current) return;
-    thinFillAreaPolylineRef.current.setOptions({
-      strokeColor: "black",
-      zIndex: lineIsActive
-        ? 9998
-        : lineZIndex[data[lineIndex].lineCode as keyof typeof lineZIndex] + 1,
-      strokeOpacity: 1,
-      strokeWeight: 1,
+      strokeWeight: 2,
     });
   }, [isActive, isHover, lineIsActive, activeSession.lineIndex, lineIndex]);
 
   useEffect(() => refreshStyling(), [refreshStyling]);
 
   return (
-    <>
-      <Polyline
-        onLoad={polyline => {
-          polylineRef.current = polyline;
-          refreshStyling();
-        }}
-        path={coordinates}
-        onMouseOver={onHoverEnter}
-        onMouseOut={onHoverLeave}
-        onClick={onClick}
-      />
-      {isOutlined ? (
-        <Polyline
-          onLoad={polyline => {
-            thinFillAreaPolylineRef.current = polyline;
-            refreshStyling();
-          }}
-          path={coordinates}
-          onMouseOver={onHoverEnter}
-          onMouseOut={onHoverLeave}
-          onClick={onClick}
-        />
-      ) : null}
-    </>
+    <Polyline
+      onLoad={polyline => {
+        polylineRef.current = polyline;
+        refreshStyling();
+      }}
+      path={coordinates}
+      onMouseOver={onHoverEnter}
+      onMouseOut={onHoverLeave}
+      onClick={onClick}
+    />
   );
 }
 
@@ -209,7 +180,7 @@ export const WalkingMap = memo(function WalkingMap() {
         disableDefaultUI: true,
         styles: mapStyles,
         backgroundColor: "#161b2c",
-        // backgroundColor: "transparent",
+        keyboardShortcuts: false,
       }}
       onClick={onClick}
       onZoomChanged={collapsePanel}

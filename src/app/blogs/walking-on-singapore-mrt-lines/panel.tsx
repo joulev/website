@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Fragment, memo, useMemo } from "react";
+import { Fragment, memo, useEffect, useMemo } from "react";
 
 import { ChevronDown, ChevronLeft, ChevronRight, Construction, Home } from "~/components/icons";
 import { Button, LinkButton } from "~/components/ui/button";
@@ -491,6 +491,18 @@ function SessionPrevNextButton({ next }: { next?: boolean }) {
     if (newIndex > max) return 0;
     return newIndex;
   }, [activeSession.lineIndex, activeSession.sessionIndex, next]);
+
+  useEffect(() => {
+    function handleKeyPress(event: KeyboardEvent) {
+      if ((event.key === "ArrowLeft" && !next) || (event.key === "ArrowRight" && next)) {
+        event.preventDefault();
+        setActiveSession({ sessionIndex: targetSessionIndex });
+      }
+    }
+    document.addEventListener("keydown", handleKeyPress);
+    return () => document.removeEventListener("keydown", handleKeyPress);
+  }, [next, setActiveSession, targetSessionIndex]);
+
   return (
     <button
       type="button"
