@@ -72,7 +72,9 @@ function MapPolyline({
 
   const lineIsActive = activeSession.lineIndex === lineIndex;
   const isActive = lineIsActive && activeSession.sessionIndex === sessionIndex;
-  const isOutlined = lineIndex === 4 && sessionIndex === 6; // Changi Airport branch
+  const isOutlined =
+    (lineIndex === 4 && sessionIndex === 6) || // Changi Airport branch
+    (lineIndex === 7 && sessionIndex === 3); // JRL East branch
   const [isHover, setIsHover] = useState(false);
 
   const onHoverEnter = useCallback(() => setIsHover(true), []);
