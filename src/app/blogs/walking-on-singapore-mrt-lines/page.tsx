@@ -5,6 +5,7 @@ import { makeMetadata } from "~/lib/blogs/utils";
 import { cn } from "~/lib/cn";
 
 import { ActiveSessionContextProvider } from "./context";
+// import { Legend } from "./legend";
 import { WalkingMap } from "./map";
 import { Panel } from "./panel";
 
@@ -21,6 +22,7 @@ export default function Page() {
       <ActiveSessionContextProvider>
         <WalkingMap />
         <Panel />
+        {/* <Legend /> */}
       </ActiveSessionContextProvider>
     </div>
   );
