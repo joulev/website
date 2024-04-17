@@ -367,9 +367,18 @@ function SessionOverview({ line, session }: { line: Line; session: Session }) {
             <Construction className="size-4" /> Under construction
           </span>
         ) : null}
-        <SessionTerminusDisplay position="left" title="From">
-          <StationBadge station={session.start} />
-        </SessionTerminusDisplay>
+        <div className="flex flex-col gap-6">
+          <SessionTerminusDisplay position="left" title="From">
+            <StationBadge
+              station={typeof session.start === "string" ? session.start : session.start.target}
+            />
+          </SessionTerminusDisplay>
+          {typeof session.start === "object" ? (
+            <SessionTerminusDisplay position="left" title="Actual" sm>
+              <StationBadge station={session.start.actual} />
+            </SessionTerminusDisplay>
+          ) : null}
+        </div>
         <div className="flex flex-col gap-6">
           <SessionTerminusDisplay position="right" title="To">
             <StationBadge
