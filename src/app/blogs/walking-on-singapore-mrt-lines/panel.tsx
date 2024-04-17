@@ -78,14 +78,14 @@ function LineBadge({ line }: { line: Line }) {
 function getStationDetails(station: string) {
   const stationName = station
     .split(" ")
-    .filter(x => x.toUpperCase() !== x)
+    .filter(x => x.toUpperCase() !== x || x === "PUB")
     .join(" ");
   const stationCodes = station.replace(stationName, "").trim();
   const parts = stationCodes.split("-").map(connectedPart =>
     connectedPart
       .split(" ")
       .map(code => {
-        const match = /(?<line>[A-Z]+)(?<num>\d*)/.exec(code);
+        const match = /^(?<line>[A-Z]+)(?<num>\d*)$/.exec(code);
         if (!match?.groups) return null;
         const line = match.groups.line;
         const lineDetails = data.find(
