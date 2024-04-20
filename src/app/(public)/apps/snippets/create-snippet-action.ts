@@ -3,7 +3,6 @@
 import { init } from "@paralleldrive/cuid2";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import { type ThemeRegistrationAny, getHighlighter, normalizeTheme } from "shiki";
 import * as v from "valibot";
 
 import themeJson from "~/../.theme/theme.json";
@@ -21,7 +20,8 @@ function processCode(code: string) {
 }
 
 async function highlightCode(code: string, language: string) {
-  const theme = normalizeTheme(themeJson as unknown as ThemeRegistrationAny);
+  const { normalizeTheme, getHighlighter } = await import("shiki");
+  const theme = normalizeTheme(themeJson as unknown as import("shiki").ThemeRegistrationAny);
   const highlighter = await getHighlighter({ themes: [theme], langs: [language] });
   return highlighter.codeToHtml(code, { theme: theme.name, lang: language });
 }
