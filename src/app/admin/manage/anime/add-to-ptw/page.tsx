@@ -35,8 +35,9 @@ export default async function Page({ searchParams }: PageProps) {
       {items.length > 0 && (
         <List>
           <ListContent>
-            {items.map(item =>
-              item ? (
+            {items
+              .filter((item): item is NonNullable<(typeof items)[number]> => Boolean(item))
+              .map(item => (
                 <ListItem key={item.id}>
                   <div className="flex w-full flex-col gap-1.5">
                     <div className="truncate">{getTitle(item.title)}</div>
@@ -60,8 +61,7 @@ export default async function Page({ searchParams }: PageProps) {
                     </div>
                   </div>
                 </ListItem>
-              ) : null,
-            )}
+              ))}
           </ListContent>
         </List>
       )}

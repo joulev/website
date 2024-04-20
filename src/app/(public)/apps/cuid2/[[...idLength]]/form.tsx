@@ -27,7 +27,7 @@ export function Form({ initialValue }: { initialValue: number }) {
           type="number"
           placeholder="Length"
           value={String(value)}
-          onValueChange={v => setValue(parseInt(v))}
+          onValueChange={v => setValue(Number.parseInt(v))}
         />
       </div>
       <Button type="submit" disabled={!valueIsValid}>

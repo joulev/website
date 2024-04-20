@@ -222,7 +222,10 @@ export function Editor() {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <Select value={tabSize.toString()} onValueChange={val => setTabSize(parseInt(val))}>
+          <Select
+            value={tabSize.toString()}
+            onValueChange={val => setTabSize(Number.parseInt(val))}
+          >
             <SelectTrigger className="min-h-8 w-36 px-3 py-1 max-sm:hidden">
               <SelectValue placeholder="Select tabsize" />
             </SelectTrigger>

@@ -1,7 +1,7 @@
 "use client";
 
 import { GoogleMap, Polyline, useJsApiLoader } from "@react-google-maps/api";
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 
 import { env } from "~/env.mjs";
 
