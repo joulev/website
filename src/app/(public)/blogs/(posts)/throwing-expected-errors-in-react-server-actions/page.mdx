@@ -1,0 +1,205 @@
+import { makeMetadata } from "~/lib/blogs/utils";
+
+export const metadata = makeMetadata("throwing-expected-errors-in-react-server-actions");
+
+## TL;DR
+
+1. `throw new Error("Wrong password")` doesn't work out of the box in React server actions, thanks to a security feature of React.
+2. In the event of an expected error like the "Wrong password" error above, your server action is still expected to not throw.
+3. You can use a higher order function wrapper and a custom error class to "throw" expected errors in server actions.
+
+---
+
+## What are Server Actions?
+
+[Server actions](https://react.dev/reference/rsc/server-actions) is a pretty new React feature, released to React stable alongside the new [React server component](https://react.dev/reference/rsc/server-components) (RSC) system that has been confusing new and experienced developers alike and going on the trending tab nonstop on Twitter.
+
+Since you came here, probably you already know what server actions are already, then please continue in the next section. If you don't, this article won't be helpful to you, though you might want to check the React documentation and play with server components/server actions a bit. It's pretty cool, though it's very far from what you're used to in client-side React.
+
+## Throwing Errors in Server Actions Doesn't Work
+
+You probably have once written something like this in your server action:
+
+```ts
+"use server";
+
+export async function logIn(formData: FormData) {
+  // ...
+  if (passwordIsWrong)
+    throw new Error("The username or password is wrong. Please check and try again.");
+  // ...
+}
+```
+
+And then you run your server action, trying to catch this error on the client side. Only to find that although the error is thrown, the *error message* is completely omitted, and you only have a generic error message that looks like this
+
+> Error: An error occurred in the Server Components render. The specific message is omitted in production builds to avoid leaking sensitive details. A digest property is included in this error instance which may provide additional details about the nature of the error.
+
+with a `digest` property that definitely doesn't tell you that the user entered the wrong password, for you to display an error banner on the client side. From the error that you catch on the client side, you cannot get the original error message *at all*.
+
+### Why?
+
+This is a security feature. React intentionally omits the actual error message in production builds to avoid leaking sensitive details.
+
+Let's assume that in a separate action, you do not intentionally throw any errors, but a problematic integration with a third party service makes one of the function calls throw an unexpected error. This error could contain sensitive information that can be used against you, like an API key, an admin user ID, anything. Since you didn't write the `throw new Error` statement yourself, you cannot be sure the error message is safe for anyone to see, so you wouldn't want to leak this error message to the client side.
+
+React can't know if a particular error is thrown intentionally by you or not, so it just considers that all errors it catches are unexpected errors resulting from a bug in your code. In other words, all errors thrown in your server action are considered to be equivalent to 5xx responses (*you* messed up) in a traditional server, not 4xx responses (the user messed up).
+
+Hence, you are supposed to return a value rather than throwing an error when you encounter a user error. Something like this
+
+```js
+"use server";
+
+export async function updateName(name) {
+  if (!name) return { error: "Name is required" };
+  await db.users.updateName(name);
+}
+```
+
+certainly makes any JavaScript developer feel uneasy, but this is literally [one of the examples](https://react.dev/reference/rsc/server-actions#composing-server-actions-with-actions) shown on the React documentation at the time of writing.
+
+## How to Continue `throw`ing
+
+But then, you ask me, "This would make the code quite weird to follow. I want to continue throwing errors when I see errors. How can I do that?"
+
+Thankfully, JavaScript the programming language has plenty of features that can help you do this. You can make a higher order function (HOF) that wraps your server action and catches a special error class meant for user errors, for example.
+
+```ts
+// lib/action-utils.ts
+export type ServerActionResult<T> = { success: true; value: T } | { success: false; error: string };
+
+export class ServerActionError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "ServerActionError";
+  }
+}
+
+export function createServerAction<Return, Args extends unknown[] = []>(
+  callback: (...args: Args) => Promise<Return>,
+): (...args: Args) => Promise<ServerActionResult<Return>> {
+  return async (...args: Args) => {
+    try {
+      const value = await callback(...args);
+      return { success: true, value };
+    } catch (error) {
+      if (error instanceof ServerActionError) return { success: false, error: error.message };
+      throw error;
+    }
+  };
+}
+```
+
+Without TypeScript typings to simplify the code and make the idea clearer:
+
+```js
+export class ServerActionError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ServerActionError";
+  }
+}
+
+export function createServerAction(callback) {
+  return async (...args) => {
+    try {
+      const value = await callback(...args);
+      return { success: true, value };
+    } catch (error) {
+      if (error instanceof ServerActionError) return { success: false, error: error.message };
+      throw error;
+    }
+  };
+}
+```
+
+Then you can use this wrapper pretty easily
+
+```ts
+"use server";
+
+import { ServerActionError, createServerAction } from "~/lib/action-utils";
+
+export const returnValue = createServerAction(async () => {
+  return 1;
+});
+
+export const throwErrorSafe = createServerAction(async () => {
+  throw new ServerActionError("Wrong password");
+});
+
+export const throwErrorUnsafe = createServerAction(async () => {
+  throw new Error("Wrong password");
+});
+```
+
+`returnValue` will continue to work normally, `throwErrorSafe` will also work normally *despite* you using a `throw` statement to control the logic flow. `throwErrorUnsafe`, to simulate a "you messed up" error, also works as expected where you will receive a generic React error message.
+
+You can test this pretty easily, for example:
+
+```tsx
+"use client";
+
+import type { ServerActionResult } from "~/lib/action-utils";
+import { returnValue, throwErrorSafe, throwErrorUnsafe } from "./actions";
+
+function log(result: ServerActionResult<unknown>) {
+  if (result.success) console.log("Success", result.value);
+  else console.log("Error", result.error);
+}
+
+export default function Page() {
+  async function runReturnValue() {
+    console.log("Return value");
+    log(await returnValue());
+  }
+  async function runThrowErrorSafe() {
+    console.log("Throw error safe");
+    log(await throwErrorSafe());
+  }
+  async function runThrowErrorUnsafe() {
+    console.log("Throw error unsafe");
+    log(await throwErrorUnsafe());
+  }
+  return (
+    <div>
+      <button type="button" onClick={runReturnValue}>
+        Get return value
+      </button>
+      <button type="button" onClick={runThrowErrorSafe}>
+        Throw error safe
+      </button>
+      <button type="button" onClick={runThrowErrorUnsafe}>
+        Throw error unsafe
+      </button>
+    </div>
+  );
+}
+```
+
+and the output is exactly as expected (copied directly from the browser console, Safari):
+
+```txt
+[Log] Return value (page-09a93bf103710d1e.js, line 1)
+[Log] Success – 1 (page-09a93bf103710d1e.js, line 1)
+[Log] Throw error safe (page-09a93bf103710d1e.js, line 1)
+[Log] Error – "Wrong password" (page-09a93bf103710d1e.js, line 1)
+[Log] Throw error unsafe (page-09a93bf103710d1e.js, line 1)
+[Error] Failed to load resource: the server responded with a status of 500 (Internal Server Error) (test, line 0)
+[Error] Unhandled Promise Rejection: Error: An error occurred in the Server Components render. The specific message is omitted in production builds to avoid leaking sensitive details. A digest property is included on this error instance ...
+  (anonymous function) (page-09a93bf103710d1e.js:1:892)
+```
+
+and you know have the "Wrong password" message in its full glory to display to the user.
+
+Of course, the above code is not the only way. You can make changes to it where you please, you can shape your wrapper in any way you like, you can tweak the return type and whatnot completely freely. It's JavaScript after all, go wild!
+
+### Why Don't We Just Catch All Errors? Why `ServerActionError`?
+
+Well... you *can* catch all errors and skip the `ServerActionError` altogether, but then you are effectively bypassing React's security mechanisms, and all unexpected errors in your server actions are now exposed to the client side. I wouldn't recommend that.
+
+The special `ServerActionError` class is made to differentiate between expected errors and unexpected errors. In the sample HOF above, we only catch `ServerActionError` and rethrow all other errors. In this way, you can ensure that only "good" error messages are exposed, while potentially sensitive error messages remain hidden from the client side.
+
+### A Note on `redirect()` and Similar Functions in Next.js
+
+`redirect()`, `permanentRedirect()` and `notFound()` in Next.js are actually functions that throw special errors. For the functions to work, these errors should not be caught, and if they are caught you have to rethrow them. Hence, when writing the HOF, you should be careful not to accidentally catch these errors without rethrowing. The code presented above should already work, since we only catch `ServerActionError`, and the special Next.js errors are not part of this error class.

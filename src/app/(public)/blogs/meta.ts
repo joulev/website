@@ -19,4 +19,11 @@ export const meta: { slug: string; title: string; description: string; postedDat
     description: "I walked on all Singapore MRT lines. Yes!!!",
     postedDate: "2024-04-02",
   },
+  {
+    slug: "throwing-expected-errors-in-react-server-actions",
+    title: "Throwing Expected Errors in React Server Actions",
+    description:
+      "Throwing expected errors (e.g., wrong password, username already taken) in React server actions is not as straightforward as a simple `throw new Error()`. Why? And what can you do about it?",
+    postedDate: "2024-05-01",
+  },
 ];
