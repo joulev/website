@@ -21,8 +21,8 @@ importers:
         specifier: 1.7.2
         version: 1.7.2
       '@discordjs/builders':
-        specifier: 1.8.0
-        version: 1.8.0
+        specifier: 1.8.1
+        version: 1.8.1
       '@graphql-codegen/cli':
         specifier: 5.0.2
         version: 5.0.2(@parcel/watcher@2.4.1)(@types/node@20.12.8)(graphql@16.8.1)(typescript@5.4.5)
@@ -159,8 +159,8 @@ importers:
         specifier: 3.2.1
         version: 3.2.1
       openai:
-        specifier: 4.40.2
-        version: 4.40.2
+        specifier: 4.41.0
+        version: 4.41.0
       postcss:
         specifier: 8.4.38
         version: 8.4.38
@@ -827,8 +827,8 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
-  '@discordjs/builders@1.8.0':
-    resolution: {integrity: sha512-NHj5LucA0Td8g0RMbMP6wfvra4QRyvKp7bE/PEMACGcfsaZkqCi4zPZ83vvkaiqRKVhyoFgRWx9f6ZWtaeM/ww==}
+  '@discordjs/builders@1.8.1':
+    resolution: {integrity: sha512-GkF+HM01FHy+NSoTaUPR8z44otfQgJ1AIsRxclYGUZDyUbdZEFyD/5QVv2Y1Flx6M+B0bQLzg2M9CJv5lGTqpA==}
     engines: {node: '>=16.11.0'}
 
   '@discordjs/formatters@0.4.0':
@@ -4591,8 +4591,8 @@ packages:
     resolution: {integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==}
     engines: {node: '>=6'}
 
-  openai@4.40.2:
-    resolution: {integrity: sha512-r9AIaYQNHw8HGJpnny6Rcu/0moGUVqvpv0wTJfP0hKlk8ja5DVUMUCdPWEVfg7lxQMC+wIh+Qjp3onDIhVBemA==}
+  openai@4.41.0:
+    resolution: {integrity: sha512-fiV+RvUGRW+PXxycqeDYuOwsL3TxNqT/LcM6vlqyLz9ACmfSUGg1qviQrHuuNKL7gFOvfzgEJRVVFdqmv/sjxg==}
     hasBin: true
 
   ora@5.4.1:
@@ -6656,7 +6656,7 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
-  '@discordjs/builders@1.8.0':
+  '@discordjs/builders@1.8.1':
     dependencies:
       '@discordjs/formatters': 0.4.0
       '@discordjs/util': 1.1.0
@@ -11019,7 +11019,7 @@ snapshots:
     dependencies:
       mimic-fn: 2.1.0
 
-  openai@4.40.2:
+  openai@4.41.0:
     dependencies:
       '@types/node': 18.19.31
       '@types/node-fetch': 2.6.11
