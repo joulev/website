@@ -1,6 +1,8 @@
 import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
+// @ts-expect-error
+import bgPatterns from "tailwindcss-bg-patterns";
 import defaultTheme from "tailwindcss/defaultTheme";
 
 const config: Config = {
@@ -84,7 +86,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [animate, typography],
+  plugins: [animate, typography, bgPatterns],
 };
 
 export default config;

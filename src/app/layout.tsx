@@ -7,7 +7,6 @@ import localFont from "next/font/local";
 
 import { cn } from "~/lib/cn";
 
-import { Background } from "./background";
 import "./globals.css";
 import { VersionFooter } from "./version-footer";
 
@@ -31,7 +30,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <body
         className={cn(sans.variable, mono.variable, "bg-[#334155] font-sans text-text-primary")}
       >
-        <Background />
+        <div className="fixed inset-0 pattern-cross pattern-text-tertiary pattern-bg-black pattern-size-6 pattern-opacity-20" />
         {children}
         <VersionFooter />
         <Analytics />
