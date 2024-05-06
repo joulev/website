@@ -26,4 +26,11 @@ export const meta: { slug: string; title: string; description: string; postedDat
       "Throwing expected errors (e.g., wrong password, username already taken) in React server actions is not as straightforward as a simple `throw new Error()`. Why? And what can you do about it?",
     postedDate: "2024-05-01",
   },
+  {
+    slug: "lets-talk-nextjs-router-cache",
+    title: "Let's Talk about the Next.js Router Cache",
+    description:
+      "The Next.js Router Cache is controversial to say the least. But I think Vercel and the Next.js team have very good reasons to implement it, and the new `staleTimes` option to configure it should be considered to only be an escape hatch at best. This is why.",
+    postedDate: "2024-05-06",
+  },
 ];

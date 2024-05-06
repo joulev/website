@@ -1,0 +1,95 @@
+import { makeMetadata } from "~/lib/blogs/utils";
+
+export const metadata = makeMetadata("lets-talk-nextjs-router-cache");
+
+## TL;DR
+
+1. The Next.js router cache is controversial, but it is good.
+2. The router cache aims to lower server load and to serve "acceptably" stale data.
+3. For mutations initiated by the user, you **must** use server actions.
+4. For data that needs to be fresh all the time, use client side data fetching.
+5. `staleTimes` and `router.refresh` are escape hatches, and there are better solutions most of the time regarding the router cache.
+
+---
+
+## The Controversy Known as the Next.js Router Cache
+
+Perhaps one of the most unpopular parts of the `app` router in Next.js is the [router cache](https://nextjs.org/docs/app/building-your-application/caching#router-cache).
+
+Note that the router cache does not affect client side data fetching. The rest of the post assumes server side data fetching (with server components), unless otherwise stated.
+
+The router cache basically stores the content of a route for a certain amount of time on the client, so if you use client-side navigations (e.g., `<Link>` compared to regular `<a>` tags) within this specified time frame, the page content will be served from the cache instead of fetching it from the server, even when the page is [dynamically rendered](https://nextjs.org/docs/app/building-your-application/rendering/server-components#dynamic-rendering). For statically rendered pages, the time duration is 5 minutes by default, while for dynamically rendered pages, it is 30 seconds.
+
+It certainly is unexpected for most Next.js developers. We recall that in the `pages` router, dynamic pages are truly dynamic, they are always rendered at request time (i.e., the client side cache timeframe mentioned above is zero). This guarantees that the data the page gets is always fresh (at the time of the request), while in the `app` router, the data could be outdated by up to 30 seconds. This possibility of stale data is outrageous at first sight – after all, if I explicitly make the page dynamic, it *should* be dynamic all of the time, shouldn't it?
+
+And before 14.2.0, it was impossible to configure these values. Your only choice would be to use the following invalidation methods:
+
+1. Use `revalidatePath`/`revalidateTag` **inside server actions** to invalidate certain pages or tags. Note that calling `revalidatePath`/`revalidateTag` in route handler does **nothing** with respect to the router cache.
+
+2. Use `router.refresh` to manually purge all router cache on the client. While this is a simple way to invalidate the cache, it feels patchy and not very elegant. Well, it *is* patchy, and should only be used as an escape hatch.
+
+Only when the router cache becomes too controversial, the team decided to bring the [`staleTimes`](https://nextjs.org/docs/app/api-reference/next-config-js/staleTimes) options to manually configure the router cache duration. This option, only available from 14.2.0 and is still marked as experimental at the time of writing, makes it finally possible to make dynamic pages *truly dynamic*. Good news right?
+
+I *would* have said so a few months ago when I was still in the anti-router cache camp. But since then, after using the `app` router for a while, I am now fully in the opinion that the router cache is a good feature, and the Next.js team has very good reasons to – albeit forcibly – include it. `staleTimes`, like `router.refresh`, should only be considered as escape hatches. Let's see why.
+
+It's gonna be long, apologies for that, but I think it's necessary to explain verbosely so the router cache can click for you.
+
+## Argument For the Router Cache: Spam Tab Switching
+
+Let's consider a user settings page, divided into several tabs, like `/settings/account` and `/settings/billing`. Since these pages concern user data, they have to be dynamically rendered. (Client-side data fetching is **not** affected by the router cache so let's not consider that option.)
+
+Assuming the router cache is not there, when the user switches between tabs, the page content is fetched from the server every time. This is typically not a problem, but when the user switches back and forth quickly (they could have accidentally clicked a wrong link in the navigation sidebar), the server will be bombarded with requests, increasing server load.
+
+Since the user doesn't make any changes to their settings, the page data *should* remain the same. So it would be beneficial if you only fetch the page data once and cache for a certain amount of time, and when the user comes back to it, you serve the data from the cache rather than hitting the server again.
+
+Remember that each of those server hit counts towards the invoice sent to you at the end of the month. If you host on Vercel, chances are each one of those dynamic page request is counted as one serverless function invocation. Sites could be spending a certain amount more than they should have due to these unnecessary uncached server hits.
+
+That's why we have the router cache. I can't tell for sure because I'm not part of the team, but I strongly believe the idea behind this cache is **the need to reduce server load**.
+
+One could even argue that, since Vercel is a hosting provider, they have seen so many of their customers complaining about the bills due to these unnecessary uncached requests, that they feel there is a need to prevent their customers from continue doing that.
+
+## Solutions to the Potential of Stale Data
+
+But, obviously, the 30 second (by default) cache duration for dynamic pages means there is a potential for stale data. We will examine two different cases.
+
+### Case 1: Data Updates from Third Party – "Acceptably" Stale Data
+
+Let's have a dashboard page where data is supposed to be updated very often from an external source. It could be the EUR/USD exchange rate, your Twitter follower count, or how much your user has lost investing in another scamcoin again.
+
+This case, whenever the user navigates away and then back within 30 seconds, they will definitely see stale data. Which is expected. Next.js has no way to know whether the data has been updated elsewhere, but it knows the data has not been updated *by the user themselves*. Hence, to prevent server load (see above), it decides to consider cases like this to be "acceptably stale": yes, it *could* be stale, but still within the acceptable level. That's why the duration is set to 30 seconds and not, say, 30 minutes. A dashboard lagging behind by 30 minutes is disastrous, but it's not like your user will be ruined if they see the follower count lagging behind by 30 seconds. After all, if the page is completely fresh, the user could still open it and wait for 30 seconds to – viola – see some data stale by 30 seconds.
+
+Of course, there still exists plenty of cases where 30 seconds is not acceptable. I say that in those cases, **server side rendering is a bad, bad idea**. You should instead be utilising client side data fetching instead, with Tanstack Query or SWR, to ensure the data is always fresh at will (every 10 seconds, whenever the tab is focused, etc.). Heck, you should – if you can – even consider going 100% real-time with WebSockets or similar technologies, for the freshest data possible. **Server side rendering is not the solution for data that needs to be fresh all the time.**
+
+**Conclusion: For data updates from third party, use client-side data fetching instead. Or allow the data to be stale by up to 30 seconds in cases where that is acceptable.**
+
+B-but SEO? Use the hybrid approach of fetching the initial value on the server side (which could be slightly stale, but readable by crawlers), then use client side rendering to keep the data fresh.
+
+### Case 2: Data Updates from User – Mutation Done Incorrectly
+
+Let's take the settings page example above again. Say the user wants to update their bio. They go to the `/settings/account` page, update their bio, and then switch to, or get directed to, a different page. The `/settings/account` page is now cached for 30 seconds. If the user switches back to the `/settings/account` page within 30 seconds, they will see the old bio, not the updated one. Oh no!
+
+The cause of this is that you probably uses something like `fetch("/api/users", { method: "PATCH" })` for the mutation. Next.js has zero idea that the user has updated something in the page, the best it can do is to see that you sent one HTTP request to some server to do something. As such, it still considers the page to be "acceptably stale" and serves the cached bio data.
+
+Hence, manual data update requests like the `PATCH` above is not the way to update server-side rendered pages. Instead, you *must* use server actions, with `revalidatePath`/`revalidateTag` where needed. It's a "must" not a "should", there are literally no alternatives, whether you like server actions or not. The reason is that server actions are *very tightly* coupled with the Next.js router, and thanks to that Next.js can know that "something has changed", and invalidate the client side cache according to the `revalidatePath`/`revalidateTag` functions that you call in the server action.
+
+With server actions + `revalidatePath`/`revalidateTag`, Next.js knows that the data is no longer *acceptably stale*. It has become *unacceptably stale*, as it's guaranteed that there is new data. Hence, it invalidates the cache and makes a request for the new data again.
+
+Manual REST-style data updates, tRPC, mutation methods of Tanstack Query, etc. are **all** not the way to update server-side rendered data. If you want to update client-side rendered data, go ahead, but for data fetched in server components, you *must* use server actions. No alternatives.
+
+**Conclusion: For user-initiated data updates, use server actions with suitable invalidation functions for the mutation request.**
+
+## Conclusion
+
+We can see now that the router cache is built upon two foundations: the need to reduce server load, and the idea that some data can be *acceptably* stale.
+
+It is not how frameworks are traditionally expected to work, so it certainly presents a big surprise to everyone. But as you see, it is a good feature. The team has good reasons to include it, and I hope I managed to understand the team's idea well enough to explain it to you.
+
+We can also see that it's a bad idea to ditch client side data fetching for server side rendering entirely. For data that needs to be fresh all the time, client side data fetching is the way to go.
+
+To conclude, let's see how Dominik, maintainer of Tanstack Query, thinks about a non-zero stale time for queries:
+
+<Tweet id="1687454784209448962" />
+
+I don't use Tanstack Query, so I don't know if this new default cache duration has been implemented yet, but I am in favour of this decision.
+
+Oh, and did I ever mention [`staleTimes`](https://nextjs.org/docs/app/api-reference/next-config-js/staleTimes) (the option to configure the router cache invalidation periods) and `router.refresh` in the solutions mentioned above? No! They are simply workaround and escape hatches, and most of the times, you will do well without them.
