@@ -44,7 +44,7 @@ Since the user doesn't make any changes to their settings, the page data *should
 
 Remember that each of those server hit counts towards the invoice sent to you at the end of the month. If you host on Vercel, chances are each one of those dynamic page request is counted as one serverless function invocation. Sites could be spending a certain amount more than they should have due to these unnecessary uncached server hits.
 
-Not to also mention the user experience. If the page can be served instantly, it will be a lot more smooth than having the user wait a couple of seconds for the page to load, no? It is similar to the `bfcache`, where you can instantly go back to the previous page without having to wait for it to load again.
+Not to also mention the user experience. If the page can be served instantly, it will be a lot more smooth than having the user wait a couple of seconds for the page to load, no? It is similar to the [`bfcache`](https://web.dev/articles/bfcache), where you can instantly go back to the previous page without having to wait for it to load again.
 
 That's why we have the router cache. I can't tell for sure because I'm not part of the team, but I strongly believe the idea behind this cache is **the need to reduce server load** and **the `bfcache`-like UX improvements made possible by instant navigations**.
 
