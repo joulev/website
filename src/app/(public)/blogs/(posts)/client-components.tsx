@@ -59,7 +59,7 @@ export function ShareButton() {
   const { slug } = useMetadata();
   return (
     <CopyButton
-      content={`https://joulev.com/blogs/${slug}`}
+      content={`https://joulev.dev/blogs/${slug}`}
       variants={{ size: "sm" }}
       copyChildren={
         <>
