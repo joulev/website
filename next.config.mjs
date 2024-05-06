@@ -34,6 +34,11 @@ const nextConfig = {
   ],
   redirects: async () => [
     { source: "/sponsor", destination: "https://github.com/sponsors/joulev", permanent: false },
+    {
+      source: "/blogs/lets-talk-nextjs-router-cache",
+      destination: "/blogs/yes-nextjs-router-cache-is-actually-good",
+      permanent: true,
+    },
   ],
 };
 
