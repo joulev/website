@@ -10,5 +10,8 @@ export async function getGithubReadme() {
   if (Array.isArray(data) || data.type !== "file")
     throw new Error("github/joulev/joulev/readme.md doesn't exist");
 
-  return Buffer.from(data.content, "base64").toString("utf-8");
+  return Buffer.from(data.content, "base64")
+    .toString("utf-8")
+    .split("<!-- EXCLUDE -->", 1)[0]
+    .trim();
 }
