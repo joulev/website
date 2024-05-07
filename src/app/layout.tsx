@@ -30,7 +30,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <body
         className={cn(sans.variable, mono.variable, "bg-[#334155] font-sans text-text-primary")}
       >
-        <div className="fixed inset-0 pattern-cross pattern-text-tertiary pattern-bg-black pattern-size-6 pattern-opacity-20" />
+        <div className="fixed inset-0 -z-50 pattern-cross pattern-text-tertiary pattern-bg-black pattern-size-6 pattern-opacity-20" />
         {children}
         <VersionFooter />
         <Analytics />
