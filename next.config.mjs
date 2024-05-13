@@ -15,6 +15,7 @@ const withMDX = createMDX({
 const nextConfig = {
   experimental: {
     webpackBuildWorker: true,
+    optimizePackageImports: ["shiki"],
   },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   images: {
