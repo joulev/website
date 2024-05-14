@@ -36,7 +36,7 @@ export const {
       },
       clientId: env.ANILIST_CLIENT_ID,
       clientSecret: env.ANILIST_CLIENT_SECRET,
-      profile: (profile: Profile) => ({ id: profile.id }),
+      profile: (profile: Profile) => ({ id: profile.id || undefined }),
     } satisfies OAuthConfig<Profile>,
   ],
   callbacks: {
