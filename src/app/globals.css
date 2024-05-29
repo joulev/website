@@ -25,6 +25,12 @@
   }
 }
 
+@layer utilities {
+  .error-page-link {
+    @apply text-text-primary underline underline-offset-4 decoration-text-tertiary
+  }
+}
+
 hr {
   @apply border-separator;
 }

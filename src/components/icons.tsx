@@ -26,9 +26,9 @@ function createIcon(name: string, svgContent: React.ReactNode, withStrokeCurrent
       fill="none"
       viewBox="0 0 24 24"
       className={cn(
-        className,
         "[&_path]:stroke-2 [&_path]:[stroke-linecap:round] [&_path]:[stroke-linejoin:round]",
         withStrokeCurrent && "[&_path]:stroke-current",
+        className,
       )}
     >
       <title>{`${name} icon`}</title>

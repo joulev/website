@@ -33,18 +33,82 @@ export default function Page() {
   return (
     <main className="container max-w-screen-md">
       <Card className="flex flex-col p-0">
-        <section className="flex flex-col items-start gap-6 bg-bg-darker p-6 sm:flex-row sm:items-end sm:justify-between sm:p-9">
-          <div>
-            <h1 className="text-3xl font-medium">Vu Van Dung</h1>
-            <div className="text-text-secondary">@joulev</div>
-          </div>
-          <div className="flex flex-row gap-3">
-            <LinkButton href="https://github.com/joulev" target="_blank" rel="noreferrer noopener">
-              <GitHub /> GitHub
-            </LinkButton>
-            <LinkButton href="mailto:me@joulev.dev" target="_blank" rel="noreferrer noopener">
-              <Mail /> Email
-            </LinkButton>
+        <section className="flex flex-col gap-6 bg-bg-darker p-6 pt-9 sm:p-9">
+          <h1 className="text-3xl font-medium">Vu Van Dung</h1>
+          <div className="flex flex-row flex-wrap justify-between sm:justify-normal gap-x-9 gap-y-2 font-mono text-text-secondary [&_a:hover]:text-text-primary [&_a]:transition">
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-row items-center gap-3">
+                <svg width="24" height="24" fill="none">
+                  <title>Vietnam flag</title>
+                  <g clip-path="url(#a)">
+                    <path
+                      className="stroke-text-tertiary"
+                      d="M2.667 3.833h18.666A2.167 2.167 0 0 1 23.5 6v12a2.167 2.167 0 0 1-2.167 2.167H2.667A2.167 2.167 0 0 1 .5 18V6a2.167 2.167 0 0 1 2.167-2.167Z"
+                    />
+                    <path
+                      className="fill-text-secondary"
+                      d="M13.169 10.691 12 7.095l-1.169 3.596H7.05l3.06 2.222-1.17 3.597L12 14.287l3.06 2.223-1.17-3.597 3.06-2.222h-3.781Z"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="a">
+                      <path fill="#fff" d="M0 0h24v24H0z" />
+                    </clipPath>
+                  </defs>
+                </svg>
+                <div aria-label="Native name">
+                  <a
+                    href="https://en.wiktionary.org/wiki/Vũ"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    Vũ
+                  </a>{" "}
+                  <a
+                    href="https://en.wiktionary.org/wiki/Văn"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    Văn
+                  </a>{" "}
+                  <a
+                    href="https://en.wiktionary.org/wiki/Dũng"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    <strong>Dũng</strong>
+                  </a>{" "}
+                  <span className="font-sans text-xs text-text-tertiary">/vu van zuŋ/</span>
+                </div>
+              </div>
+              <div className="flex flex-row items-center gap-3">
+                <svg width="24" height="24" fill="none">
+                  <title>Location</title>
+                  <path
+                    d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"
+                    className="stroke-text-tertiary"
+                  />
+                  <circle cx="12" cy="10" r="3" className="fill-text-secondary" />
+                </svg>
+                <div>
+                  <span className="text-text-tertiary">Living in</span> Singapore
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col gap-2 sm:mx-auto">
+              <div className="flex flex-row items-center gap-3">
+                <GitHub className="[&_path]:stroke-1 text-text-tertiary" />
+                <a href="https://github.com/joulev" target="_blank" rel="noreferrer noopener">
+                  @joulev
+                </a>
+              </div>
+              <div className="flex flex-row items-center gap-3">
+                <Mail className="[&_path]:stroke-1 text-text-tertiary" />
+                <a href="mailto:me@joulev.dev" target="_blank" rel="noreferrer noopener">
+                  me@joulev.dev
+                </a>
+              </div>
+            </div>
           </div>
         </section>
         <hr />
