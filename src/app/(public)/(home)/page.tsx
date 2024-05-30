@@ -90,9 +90,7 @@ export default function Page() {
                   />
                   <circle cx="12" cy="10" r="3" className="fill-text-secondary" />
                 </svg>
-                <div>
-                  <span className="text-text-tertiary">Living in</span> Singapore
-                </div>
+                <div>Singapore</div>
               </div>
             </div>
             <div className="flex flex-col gap-2 sm:mx-auto">

@@ -156,7 +156,7 @@ export function LinkShowcase() {
       <p>
         <Link href="https://en.wikipedia.org/wiki/Big_Bang">
           Click this link to read the full article on the Big Bang, while I make this link
-          ridiculously long to show how the component works with line breaks inside the link.
+          ridiculously long to show how the component works with line breaks.
         </Link>
       </p>
     </Showcase>
@@ -364,7 +364,7 @@ export function NavigationMenuShowcase() {
     <Showcase title="Navigation Menu" noCard>
       <div className="flex flex-col items-center not-prose">
         <div>
-          <NavigationMenu className="z-0">
+          <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
