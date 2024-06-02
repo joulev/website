@@ -43,9 +43,9 @@ function getNavbarItems(lists: AnimeLists, isAdmin: boolean | undefined) {
   return [
     { icon: <PlayCircle />, status: "watching", count: lists.watching.length },
     { icon: <Repeat />, status: "rewatching", count: lists.rewatching.length },
-    { icon: <Tv2 />, status: "completed/tv", count: lists.completedTV.length },
-    { icon: <Film />, status: "completed/movies", count: lists.completedMovies.length },
-    { icon: <CheckCircle />, status: "completed/others", count: lists.completedOthers.length },
+    { icon: <Tv2 />, status: "completed/tv", count: lists["completed/tv"].length },
+    { icon: <Film />, status: "completed/movies", count: lists["completed/movies"].length },
+    { icon: <CheckCircle />, status: "completed/others", count: lists["completed/others"].length },
     { icon: <PauseCircle />, status: "paused", count: lists.paused.length },
     { icon: <XCircle />, status: "dropped", count: lists.dropped.length },
     { icon: <Calendar />, status: "planning", count: lists.planning.length },
@@ -113,8 +113,8 @@ function Navigation({ basePath, items }: { basePath: string; items: Item[] }) {
 }
 
 export function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
-  const { lists } = useAnimeData();
-  const items = useMemo(() => getNavbarItems(lists, isAdmin), [lists, isAdmin]);
+  const { optimisticLists } = useAnimeData();
+  const items = useMemo(() => getNavbarItems(optimisticLists, isAdmin), [optimisticLists, isAdmin]);
 
   const [expanded, setExpanded] = useState(false);
   const pathname = usePathname();

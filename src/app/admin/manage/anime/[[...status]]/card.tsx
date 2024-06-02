@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useAnimeData } from "~/components/anime/data-context";
 
 import {
   Move3d as Animation,
@@ -55,15 +56,21 @@ function BottomPartTemplate({ text, children }: { text: string; children: React.
 const icons = [Enjoyment, Story, Character, Animation, Music];
 const keys = ["Enjoyment", "Story", "Characters", "Animation", "Music"] as const;
 
-function UpdateItemScore({ item }: { item: AnimeListItem }) {
+function UpdateItemScore({ item, status }: { item: AnimeListItem; status: AnimeListItemStatus }) {
   const startTransition = useTransitionWithNProgress();
+
+  const { optimisticListsAct } = useAnimeData();
 
   const advancedScores = item.advancedScores as Record<(typeof keys)[number], string | undefined>;
   const originalScoresStr = keys.map(key => String(advancedScores[key] ?? "0"));
   const [scoresStr, setScoresStr] = useState(originalScoresStr);
   const scores = scoresStr.map(score => constraintScore(Number(score)));
   const accumulate = getAccumulatedScore(scores);
-  const setScore = () => startTransition(() => updateScore(item, scores));
+  const setScore = () =>
+    startTransition(async () => {
+      optimisticListsAct(["UPDATE_SCORE", { status, id: item.id, advancedScores: scores }]);
+      await updateScore(item, scores);
+    });
 
   return (
     <Dialog onOpenChange={isOpen => isOpen || setScoresStr(originalScoresStr)}>
@@ -124,13 +131,36 @@ function UpdateItemScore({ item }: { item: AnimeListItem }) {
 function BottomPart({ item, status }: { item: AnimeListItem; status: AnimeListItemStatus }) {
   const startTransition = useTransitionWithNProgress();
 
-  const setAsWatching = () => startTransition(() => updateStatus(item, MediaListStatus.Current));
+  const { optimisticListsAct } = useAnimeData();
+
+  const setAsWatching = () =>
+    startTransition(async () => {
+      optimisticListsAct(["UPDATE_STATUS", { status, id: item.id, newStatus: "watching" }]);
+      await updateStatus(item, MediaListStatus.Current);
+    });
   const setAsRewatching = () =>
-    startTransition(() => updateStatus(item, MediaListStatus.Repeating));
-  const setAsPaused = () => startTransition(() => updateStatus(item, MediaListStatus.Paused));
-  const setAsDropped = () => startTransition(() => updateStatus(item, MediaListStatus.Dropped));
-  const increment = () => startTransition(() => incrementProgress(item));
+    startTransition(async () => {
+      optimisticListsAct(["UPDATE_STATUS", { status, id: item.id, newStatus: "rewatching" }]);
+      await updateStatus(item, MediaListStatus.Repeating);
+    });
+  const setAsPaused = () =>
+    startTransition(async () => {
+      optimisticListsAct(["UPDATE_STATUS", { status, id: item.id, newStatus: "paused" }]);
+      await updateStatus(item, MediaListStatus.Paused);
+    });
+  const setAsDropped = () =>
+    startTransition(async () => {
+      optimisticListsAct(["UPDATE_STATUS", { status, id: item.id, newStatus: "dropped" }]);
+      await updateStatus(item, MediaListStatus.Dropped);
+    });
+  const increment = () =>
+    startTransition(async () => {
+      optimisticListsAct(["UPDATE_PROGRESS", { status, id: item.id }]);
+      await incrementProgress(item);
+    });
+  // TODO: Optimistically update the list
   const cancelRewatch = () => startTransition(() => cancelRewatchAction(item));
+  // TODO: Optimistically update the list
   const remove = () => startTransition(() => removeFromList(item));
 
   const watchedEpisodes = item.progress || 0;
@@ -172,7 +202,7 @@ function BottomPart({ item, status }: { item: AnimeListItem; status: AnimeListIt
           <Button variants={{ size: "icon-sm" }} onClick={setAsRewatching}>
             <Repeat />
           </Button>
-          <UpdateItemScore item={item} />
+          <UpdateItemScore item={item} status={status} />
         </BottomPartTemplate>
       );
     case "completed/others":

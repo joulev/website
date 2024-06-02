@@ -43,34 +43,8 @@ function sortList(list: (AnimeListItem | null)[], type: "planning" | "completed"
   return [...list].sort((a, b) => (b?.updatedAt ?? 0) - (a?.updatedAt ?? 0));
 }
 
-function getListNotSorted(
-  lists: AnimeLists,
-  status: AnimeListItemStatus,
-): (AnimeListItem | null)[] {
-  switch (status) {
-    case "watching":
-      return lists.watching;
-    case "rewatching":
-      return lists.rewatching;
-    case "completed/tv":
-      return lists.completedTV;
-    case "completed/movies":
-      return lists.completedMovies;
-    case "completed/others":
-      return lists.completedOthers;
-    case "paused":
-      return lists.paused;
-    case "dropped":
-      return lists.dropped;
-    case "planning":
-      return lists.planning;
-    default:
-      throw new Error("invariant: getList in [...status]/page.tsx");
-  }
-}
-
 function getList(lists: AnimeLists, status: AnimeListItemStatus) {
-  const list = getListNotSorted(lists, status);
+  const list = lists[status];
   return sortList(
     list,
     status === "planning" ? "planning" : status.includes("completed") ? "completed" : "others",
@@ -84,8 +58,8 @@ function AnimePageContentSafe({
   status: AnimeListItemStatus;
   card: React.FC<{ item: AnimeListItem; status: AnimeListItemStatus }>;
 }) {
-  const { lists } = useAnimeData();
-  const list = useMemo(() => getList(lists, status), [lists, status]);
+  const { optimisticLists } = useAnimeData();
+  const list = useMemo(() => getList(optimisticLists, status), [optimisticLists, status]);
   if (list.length === 0) return <EmptyState>No entries. Check back later.</EmptyState>;
   return (
     <List>
@@ -101,7 +75,7 @@ function AnimePageContentSafe({
 
 export function AnimePageContent({
   status: rawStatus,
-  card: Card,
+  card,
 }: {
   status: string[] | undefined;
   card: React.FC<{ item: AnimeListItem; status: AnimeListItemStatus }>;
@@ -121,5 +95,5 @@ export function AnimePageContent({
   )
     notFound();
 
-  return <AnimePageContentSafe status={status} card={Card} />;
+  return <AnimePageContentSafe status={status} card={card} />;
 }

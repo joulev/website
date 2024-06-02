@@ -6,17 +6,8 @@ import { getClient } from "~/lib/graphql";
 
 import { GET_ANIME } from "./queries";
 
-export type AnimeListItemStatus =
-  | "watching"
-  | "rewatching"
-  | "completed/tv"
-  | "completed/movies"
-  | "completed/others"
-  | "paused"
-  | "dropped"
-  | "planning";
-
 export type AnimeLists = Awaited<ReturnType<typeof getAllLists>>;
+export type AnimeListItemStatus = keyof AnimeLists;
 export type AnimeListItem = NonNullable<AnimeLists["watching"][number]>;
 
 export const getAllLists = dedupe(
@@ -31,9 +22,9 @@ export const getAllLists = dedupe(
         paused: lists.find(list => list?.name === "Paused")?.entries ?? [],
         dropped: lists.find(list => list?.name === "Dropped")?.entries ?? [],
         planning: lists.find(list => list?.name === "Planning")?.entries ?? [],
-        completedTV: lists.find(list => list?.name === "Completed TV")?.entries ?? [],
-        completedMovies: lists.find(list => list?.name === "Completed Movie")?.entries ?? [],
-        completedOthers: lists
+        "completed/tv": lists.find(list => list?.name === "Completed TV")?.entries ?? [],
+        "completed/movies": lists.find(list => list?.name === "Completed Movie")?.entries ?? [],
+        "completed/others": lists
           .filter(
             list =>
               list?.name?.toLowerCase().includes("completed") &&
