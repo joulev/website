@@ -40,7 +40,7 @@ export default function Page() {
               <div className="flex flex-row items-center gap-3">
                 <svg width="24" height="24" fill="none">
                   <title>Vietnam flag</title>
-                  <g clip-path="url(#a)">
+                  <g clipPath="url(#a)">
                     <path
                       className="stroke-text-tertiary"
                       d="M2.667 3.833h18.666A2.167 2.167 0 0 1 23.5 6v12a2.167 2.167 0 0 1-2.167 2.167H2.667A2.167 2.167 0 0 1 .5 18V6a2.167 2.167 0 0 1 2.167-2.167Z"

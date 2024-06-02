@@ -76,7 +76,7 @@ function NavigationMenuListItem({
 function Navigation() {
   const session = useSession();
   return (
-    <div className="fixed left-1/2 top-12 -translate-x-1/2 z-10">
+    <div className="fixed left-1/2 top-12 -translate-x-1/2 z-10 elements-fade-in-on-load">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem className="grid size-10 place-items-center rounded-full">

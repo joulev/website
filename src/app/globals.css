@@ -91,3 +91,30 @@ hr {
   @apply rounded-[4px] font-semibold text-cyan no-underline transition hover:bg-bg-idle hover:[box-shadow:0_0_0_4px_var(--bg-idle)] active:bg-bg-active active:[box-shadow:0_0_0_4px_var(--bg-active)];
   /* [box-shadow:0_0_0_4px_transparent] // this gave the behaviour I wanted, but removing it makes the thing even better */
 }
+
+@keyframes page-enter {
+  0% {
+    opacity: 0;
+    transform: perspective(5000px) rotateX(-12deg) scale(.95);
+  }
+  20% {
+    opacity: 0;
+    transform: perspective(5000px) rotateX(-12deg) scale(.95);
+  }
+}
+.page-fade-in-on-load {
+  animation: page-enter 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top center;
+}
+
+@keyframes elements-enter {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+}
+.elements-fade-in-on-load {
+  animation: elements-enter 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
