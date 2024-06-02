@@ -1,4 +1,5 @@
 import { unstable_cache as cache } from "next/cache";
+import { cache as dedupe } from "react";
 
 import type { MediaListStatus } from "~/lib/gql/graphql";
 import { getClient } from "~/lib/graphql";
@@ -29,7 +30,7 @@ export type AnimeCardVariant =
   | "dropped"
   | "planning";
 
-export const getAllLists = cache(
+const getAllLists = cache(
   async (status?: MediaListStatus) => {
     const client = getClient();
     const data = await client.request(GET_ANIME, { status });
@@ -56,6 +57,9 @@ export const getAllLists = cache(
   [],
   { tags: ["anime-lists"] },
 );
+
+const getAllListsCached = dedupe(getAllLists);
+export { getAllListsCached as getAllLists };
 
 function sortList(list: (AnimeListItem | null)[], type: "planning" | "completed" | "others") {
   if (type === "planning")

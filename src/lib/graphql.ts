@@ -5,19 +5,25 @@ export function getClient(token?: string) {
   return new GraphQLClient("https://graphql.anilist.co", {
     fetch: async (url, init) => {
       // Temporary "logging"
-      if (env.DISCORD_WEBHOOKS)
-        await fetch(env.DISCORD_WEBHOOKS[0], {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            content: `
-Fetching from AniList
+      try {
+        if (process.env.DEBUG_WEBHOOK) {
+          const body: { operationName: string; variables?: object | undefined } = JSON.parse(
+            String(init?.body),
+          );
+          await fetch(process.env.DEBUG_WEBHOOK, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              content: `
+Fetching from AniList (${body.operationName})
 \`\`\`
-${init?.body}
+${JSON.stringify(body.variables)}
 \`\`\`
-`,
-          }),
-        });
+`.trim(),
+            }),
+          });
+        }
+      } catch {}
       return fetch(url, init);
     },
     headers: token ? { authorization: `Bearer ${token}` } : undefined,
