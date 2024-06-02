@@ -98,7 +98,7 @@ function sortList(list: (AnimeListItem | null)[], type: "planning" | "completed"
 async function getListNotSorted(
   status: AnimeAllowedStatus,
 ): Promise<[(AnimeListItem | null)[], AnimeCardVariant]> {
-  const lists = await getAllLists();
+  const lists = await getAllListsCached();
   switch (status) {
     case "watching":
       return [lists.watching, "watching"];
