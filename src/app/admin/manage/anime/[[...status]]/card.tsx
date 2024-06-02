@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import { useAnimeData } from "~/components/anime/data-context";
 
 import {
@@ -41,8 +41,7 @@ import {
 import type { AnimeListItem, AnimeListItemStatus } from "~/lib/anime/get-lists";
 import { constraintScore, convertSeason, getAccumulatedScore, getTitle } from "~/lib/anime/utils";
 import { cn } from "~/lib/cn";
-import { MediaListStatus } from "~/lib/gql/graphql";
-import { useTransitionWithNProgress } from "~/lib/hooks/use-transition-with-nprogress";
+import { MediaFormat, MediaListStatus } from "~/lib/gql/graphql";
 
 function BottomPartTemplate({ text, children }: { text: string; children: React.ReactNode }) {
   return (
@@ -57,8 +56,6 @@ const icons = [Enjoyment, Story, Character, Animation, Music];
 const keys = ["Enjoyment", "Story", "Characters", "Animation", "Music"] as const;
 
 function UpdateItemScore({ item, status }: { item: AnimeListItem; status: AnimeListItemStatus }) {
-  const startTransition = useTransitionWithNProgress();
-
   const { optimisticListsAct } = useAnimeData();
 
   const advancedScores = item.advancedScores as Record<(typeof keys)[number], string | undefined>;
@@ -129,8 +126,6 @@ function UpdateItemScore({ item, status }: { item: AnimeListItem; status: AnimeL
 }
 
 function BottomPart({ item, status }: { item: AnimeListItem; status: AnimeListItemStatus }) {
-  const startTransition = useTransitionWithNProgress();
-
   const { optimisticListsAct } = useAnimeData();
 
   const setAsWatching = () =>
@@ -158,10 +153,28 @@ function BottomPart({ item, status }: { item: AnimeListItem; status: AnimeListIt
       optimisticListsAct(["UPDATE_PROGRESS", { status, id: item.id }]);
       await incrementProgress(item);
     });
-  // TODO: Optimistically update the list
-  const cancelRewatch = () => startTransition(() => cancelRewatchAction(item));
-  // TODO: Optimistically update the list
-  const remove = () => startTransition(() => removeFromList(item));
+  const cancelRewatch = () =>
+    startTransition(async () => {
+      const format = item.media?.format ?? MediaFormat.Ova;
+      optimisticListsAct([
+        "CANCEL_REWATCH",
+        {
+          id: item.id,
+          newStatus:
+            format === MediaFormat.Tv
+              ? "completed/tv"
+              : format === MediaFormat.Movie
+                ? "completed/movies"
+                : "completed/others",
+        },
+      ]);
+      await cancelRewatchAction(item);
+    });
+  const remove = () =>
+    startTransition(async () => {
+      optimisticListsAct(["REMOVE", { status, id: item.id }]);
+      await removeFromList(item);
+    });
 
   const watchedEpisodes = item.progress || 0;
   const totalEpisodes = item.media?.episodes;

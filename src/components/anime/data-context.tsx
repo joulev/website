@@ -8,7 +8,9 @@ import { generateContext } from "~/lib/hooks/generate-context";
 type ReducerAction =
   | ["UPDATE_SCORE", { status: AnimeListItemStatus; id: number; advancedScores: number[] }]
   | ["UPDATE_STATUS", { status: AnimeListItemStatus; id: number; newStatus: AnimeListItemStatus }]
-  | ["UPDATE_PROGRESS", { status: AnimeListItemStatus; id: number }];
+  | ["UPDATE_PROGRESS", { status: AnimeListItemStatus; id: number }]
+  | ["CANCEL_REWATCH", { id: number; newStatus: AnimeListItemStatus }]
+  | ["REMOVE", { status: AnimeListItemStatus; id: number }];
 
 const [Provider, useAnimeData] = generateContext<{
   optimisticLists: AnimeLists;
@@ -38,6 +40,17 @@ function optimisticReducer(current: AnimeLists, action: ReducerAction): AnimeLis
         const item = draft[data.status].find(i => i?.id === data.id);
         if (!item) return;
         item.progress = (item.progress ?? 0) + 1;
+        break;
+      }
+      case "CANCEL_REWATCH": {
+        const item = draft.rewatching.find(i => i?.id === data.id);
+        if (!item) return;
+        draft.rewatching = draft.rewatching.filter(i => i?.id !== data.id);
+        draft[data.newStatus].push(item);
+        break;
+      }
+      case "REMOVE": {
+        draft[data.status] = draft[data.status].filter(i => i?.id !== data.id);
         break;
       }
     }
