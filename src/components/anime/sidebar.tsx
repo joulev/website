@@ -1,9 +1,22 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-import { Menu, X } from "~/components/icons";
+import {
+  Calendar,
+  CheckCircle,
+  Film,
+  Menu,
+  PauseCircle,
+  PlayCircle,
+  PlusCircle,
+  Repeat,
+  RotateCcw,
+  Tv2,
+  X,
+  XCircle,
+} from "~/components/icons";
 import { Title } from "~/components/title";
 import { Button } from "~/components/ui/button";
 import { Link } from "~/components/ui/link";
@@ -15,13 +28,34 @@ import {
   SidebarSectionItems,
 } from "~/components/ui/sidebar";
 import { forceRefresh } from "~/lib/anime/actions";
+import type { AnimeLists } from "~/lib/anime/get-lists";
 import { getListTitleFromStatus } from "~/lib/anime/utils";
 import { useTransitionWithNProgress } from "~/lib/hooks/use-transition-with-nprogress";
+import { useAnimeData } from "./data-context";
 
 interface Item {
   icon: React.ReactNode;
   status: string;
   count?: number;
+}
+
+function getNavbarItems(lists: AnimeLists, isAdmin: boolean | undefined) {
+  return [
+    { icon: <PlayCircle />, status: "watching", count: lists.watching.length },
+    { icon: <Repeat />, status: "rewatching", count: lists.rewatching.length },
+    { icon: <Tv2 />, status: "completed/tv", count: lists.completedTV.length },
+    { icon: <Film />, status: "completed/movies", count: lists.completedMovies.length },
+    { icon: <CheckCircle />, status: "completed/others", count: lists.completedOthers.length },
+    { icon: <PauseCircle />, status: "paused", count: lists.paused.length },
+    { icon: <XCircle />, status: "dropped", count: lists.dropped.length },
+    { icon: <Calendar />, status: "planning", count: lists.planning.length },
+    ...(isAdmin
+      ? [
+          { icon: <PlusCircle />, status: "add-to-ptw" },
+          { icon: <RotateCcw />, status: "refresh" },
+        ]
+      : []),
+  ];
 }
 
 function Navigation({ basePath, items }: { basePath: string; items: Item[] }) {
@@ -78,7 +112,10 @@ function Navigation({ basePath, items }: { basePath: string; items: Item[] }) {
   );
 }
 
-export function Sidebar({ isAdmin, items }: { isAdmin?: boolean; items: Item[] }) {
+export function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
+  const { lists } = useAnimeData();
+  const items = useMemo(() => getNavbarItems(lists, isAdmin), [lists, isAdmin]);
+
   const [expanded, setExpanded] = useState(false);
   const pathname = usePathname();
   const basePath = isAdmin ? "/admin/manage/anime" : "/apps/anime";

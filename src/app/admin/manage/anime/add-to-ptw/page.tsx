@@ -1,7 +1,7 @@
 import { EmptyState } from "~/components/anime/empty-state";
 import { Score } from "~/components/anime/score";
 import { List, ListContent, ListItem } from "~/components/ui/lists";
-import { getAllLists } from "~/lib/anime/get-lists";
+import { getAllIds } from "~/lib/anime/get-lists";
 import { SEARCH_ANIME } from "~/lib/anime/queries";
 import { convertSeason, getTitle } from "~/lib/anime/utils";
 import { getAuthenticatedGraphQLClient } from "~/lib/auth/helpers";
@@ -13,8 +13,7 @@ import { SearchForm } from "./search-form";
 async function search(query: string | undefined) {
   if (!query) return [];
   const client = await getAuthenticatedGraphQLClient();
-  const { lists } = await getAllLists();
-  const allIds = lists.flatMap(list => list?.entries).map(entry => entry?.mediaId ?? 0);
+  const allIds = await getAllIds();
   const data = await client.request(SEARCH_ANIME, { search: query, idNotIn: allIds });
   const items = data.Page?.media ?? [];
   return items;

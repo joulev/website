@@ -1,10 +1,8 @@
-import { AnimePageContent } from "~/components/anime/page";
-
 import type { PageProps, Params } from "./$types";
-import { Card } from "./card";
+import { PageClient } from "./page-client";
 
 export default function Page({ params }: PageProps) {
-  return <AnimePageContent status={params.status} card={Card} />;
+  return <PageClient status={params.status} />;
 }
 
 export function generateStaticParams(): Params[] {

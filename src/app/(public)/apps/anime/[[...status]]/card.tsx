@@ -4,11 +4,11 @@ import { Score } from "~/components/anime/score";
 import { Link } from "~/components/ui/link";
 import { ListItem } from "~/components/ui/lists";
 import { Progress } from "~/components/ui/progress";
-import type { AnimeCardVariant, AnimeListItem } from "~/lib/anime/get-lists";
+import type { AnimeListItem, AnimeListItemStatus } from "~/lib/anime/get-lists";
 import { convertSeason, getTitle } from "~/lib/anime/utils";
 
-function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCardVariant }) {
-  switch (variant) {
+function BottomPart({ item, status }: { item: AnimeListItem; status: AnimeListItemStatus }) {
+  switch (status) {
     case "watching":
     case "rewatching":
     case "paused":
@@ -24,7 +24,8 @@ function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCard
         </div>
       );
     }
-    case "completed":
+    case "completed/tv":
+    case "completed/movies":
       return (
         <div className="flex flex-row items-center divide-x divide-separator">
           <Score score={item.score} className="pr-3" />
@@ -38,7 +39,7 @@ function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCard
           ) : null}
         </div>
       );
-    case "completed-others":
+    case "completed/others":
     case "planning":
       return (
         <div className="text-sm text-text-secondary">
@@ -50,7 +51,7 @@ function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCard
   }
 }
 
-export function Card({ item, variant }: { item: AnimeListItem; variant: AnimeCardVariant }) {
+export function Card({ item, status }: { item: AnimeListItem; status: AnimeListItemStatus }) {
   return (
     <ListItem asChild>
       <Link href={`https://anilist.co/anime/${item.mediaId}`} unstyled>
@@ -58,7 +59,7 @@ export function Card({ item, variant }: { item: AnimeListItem; variant: AnimeCar
           {/* min-w-0 is required here for truncating to work */}
           <div className="flex min-w-0 flex-grow flex-col justify-between gap-3">
             <div className="truncate">{getTitle(item.media?.title)}</div>
-            <BottomPart item={item} variant={variant} />
+            <BottomPart item={item} status={status} />
           </div>
           {item.media?.coverImage?.medium ? (
             <div className="relative hidden min-h-16 w-12 shrink-0 overflow-clip rounded-[0.5rem] sm:block">

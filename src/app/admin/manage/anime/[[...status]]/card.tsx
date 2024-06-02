@@ -3,18 +3,18 @@
 import { useState } from "react";
 
 import {
-  AlignJustify as Story,
-  ChevronsRight,
   Move3d as Animation,
+  User as Character,
+  ChevronsRight,
+  Smile as Enjoyment,
   Music,
   Pause,
   Pencil,
   Play,
   Repeat,
-  Smile as Enjoyment,
   StopCircle,
+  AlignJustify as Story,
   Trash,
-  User as Character,
   X,
 } from "~/components/icons";
 import { Button } from "~/components/ui/button";
@@ -37,7 +37,7 @@ import {
   updateScore,
   updateStatus,
 } from "~/lib/anime/actions";
-import type { AnimeCardVariant, AnimeListItem } from "~/lib/anime/get-lists";
+import type { AnimeListItem, AnimeListItemStatus } from "~/lib/anime/get-lists";
 import { constraintScore, convertSeason, getAccumulatedScore, getTitle } from "~/lib/anime/utils";
 import { cn } from "~/lib/cn";
 import { MediaListStatus } from "~/lib/gql/graphql";
@@ -121,7 +121,7 @@ function UpdateItemScore({ item }: { item: AnimeListItem }) {
   );
 }
 
-function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCardVariant }) {
+function BottomPart({ item, status }: { item: AnimeListItem; status: AnimeListItemStatus }) {
   const startTransition = useTransitionWithNProgress();
 
   const setAsWatching = () => startTransition(() => updateStatus(item, MediaListStatus.Current));
@@ -139,7 +139,7 @@ function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCard
     item.media?.season && item.media.seasonYear
       ? `${convertSeason(item.media.season)} ${item.media.seasonYear}`
       : "Season N/A";
-  switch (variant) {
+  switch (status) {
     case "watching":
       return (
         <BottomPartTemplate text={`Progress: ${watchedEpisodes}/${totalEpisodes ?? "unknown"}`}>
@@ -165,7 +165,8 @@ function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCard
           </Button>
         </BottomPartTemplate>
       );
-    case "completed":
+    case "completed/tv":
+    case "completed/movies":
       return (
         <BottomPartTemplate text={`Score: ${item.score || "unknown"}`}>
           <Button variants={{ size: "icon-sm" }} onClick={setAsRewatching}>
@@ -174,7 +175,7 @@ function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCard
           <UpdateItemScore item={item} />
         </BottomPartTemplate>
       );
-    case "completed-others":
+    case "completed/others":
       return (
         <BottomPartTemplate text={season}>
           <Button variants={{ size: "icon-sm" }} onClick={setAsRewatching}>
@@ -212,12 +213,12 @@ function BottomPart({ item, variant }: { item: AnimeListItem; variant: AnimeCard
   }
 }
 
-export function Card({ item, variant }: { item: AnimeListItem; variant: AnimeCardVariant }) {
+export function Card({ item, status }: { item: AnimeListItem; status: AnimeListItemStatus }) {
   return (
     <ListItem>
       <div className="flex w-full flex-col gap-1.5">
         <div className="truncate">{getTitle(item.media?.title)}</div>
-        <BottomPart item={item} variant={variant} />
+        <BottomPart item={item} status={status} />
       </div>
     </ListItem>
   );

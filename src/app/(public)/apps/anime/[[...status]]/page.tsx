@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 
-import { AnimePageContent } from "~/components/anime/page";
 import { getListTitleFromStatus } from "~/lib/anime/utils";
 
 import type { PageProps, Params } from "./$types";
-import { Card } from "./card";
+import { PageClient } from "./page-client";
 
 export default function Page({ params }: PageProps) {
-  return <AnimePageContent status={params.status} card={Card} />;
+  return <PageClient status={params.status} />;
 }
 
 export function generateMetadata({ params }: PageProps): Metadata {
