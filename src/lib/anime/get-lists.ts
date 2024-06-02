@@ -19,35 +19,34 @@ export type AnimeListItemStatus =
 export type AnimeLists = Awaited<ReturnType<typeof getAllLists>>;
 export type AnimeListItem = NonNullable<AnimeLists["watching"][number]>;
 
-const getAllLists = cache(
-  async (status?: MediaListStatus) => {
-    const client = getClient();
-    const data = await client.request(GET_ANIME, { status });
-    const lists = data.MediaListCollection?.lists ?? [];
-    return {
-      watching: lists.find(list => list?.name === "Watching")?.entries ?? [],
-      rewatching: lists.find(list => list?.name === "Rewatching")?.entries ?? [],
-      paused: lists.find(list => list?.name === "Paused")?.entries ?? [],
-      dropped: lists.find(list => list?.name === "Dropped")?.entries ?? [],
-      planning: lists.find(list => list?.name === "Planning")?.entries ?? [],
-      completedTV: lists.find(list => list?.name === "Completed TV")?.entries ?? [],
-      completedMovies: lists.find(list => list?.name === "Completed Movie")?.entries ?? [],
-      completedOthers: lists
-        .filter(
-          list =>
-            list?.name?.toLowerCase().includes("completed") &&
-            !list.name.includes("TV") &&
-            !list.name.includes("Movie"),
-        )
-        .flatMap(list => list?.entries ?? []),
-    };
-  },
-  [],
-  { tags: ["anime-lists"] },
+export const getAllLists = dedupe(
+  cache(
+    async (status?: MediaListStatus) => {
+      const client = getClient();
+      const data = await client.request(GET_ANIME, { status });
+      const lists = data.MediaListCollection?.lists ?? [];
+      return {
+        watching: lists.find(list => list?.name === "Watching")?.entries ?? [],
+        rewatching: lists.find(list => list?.name === "Rewatching")?.entries ?? [],
+        paused: lists.find(list => list?.name === "Paused")?.entries ?? [],
+        dropped: lists.find(list => list?.name === "Dropped")?.entries ?? [],
+        planning: lists.find(list => list?.name === "Planning")?.entries ?? [],
+        completedTV: lists.find(list => list?.name === "Completed TV")?.entries ?? [],
+        completedMovies: lists.find(list => list?.name === "Completed Movie")?.entries ?? [],
+        completedOthers: lists
+          .filter(
+            list =>
+              list?.name?.toLowerCase().includes("completed") &&
+              !list.name.includes("TV") &&
+              !list.name.includes("Movie"),
+          )
+          .flatMap(list => list?.entries ?? []),
+      };
+    },
+    [],
+    { tags: ["anime-lists"] },
+  ),
 );
-
-const getAllListsCached = dedupe(getAllLists);
-export { getAllListsCached as getAllLists };
 
 export async function getAllIds() {
   const lists: Record<string, (AnimeListItem | null)[]> = await getAllLists();
