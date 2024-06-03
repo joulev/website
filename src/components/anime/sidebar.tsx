@@ -30,7 +30,7 @@ import {
 import { forceRefresh } from "~/lib/anime/actions";
 import type { AnimeLists } from "~/lib/anime/get-lists";
 import { getListTitleFromStatus } from "~/lib/anime/utils";
-import { useTransitionWithNProgress } from "~/lib/hooks/use-transition-with-nprogress";
+import { useTransitionWithNProgress } from "~/lib/hooks/use-nprogress";
 import { useAnimeData } from "./data-context";
 
 interface Item {

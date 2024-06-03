@@ -13,7 +13,8 @@
     "download-theme": "./scripts/download-theme.sh",
     "format": "biome format --write .",
     "lint": "biome lint .",
-    "start": "next start"
+    "start": "next start",
+    "type-check": "tsc --pretty --noEmit"
   },
   "dependencies": {
     "@auth/core": "0.32.0",

@@ -2,7 +2,7 @@
 
 import { RotateCcw } from "~/components/icons";
 import { Button } from "~/components/ui/button";
-import { useTransitionWithNProgress } from "~/lib/hooks/use-transition-with-nprogress";
+import { useTransitionWithNProgress } from "~/lib/hooks/use-nprogress";
 
 import { refreshIrasuto } from "./refresh-action";
 

@@ -3,7 +3,7 @@
 import { ExternalLink, Plus } from "~/components/icons";
 import { Button, LinkButton } from "~/components/ui/button";
 import { addToPTW } from "~/lib/anime/actions";
-import { useTransitionWithNProgress } from "~/lib/hooks/use-transition-with-nprogress";
+import { useTransitionWithNProgress } from "~/lib/hooks/use-nprogress";
 
 export function ActionButtons({ id }: { id: number }) {
   const startTransition = useTransitionWithNProgress();

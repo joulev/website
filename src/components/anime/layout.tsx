@@ -15,7 +15,7 @@ export async function AnimeLayout({
   return (
     <main className="container max-w-screen-lg">
       <Card className="flex flex-col items-stretch p-0 md:flex-row">
-        <AnimeDataContextProvider lists={lists}>
+        <AnimeDataContextProvider value={{ lists, pending: false }}>
           <Sidebar isAdmin={isAdmin} />
           <div className="mx-auto w-full max-w-lg p-6">{children}</div>
         </AnimeDataContextProvider>

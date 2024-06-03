@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { useTransitionWithNProgress } from "~/lib/hooks/use-transition-with-nprogress";
+import { useTransitionWithNProgress } from "~/lib/hooks/use-nprogress";
 
 export function SearchForm({ query }: { query: string | undefined }) {
   const router = useRouter();

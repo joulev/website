@@ -1,18 +1,35 @@
 import { unstable_cache as cache } from "next/cache";
 import { cache as dedupe } from "react";
 
-import type { MediaListStatus } from "~/lib/gql/graphql";
+import type { GetAnimeQuery, MediaListStatus } from "~/lib/gql/graphql";
 import { getClient } from "~/lib/graphql";
 
 import { GET_ANIME } from "./queries";
 
-export type AnimeLists = Awaited<ReturnType<typeof getAllLists>>;
-export type AnimeListItemStatus = keyof AnimeLists;
-export type AnimeListItem = NonNullable<AnimeLists["watching"][number]>;
+export type AnimeListItemStatus =
+  | "watching"
+  | "rewatching"
+  | "paused"
+  | "dropped"
+  | "planning"
+  | "completed/tv"
+  | "completed/movies"
+  | "completed/others";
+
+// (𓁹‿𓁹)
+type AnimeListItemFromAnilist = NonNullable<
+  NonNullable<
+    NonNullable<
+      NonNullable<NonNullable<GetAnimeQuery["MediaListCollection"]>["lists"]>[number]
+    >["entries"]
+  >[number]
+>;
+export type AnimeListItem = AnimeListItemFromAnilist & { pending?: boolean };
+export type AnimeLists = Record<AnimeListItemStatus, (AnimeListItem | null)[]>;
 
 export const getAllLists = dedupe(
   cache(
-    async (status?: MediaListStatus) => {
+    async (status?: MediaListStatus): Promise<AnimeLists> => {
       const client = getClient();
       const data = await client.request(GET_ANIME, { status });
       const lists = data.MediaListCollection?.lists ?? [];

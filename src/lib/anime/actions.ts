@@ -29,9 +29,11 @@ function generateAction<T extends unknown[] = []>(
   };
 }
 
-export const incrementProgress = generateAction(async (client, item: AnimeListItem) => {
-  await client.request(UPDATE_PROGRESS, { id: item.id, progress: (item.progress ?? 0) + 1 });
-});
+export const incrementProgress = generateAction(
+  async (client, item: AnimeListItem, newProgress: number) => {
+    await client.request(UPDATE_PROGRESS, { id: item.id, progress: newProgress });
+  },
+);
 
 export const updateStatus = generateAction(
   async (client, item: AnimeListItem, status: MediaListStatus) => {

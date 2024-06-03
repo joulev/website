@@ -151,7 +151,7 @@ function BottomPart({ item, status }: { item: AnimeListItem; status: AnimeListIt
   const increment = () =>
     startTransition(async () => {
       optimisticListsAct(["UPDATE_PROGRESS", { status, id: item.id }]);
-      await incrementProgress(item);
+      await incrementProgress(item, (item.progress ?? 0) + 1);
     });
   const cancelRewatch = () =>
     startTransition(async () => {
@@ -259,7 +259,7 @@ function BottomPart({ item, status }: { item: AnimeListItem; status: AnimeListIt
 export function Card({ item, status }: { item: AnimeListItem; status: AnimeListItemStatus }) {
   return (
     <ListItem>
-      <div className="flex w-full flex-col gap-1.5">
+      <div className={cn("flex w-full flex-col gap-1.5", item.pending && "opacity-50")}>
         <div className="truncate">{getTitle(item.media?.title)}</div>
         <BottomPart item={item} status={status} />
       </div>
