@@ -4,12 +4,11 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { Balancer } from "react-wrap-balancer";
 
-import { CopyButton } from "~/components/copy-button";
-import { Check, Share } from "~/components/icons";
 import { Link } from "~/components/ui/link";
 import { incrementViews } from "~/lib/blogs/increment-view";
 import { formatTime } from "~/lib/blogs/utils";
 
+import { useHoverBackground } from "~/components/ui/hooks/use-hover-background";
 import { meta } from "../meta";
 
 function useMetadata() {
@@ -33,11 +32,34 @@ export function PostedDate() {
   const { postedDate } = useMetadata();
   const publishedTime = new Date(postedDate);
   return (
-    <div className="text-sm text-text-secondary">
-      Posted{" "}
-      <time dateTime={publishedTime.toISOString()} title={publishedTime.toISOString()}>
-        {formatTime(publishedTime)}
-      </time>
+    <div className="max-blog-lg:text-sm text-text-secondary">
+      <time dateTime={publishedTime.toISOString().split("T")[0]}>{formatTime(publishedTime)}</time>
+    </div>
+  );
+}
+
+export function Author() {
+  return (
+    <div className="-m-3">
+      <a
+        href="https://github.com/joulev"
+        target="_blank"
+        rel="noreferrer noopener"
+        className="hover-bg relative flex flex-row items-center gap-3 w-fit rounded m-1 p-2 hover:bg-bg-idle hover:m-0 hover:p-3 transition-all"
+        {...useHoverBackground({})}
+      >
+        <img
+          src="https://avatars.githubusercontent.com/u/44609036"
+          alt="Vu Van Dung"
+          className="size-9 shrink-0 rounded-full"
+        />
+        <div className="flex flex-col gap-1.5">
+          <div className="blog-lg:text-lg font-semibold leading-none blog-lg:leading-none">
+            Vu Van Dung
+          </div>
+          <div className="text-sm text-text-secondary leading-none">@joulev</div>
+        </div>
+      </a>
     </div>
   );
 }
@@ -52,26 +74,6 @@ export function ViewSourceHistory() {
       <div className="w-px bg-separator" />
       <Link href={historyLink}>View history</Link>
     </div>
-  );
-}
-
-export function ShareButton() {
-  const { slug } = useMetadata();
-  return (
-    <CopyButton
-      content={`https://joulev.dev/blogs/${slug}`}
-      variants={{ size: "sm" }}
-      copyChildren={
-        <>
-          <Share /> Share
-        </>
-      }
-      copiedChildren={
-        <>
-          <Check /> Link copied!
-        </>
-      }
-    />
   );
 }
 
