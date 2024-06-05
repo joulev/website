@@ -22,6 +22,7 @@
     --mint: #66c4df;
     --cyan: #5ac8f5;
     --blue: #0a84ff;
+    --prose-width: theme(maxWidth.prose)
   }
 }
 

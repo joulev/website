@@ -26,7 +26,9 @@ You probably have once written something like this in your server action:
 export async function logIn(formData: FormData) {
   // ...
   if (passwordIsWrong)
-    throw new Error("The username or password is wrong. Please check and try again.");
+    throw new Error(
+      "The username or password is wrong. Please check and try again."
+    );
   // ...
 }
 ```
@@ -66,7 +68,9 @@ Thankfully, JavaScript the programming language has plenty of features that can 
 
 ```ts
 // lib/action-utils.ts
-export type ServerActionResult<T> = { success: true; value: T } | { success: false; error: string };
+export type ServerActionResult<T> =
+  | { success: true; value: T }
+  | { success: false; error: string };
 
 export class ServerActionError extends Error {
   constructor(message: string) {
@@ -83,7 +87,8 @@ export function createServerAction<Return, Args extends unknown[] = []>(
       const value = await callback(...args);
       return { success: true, value };
     } catch (error) {
-      if (error instanceof ServerActionError) return { success: false, error: error.message };
+      if (error instanceof ServerActionError)
+        return { success: false, error: error.message };
       throw error;
     }
   };
@@ -106,7 +111,8 @@ export function createServerAction(callback) {
       const value = await callback(...args);
       return { success: true, value };
     } catch (error) {
-      if (error instanceof ServerActionError) return { success: false, error: error.message };
+      if (error instanceof ServerActionError)
+        return { success: false, error: error.message };
       throw error;
     }
   };

@@ -45,7 +45,7 @@ export function Author() {
         href="https://github.com/joulev"
         target="_blank"
         rel="noreferrer noopener"
-        className="hover-bg relative flex flex-row items-center gap-3 w-fit rounded m-1 p-2 hover:bg-bg-idle hover:m-0 hover:p-3 transition-all"
+        className="hover-bg relative flex flex-row items-center gap-3 w-fit rounded m-1 p-2 hover:bg-bg-idle hover:m-0 hover:p-3 active:bg-bg-active transition-all"
         {...useHoverBackground({})}
       >
         <img

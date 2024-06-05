@@ -18,7 +18,7 @@ export function Problem() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentcolor"
+            stroke="#c9cbcd"
             strokeOpacity={opacity}
             strokeWidth="2"
             strokeLinecap="round"
@@ -51,7 +51,7 @@ export function Problem() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentcolor"
+            stroke="#c9cbcd"
             strokeOpacity={opacity}
             strokeWidth="2"
             strokeLinecap="round"
@@ -107,7 +107,7 @@ export function FlaskConicalFlattening() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentcolor"
+            stroke="#c9cbcd"
             strokeOpacity={opacity}
             strokeWidth="2"
             strokeLinecap="round"
@@ -138,7 +138,7 @@ export function FlaskConicalFlattening() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentcolor"
+            stroke="#c9cbcd"
             strokeOpacity={opacity}
             strokeWidth="2"
             strokeLinecap="round"
@@ -179,7 +179,7 @@ export function AtomReallyFlattening() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentcolor"
+            stroke="#c9cbcd"
             strokeOpacity={opacity}
             strokeWidth="2"
             strokeLinecap="round"
@@ -216,13 +216,9 @@ export function AtomReallyFlattening() {
             stroke="none"
           >
             <title>"Really flattening" example: atom icon, flattened version</title>
+            <path fill="#c9cbcd" fillOpacity={opacity} d="M10 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0Z" />
             <path
-              fill="currentcolor"
-              fillOpacity={opacity}
-              d="M10 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0Z"
-            />
-            <path
-              fill="currentcolor"
+              fill="#c9cbcd"
               fillOpacity={opacity}
               fillRule="evenodd"
               clipRule="evenodd"
@@ -264,7 +260,7 @@ export function AtomMask() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentcolor"
+            stroke="#c9cbcd"
             strokeOpacity={opacity}
             strokeWidth="2"
             strokeLinecap="round"
@@ -312,7 +308,7 @@ export function AtomMask() {
                 d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"
               />
             </mask>
-            <rect width="24" height="24" fill="currentcolor" fillOpacity={opacity} mask="url(#a)" />
+            <rect width="24" height="24" fill="#c9cbcd" fillOpacity={opacity} mask="url(#a)" />
           </svg>
           <div className="text-lg">Masked ✅</div>
         </div>
@@ -346,7 +342,7 @@ export function AtomMaskCustomiseStrokeWidth() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentcolor"
+            stroke="#c9cbcd"
             strokeOpacity={0.3}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
@@ -397,7 +393,7 @@ export function AtomMaskCustomiseStrokeWidth() {
                 d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"
               />
             </mask>
-            <rect width="24" height="24" fill="currentcolor" fillOpacity={0.3} mask="url(#a)" />
+            <rect width="24" height="24" fill="#c9cbcd" fillOpacity={0.3} mask="url(#a)" />
           </svg>
           <div className="text-lg">Masked ✅</div>
         </div>
