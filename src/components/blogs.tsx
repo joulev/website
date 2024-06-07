@@ -44,7 +44,7 @@ export function code({ className, ...props }: React.ComponentPropsWithoutRef<"co
     <code
       {...props}
       className={cn(
-        "mx-1 bg-bg-darker [box-shadow:0_0_0_4px_var(--bg-darker)] rounded-[4px] [font-weight:inherit] before:content-[''] after:content-[''] [pre_&]:rounded-none [pre_&]:bg-transparent [pre_&]:p-0 [pre_&]:[box-shadow:none]",
+        "mx-1 bg-bg-darker [box-shadow:0_0_0_4px_var(--bg-darker)] rounded-[4px] [font-weight:inherit] before:content-[''] after:content-[''] [pre_&]:rounded-none [pre_&]:bg-transparent [pre_&]:p-0 [pre_&]:mx-0 [pre_&]:[box-shadow:none]",
         className,
       )}
     />
