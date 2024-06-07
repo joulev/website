@@ -1,9 +1,11 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useFormStatus } from "react-dom";
 
 import { code as Code } from "~/components/blogs";
-import { LinkButton } from "~/components/ui/button";
+import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 
 function getEmoteIdFromInput(input: string) {
@@ -11,11 +13,24 @@ function getEmoteIdFromInput(input: string) {
   return match ? match[0] : null;
 }
 
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button type="submit" disabled={pending} className="w-full" variants={{ variant: "primary" }}>
+      Generate
+    </Button>
+  );
+}
+
 export function Form() {
   const [input, setInput] = useState("");
+  const router = useRouter();
   const emoteId = getEmoteIdFromInput(input);
   return (
-    <div className="flex flex-col gap-6 p-6 text-text-prose">
+    <form
+      className="flex flex-col gap-6 p-6 text-text-prose"
+      action={() => router.push(`/apps/live-reaction/${emoteId}`)}
+    >
       <div>
         Enter the emote ID (a number), or type a message containing only the emote and paste the
         message content here.
@@ -40,13 +55,7 @@ export function Form() {
           Detected emote ID: <strong className="text-text-primary">{emoteId}</strong>
         </div>
       ) : null}
-      <LinkButton
-        href={`/apps/live-reaction/${emoteId}`}
-        className="w-full"
-        variants={{ variant: "primary" }}
-      >
-        Generate
-      </LinkButton>
-    </div>
+      <SubmitButton />
+    </form>
   );
 }
