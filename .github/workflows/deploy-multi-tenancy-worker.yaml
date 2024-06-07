@@ -11,12 +11,6 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-        with:
-          version: latest
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "pnpm"
-      - run: pnpm install
-      - run: pnpm deploy-worker
+      - uses: oven-sh/setup-bun@v1
+      - run: bun i
+      - run: bun deploy-worker
