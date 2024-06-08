@@ -64,6 +64,7 @@ function MapPolyline({
   sessionIndex: number;
 }) {
   const polylineRef = useRef<google.maps.Polyline | null>(null);
+  const clickedPolylineRef = useRef<google.maps.Polyline | null>(null);
 
   const { activeSession, setActiveSession, setPanelIsExpanded } = useActiveSession();
 
@@ -79,7 +80,7 @@ function MapPolyline({
   }, [setPanelIsExpanded, setActiveSession, lineIndex, sessionIndex]);
 
   const refreshStyling = useCallback(() => {
-    if (!polylineRef.current) return;
+    if (!polylineRef.current || !clickedPolylineRef.current) return;
     polylineRef.current.setOptions({
       strokeColor:
         isActive || isHover
@@ -89,28 +90,47 @@ function MapPolyline({
             : "#555555",
       zIndex:
         isActive || isHover
+          ? 8999
+          : lineIsActive
+            ? 8997
+            : lineZIndex[data[lineIndex].lineCode as keyof typeof lineZIndex],
+      strokeOpacity: 1,
+      strokeWeight: 2,
+    });
+    clickedPolylineRef.current.setOptions({
+      strokeOpacity: 0,
+      strokeWeight: 10,
+      zIndex:
+        isActive || isHover
           ? 9999
           : lineIsActive
             ? 9997
             : lineZIndex[data[lineIndex].lineCode as keyof typeof lineZIndex],
-      strokeOpacity: 1,
-      strokeWeight: 2,
     });
   }, [isActive, isHover, lineIsActive, activeSession.lineIndex, lineIndex]);
 
   useEffect(() => refreshStyling(), [refreshStyling]);
 
   return (
-    <Polyline
-      onLoad={polyline => {
-        polylineRef.current = polyline;
-        refreshStyling();
-      }}
-      path={coordinates}
-      onMouseOver={onHoverEnter}
-      onMouseOut={onHoverLeave}
-      onClick={onClick}
-    />
+    <>
+      <Polyline
+        onLoad={polyline => {
+          polylineRef.current = polyline;
+          refreshStyling();
+        }}
+        path={coordinates}
+      />
+      <Polyline
+        onLoad={polyLine => {
+          clickedPolylineRef.current = polyLine;
+          refreshStyling();
+        }}
+        path={coordinates}
+        onMouseOver={onHoverEnter}
+        onMouseOut={onHoverLeave}
+        onClick={onClick}
+      />
+    </>
   );
 }
 
