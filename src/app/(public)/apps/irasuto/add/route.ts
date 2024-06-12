@@ -11,7 +11,7 @@ import { photos as photosSchema } from "~/lib/db/schema";
 import type { NewIrasutoPhoto } from "~/lib/db/schema";
 import { uploadPhotoToR2 } from "~/lib/s3/irasuto";
 
-const schema = v.object({ password: v.literal(env.PASSWORD), url: v.string([v.url()]) });
+const schema = v.object({ password: v.literal(env.PASSWORD), url: v.pipe(v.string(), v.url()) });
 
 type FetchedPhoto = Omit<NewIrasutoPhoto, "storageKey"> & { url: string };
 
