@@ -35,8 +35,8 @@ async function getAvailableSlug() {
 
 export async function createSnippet(formData: FormData) {
   const createSnippetSchema = v.object({
-    code: v.string([v.maxLength(65_536)]),
-    language: v.string([v.maxLength(16)]),
+    code: v.pipe(v.string(), v.maxLength(65_536)),
+    language: v.pipe(v.string(), v.maxLength(16)),
   });
   const { code, language } = v.parse(createSnippetSchema, {
     code: formData.get("code") || "",
