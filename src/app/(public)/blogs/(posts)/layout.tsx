@@ -42,7 +42,7 @@ export default function Layout({ children }: LayoutProps) {
               </LinkButton>
             </div>
           </article>
-          <div className="flex flex-col p-6 blog-lg:p-12">
+          <aside className="flex flex-col p-6 blog-lg:p-12">
             <div className="flex-grow max-blog-lg:hidden" />
             <div className="sticky bottom-12 flex w-full flex-col gap-6 blog-lg:gap-12 text-sm">
               <div className="flex flex-col gap-3 max-w-prose mx-auto w-full">
@@ -60,7 +60,7 @@ export default function Layout({ children }: LayoutProps) {
                 <ViewSourceHistory />
               </div>
             </div>
-          </div>
+          </aside>
         </div>
       </Card>
       <IncrementViews />

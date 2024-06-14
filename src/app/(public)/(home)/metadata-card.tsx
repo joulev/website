@@ -18,9 +18,9 @@ export function MetadataCard({
       {left}
       <div className="flex min-w-0 flex-grow flex-col">
         <div className="flex flex-grow flex-row justify-between">
-          <div className="text-xs font-light uppercase tracking-widest text-text-tertiary">
+          <h3 className="text-xs font-light uppercase tracking-widest text-text-tertiary">
             {title}
-          </div>
+          </h3>
           <LinkButton
             href={href}
             variants={{ variant: "ghost", size: "icon-sm" }}

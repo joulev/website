@@ -13,7 +13,7 @@ export const List = forwardRef<HTMLDivElement, BaseProps<"div">>(function List(
   { asChild, className, ...props },
   ref,
 ) {
-  const Component = asChild ? Slot : "div";
+  const Component = asChild ? Slot : "section";
   return <Component {...props} className={cn("flex flex-col gap-2", className)} ref={ref} />;
 });
 
@@ -56,10 +56,10 @@ const listContentVariants = cva({
 });
 
 export const ListContent = forwardRef<
-  HTMLDivElement,
-  BaseProps<"div"> & { variants?: VariantProps<typeof listContentVariants> }
+  HTMLUListElement,
+  BaseProps<"ul"> & { variants?: VariantProps<typeof listContentVariants> }
 >(function ListContent({ asChild, variants, className, ...props }, ref) {
-  const Component = asChild ? Slot : "div";
+  const Component = asChild ? Slot : "ul";
   return (
     <Component
       {...props}
@@ -75,7 +75,7 @@ export const ListItem = forwardRef<HTMLDivElement, BaseProps<"div">>(function Li
 ) {
   const Component = asChild ? Slot : "div";
   return (
-    <div data-li>
+    <li data-li>
       <Component
         {...props}
         className={cn("hover-bg flex w-full flex-row", className)}
@@ -83,7 +83,7 @@ export const ListItem = forwardRef<HTMLDivElement, BaseProps<"div">>(function Li
         data-li-inner
         ref={ref}
       />
-    </div>
+    </li>
   );
 });
 

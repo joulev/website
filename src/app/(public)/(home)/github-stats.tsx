@@ -62,7 +62,10 @@ function BackgroundPattern() {
     .fill(null)
     .map(_ => colours[Math.floor(seededRandom() * colours.length)]);
   return (
-    <div className="absolute -left-6 -top-6 -z-10 grid grid-cols-7 grid-rows-7 gap-1">
+    <div
+      className="absolute -left-6 -top-6 -z-10 grid grid-cols-7 grid-rows-7 gap-1 not-sr-only"
+      aria-hidden="true"
+    >
       {days.map((c, i) => (
         <div key={i} className="size-3 rounded-[0.2rem]" style={{ background: c }} />
       ))}
@@ -72,9 +75,9 @@ function BackgroundPattern() {
 
 function GitHubStatsData({ label, value }: { label: React.ReactNode; value: number }) {
   return (
-    <div>
-      <span className="mr-1 text-sm text-text-secondary">{label}:</span>
-      {value}
+    <div className="flex flex-row items-baseline">
+      <dt className="mr-1 text-sm text-text-secondary">{label}:</dt>
+      <dd>{value}</dd>
     </div>
   );
 }
@@ -90,10 +93,10 @@ export async function GitHubStats() {
         </>
       }
       right={
-        <div className="flex flex-row flex-wrap gap-x-6 sm:gap-x-4 md:gap-x-6">
+        <dl className="flex flex-row flex-wrap gap-x-6 sm:gap-x-4 md:gap-x-6">
           <GitHubStatsData label="Issues" value={issues} />
           <GitHubStatsData label="PRs" value={prs} />
-          <hr className="w-full border-none" />
+          <div className="w-full border-none" />
           <GitHubStatsData
             label={
               <>
@@ -102,7 +105,7 @@ export async function GitHubStats() {
             }
             value={contribs}
           />
-        </div>
+        </dl>
       }
       title="GitHub Stats"
       icon={GitHub}

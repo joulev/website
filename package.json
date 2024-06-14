@@ -59,6 +59,7 @@
     "dotenv": "16.4.5",
     "drizzle-kit": "0.22.7",
     "drizzle-orm": "0.31.2",
+    "github-slugger": "2.0.0",
     "graphql": "16.8.1",
     "graphql-request": "7.0.1",
     "immer": "10.1.1",

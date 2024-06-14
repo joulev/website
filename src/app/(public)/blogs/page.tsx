@@ -19,7 +19,7 @@ export default function Page() {
             <Title title="blogs" subtitle="My weird knowledge, noted down" />
           </div>
         </div>
-        <div className="flex w-full flex-col divide-y divide-separator">
+        <ul className="flex w-full flex-col divide-y divide-separator">
           {meta
             .sort((a, b) => new Date(b.postedDate).valueOf() - new Date(a.postedDate).valueOf())
             .map(post => {
@@ -31,7 +31,7 @@ export default function Page() {
                       <Balancer>{post.title}</Balancer>
                     </h2>
                     <p className="text-text-secondary">{post.description}</p>
-                    <div className="text-sm text-text-tertiary">
+                    <p className="text-sm text-text-tertiary">
                       Posted{" "}
                       <time
                         dateTime={publishedTime.toISOString()}
@@ -39,12 +39,12 @@ export default function Page() {
                       >
                         {formatTime(publishedTime)}
                       </time>
-                    </div>
+                    </p>
                   </div>
                 </PostCard>
               );
             })}
-        </div>
+        </ul>
       </Card>
     </main>
   );

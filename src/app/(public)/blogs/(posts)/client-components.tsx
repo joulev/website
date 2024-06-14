@@ -32,9 +32,9 @@ export function PostedDate() {
   const { postedDate } = useMetadata();
   const publishedTime = new Date(postedDate);
   return (
-    <div className="max-blog-lg:text-sm text-text-secondary">
+    <p className="max-blog-lg:text-sm text-text-secondary">
       <time dateTime={publishedTime.toISOString().split("T")[0]}>{formatTime(publishedTime)}</time>
-    </div>
+    </p>
   );
 }
 
@@ -48,6 +48,7 @@ export function Author() {
         className="hover-bg relative flex flex-row items-center gap-3 w-fit rounded m-1 p-2 hover:bg-bg-idle hover:m-0 hover:p-3 active:bg-bg-active transition-all"
         {...useHoverBackground({})}
       >
+        <p className="sr-only">Written by</p>
         <img
           src="https://avatars.githubusercontent.com/u/44609036"
           alt="Vu Van Dung"

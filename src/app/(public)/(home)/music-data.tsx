@@ -19,10 +19,12 @@ export async function MusicData() {
         <img src={thumbnail?.url} alt={song.name} className="size-18 rounded-[0.5rem] opacity-80" />
       }
       right={
-        <>
-          <div className="truncate text-lg font-semibold">{song.name}</div>
-          <div className="truncate text-sm text-text-secondary">{song.artist.name}</div>
-        </>
+        <dl>
+          <dt className="sr-only">Song name</dt>
+          <dd className="truncate text-lg font-semibold">{song.name}</dd>
+          <dt className="sr-only">Artist</dt>
+          <dd className="truncate text-sm text-text-secondary">{song.artist.name}</dd>
+        </dl>
       }
       title="Recent favourite"
       icon={PlayCircle}

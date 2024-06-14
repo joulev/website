@@ -5,13 +5,13 @@ import { Link } from "~/components/ui/link";
 
 export function PostCard({ slug, children }: { slug: string; children: React.ReactNode }) {
   return (
-    <Link
-      href={`/blogs/${slug}`}
-      unstyled
+    <li
       className="hover-bg transition hover:bg-bg-hover active:bg-bg-active"
       {...useHoverBackground({})}
     >
-      {children}
-    </Link>
+      <Link href={`/blogs/${slug}`} unstyled>
+        {children}
+      </Link>
+    </li>
   );
 }

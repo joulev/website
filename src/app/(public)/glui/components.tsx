@@ -1,3 +1,5 @@
+import { slug } from "github-slugger";
+import { h3 as H3 } from "~/components/blogs";
 import {
   Atom,
   ChevronDown,
@@ -97,9 +99,10 @@ function Showcase({
   noCard,
   children,
 }: React.PropsWithChildren<{ title: string; className?: string; noCard?: boolean }>) {
+  const id = slug(title);
   return (
     <section>
-      <h3>{title}</h3>
+      <H3 id={id}>{title}</H3>
       {noCard ? (
         children
       ) : (

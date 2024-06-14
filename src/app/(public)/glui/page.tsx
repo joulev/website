@@ -30,7 +30,7 @@ export default function Page() {
                 </span>
               }
               subtitle={
-                <div className="text-lg text-text-secondary">
+                <p className="text-lg text-text-secondary">
                   A component collection based on{" "}
                   <Link href="https://www.figma.com/community/file/1253443272911187215/apple-design-resources-visionos">
                     visionOS UI design system
@@ -38,7 +38,7 @@ export default function Page() {
                   and built using <Link href="https://radix-ui.com/">Radix UI</Link>,{" "}
                   <Link href="https://tailwindcss.com/">Tailwind CSS</Link> and{" "}
                   <Link href="https://ui.shadcn.com/">shadcn/ui</Link>.
-                </div>
+                </p>
               }
             />
             <div className="flex flex-col items-stretch gap-x-6 gap-y-3 sm:flex-row">
@@ -59,9 +59,9 @@ export default function Page() {
           </div>
         </div>
         <div className="py-12 px-6 sm:px-12">
-          <div className="prose min-w-full">
+          <article className="prose min-w-full">
             <Documentation />
-          </div>
+          </article>
         </div>
       </Card>
     </main>
