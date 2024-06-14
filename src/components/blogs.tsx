@@ -2,6 +2,35 @@ import { Link } from "~/components/ui/link";
 import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
 import { cn } from "~/lib/cn";
 
+function Heading({
+  level,
+  id,
+  children,
+  ...props
+}: React.ComponentPropsWithoutRef<"h1"> & { level: 1 | 2 | 3 | 4 | 5 | 6 }) {
+  const Tag = `h${level}` as const;
+  return (
+    <Tag id={id} {...props} className="scroll-mt-36">
+      <a href={`#${id}`} className="not-prose group relative">
+        <span
+          aria-hidden="true"
+          className="absolute right-full not-sr-only w-4 translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition"
+        >
+          <span className="text-lg font-mono font-normal text-text-tertiary hover:text-text-secondary transition before:content-['#']" />
+        </span>
+        {children}
+      </a>
+    </Tag>
+  );
+}
+
+export const h1 = (props: React.ComponentPropsWithoutRef<"h1">) => <Heading level={1} {...props} />;
+export const h2 = (props: React.ComponentPropsWithoutRef<"h2">) => <Heading level={2} {...props} />;
+export const h3 = (props: React.ComponentPropsWithoutRef<"h3">) => <Heading level={3} {...props} />;
+export const h4 = (props: React.ComponentPropsWithoutRef<"h4">) => <Heading level={4} {...props} />;
+export const h5 = (props: React.ComponentPropsWithoutRef<"h5">) => <Heading level={5} {...props} />;
+export const h6 = (props: React.ComponentPropsWithoutRef<"h6">) => <Heading level={6} {...props} />;
+
 export function a({ href, className, ...props }: React.ComponentPropsWithoutRef<"a">) {
   if (!href) return <a {...props} className={cn("link", className)} />;
   return <Link href={href} {...props} className={className} />;
