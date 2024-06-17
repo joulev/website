@@ -30,6 +30,7 @@ const config: Config = {
         hover: "var(--bg-hover)",
         active: "var(--bg-active)",
         disabled: "var(--bg-disabled)",
+        "site-bg": "#293443",
       },
       separator: "var(--separator)",
       black: "black",
