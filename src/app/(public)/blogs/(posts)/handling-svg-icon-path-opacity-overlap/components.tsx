@@ -13,12 +13,11 @@ export function Problem() {
       <div className="grid grid-cols-2 divide-x divide-separator">
         <div className="flex flex-col items-center gap-3 pr-6">
           <svg
-            className="size-24"
+            className="size-24 stroke-[#313335] dark:stroke-[#c9cbcd]"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#c9cbcd"
             strokeOpacity={opacity}
             strokeWidth="2"
             strokeLinecap="round"
@@ -46,12 +45,11 @@ export function Problem() {
         </div>
         <div className="flex flex-col items-center gap-3 pl-6">
           <svg
-            className="size-24"
+            className="size-24 stroke-[#313335] dark:stroke-[#c9cbcd]"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#c9cbcd"
             strokeOpacity={opacity}
             strokeWidth="2"
             strokeLinecap="round"
@@ -102,12 +100,11 @@ export function FlaskConicalFlattening() {
       <div className="grid grid-cols-2 divide-x divide-separator">
         <div className="flex flex-col items-center gap-3 pr-6">
           <svg
-            className="size-24"
+            className="size-24 stroke-[#313335] dark:stroke-[#c9cbcd]"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#c9cbcd"
             strokeOpacity={opacity}
             strokeWidth="2"
             strokeLinecap="round"
@@ -133,12 +130,11 @@ export function FlaskConicalFlattening() {
         </div>
         <div className="flex flex-col items-center gap-3 pl-6">
           <svg
-            className="size-24"
+            className="size-24 stroke-[#313335] dark:stroke-[#c9cbcd]"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#c9cbcd"
             strokeOpacity={opacity}
             strokeWidth="2"
             strokeLinecap="round"
@@ -174,12 +170,11 @@ export function AtomReallyFlattening() {
       <div className="grid grid-cols-2 divide-x divide-separator">
         <div className="flex flex-col items-center gap-3 pr-6">
           <svg
-            className="size-24"
+            className="size-24 stroke-[#313335] dark:stroke-[#c9cbcd]"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#c9cbcd"
             strokeOpacity={opacity}
             strokeWidth="2"
             strokeLinecap="round"
@@ -216,9 +211,13 @@ export function AtomReallyFlattening() {
             stroke="none"
           >
             <title>"Really flattening" example: atom icon, flattened version</title>
-            <path fill="#c9cbcd" fillOpacity={opacity} d="M10 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0Z" />
             <path
-              fill="#c9cbcd"
+              className="fill-[#313335] dark:fill-[#c9cbcd]"
+              fillOpacity={opacity}
+              d="M10 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0Z"
+            />
+            <path
+              className="fill-[#313335] dark:fill-[#c9cbcd]"
               fillOpacity={opacity}
               fillRule="evenodd"
               clipRule="evenodd"
@@ -255,12 +254,11 @@ export function AtomMask() {
       <div className="grid grid-cols-2 divide-x divide-separator">
         <div className="flex flex-col items-center gap-3 pr-6">
           <svg
-            className="size-24"
+            className="size-24 stroke-[#313335] dark:stroke-[#c9cbcd]"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#c9cbcd"
             strokeOpacity={opacity}
             strokeWidth="2"
             strokeLinecap="round"
@@ -308,7 +306,13 @@ export function AtomMask() {
                 d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"
               />
             </mask>
-            <rect width="24" height="24" fill="#c9cbcd" fillOpacity={opacity} mask="url(#a)" />
+            <rect
+              width="24"
+              height="24"
+              className="fill-[#313335] dark:fill-[#c9cbcd]"
+              fillOpacity={opacity}
+              mask="url(#a)"
+            />
           </svg>
           <div className="text-lg">Masked ✅</div>
         </div>
@@ -337,12 +341,11 @@ export function AtomMaskCustomiseStrokeWidth() {
       <div className="grid grid-cols-2 divide-x divide-separator">
         <div className="flex flex-col items-center gap-3 pr-6">
           <svg
-            className="size-24"
+            className="size-24 stroke-[#313335] dark:stroke-[#c9cbcd]"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#c9cbcd"
             strokeOpacity={0.3}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
@@ -393,7 +396,13 @@ export function AtomMaskCustomiseStrokeWidth() {
                 d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"
               />
             </mask>
-            <rect width="24" height="24" fill="#c9cbcd" fillOpacity={0.3} mask="url(#a)" />
+            <rect
+              width="24"
+              height="24"
+              className="fill-[#313335] dark:fill-[#c9cbcd]"
+              fillOpacity={0.3}
+              mask="url(#a)"
+            />
           </svg>
           <div className="text-lg">Masked ✅</div>
         </div>
