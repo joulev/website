@@ -12,7 +12,7 @@ import type { Coordinate, Line } from "./types";
 
 const center = { lat: 1.352, lng: 103.811 };
 
-const mapStylesDark: google.maps.MapTypeStyle[] = [
+const mapStyles: google.maps.MapTypeStyle[] = [
   // Labels
   { featureType: "all", elementType: "labels", stylers: [{ visibility: "off" }] },
   { featureType: "transit", elementType: "labels", stylers: [{ visibility: "on" }] },
@@ -36,34 +36,6 @@ const mapStylesDark: google.maps.MapTypeStyle[] = [
     featureType: "transit.station.airport",
     elementType: "geometry",
     stylers: [{ color: "#161b2c" }],
-  },
-  { featureType: "transit.line", elementType: "geometry.stroke", stylers: [{ visibility: "off" }] },
-  { featureType: "transit.line", elementType: "geometry", stylers: [{ invert_lightness: true }] },
-];
-const mapStylesLight: google.maps.MapTypeStyle[] = [
-  // Labels
-  { featureType: "all", elementType: "labels", stylers: [{ visibility: "off" }] },
-  { featureType: "transit", elementType: "labels", stylers: [{ visibility: "on" }] },
-  { featureType: "administrative", elementType: "labels", stylers: [{ visibility: "on" }] },
-  { elementType: "labels.text.stroke", stylers: [{ color: "#d3d8e9" }] },
-  { elementType: "labels.text.fill", stylers: [{ color: "#5e74b0" }] },
-  {
-    featureType: "transit.station",
-    elementType: "labels.text.fill",
-    stylers: [{ color: "#002480" }],
-  },
-  // Geometry
-  { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#d3d8e9" }] },
-  { featureType: "water", elementType: "geometry", stylers: [{ color: "#eef0f7" }] },
-  { featureType: "poi", elementType: "geometry", stylers: [{ color: "#d3d8e9" }] },
-  { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#d3e5e9" }] },
-  { featureType: "road", elementType: "geometry", stylers: [{ color: "#c9cfe4" }] },
-  { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#d3d8e9" }] },
-  { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#bec7e0" }] },
-  {
-    featureType: "transit.station.airport",
-    elementType: "geometry",
-    stylers: [{ color: "#d3d8e9" }],
   },
   { featureType: "transit.line", elementType: "geometry.stroke", stylers: [{ visibility: "off" }] },
   { featureType: "transit.line", elementType: "geometry", stylers: [{ invert_lightness: true }] },
@@ -226,8 +198,8 @@ export const WalkingMap = memo(function WalkingMap() {
       options={{
         clickableIcons: false,
         disableDefaultUI: true,
-        styles: mapStylesLight,
-        backgroundColor: "#d3d8e9",
+        styles: mapStyles,
+        backgroundColor: "#161b2c",
         keyboardShortcuts: false,
       }}
       onClick={onClick}
