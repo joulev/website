@@ -159,3 +159,17 @@ hr {
 .elements-fade-in-on-load {
   animation: elements-enter 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+code[data-theme*=" "],
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+ 
+.dark {
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
+}

@@ -11,7 +11,12 @@ import { env } from "./src/env.mjs";
 const theme = createRequire(import.meta.url)("./.theme/theme.json");
 
 const withMDX = createMDX({
-  options: { rehypePlugins: [rehypeSlug, [rehypePrettyCode, { keepBackground: false, theme }]] },
+  options: {
+    rehypePlugins: [
+      rehypeSlug,
+      [rehypePrettyCode, { keepBackground: false, theme: { light: "vitesse-light", dark: theme } }],
+    ],
+  },
 });
 
 /** @type {import("next").NextConfig} */
