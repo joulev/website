@@ -1,6 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 
-import * as customComponents from "~/components/blogs";
+import * as customComponents from "~/components/blogs/mdx";
 import { Tweet } from "~/components/ui/tweet";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {

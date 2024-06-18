@@ -23,6 +23,7 @@ const config: Config = {
         prose: "var(--text-prose)",
         secondary: "var(--text-secondary)",
         tertiary: "var(--text-tertiary)",
+        "button-primary": "var(--text-button-primary)",
       },
       bg: {
         idle: "var(--bg-idle)",
@@ -30,7 +31,7 @@ const config: Config = {
         hover: "var(--bg-hover)",
         active: "var(--bg-active)",
         disabled: "var(--bg-disabled)",
-        "site-bg": "#293443",
+        "site-bg": "var(--site-bg)",
       },
       separator: "var(--separator)",
       black: "black",

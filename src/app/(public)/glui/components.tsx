@@ -1,5 +1,5 @@
 import { slug } from "github-slugger";
-import { h3 as H3 } from "~/components/blogs";
+import { h3 as H3 } from "~/components/blogs/mdx";
 import {
   Atom,
   ChevronDown,

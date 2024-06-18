@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { TitleBackgroundPattern } from "~/components/blogs/title-background-pattern";
 import { GitHub } from "~/components/icons";
 import { Title } from "~/components/title";
 import { LinkButton } from "~/components/ui/button";
@@ -11,16 +12,7 @@ export default function Page() {
     <main className="container max-w-screen-md">
       <Card className="flex flex-col p-0">
         <div className="bg-bg-darker pt-36 relative pb-6 sm:pb-12 px-6 sm:px-12">
-          <div
-            className="absolute inset-0 -z-10"
-            style={{
-              backgroundImage:
-                "url(\"data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg' %3E%3Ccircle cx='2' cy='2' r='2' fill='%23afafaf70' /%3E%3C/svg%3E\")",
-              backgroundPosition: "13px 16px",
-              maskImage: "linear-gradient(to top right, #0000 0%, #0003 50%, #000 100%)",
-              WebkitMaskImage: "linear-gradient(to top right, #0000 0%, #0003 50%, #000 100%)",
-            }}
-          />
+          <TitleBackgroundPattern />
           <div className="flex flex-col gap-6">
             <Title
               title="glui"

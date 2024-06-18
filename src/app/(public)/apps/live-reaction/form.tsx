@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 
-import { code as Code } from "~/components/blogs";
+import { code as Code } from "~/components/blogs/mdx";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 

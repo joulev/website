@@ -49,12 +49,12 @@ export function Collage({ photos, allowDelete }: { photos: Photo[]; allowDelete?
   return (
     <div
       className={cn(
-        "grid min-h-screen grid-cols-1 divide-x divide-separator transition duration-600 sm:grid-cols-2 lg:grid-cols-3",
+        "grid min-h-screen grid-cols-1 divide-x divide-[#8f8f8f50] transition duration-600 sm:grid-cols-2 lg:grid-cols-3",
         count === null ? "opacity-0" : "opacity-100",
       )}
     >
       {columns.map((column, i) => (
-        <div key={i} className="flex flex-col divide-y divide-separator">
+        <div key={i} className="flex flex-col divide-y divide-[#8f8f8f50]">
           {column.map(photo => (
             <TweetPhoto key={photo.storageKey} {...photo} allowDelete={allowDelete} />
           ))}

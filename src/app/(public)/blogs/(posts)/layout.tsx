@@ -1,7 +1,7 @@
+import { TitleBackgroundPattern } from "~/components/blogs/title-background-pattern";
 import { ChevronLeft } from "~/components/icons";
 import { LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
-
 import type { LayoutProps } from "./$types";
 import AboutTheAuthor from "./about-the-author.mdx";
 import {
@@ -17,16 +17,7 @@ export default function Layout({ children }: LayoutProps) {
     <main className="container max-w-screen-xl">
       <Card className="flex flex-col p-0">
         <div className="relative border-b border-separator bg-bg-darker px-6 pb-9 pt-36 md:pb-12 blog-lg:px-12">
-          <div
-            className="absolute inset-0 -z-10"
-            style={{
-              backgroundImage:
-                "url(\"data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg' %3E%3Ccircle cx='2' cy='2' r='2' fill='%23afafaf70' /%3E%3C/svg%3E\")",
-              backgroundPosition: "13px 16px",
-              maskImage: "linear-gradient(to top right, #0000 0%, #0003 50%, #000 100%)",
-              WebkitMaskImage: "linear-gradient(to top right, #0000 0%, #0003 50%, #000 100%)",
-            }}
-          />
+          <TitleBackgroundPattern />
           <div className="flex max-w-prose flex-col gap-6 blog-lg:gap-9 max-blog-lg:mx-auto">
             <PostedDate />
             <PostTitle />
