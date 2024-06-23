@@ -1170,7 +1170,7 @@
         "start": "TE22 Gardens by the Bay",
         "via": null,
         "end": "TE26 Marine Parade",
-        "underConstruction": true,
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.8689658, "lat": 1.2808037 },
           { "lng": 103.8696528, "lat": 1.2819621 },
@@ -1247,7 +1247,7 @@
         "start": "TE26 Marine Parade",
         "via": null,
         "end": "TE29 Bayshore",
-        "underConstruction": true,
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.9078356, "lat": 1.3040847 },
           { "lng": 103.9083428, "lat": 1.3041169 },
