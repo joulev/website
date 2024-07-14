@@ -56,3 +56,4 @@ export async function POST(req: Request) {
 }
 
 export const runtime = "edge";
+export const preferredRegion = ["sin1", "hnd1"];
