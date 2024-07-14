@@ -1,11 +1,8 @@
-import { OpenAIStream, StreamingTextResponse } from "ai";
-import { OpenAI } from "openai";
+import { openai } from "@ai-sdk/openai";
+import { streamText } from "ai";
 import * as v from "valibot";
 
-import { env } from "~/env.mjs";
 import { getSession } from "~/lib/auth/helpers";
-
-const openai = new OpenAI({ apiKey: env.OPENAI_API_KEY });
 
 const bodySchema = v.object({
   messages: v.array(
@@ -42,13 +39,12 @@ export async function POST(req: Request) {
   const { messages } = result.output;
 
   try {
-    const response = await openai.chat.completions.create({
-      model: "gpt-4-1106-preview",
+    const result = await streamText({
+      model: openai("gpt-4o"),
       messages: [{ role: "system", content: initialPrompt }, ...messages],
       temperature: 0.2,
-      stream: true,
     });
-    return new StreamingTextResponse(OpenAIStream(response));
+    return result.toAIStreamResponse();
   } catch (e) {
     console.error(e);
     return Response.json({}, { status: 500 });
