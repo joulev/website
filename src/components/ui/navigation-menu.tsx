@@ -21,7 +21,7 @@ export const NavigationMenu = forwardRef<
     <div className={cn("absolute top-full flex justify-center md:left-1/2 md:-translate-x-1/2")}>
       <NavigationMenuPrimitive.Viewport
         className={cn(
-          "card relative mt-4 h-[--radix-navigation-menu-viewport-height] w-full origin-[top_center] overflow-hidden rounded-full bg-bg-idle backdrop-blur transition-all",
+          "card relative mt-4 h-[--radix-navigation-menu-viewport-height] max-h-[calc(100dvh-180px)] w-full origin-[top_center] overflow-x-hidden overflow-y-auto no-scrollbar rounded-full bg-bg-idle backdrop-blur transition-all",
           "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90",
         )}
       />
