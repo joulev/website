@@ -19,6 +19,7 @@ const nextConfig = {
   experimental: {
     webpackBuildWorker: true,
     optimizePackageImports: ["shiki"],
+    serverComponentsExternalPackages: ["@aws-sdk/client-s3", "@aws-sdk/s3-request-presigner"],
   },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   images: {
