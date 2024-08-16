@@ -93,36 +93,6 @@ hr {
   /* [box-shadow:0_0_0_4px_transparent] // this gave the behaviour I wanted, but removing it makes the thing even better */
 }
 
-@keyframes page-enter {
-  0% {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  20% {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  80% {
-    opacity: 1;
-  }
-}
-.page-fade-in-on-load {
-  animation: page-enter 0.75s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: top center;
-}
-
-@keyframes elements-enter {
-  0% {
-    opacity: 0;
-  }
-  40% {
-    opacity: 0;
-  }
-}
-.elements-fade-in-on-load {
-  animation: elements-enter 1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 .no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
