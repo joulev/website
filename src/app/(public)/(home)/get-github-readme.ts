@@ -12,6 +12,7 @@ export async function getGithubReadme() {
 
   return Buffer.from(data.content, "base64")
     .toString("utf-8")
-    .split("<!-- EXCLUDE -->", 1)[0]
+    .split("<!-- START -->", 2)[1]
+    .split("<!-- END -->", 1)[0]
     .trim();
 }
