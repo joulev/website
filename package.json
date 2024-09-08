@@ -54,7 +54,7 @@
     "@vercel/speed-insights": "1.0.12",
     "ai": "3.3.21",
     "autoprefixer": "10.4.20",
-    "concurrently": "8.2.2",
+    "concurrently": "9.0.0",
     "cva": "1.0.0-beta.1",
     "discord-api-types": "0.37.98",
     "dotenv": "16.4.5",
