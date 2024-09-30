@@ -5,8 +5,7 @@ import { Title } from "~/components/title";
 import { Card } from "~/components/ui/card";
 import { formatTime } from "~/lib/blogs/utils";
 
-import { opengraphImage } from "~/app/opengraph";
-
+import { getMetadata } from "~/lib/seo";
 import { meta } from "./meta";
 import { PostCard } from "./post-card";
 
@@ -50,13 +49,8 @@ export default function Page() {
   );
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getMetadata({
   title: "joulev.dev » blogs",
   description: "My collection of weird knowledge",
-  openGraph: {
-    title: "joulev.dev » blogs",
-    description: "My collection of weird knowledge",
-    url: "/blogs",
-    ...opengraphImage,
-  },
-};
+  url: "/blogs",
+});

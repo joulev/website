@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Title } from "~/components/title";
 import { Card } from "~/components/ui/card";
 
-import { opengraphImage } from "~/app/opengraph";
+import { getMetadata } from "~/lib/seo";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -20,13 +20,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getMetadata({
   title: "joulev.dev » link",
   description: "A simple URL shortener",
-  openGraph: {
-    title: "joulev.dev » link",
-    description: "A simple URL shortener",
-    url: "/apps/link",
-    ...opengraphImage,
-  },
-};
+  url: "/apps/link",
+});

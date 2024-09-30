@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
-import { opengraphImage } from "~/app/opengraph";
-
+import { getMetadata } from "~/lib/seo";
 import { Editor } from "./editor";
 
 export default function Page() {
@@ -12,13 +11,8 @@ export default function Page() {
   );
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getMetadata({
   title: "joulev.dev » snippets",
   description: "Upload and share short code snippets",
-  openGraph: {
-    title: "joulev.dev » snippets",
-    description: "Upload and share short code snippets",
-    url: "/apps/snippets",
-    ...opengraphImage,
-  },
-};
+  url: "/apps/snippets",
+});

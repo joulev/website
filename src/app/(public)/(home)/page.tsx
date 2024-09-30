@@ -7,9 +7,8 @@ import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
 import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
 
-import { opengraphImage } from "~/app/opengraph";
-
 import { LinkButton } from "~/components/ui/button";
+import { getMetadata } from "~/lib/seo";
 import { getGithubReadme } from "./get-github-readme";
 import { GitHubStats } from "./github-stats";
 import { MusicData } from "./music-data";
@@ -241,13 +240,8 @@ export default function Page() {
   );
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getMetadata({
   title: "Vu Van Dung",
-  description: "Software developer. I build things for the web.",
-  openGraph: {
-    title: "Vu Van Dung",
-    description: "Software developer. I build things for the web.",
-    url: "/",
-    ...opengraphImage,
-  },
-};
+  description: "My personal homepage on the Internet",
+  url: "/",
+});

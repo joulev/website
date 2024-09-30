@@ -13,8 +13,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 
-import { opengraphImage } from "~/app/opengraph";
-
+import { getMetadata } from "~/lib/seo";
 import { NavigateButton } from "./navigate-button";
 
 function CreditDialog() {
@@ -82,13 +81,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getMetadata({
   title: "joulev.dev » irasuto",
   description: "My collection of illustrations",
-  openGraph: {
-    title: "joulev.dev » irasuto",
-    description: "My collection of illustrations",
-    url: "/apps/irasuto",
-    ...opengraphImage,
-  },
-};
+  url: "/apps/irasuto",
+});

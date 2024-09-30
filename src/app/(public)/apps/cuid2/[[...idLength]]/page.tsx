@@ -6,8 +6,7 @@ import { Balancer } from "react-wrap-balancer";
 import { CopyButton } from "~/components/copy-button";
 import { Card } from "~/components/ui/card";
 
-import { opengraphImage } from "~/app/opengraph";
-
+import { getMetadata } from "~/lib/seo";
 import type { PageProps, Params } from "./$types";
 import { DEFAULT_LENGTH, MAX_LENGTH, MIN_LENGTH } from "./constants";
 import { Form } from "./form";
@@ -43,16 +42,11 @@ export default function Page({ params }: PageProps) {
   );
 }
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getMetadata({
   title: "joulev.dev » cuid2",
   description: "Online cuid2 generator",
-  openGraph: {
-    title: "joulev.dev » cuid2",
-    description: "Online cuid2 generator",
-    url: "/apps/cuid2",
-    ...opengraphImage,
-  },
-};
+  url: "/apps/cuid2",
+});
 
 export const runtime = "edge";
 export const revalidate = 0;

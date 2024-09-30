@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { meta } from "~/app/(public)/blogs/meta";
-import { opengraphImage } from "~/app/opengraph";
+import { getMetadata } from "../seo";
 
 export function formatTime(date: Date) {
   // "10 December 2023"
@@ -15,20 +15,13 @@ export function makeMetadata(slug: string, overrideOg = false): Metadata {
   const title = `${metadata.title} | joulev.dev » blogs`;
   const description = `${metadata.description} A blog post by @joulev.`;
 
+  const defaultMetadata = getMetadata({ title, description, url: `/blogs/${slug}` });
   return {
-    title,
-    description,
+    ...defaultMetadata,
     openGraph: {
-      title,
-      description,
+      ...(overrideOg ? {} : defaultMetadata.openGraph),
       type: "article",
       url: `/blogs/${slug}`,
-      ...(overrideOg ? {} : opengraphImage),
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
     },
     alternates: {
       canonical: `/blogs/${slug}`,

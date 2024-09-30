@@ -4,6 +4,7 @@ import { Title } from "~/components/title";
 import { LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
+import { getMetadata } from "~/lib/seo";
 import Documentation from "./documentation.mdx";
 
 export default function Page() {
@@ -69,11 +70,10 @@ export default function Page() {
 }
 
 export const metadata: Metadata = {
-  title: "joulev.dev » glui",
-  description: "A glassmorphic component collection",
-  openGraph: {
+  ...getMetadata({
     title: "joulev.dev » glui",
     description: "A glassmorphic component collection",
     url: "/glui",
-  },
+  }),
+  openGraph: { url: "/glui" },
 };

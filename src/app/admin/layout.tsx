@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Logo } from "~/components/logo";
 import { Link } from "~/components/ui/link";
 import {
@@ -11,6 +12,7 @@ import {
 } from "~/components/ui/navigation-menu";
 import { signOut } from "~/lib/auth/config";
 import { getSession } from "~/lib/auth/helpers";
+import { getMetadata } from "~/lib/seo";
 
 function NavigationMenuListItem({
   href,
@@ -115,5 +117,14 @@ export default async function Layout({ children }: { children: React.ReactNode }
     </>
   );
 }
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+  ...getMetadata({
+    title: "joulev.dev » Admin portal",
+    description: "Internal",
+    url: "/admin",
+  }),
+};
 
 export const runtime = "edge";
