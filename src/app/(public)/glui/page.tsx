@@ -26,7 +26,7 @@ export default function Page() {
             <Title
               title="glui"
               titleLabel={
-                <span className="cursor-default select-none self-center rounded-full bg-bg-idle px-3 py-1 text-sm text-text-secondary backdrop-blur">
+                <span className="cursor-default select-none self-center rounded-full bg-bg-idle px-3 py-1 text-sm text-text-secondary">
                   work in progress
                 </span>
               }

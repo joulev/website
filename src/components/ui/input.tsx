@@ -22,7 +22,7 @@ export const Input = forwardRef<
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-full bg-bg-darker backdrop-blur",
+        "relative overflow-hidden rounded-full bg-bg-darker",
         disabled ? "opacity-50" : "hover-bg recessed",
       )}
       {...useHoverBackground({})}

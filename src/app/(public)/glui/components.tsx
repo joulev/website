@@ -106,7 +106,9 @@ function Showcase({
       {noCard ? (
         children
       ) : (
-        <Card className={cn("flex flex-col gap-6 not-prose", className)}>{children}</Card>
+        <Card className={cn("flex flex-col gap-6 not-prose backdrop-blur-none", className)}>
+          {children}
+        </Card>
       )}
     </section>
   );
@@ -367,8 +369,9 @@ export function NavigationMenuShowcase() {
     <Showcase title="Navigation Menu" noCard>
       <div className="flex flex-col items-center not-prose">
         <div>
-          <NavigationMenu>
-            <NavigationMenuList>
+          {/* This class is only here because Safari 18.0 is stupid https://discussions.apple.com/thread/255764118?sortBy=rank */}
+          <NavigationMenu className="[&_[data-navigation-menu-viewport]]:backdrop-blur-none">
+            <NavigationMenuList className="backdrop-blur-none">
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -416,9 +419,7 @@ export function NavigationMenuShowcase() {
             </NavigationMenuList>
           </NavigationMenu>
         </div>
-        <div className="grid h-[582px] place-items-center text-text-tertiary md:h-[320px]">
-          Interact with the navigation menu above.
-        </div>
+        <div className="h-[582px] md:h-[320px]" />
       </div>
     </Showcase>
   );

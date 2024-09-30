@@ -9,7 +9,7 @@ import { useHoverBackground } from "./hooks/use-hover-background";
 import { Link } from "./link";
 
 export const buttonVariants = cva({
-  base: "hover-bg inline-flex shrink-0 flex-row items-center justify-center gap-[--button-gap] rounded-full outline-offset-4 backdrop-blur transition disabled:cursor-not-allowed disabled:bg-bg-disabled disabled:text-text-tertiary",
+  base: "hover-bg inline-flex shrink-0 flex-row items-center justify-center gap-[--button-gap] rounded-full outline-offset-4 transition disabled:cursor-not-allowed disabled:bg-bg-disabled disabled:text-text-tertiary",
   variants: {
     variant: {
       primary: "bg-text-primary text-black shadow disabled:shadow-none",

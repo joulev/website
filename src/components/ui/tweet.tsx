@@ -16,8 +16,15 @@ function TweetContainer({
   children: React.ReactNode;
 }) {
   return (
-    <div className={cn("not-prose", className)}>
-      <Card className="mx-auto flex max-w-lg flex-col gap-6">{children}</Card>
+    <div>
+      <Card
+        className={cn(
+          "not-prose mx-auto flex max-w-lg flex-col gap-6 backdrop-blur-none",
+          className,
+        )}
+      >
+        {children}
+      </Card>
     </div>
   );
 }

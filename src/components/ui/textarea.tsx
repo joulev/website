@@ -22,7 +22,7 @@ export const TextArea = forwardRef<
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded bg-bg-darker backdrop-blur",
+        "relative overflow-hidden rounded bg-bg-darker",
         disabled ? "opacity-50" : "hover-bg recessed",
       )}
       {...useHoverBackground({})}

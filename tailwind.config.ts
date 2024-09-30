@@ -15,7 +15,7 @@ const config: Config = {
   ],
   theme: {
     borderRadius: { DEFAULT: "1.25rem", full: "2rem", none: "0" },
-    backdropBlur: { DEFAULT: "12px", lg: "24px" },
+    backdropBlur: { DEFAULT: "12px", lg: "24px", none: "" },
     container: { center: true, padding: "1.5rem" },
     colors: {
       text: {
