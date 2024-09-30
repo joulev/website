@@ -3,7 +3,10 @@
 import { useChat } from "ai/react";
 import { useCallback, useState } from "react";
 import Markdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import "./hide-katex-html.css";
 
 import { Title } from "~/components/title";
 import { Button } from "~/components/ui/button";
@@ -26,6 +29,7 @@ export function PageClient() {
 
   const submit = useCallback(async () => {
     setIsLoading(true);
+    await navigator.clipboard.writeText(prompt);
     try {
       await append({ role: "user", content: prompt });
       setPrompt("");
@@ -58,7 +62,11 @@ export function PageClient() {
                 {m.role === "user" ? "You" : "System"}
               </div>
               <div className="prose max-w-full">
-                <Markdown remarkPlugins={[remarkGfm]} components={{ pre: Pre, a: A }}>
+                <Markdown
+                  remarkPlugins={[remarkGfm, remarkMath]}
+                  rehypePlugins={[rehypeKatex]}
+                  components={{ pre: Pre, a: A }}
+                >
                   {m.content}
                 </Markdown>
               </div>
