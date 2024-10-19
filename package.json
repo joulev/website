@@ -66,7 +66,7 @@
     "graphql-request": "7.1.0",
     "immer": "10.1.1",
     "next": "14.2.15",
-    "next-auth": "5.0.0-beta.22",
+    "next-auth": "5.0.0-beta.23",
     "next-axiom": "1.5.1",
     "nextjs-route-types": "1.1.1",
     "nprogress": "0.2.0",
