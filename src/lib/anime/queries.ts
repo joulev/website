@@ -25,6 +25,10 @@ export const GET_ANIME = graphql(/* GraphQL */ `
             season
             seasonYear
             format
+            status
+            nextAiringEpisode {
+              episode
+            }
           }
         }
       }

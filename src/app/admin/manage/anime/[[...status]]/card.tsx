@@ -41,9 +41,12 @@ import {
 import type { AnimeListItem, AnimeListItemStatus } from "~/lib/anime/get-lists";
 import { constraintScore, convertSeason, getAccumulatedScore, getTitle } from "~/lib/anime/utils";
 import { cn } from "~/lib/cn";
-import { MediaFormat, MediaListStatus } from "~/lib/gql/graphql";
+import { MediaFormat, MediaListStatus, MediaStatus } from "~/lib/gql/graphql";
 
-function BottomPartTemplate({ text, children }: { text: string; children: React.ReactNode }) {
+function BottomPartTemplate({
+  text,
+  children,
+}: { text: React.ReactNode; children: React.ReactNode }) {
   return (
     <div className="flex flex-row flex-wrap items-end gap-x-3">
       <div className="flex-grow text-sm text-text-secondary">{text}</div>
@@ -125,6 +128,15 @@ function UpdateItemScore({ item, status }: { item: AnimeListItem; status: AnimeL
   );
 }
 
+function checkProgressBehind(item: AnimeListItem) {
+  if (item.media?.status !== MediaStatus.Releasing) return false;
+  const nextAiring = item.media?.nextAiringEpisode?.episode;
+  if (!nextAiring) return false;
+  const watchedEpisodes = item.progress ?? 0;
+  const behindBy = nextAiring - watchedEpisodes - 1;
+  return behindBy > 0;
+}
+
 function BottomPart({ item, status }: { item: AnimeListItem; status: AnimeListItemStatus }) {
   const { optimisticListsAct } = useAnimeData();
 
@@ -185,7 +197,13 @@ function BottomPart({ item, status }: { item: AnimeListItem; status: AnimeListIt
   switch (status) {
     case "watching":
       return (
-        <BottomPartTemplate text={`Progress: ${watchedEpisodes}/${totalEpisodes ?? "unknown"}`}>
+        <BottomPartTemplate
+          text={
+            <span className={cn(checkProgressBehind(item) && "text-yellow")}>
+              Progress: {watchedEpisodes}/{totalEpisodes ?? "unknown"}
+            </span>
+          }
+        >
           <Button variants={{ size: "icon-sm" }} onClick={increment}>
             <ChevronsRight />
           </Button>
