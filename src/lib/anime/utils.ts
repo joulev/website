@@ -1,6 +1,6 @@
 import * as v from "valibot";
 
-import type { MediaTitle } from "~/lib/gql/graphql";
+import type { MediaTitle } from "~/lib/gql/types";
 
 export function convertSeason(season: string) {
   return season[0] + season.slice(1).toLowerCase();

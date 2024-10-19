@@ -7,7 +7,9 @@ const config: CodegenConfig = {
   generates: {
     "src/lib/gql/": {
       preset: "client",
-      plugins: [],
+    },
+    "src/lib/gql/types.ts": {
+      plugins: ["typescript"],
     },
   },
 };
