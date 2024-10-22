@@ -1,38 +1,37 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import Form from "next/form";
 import { useState } from "react";
 
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { useTransitionWithNProgress } from "~/lib/hooks/use-nprogress";
+
+import { useFormStatus } from "react-dom";
+
+function SubmitButton({ disabled }: { disabled?: boolean }) {
+  const { pending } = useFormStatus();
+  return (
+    <Button type="submit" variants={{ variant: "primary" }} disabled={disabled || pending}>
+      Search
+    </Button>
+  );
+}
 
 export function SearchForm({ query }: { query: string | undefined }) {
-  const router = useRouter();
-  const pathname = usePathname();
   const [value, setValue] = useState(query ?? "");
-  const startTransition = useTransitionWithNProgress();
 
   return (
-    <form
-      className="flex flex-row gap-3"
-      onSubmit={e => {
-        e.preventDefault();
-        if (value)
-          startTransition(() => router.replace(`${pathname}?s=${encodeURIComponent(value)}`));
-      }}
-    >
+    <Form action="" className="flex flex-row gap-3">
       <div className="flex-grow">
         <Input
           placeholder="Anime title"
+          name="s"
           value={value}
           onValueChange={setValue}
           spellCheck={false}
         />
       </div>
-      <Button type="submit" variants={{ variant: "primary" }} disabled={!value}>
-        Search
-      </Button>
-    </form>
+      <SubmitButton disabled={!value} />
+    </Form>
   );
 }

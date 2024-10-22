@@ -21,7 +21,7 @@ async function getTemplate() {
 }
 
 export const GET: RouteHandler = async (_, { params }) => {
-  const { emoteId } = params;
+  const { emoteId } = await params;
   const [[smallEmote, largeEmote], template] = await Promise.all([
     getEmote(emoteId),
     getTemplate(),

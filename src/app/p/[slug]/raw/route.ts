@@ -235,7 +235,7 @@ const mimeTypes: Record<string, string> = {
 };
 
 export const GET: RouteHandler = async (_, { params }) => {
-  const snippet = await getSnippet(params.slug);
+  const snippet = await getSnippet((await params).slug);
   if (!snippet) notFound();
   return new Response(snippet.code, {
     headers: {

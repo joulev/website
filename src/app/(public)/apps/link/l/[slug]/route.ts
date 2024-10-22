@@ -6,7 +6,7 @@ import { shortLinks } from "~/lib/db/schema";
 import type { RouteHandler } from "./$types";
 
 const handler: RouteHandler = async (_, { params }) => {
-  const slug = params.slug;
+  const slug = (await params).slug;
   const results = await db.select().from(shortLinks).where(eq(shortLinks.slug, slug)).limit(1);
   const value = results.at(0);
   if (!value) return new Response("Not Found", { status: 404 });

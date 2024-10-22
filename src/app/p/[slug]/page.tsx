@@ -15,7 +15,7 @@ import { DropdownMenuItemCopyButton } from "./dropdown-menu-item-copy-button";
 import { getSnippet } from "./get-snippet";
 
 export default async function Page({ params }: PageProps) {
-  const snippet = await getSnippet(params.slug);
+  const snippet = await getSnippet((await params).slug);
   if (!snippet) notFound();
   return (
     <main className="container max-w-[100ch] py-18">
@@ -90,8 +90,8 @@ export default async function Page({ params }: PageProps) {
   );
 }
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const snippet = await getSnippet(params.slug);
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const snippet = await getSnippet((await params).slug);
   if (!snippet) return {};
   return {
     robots: { index: false, follow: false },

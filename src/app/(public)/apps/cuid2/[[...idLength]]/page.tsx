@@ -19,8 +19,8 @@ function getLength(params: Params) {
   return length;
 }
 
-export default function Page({ params }: PageProps) {
-  const length = getLength(params);
+export default async function Page({ params }: PageProps) {
+  const length = getLength(await params);
   const value = init({ length })();
   return (
     <main className="container max-w-screen-md">

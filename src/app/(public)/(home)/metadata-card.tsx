@@ -10,7 +10,7 @@ export function MetadataCard({
   left: React.ReactNode;
   right: React.ReactNode;
   title: string;
-  icon: (props: React.ComponentProps<"svg">) => JSX.Element;
+  icon: (props: React.ComponentProps<"svg">) => React.JSX.Element;
   href: string;
 }) {
   return (

@@ -19,7 +19,9 @@ const nextConfig = {
   experimental: {
     webpackBuildWorker: true,
     optimizePackageImports: ["shiki"],
-    serverComponentsExternalPackages: ["@aws-sdk/client-s3", "@aws-sdk/s3-request-presigner"],
+    staleTimes: {
+      dynamic: 30,
+    },
   },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   images: {
@@ -45,6 +47,7 @@ const nextConfig = {
       permanent: true,
     },
   ],
+  serverExternalPackages: ["@aws-sdk/client-s3", "@aws-sdk/s3-request-presigner"],
 };
 
 export default withMDX(withAxiom(withNextJSRouteTypes(nextConfig)));

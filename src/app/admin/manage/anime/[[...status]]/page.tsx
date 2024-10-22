@@ -1,8 +1,8 @@
 import type { PageProps, Params } from "./$types";
 import { PageClient } from "./page-client";
 
-export default function Page({ params }: PageProps) {
-  return <PageClient status={params.status} />;
+export default async function Page({ params }: PageProps) {
+  return <PageClient status={(await params).status} />;
 }
 
 export function generateStaticParams(): Params[] {
