@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { makeMetadata } from "~/lib/blogs/utils";
 import { cn } from "~/lib/cn";
@@ -19,11 +20,13 @@ const ltaIdentity = localFont({
 export default function Page() {
   return (
     <div className={cn("fixed inset-0", ltaIdentity.variable)}>
-      <ActiveSessionContextProvider>
-        <WalkingMap />
-        <Panel />
-        {/* <Legend /> */}
-      </ActiveSessionContextProvider>
+      <NuqsAdapter>
+        <ActiveSessionContextProvider>
+          <WalkingMap />
+          <Panel />
+          {/* <Legend /> */}
+        </ActiveSessionContextProvider>
+      </NuqsAdapter>
     </div>
   );
 }
