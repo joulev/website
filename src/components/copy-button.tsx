@@ -7,7 +7,7 @@ import { Button } from "~/components/ui/button";
 
 export function useCopyState(delay = 1000) {
   const [showCopied, setShowCopied] = useState(false);
-  const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [currentTimeout, setCurrentTimeout] = useState<Timer | null>(null);
   async function copy(content: string) {
     if (currentTimeout) clearTimeout(currentTimeout);
     await navigator.clipboard.writeText(content);
