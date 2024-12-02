@@ -52,12 +52,12 @@ export async function POST(req: Request) {
   const { messages } = result.output;
 
   try {
-    const result = await streamText({
+    const result = streamText({
       model: openai("gpt-4o"),
       messages: [{ role: "system", content: initialPrompt }, ...messages],
       temperature: 0.2,
     });
-    return result.toAIStreamResponse();
+    return result.toDataStreamResponse();
   } catch (e) {
     console.error(e);
     return Response.json({}, { status: 500 });
