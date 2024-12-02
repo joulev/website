@@ -13,6 +13,7 @@ export const {
   signOut,
   signIn,
 } = NextAuth({
+  trustHost: true,
   providers: [
     {
       id: "anilist",
