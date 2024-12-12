@@ -758,7 +758,7 @@
         "start": "NE18 Punggol Coast",
         "via": null,
         "end": "NE17 CP4 PTC Punggol",
-        "underConstruction": true,
+        "underConstruction": false,
         "coordinates": [
           { "lng": 103.9111188, "lat": 1.4133325 },
           { "lng": 103.9108344, "lat": 1.4121044 },
