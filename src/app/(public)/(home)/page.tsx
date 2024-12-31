@@ -111,7 +111,8 @@ export default function Page() {
               </div>
             </dl>
           </div>
-          <div className="flex flex-col sm:flex-row gap-6">
+          {/* Thanks LinkedIn Premium Trial */}
+          {/* <div className="flex flex-col sm:flex-row gap-6">
             <div className="flex flex-col gap-3 flex-grow">
               <h2 className="flex flex-row text-lg font-bold gap-3 items-center">
                 <svg viewBox="0 0 24 24" fill="none" className="size-8 text-text-secondary">
@@ -149,7 +150,7 @@ export default function Page() {
                 Contact
               </LinkButton>
             </div>
-          </div>
+          </div> */}
         </section>
         <section className="flex flex-col gap-6 p-6 sm:p-9">
           <h2 className="sr-only">About me</h2>
