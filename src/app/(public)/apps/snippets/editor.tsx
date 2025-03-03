@@ -7,7 +7,7 @@ import {
   type ThemeRegistrationAny,
   type ThemeRegistrationResolved,
   bundledLanguages,
-  getHighlighter,
+  createHighlighter,
   normalizeTheme,
 } from "shiki";
 
@@ -98,7 +98,7 @@ function ShikiEditor({ name, language, tabSize = 2, value, onChange }: ShikiEdit
   useEffect(() => {
     (async () => {
       const resolvedTheme = normalizeTheme(themeJson as unknown as ThemeRegistrationAny);
-      const highlighter = await getHighlighter({
+      const highlighter = await createHighlighter({
         themes: [resolvedTheme],
         langs: preloadedLanguages,
       });
