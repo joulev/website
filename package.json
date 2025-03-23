@@ -91,7 +91,7 @@
     "tailwindcss-animate": "1.0.7",
     "tailwindcss-bg-patterns": "0.3.0",
     "typescript": "5.8.2",
-    "valibot": "0.42.1",
+    "valibot": "1.0.0",
     "wrangler": "4.3.0",
     "ytmusic-api": "5.3.0",
     "zod": "3.24.2"
