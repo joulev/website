@@ -20,9 +20,9 @@ function processCode(code: string) {
 }
 
 async function highlightCode(code: string, language: string) {
-  const { normalizeTheme, getHighlighter } = await import("shiki");
+  const { normalizeTheme, createHighlighter } = await import("shiki");
   const theme = normalizeTheme(themeJson as unknown as import("shiki").ThemeRegistrationAny);
-  const highlighter = await getHighlighter({ themes: [theme], langs: [language] });
+  const highlighter = await createHighlighter({ themes: [theme], langs: [language] });
   return highlighter.codeToHtml(code, { theme: theme.name, lang: language });
 }
 
