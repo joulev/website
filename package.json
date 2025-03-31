@@ -29,7 +29,7 @@
     "@graphql-typed-document-node/core": "3.2.0",
     "@mdx-js/loader": "3.1.0",
     "@mdx-js/react": "3.1.0",
-    "@neondatabase/serverless": "0.10.4",
+    "@neondatabase/serverless": "1.0.0",
     "@next/mdx": "15.2.4",
     "@paralleldrive/cuid2": "2.2.2",
     "@parcel/watcher": "2.5.1",
