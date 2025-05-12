@@ -1,7 +1,7 @@
 "use client";
 
 import { SessionProvider, useSession } from "next-auth/react";
-
+import { RemoveScroll } from "react-remove-scroll";
 import { Logo } from "~/components/logo";
 import { Link } from "~/components/ui/link";
 import {
@@ -13,6 +13,7 @@ import {
   NavigationMenuMainLink,
   NavigationMenuTrigger,
 } from "~/components/ui/navigation-menu";
+import { cn } from "~/lib/cn";
 
 const navItems: { title: string; href: string; description: string }[] = [
   {
@@ -76,8 +77,8 @@ function NavigationMenuListItem({
 function Navigation() {
   const session = useSession();
   return (
-    <div className="fixed left-1/2 top-12 -translate-x-1/2 z-10">
-      <NavigationMenu>
+    <div className={cn("fixed top-12 inset-x-0 z-10", RemoveScroll.classNames.zeroRight)}>
+      <NavigationMenu className="mx-auto">
         <NavigationMenuList>
           <NavigationMenuItem className="grid size-10 place-items-center rounded-full">
             <Link href="/" className="group/logo-link" unstyled>
