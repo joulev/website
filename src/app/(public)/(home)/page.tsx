@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import { ExternalLink, GitHub, Mail } from "~/components/icons";
+import { GitHub, Mail } from "~/components/icons";
 import { Card } from "~/components/ui/card";
 import { Link } from "~/components/ui/link";
 import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
 
-import { LinkButton } from "~/components/ui/button";
 import { getMetadata } from "~/lib/seo";
 import { getGithubReadme } from "./get-github-readme";
 import { GitHubStats } from "./github-stats";
@@ -248,3 +247,5 @@ export const metadata: Metadata = getMetadata({
   description: "My personal homepage on the Internet",
   url: "/",
 });
+
+export const revalidate = 3600;
