@@ -4,11 +4,11 @@
   "scripts": {
     "check": "biome check .",
     "check:ci": "biome ci .",
-    "build": "bun download-assets && bun codegen && next build",
+    "build": "bun download-assets && bun codegen && next build --turbopack",
     "codegen": "graphql-codegen --config codegen.ts",
     "db:push": "drizzle-kit push",
     "deploy-worker": "wrangler deploy misc/multi-tenancy-worker.ts --name multi-tenant-on-website --compatibility-date 2023-12-05",
-    "dev": "concurrently \"bun codegen --watch\" \"next dev\"",
+    "dev": "concurrently \"bun codegen --watch\" \"next dev --turbopack\"",
     "download-assets": "bun run scripts/download-assets.ts",
     "format": "biome format --write .",
     "lint": "biome lint .",
