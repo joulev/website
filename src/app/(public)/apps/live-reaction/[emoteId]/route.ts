@@ -1,8 +1,6 @@
 import { notFound } from "next/navigation";
 import sharp from "sharp";
 
-import type { RouteHandler } from "./$types";
-
 async function getEmote(id: string | number) {
   const res = await fetch(`http://cdn.discordapp.com/emojis/${id}.png`);
   if (!res.ok) notFound();
@@ -20,7 +18,7 @@ async function getTemplate() {
   return sharp(buffer).png().toBuffer();
 }
 
-export const GET: RouteHandler = async (_, { params }) => {
+export async function GET(_: Request, { params }: RouteContext<"/apps/live-reaction/[emoteId]">) {
   const { emoteId } = await params;
   const [[smallEmote, largeEmote], template] = await Promise.all([
     getEmote(emoteId),
@@ -37,4 +35,4 @@ export const GET: RouteHandler = async (_, { params }) => {
   return new Response(output as BodyInit, {
     headers: { "Content-Type": "image/png", "Cache-Control": "public, max-age=604800, immutable" },
   });
-};
+}

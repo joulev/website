@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 
 import { getSnippet } from "../get-snippet";
-import type { RouteHandler } from "./$types";
 
 // Credit: GPT-4 Turbo
 const mimeTypes: Record<string, string> = {
@@ -234,7 +233,7 @@ const mimeTypes: Record<string, string> = {
   文言: "text/plain",
 };
 
-export const GET: RouteHandler = async (_, { params }) => {
+export async function GET(_: Request, { params }: RouteContext<"/p/[slug]/raw">) {
   const snippet = await getSnippet((await params).slug);
   if (!snippet) notFound();
   return new Response(snippet.code, {
@@ -246,7 +245,7 @@ export const GET: RouteHandler = async (_, { params }) => {
       "Access-Control-Allow-Headers": "Content-Type",
     },
   });
-};
+}
 
 export const revalidate = 0;
 export const runtime = "edge";

@@ -7,11 +7,10 @@ import { CopyButton } from "~/components/copy-button";
 import { Card } from "~/components/ui/card";
 
 import { getMetadata } from "~/lib/seo";
-import type { PageProps, Params } from "./$types";
 import { DEFAULT_LENGTH, MAX_LENGTH, MIN_LENGTH } from "./constants";
 import { Form } from "./form";
 
-function getLength(params: Params) {
+function getLength(params: Awaited<PageProps<"/apps/cuid2/[[...idLength]]">["params"]>) {
   if (!params.idLength) return DEFAULT_LENGTH;
   if (params.idLength.length !== 1) notFound();
   const length = Number.parseInt(params.idLength[0]);
@@ -19,7 +18,7 @@ function getLength(params: Params) {
   return length;
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: PageProps<"/apps/cuid2/[[...idLength]]">) {
   const length = getLength(await params);
   const value = init({ length })();
   return (

@@ -5,9 +5,7 @@ import { Plus } from "~/components/icons";
 import { LinkButton } from "~/components/ui/button";
 import { Link } from "~/components/ui/link";
 
-import type { PageProps } from "./$types";
-
-export default async function Page({ searchParams }: PageProps) {
+export default async function Page({ searchParams }: PageProps<"/apps/link/success">) {
   const slug = (await searchParams).slug;
   if (typeof slug !== "string" || slug.length === 0) redirect("/apps/link");
   const url = `https://l.joulev.dev/${slug}`;

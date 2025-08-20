@@ -10,11 +10,10 @@ import {
 } from "~/components/ui/dropdown-menu";
 import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
 
-import type { PageProps, Params } from "./$types";
 import { DropdownMenuItemCopyButton } from "./dropdown-menu-item-copy-button";
 import { getSnippet } from "./get-snippet";
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: PageProps<"/p/[slug]">) {
   const snippet = await getSnippet((await params).slug);
   if (!snippet) notFound();
   return (
@@ -90,7 +89,7 @@ export default async function Page({ params }: PageProps) {
   );
 }
 
-export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/p/[slug]">): Promise<Metadata> {
   const snippet = await getSnippet((await params).slug);
   if (!snippet) return {};
   return {

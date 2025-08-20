@@ -2,10 +2,15 @@
 import { usePathname } from "next/navigation";
 import { useLogger } from "next-axiom";
 import { LogLevel } from "next-axiom/dist/logger";
-import type { ErrorProps } from "./$types";
 import Image500 from "./500.webp";
 
-export default function ErrorComponent({ error, reset }: ErrorProps) {
+export default function ErrorComponent({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
   const pathname = usePathname();
   const log = useLogger({ source: "error.tsx" });
   log.logHttpRequest(

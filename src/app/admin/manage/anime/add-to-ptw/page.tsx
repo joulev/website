@@ -6,7 +6,6 @@ import { SEARCH_ANIME } from "~/lib/anime/queries";
 import { convertSeason, getTitle } from "~/lib/anime/utils";
 import { getAuthenticatedGraphQLClient } from "~/lib/auth/helpers";
 
-import type { PageProps } from "./$types";
 import { ActionButtons } from "./action-buttons";
 import { SearchForm } from "./search-form";
 
@@ -19,7 +18,7 @@ async function search(query: string | undefined) {
   return items;
 }
 
-export default async function Page(props: PageProps) {
+export default async function Page(props: PageProps<"/admin/manage/anime/add-to-ptw">) {
   const searchParams = await props.searchParams;
   const query = Array.isArray(searchParams.s) ? searchParams.s[0] : searchParams.s;
   const items = await search(query);

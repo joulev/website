@@ -2,19 +2,22 @@ import type { Metadata } from "next";
 
 import { getListTitleFromStatus } from "~/lib/anime/utils";
 
-import type { PageProps, Params } from "./$types";
 import { PageClient } from "./page-client";
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: PageProps<"/apps/anime/[[...status]]">) {
   return <PageClient status={(await params).status} />;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps<"/apps/anime/[[...status]]">): Promise<Metadata> {
   const status = (await params).status?.join("/") ?? "watching";
   return { title: getListTitleFromStatus(status, "404") };
 }
 
-export function generateStaticParams(): Params[] {
+export function generateStaticParams(): Awaited<
+  PageProps<"/apps/anime/[[...status]]">["params"]
+>[] {
   return [
     { status: [] },
     { status: ["watching"] },
