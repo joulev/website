@@ -1,11 +1,9 @@
 "use client";
 import { notFound } from "next/navigation";
-
+import { useMemo } from "react";
 import { List, ListContent, ListHeader } from "~/components/ui/lists";
 import type { AnimeListItem, AnimeListItemStatus, AnimeLists } from "~/lib/anime/get-lists";
 import { getListTitleFromStatus, getTitle } from "~/lib/anime/utils";
-
-import { useMemo } from "react";
 import { useAnimeData } from "./data-context";
 import { EmptyState } from "./empty-state";
 

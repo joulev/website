@@ -3,8 +3,12 @@ import type { Metadata } from "next";
 export function getMetadata({
   title,
   description,
-  url,
-}: { title: string; description: string; url: string }): Metadata {
+  // url,
+}: {
+  title: string;
+  description: string;
+  url: string;
+}): Metadata {
   return {
     title,
     description,

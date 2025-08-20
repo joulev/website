@@ -1,7 +1,7 @@
 "use client";
+import { usePathname } from "next/navigation";
 import { useLogger } from "next-axiom";
 import { LogLevel } from "next-axiom/dist/logger";
-import { usePathname } from "next/navigation";
 import type { ErrorProps } from "./$types";
 import Image500 from "./500.webp";
 

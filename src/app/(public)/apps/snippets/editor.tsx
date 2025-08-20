@@ -3,12 +3,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import {
-  type Highlighter,
-  type ThemeRegistrationAny,
-  type ThemeRegistrationResolved,
   bundledLanguages,
   createHighlighter,
+  type Highlighter,
   normalizeTheme,
+  type ThemeRegistrationAny,
+  type ThemeRegistrationResolved,
 } from "shiki";
 
 import themeJson from "~/../.theme/theme.json";

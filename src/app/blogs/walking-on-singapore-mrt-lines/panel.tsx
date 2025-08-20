@@ -318,7 +318,12 @@ function SessionTerminusDisplay({
   position,
   sm,
   children,
-}: { title: string; position: "left" | "right"; sm?: boolean; children: React.ReactNode }) {
+}: {
+  title: string;
+  position: "left" | "right";
+  sm?: boolean;
+  children: React.ReactNode;
+}) {
   return (
     <div
       className={cn(

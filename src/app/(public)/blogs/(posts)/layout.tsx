@@ -7,8 +7,8 @@ import AboutTheAuthor from "./about-the-author.mdx";
 import {
   Author,
   IncrementViews,
-  PostTitle,
   PostedDate,
+  PostTitle,
   ViewSourceHistory,
 } from "./client-components";
 

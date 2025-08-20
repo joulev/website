@@ -46,7 +46,10 @@ import { MediaFormat, MediaListStatus, MediaStatus } from "~/lib/gql/graphql";
 function BottomPartTemplate({
   text,
   children,
-}: { text: React.ReactNode; children: React.ReactNode }) {
+}: {
+  text: React.ReactNode;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-row flex-wrap items-end gap-x-3">
       <div className="flex-grow text-sm text-text-secondary">{text}</div>

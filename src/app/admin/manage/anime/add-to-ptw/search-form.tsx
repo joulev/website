@@ -2,11 +2,9 @@
 
 import Form from "next/form";
 import { useState } from "react";
-
+import { useFormStatus } from "react-dom";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-
-import { useFormStatus } from "react-dom";
 
 function SubmitButton({ disabled }: { disabled?: boolean }) {
   const { pending } = useFormStatus();
