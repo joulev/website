@@ -1,11 +1,12 @@
-import type { PageProps, Params } from "./$types";
 import { PageClient } from "./page-client";
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: PageProps<"/admin/manage/anime/[[...status]]">) {
   return <PageClient status={(await params).status} />;
 }
 
-export function generateStaticParams(): Params[] {
+export function generateStaticParams(): Awaited<
+  PageProps<"/admin/manage/anime/[[...status]]">["params"]
+>[] {
   return [
     { status: [] },
     { status: ["watching"] },

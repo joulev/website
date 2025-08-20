@@ -5,9 +5,7 @@ import { Plus } from "~/components/icons";
 import { LinkButton } from "~/components/ui/button";
 import { Link } from "~/components/ui/link";
 
-import type { PageProps } from "./$types";
-
-export default async function Page({ searchParams }: PageProps) {
+export default async function Page({ searchParams }: PageProps<"/admin/upload/success">) {
   const key = (await searchParams).key;
   if (typeof key !== "string" || key.length === 0) redirect("/admin/upload");
   const url = `https://r2.joulev.dev/${key}`;

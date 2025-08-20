@@ -2,7 +2,6 @@ import { ChevronLeft } from "~/components/icons";
 import { LinkButton } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 
-import type { LayoutProps } from "./$types";
 import AboutTheAuthor from "./about-the-author.mdx";
 import {
   Author,
@@ -12,7 +11,7 @@ import {
   ViewSourceHistory,
 } from "./client-components";
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children }: LayoutProps<"/blogs">) {
   return (
     <main className="container max-w-screen-xl">
       <Card className="flex flex-col p-0">

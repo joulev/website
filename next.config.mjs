@@ -2,7 +2,6 @@
 import { createRequire } from "node:module";
 import createMDX from "@next/mdx";
 import { withAxiom } from "next-axiom";
-import { withNextJSRouteTypes } from "nextjs-route-types";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 
@@ -50,4 +49,4 @@ const nextConfig = {
   serverExternalPackages: ["@aws-sdk/client-s3", "@aws-sdk/s3-request-presigner"],
 };
 
-export default withMDX(withAxiom(withNextJSRouteTypes(nextConfig)));
+export default withMDX(withAxiom(nextConfig));
