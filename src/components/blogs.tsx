@@ -61,7 +61,7 @@ export function pre(props: React.ComponentPropsWithoutRef<"pre">) {
     >
       <pre
         {...props}
-        className="m-0 ml-(--inner-left-margin) blog-lg:ml-(--p) overflow-y-hidden rounded-none bg-transparent p-0"
+        className="m-0! ml-(--inner-left-margin)! blog-lg:ml-(--p)! overflow-y-hidden rounded-none bg-transparent p-0!"
       />
       <ScrollBar orientation="horizontal" />
     </ScrollArea>
