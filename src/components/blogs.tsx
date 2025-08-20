@@ -55,8 +55,8 @@ export function pre(props: React.ComponentPropsWithoutRef<"pre">) {
     <ScrollArea
       className="-mx-(--p) blog-lg:max-w-(--lg-max-width) overflow-x-auto overflow-y-hidden px-0 py-3"
       style={{
-        "--lg-max-width": "calc(var(--prose-width) + 2 * var(--p))",
-        "--inner-left-margin": "max(calc((100vw - 3rem - var(--prose-width)) / 2), var(--p))",
+        "--lg-max-width": "calc(var(--max-width-prose) + 2 * var(--p))",
+        "--inner-left-margin": "max(calc((100vw - 3rem - var(--max-width-prose)) / 2), var(--p))",
       }}
     >
       <pre
