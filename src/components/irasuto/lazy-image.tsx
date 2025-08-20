@@ -10,7 +10,7 @@ export function LazyImage({
   alt,
   className,
   ...props
-}: React.ComponentProps<"img"> & { width: number; height: number }) {
+}: React.ComponentProps<"img"> & { src: string; width: number; height: number }) {
   const { ref, inView } = useInView();
   const [dataUrl, setDataUrl] = useState<string | null>(null);
 

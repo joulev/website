@@ -1,6 +1,7 @@
 "use client";
 
-import { useChat } from "ai/react";
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 import { useCallback, useState } from "react";
 import Markdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
@@ -23,7 +24,9 @@ function A({ href, ...props }: React.ComponentPropsWithoutRef<"a">) {
 }
 
 export function PageClient() {
-  const { messages, append } = useChat({ api: "/admin/chat/api" });
+  const { messages, sendMessage } = useChat({
+    transport: new DefaultChatTransport({ api: "/admin/chat/api" }),
+  });
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,13 +34,13 @@ export function PageClient() {
     setIsLoading(true);
     await navigator.clipboard.writeText(prompt);
     try {
-      await append({ role: "user", content: prompt });
+      await sendMessage({ role: "user", parts: [{ type: "text", text: prompt }] });
       setPrompt("");
     } catch {
       alert("Fetch failed, please try again later.");
     }
     setIsLoading(false);
-  }, [append, prompt]);
+  }, [sendMessage, prompt]);
 
   const onKeyDown = useCallback(
     async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -62,13 +65,20 @@ export function PageClient() {
                 {m.role === "user" ? "You" : "System"}
               </div>
               <div className="prose max-w-full">
-                <Markdown
-                  remarkPlugins={[remarkGfm, remarkMath]}
-                  rehypePlugins={[rehypeKatex]}
-                  components={{ pre: Pre, a: A }}
-                >
-                  {m.content}
-                </Markdown>
+                {m.parts.map((p, i) =>
+                  p.type === "text" ? (
+                    <Markdown
+                      key={i}
+                      remarkPlugins={[remarkGfm, remarkMath]}
+                      rehypePlugins={[rehypeKatex]}
+                      components={{ pre: Pre, a: A }}
+                    >
+                      {p.text}
+                    </Markdown>
+                  ) : (
+                    <div key={i}>Unknown type: {p.type}</div>
+                  ),
+                )}
               </div>
             </div>
           ))}
