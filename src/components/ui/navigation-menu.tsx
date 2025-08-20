@@ -22,7 +22,7 @@ export const NavigationMenu = forwardRef<
       <NavigationMenuPrimitive.Viewport
         data-navigation-menu-viewport
         className={cn(
-          "card relative mt-4 h-[--radix-navigation-menu-viewport-height] max-h-[calc(100dvh-180px)] w-full origin-[top_center] overflow-x-hidden overflow-y-auto no-scrollbar rounded-full bg-bg-idle backdrop-blur transition-all",
+          "card relative mt-4 h-(--radix-navigation-menu-viewport-height) max-h-[calc(100dvh-180px)] w-full origin-[top_center] overflow-x-hidden overflow-y-auto no-scrollbar rounded-full bg-bg-idle backdrop-blur transition-all",
           "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90",
         )}
       />
@@ -91,7 +91,7 @@ export const NavigationMenuTrigger = forwardRef<
   <NavigationMenuPrimitive.Trigger
     ref={ref}
     className={cn(
-      "hover-bg group/menu-trigger relative inline-flex w-max items-center justify-center rounded-full bg-transparent px-4 py-2 text-text-secondary transition-colors hover:bg-bg-idle hover:text-text-primary focus:outline-none active:bg-bg-active active:text-text-primary disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-bg-idle data-[active]:text-text-primary data-[state=open]:text-text-primary",
+      "hover-bg group/menu-trigger relative inline-flex w-max items-center justify-center rounded-full bg-transparent px-4 py-2 text-text-secondary transition-colors hover:bg-bg-idle hover:text-text-primary focus:outline-none active:bg-bg-active active:text-text-primary disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-bg-idle data-active:text-text-primary data-[state=open]:text-text-primary",
       className,
     )}
     {...useHoverBackground({ style, onMouseMove })}

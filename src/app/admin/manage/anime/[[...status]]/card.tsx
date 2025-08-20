@@ -52,7 +52,7 @@ function BottomPartTemplate({
 }) {
   return (
     <div className="flex flex-row flex-wrap items-end gap-x-3">
-      <div className="flex-grow text-sm text-text-secondary">{text}</div>
+      <div className="grow text-sm text-text-secondary">{text}</div>
       <div className="flex flex-row-reverse gap-3">{children}</div>
     </div>
   );
@@ -98,7 +98,7 @@ function UpdateItemScore({ item, status }: { item: AnimeListItem; status: AnimeL
                     : "text-text-secondary",
                 )}
               />
-              <div className="flex-grow">
+              <div className="grow">
                 <Input
                   value={scoresStr[i]}
                   onValueChange={value =>

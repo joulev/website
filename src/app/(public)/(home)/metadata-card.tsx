@@ -16,8 +16,8 @@ export function MetadataCard({
   return (
     <div className="recessed relative flex flex-row gap-3 overflow-hidden rounded p-3">
       {left}
-      <div className="flex min-w-0 flex-grow flex-col">
-        <div className="flex flex-grow flex-row justify-between">
+      <div className="flex min-w-0 grow flex-col">
+        <div className="flex grow flex-row justify-between">
           <h3 className="text-xs font-light uppercase tracking-widest text-text-tertiary">
             {title}
           </h3>

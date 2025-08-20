@@ -138,7 +138,7 @@ export function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
           </Button>
         </div>
         <div
-          className="grid grid-rows-[--rows] opacity-[--opacity] transition-all ease-in-out md:grid-rows-[1fr] md:opacity-100"
+          className="grid grid-rows-(--rows) opacity-(--opacity) transition-all ease-in-out md:grid-rows-[1fr] md:opacity-100"
           style={{ "--rows": expanded ? "1fr" : "0fr", "--opacity": expanded ? 1 : 0 }}
         >
           <div className="overflow-hidden">

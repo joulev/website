@@ -91,7 +91,7 @@ export const DropdownMenuItem = forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "hover-bg relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-[disabled]:pointer-events-none data-[disabled]:text-text-tertiary [&_svg]:size-4",
+      "hover-bg relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-disabled:pointer-events-none data-disabled:text-text-tertiary [&_svg]:size-4",
       className,
     )}
     {...props}
@@ -107,7 +107,7 @@ export const DropdownMenuCheckboxItem = forwardRef<
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      "hover-bg group/dropdown-checkbox relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:size-4",
+      "hover-bg group/dropdown-checkbox relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:size-4",
       className,
     )}
     checked={checked}
@@ -130,14 +130,14 @@ export const DropdownMenuRadioItem = forwardRef<
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      "hover-bg group/dropdown-checkbox relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:size-4",
+      "hover-bg group/dropdown-checkbox relative flex cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:size-4",
       className,
     )}
     {...props}
     {...useHoverBackground({ style, onMouseMove })}
   >
     <DropdownMenuPrimitive.ItemIndicator>
-      <Circle className="!size-2 fill-current" />
+      <Circle className="size-2! fill-current" />
     </DropdownMenuPrimitive.ItemIndicator>
     <div className="size-2 group-data-[state=checked]/dropdown-checkbox:hidden" />
     {children}

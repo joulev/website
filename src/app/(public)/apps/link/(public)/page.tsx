@@ -17,7 +17,7 @@ export default function Page() {
     <form action={publicCreateLink} className="flex flex-col gap-6 p-6">
       <div className="flex flex-row items-center gap-3">
         <div>https://l.joulev.dev/</div>
-        <div className="flex-grow">
+        <div className="grow">
           <Input
             placeholder="slug (optional)"
             value={slug}

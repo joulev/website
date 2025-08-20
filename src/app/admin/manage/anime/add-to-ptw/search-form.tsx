@@ -20,7 +20,7 @@ export function SearchForm({ query }: { query: string | undefined }) {
 
   return (
     <Form action="" className="flex flex-row gap-3">
-      <div className="flex-grow">
+      <div className="grow">
         <Input
           placeholder="Anime title"
           name="s"

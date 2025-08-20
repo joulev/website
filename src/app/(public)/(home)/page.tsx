@@ -112,7 +112,7 @@ export default function Page() {
           </div>
           {/* Thanks LinkedIn Premium Trial */}
           {/* <div className="flex flex-col sm:flex-row gap-6">
-            <div className="flex flex-col gap-3 flex-grow">
+            <div className="flex flex-col gap-3 grow">
               <h2 className="flex flex-row text-lg font-bold gap-3 items-center">
                 <svg viewBox="0 0 24 24" fill="none" className="size-8 text-text-secondary">
                   <title>Announcement</title>

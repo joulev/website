@@ -42,7 +42,7 @@ export default async function Page(props: PageProps) {
                   <div className="flex w-full flex-col gap-1.5">
                     <div className="truncate">{getTitle(item.title)}</div>
                     <div className="flex flex-row flex-wrap items-end gap-x-3">
-                      <div className="flex flex-grow flex-row items-center divide-x divide-separator text-sm text-text-secondary">
+                      <div className="flex grow flex-row items-center divide-x divide-separator text-sm text-text-secondary">
                         <Score
                           score={item.meanScore ? item.meanScore / 10 : undefined}
                           className="pr-3"

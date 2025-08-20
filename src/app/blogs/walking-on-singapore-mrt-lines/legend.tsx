@@ -43,7 +43,7 @@ function LineDescription({
   return (
     <div className="flex flex-row gap-3 items-center">
       <div
-        className={cn("w-16 border-t-2 border-[--colour]", isDashed && "border-dashed")}
+        className={cn("w-16 border-t-2 border-(--colour)", isDashed && "border-dashed")}
         style={{ "--colour": colour }}
       />
       <div>
