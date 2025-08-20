@@ -370,7 +370,7 @@ export function NavigationMenuShowcase() {
       <div className="flex flex-col items-center not-prose">
         <div>
           {/* This class is only here because Safari 18.0 is stupid https://discussions.apple.com/thread/255764118?sortBy=rank */}
-          <NavigationMenu className="[&_[data-navigation-menu-viewport]]:backdrop-blur-none">
+          <NavigationMenu className="**:data-navigation-menu-viewport:backdrop-blur-none">
             <NavigationMenuList className="backdrop-blur-none">
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>

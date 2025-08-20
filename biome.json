@@ -43,5 +43,13 @@
     "formatter": {
       "arrowParentheses": "asNeeded"
     }
+  },
+  "css": {
+    "linter": {
+      "enabled": false
+    },
+    "formatter": {
+      "enabled": false
+    }
   }
 }

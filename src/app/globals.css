@@ -1,34 +1,88 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+@plugin "tailwindcss-animate";
+@plugin "tailwindcss-bg-patterns";
+
+@config "./tailwind-typography.ts";
+
+@theme inline {
+  --font-*: initial;
+  --font-sans: var(--sans);
+  --font-mono: var(--mono);
+  --font-lta: var(--lta), var(--sans);
+}
+
+@theme {
+  --color-*: initial;
+  --color-text-primary: #fffffff5;
+  --color-text-prose: #ffffffba;
+  --color-text-secondary: #ffffff7c;
+  --color-text-tertiary: #afafaf70;
+  --color-bg-idle: #8080804d;
+  --color-bg-hover: #afafaf0c;
+  --color-bg-active: #afafaf42;
+  --color-bg-darker: #12121233;
+  --color-bg-disabled: #afafaf0c;
+  --color-bg-button-hover-bg: #afafaf30;
+  --color-bg-site-bg: #2a2a41;
+  --color-separator: #afafaf1c;
+  --color-black: black;
+  --color-white: white;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-red: #ff453a;
+  --color-orange: #ff9f0a;
+  --color-yellow: #ffd60a;
+  --color-green: #32d74b;
+  --color-mint: #66c4df;
+  --color-cyan: #5ac8f5;
+  --color-blue: #0a84ff;
+
+  --blur-*: initial;
+  --blur: 12px;
+  --blur-lg: 24px;
+  --blur-none: 0px;
+
+  --radius-*: initial;
+  --radius: 1.25rem;
+  --radius-full: 2rem;
+  --radius-none: 0;
+
+  --default-transition-duration: 300ms;
+
+  --breakpoint-blog-lg: 1150px;
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@utility max-w-prose {
+  max-width: 700px !important;
+}
+
+@utility error-page-link {
+  @apply text-text-primary underline underline-offset-4 decoration-text-tertiary;
+}
 
 @layer base {
   :root {
-    --text-primary: #fffffff5;
-    --text-prose: #ffffffba;
-    --text-secondary: #ffffff7c;
-    --text-tertiary: #afafaf70;
-    --bg-idle: #8080804d;
-    --bg-hover: #afafaf0c;
-    --bg-active: #afafaf42;
-    --bg-darker: #12121233;
-    --bg-disabled: #afafaf0c;
-    --bg-button-hover-bg: #afafaf30;
-    --separator: #afafaf1c;
-    --red: #ff453a;
-    --orange: #ff9f0a;
-    --yellow: #ffd60a;
-    --green: #32d74b;
-    --mint: #66c4df;
-    --cyan: #5ac8f5;
-    --blue: #0a84ff;
-    --prose-width: theme(maxWidth.prose)
+    --prose-width: 700px;
   }
-}
 
-@layer utilities {
-  .error-page-link {
-    @apply text-text-primary underline underline-offset-4 decoration-text-tertiary
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-separator, currentColor);
   }
 }
 
@@ -78,7 +132,7 @@ hr {
 }
 
 .hover-bg {
-  @apply relative overflow-hidden [--hover-bg-colour:--bg-button-hover-bg] before:absolute before:inset-0 before:-z-10 before:opacity-0 before:transition hover:before:opacity-100 disabled:before:opacity-0;
+  @apply relative overflow-hidden [--hover-bg-colour:var(--color-bg-button-hover-bg)] before:absolute before:inset-0 before:-z-10 before:opacity-0 before:transition hover:before:opacity-100 disabled:before:opacity-0;
   &::before {
     background: radial-gradient(
       80% 100% at var(--hover-bg-left) var(--hover-bg-top),
@@ -89,7 +143,7 @@ hr {
 }
 
 .link {
-  @apply rounded-[4px] font-semibold text-cyan no-underline transition hover:bg-bg-idle hover:[box-shadow:0_0_0_4px_var(--bg-idle)] active:bg-bg-active active:[box-shadow:0_0_0_4px_var(--bg-active)];
+  @apply rounded-[4px] font-semibold text-cyan no-underline transition hover:bg-bg-idle hover:[box-shadow:0_0_0_4px_var(--color-bg-idle)] active:bg-bg-active active:[box-shadow:0_0_0_4px_var(--color-bg-active)];
   /* [box-shadow:0_0_0_4px_transparent] // this gave the behaviour I wanted, but removing it makes the thing even better */
 }
 

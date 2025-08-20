@@ -43,7 +43,7 @@ function TweetHeader({ tweet }: { tweet: EnrichedTweet }) {
           className="rounded-full"
         />
       </Link>
-      <div className="flex min-w-0 flex-grow flex-col items-start">
+      <div className="flex min-w-0 grow flex-col items-start">
         <Link href={user.url} unstyled className="max-w-full truncate font-bold text-text-primary">
           {user.name}
         </Link>

@@ -130,7 +130,7 @@ function ShikiEditor({ name, language, tabSize = 2, value, onChange }: ShikiEdit
   const shikiIsLoaded = shiki && !(shiki instanceof Error);
   return (
     <div className="flex flex-row font-mono text-sm">
-      <ScrollArea className="flex-grow overflow-x-auto">
+      <ScrollArea className="grow overflow-x-auto">
         <div className="relative w-fit min-w-full">
           {shikiIsLoaded ? (
             <div
@@ -140,7 +140,7 @@ function ShikiEditor({ name, language, tabSize = 2, value, onChange }: ShikiEdit
                   theme: shiki.theme.name,
                 }),
               }}
-              className="[&_pre]:!bg-transparent [&_pre]:p-6 [&_pre]:pl-[60px] [&_pre]:pt-4"
+              className="[&_pre]:bg-transparent! [&_pre]:p-6 [&_pre]:pl-[60px] [&_pre]:pt-4"
             />
           ) : (
             <div>

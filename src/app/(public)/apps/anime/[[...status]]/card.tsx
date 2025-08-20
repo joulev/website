@@ -57,7 +57,7 @@ export function Card({ item, status }: { item: AnimeListItem; status: AnimeListI
       <Link href={`https://anilist.co/anime/${item.mediaId}`} unstyled>
         <div className="flex w-full flex-row gap-6">
           {/* min-w-0 is required here for truncating to work */}
-          <div className="flex min-w-0 flex-grow flex-col justify-between gap-3">
+          <div className="flex min-w-0 grow flex-col justify-between gap-3">
             <div className="truncate">{getTitle(item.media?.title)}</div>
             <BottomPart item={item} status={status} />
           </div>

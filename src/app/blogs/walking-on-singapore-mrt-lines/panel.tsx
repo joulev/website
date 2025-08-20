@@ -67,7 +67,7 @@ function Stat({ label, value, unit }: { label: string; value: React.ReactNode; u
 function LineBadge({ line }: { line: Line }) {
   return (
     <span
-      className="w-[3em] h-[1.8em] rounded-[0.6em/50%] border border-white bg-[--bg] text-center font-lta text-[0.7em] font-medium text-[--fg] inline-flex justify-center items-center"
+      className="w-[3em] h-[1.8em] rounded-[0.6em/50%] border border-white bg-(--bg) text-center font-lta text-[0.7em] font-medium text-(--fg) inline-flex justify-center items-center"
       style={{ "--bg": line.colour, "--fg": line.textColour }}
     >
       <span>{line.lineCode === "LRT" ? line.lineCode : `${line.lineCode}L`}</span>
@@ -149,7 +149,7 @@ const StationBadge = memo(function StationBadge({ station }: { station: string }
               {part.map((code, j) => (
                 <Fragment key={j}>
                   <span
-                    className="flex h-[1.8em] w-[3.2em] flex-row items-center justify-center gap-[0.2em] bg-[--bg] leading-none text-[--fg]"
+                    className="flex h-[1.8em] w-[3.2em] flex-row items-center justify-center gap-[0.2em] bg-(--bg) leading-none text-(--fg)"
                     style={{
                       "--bg": code.lineDetails?.colour ?? LRT_BG,
                       "--fg": code.lineDetails?.textColour ?? LRT_FG,
@@ -168,14 +168,14 @@ const StationBadge = memo(function StationBadge({ station }: { station: string }
             {i < parts.length - 1 ? (
               <span className="relative z-10 -mx-0.5 flex h-2 w-4 shrink-0 flex-row">
                 <span
-                  className="mt-px h-1.5 w-[10px] shrink-0 bg-[--bg]"
+                  className="mt-px h-1.5 w-[10px] shrink-0 bg-(--bg)"
                   style={{
                     "--bg": parts[i][parts[i].length - 1].lineDetails?.colour ?? LRT_BG,
                     clipPath: "polygon(0 0, 10px 0, 6px 100%, 0 100%)",
                   }}
                 />
                 <span
-                  className="-ml-1 mt-px h-1.5 w-[10px] shrink-0 bg-[--bg]"
+                  className="-ml-1 mt-px h-1.5 w-[10px] shrink-0 bg-(--bg)"
                   style={{
                     "--bg": parts[i + 1][parts[i + 1].length - 1].lineDetails?.colour ?? LRT_BG,
                     clipPath: "polygon(4px 0, 10px 0, 10px 100%, 0 100%)",
@@ -288,7 +288,7 @@ function Overview() {
 function LineOverview({ line }: { line: Line }) {
   const stats = useMemo(() => getStats(line.sessions), [line.sessions]);
   return (
-    <ScrollArea className="flex flex-grow flex-col overflow-y-auto">
+    <ScrollArea className="flex grow flex-col overflow-y-auto">
       <div className="flex flex-col gap-6 p-6">
         <div className="flex flex-row items-center gap-3">
           <span className="text-2xl">
@@ -343,7 +343,7 @@ function SessionOverview({ line, session }: { line: Line; session: Session }) {
   const sessionIndex = activeSession.sessionIndex;
   const date = new Date(session.time);
   return (
-    <ScrollArea className="flex flex-grow flex-col overflow-y-auto">
+    <ScrollArea className="flex grow flex-col overflow-y-auto">
       <div className="flex flex-col gap-6 p-6">
         <div className="flex flex-row items-center gap-3">
           <span className="text-2xl">
@@ -550,7 +550,7 @@ function SessionSelector() {
       <div className="bg-bg-darker flex flex-row">
         <SessionPrevNextButton />
         <div
-          className="flex-grow grid grid-cols-[repeat(var(--num),minmax(0,1fr))] divide-x divide-separator border-x border-separator"
+          className="grow grid grid-cols-[repeat(var(--num),minmax(0,1fr))] divide-x divide-separator border-x border-separator"
           style={{ "--num": line.sessions.length }}
         >
           {line.sessions.map((_, i) => (
@@ -572,7 +572,7 @@ function LineSelectorButton({ line, index }: { line: Line; index: number }) {
       {...useHoverBackground({ style: { "--bg": line.colour, "--fg": line.textColour } })}
       className={cn(
         "font-medium h-9 flex flex-col justify-center items-center",
-        lineIsActive ? "bg-[--bg] text-[--fg]" : "hover-bg text-text-primary",
+        lineIsActive ? "bg-(--bg) text-(--fg)" : "hover-bg text-text-primary",
       )}
       onClick={() => setActiveSession({ lineIndex: index, sessionIndex: null })}
     >

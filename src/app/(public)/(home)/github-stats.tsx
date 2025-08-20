@@ -57,7 +57,7 @@ function BackgroundPattern() {
     const x = Math.sin(seed++) * 10000;
     return x - Math.floor(x);
   }
-  const colours = ["var(--bg-idle)", "var(--bg-hover)", "var(--bg-active)"];
+  const colours = ["var(--color-bg-idle)", "var(--color-bg-hover)", "var(--color-bg-active)"];
   const days = new Array(49)
     .fill(null)
     .map(_ => colours[Math.floor(seededRandom() * colours.length)]);

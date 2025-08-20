@@ -77,10 +77,10 @@ export default async function Page({ params }: PageProps) {
               ))}
             </div>
           </div>
-          <ScrollArea className="flex-grow overflow-x-auto pb-6">
+          <ScrollArea className="grow overflow-x-auto pb-6">
             <div
               dangerouslySetInnerHTML={{ __html: snippet.shikiOutput || "" }}
-              className="inline-block min-w-full pr-6 text-sm selection:bg-bg-idle [&_pre]:!bg-transparent"
+              className="inline-block min-w-full pr-6 text-sm selection:bg-bg-idle [&_pre]:bg-transparent!"
             />
             <ScrollBar orientation="horizontal" />
           </ScrollArea>

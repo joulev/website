@@ -16,8 +16,8 @@ export const Slider = forwardRef<
   >
     <SliderPrimitive.Track className="recessed relative flex h-6 w-full grow flex-row overflow-hidden rounded-full bg-bg-darker">
       <div className="w-6" />
-      <div className="relative flex-grow">
-        <SliderPrimitive.Range className="absolute !-left-6 h-full rounded-full bg-text-secondary shadow-[5px_0px_4px_rgba(0,0,0,0.18)]" />
+      <div className="relative grow">
+        <SliderPrimitive.Range className="absolute -left-6! h-full rounded-full bg-text-secondary shadow-[5px_0px_4px_rgba(0,0,0,0.18)]" />
       </div>
     </SliderPrimitive.Track>
     <SliderPrimitive.Thumb className="group relative block size-6 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">

@@ -55,7 +55,7 @@ export function PageClient() {
         <div className="border-b border-separator bg-bg-darker p-6 md:w-64 md:shrink-0 md:border-r">
           <Title title="chat" subtitle="Current model: GPT&#8209;4o" />
         </div>
-        <div className="flex max-w-full flex-grow flex-col divide-y divide-separator overflow-x-auto">
+        <div className="flex max-w-full grow flex-col divide-y divide-separator overflow-x-auto">
           {messages.map((m, index) => (
             <div key={index} className="flex flex-col gap-3 p-6">
               <div className="select-none text-xs uppercase tracking-widest text-text-secondary">

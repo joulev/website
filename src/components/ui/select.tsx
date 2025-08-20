@@ -58,7 +58,7 @@ export const SelectContent = forwardRef<
         <SelectPrimitive.Viewport
           className={cn(
             position === "popper" &&
-              "flex h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)] flex-col gap-1 p-3",
+              "flex h-(--radix-select-trigger-height) w-full min-w-(--radix-select-trigger-width) flex-col gap-1 p-3",
           )}
         >
           {children}
@@ -91,7 +91,7 @@ export const SelectItem = forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "hover-bg group/select-item relative flex w-full cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-[disabled]:pointer-events-none data-[disabled]:text-text-tertiary [&_svg]:size-4",
+      "hover-bg group/select-item relative flex w-full cursor-default select-none flex-row items-center gap-2 rounded-full px-3 py-2 text-sm outline-none transition-colors hover:bg-bg-hover active:bg-bg-active data-disabled:pointer-events-none data-disabled:text-text-tertiary [&_svg]:size-4",
       className,
     )}
     {...props}

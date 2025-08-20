@@ -39,7 +39,7 @@ export const SidebarHeaderTitle = forwardRef<HTMLDivElement, BaseProps<"h1">>(
     return (
       <Component
         {...props}
-        className={cn("flex-grow truncate text-xl font-semibold", className)}
+        className={cn("grow truncate text-xl font-semibold", className)}
         ref={ref}
       />
     );
@@ -93,7 +93,7 @@ export const SidebarSectionHeading = forwardRef<
       onClick={toggle}
       ref={ref}
     >
-      <span className="h-[30px] flex-grow truncate text-left">{children}</span>
+      <span className="h-[30px] grow truncate text-left">{children}</span>
       {hideCollapseButton || <SidebarSectionHeadingCollapseButton />}
     </button>
   );
@@ -139,7 +139,7 @@ export const SidebarSectionItem = forwardRef<
 export const SidebarSectionItemName = forwardRef<HTMLDivElement, BaseProps<"div">>(
   function SidebarSectionItemName({ asChild, className, ...props }, ref) {
     const Component = asChild ? Slot : "div";
-    return <Component {...props} className={cn("flex-grow truncate", className)} ref={ref} />;
+    return <Component {...props} className={cn("grow truncate", className)} ref={ref} />;
   },
 );
 

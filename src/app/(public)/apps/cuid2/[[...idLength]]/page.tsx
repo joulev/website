@@ -34,7 +34,7 @@ export default async function Page({ params }: PageProps) {
           </div>
         </div>
         <div className="flex flex-col gap-6 p-6 sm:flex-row sm:items-center">
-          <div className="flex-shrink-0 flex-grow">Generate a cuid2 string with length:</div>
+          <div className="shrink-0 grow">Generate a cuid2 string with length:</div>
           <Form initialValue={length} />
         </div>
       </Card>

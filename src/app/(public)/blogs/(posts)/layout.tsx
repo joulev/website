@@ -34,7 +34,7 @@ export default function Layout({ children }: LayoutProps) {
           </div>
         </div>
         <div className="flex flex-col divide-y divide-separator blog-lg:flex-row blog-lg:divide-x blog-lg:divide-y-0">
-          <article className="prose max-w-none px-[--p] py-12 [--p:24px] *:mx-auto *:max-w-prose blog-lg:[--p:48px] shrink-0">
+          <article className="prose max-w-none px-(--p) py-12 [--p:24px] *:mx-auto *:max-w-prose blog-lg:[--p:48px] shrink-0">
             {children}
             <div className="not-prose">
               <LinkButton href="/blogs" className="mt-6 text-text-primary no-underline">
@@ -43,7 +43,7 @@ export default function Layout({ children }: LayoutProps) {
             </div>
           </article>
           <aside className="flex flex-col p-6 blog-lg:p-12">
-            <div className="flex-grow max-blog-lg:hidden" />
+            <div className="grow max-blog-lg:hidden" />
             <div className="sticky bottom-12 flex w-full flex-col gap-6 blog-lg:gap-12 text-sm">
               <div className="flex flex-col gap-3 max-w-prose mx-auto w-full">
                 <h2 className="font-semibold text-base text-text-primary">About the author</h2>
