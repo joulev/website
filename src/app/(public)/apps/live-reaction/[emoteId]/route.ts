@@ -34,7 +34,7 @@ export const GET: RouteHandler = async (_, { params }) => {
     { input: largeEmote, top: 68, left: 82 },
   ]);
   const output = await canvas.png().toBuffer();
-  return new Response(output, {
+  return new Response(output as BodyInit, {
     headers: { "Content-Type": "image/png", "Cache-Control": "public, max-age=604800, immutable" },
   });
 };
