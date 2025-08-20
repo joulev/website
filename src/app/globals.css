@@ -11,6 +11,9 @@
   --font-sans: var(--sans);
   --font-mono: var(--mono);
   --font-lta: var(--lta), var(--sans);
+
+  --default-font-family: var(--sans);
+  --default-mono-font-family: var(--mono);
 }
 
 @theme {
