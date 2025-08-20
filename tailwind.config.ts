@@ -1,9 +1,9 @@
 import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
 import animate from "tailwindcss-animate";
 // @ts-expect-error
 import bgPatterns from "tailwindcss-bg-patterns";
-import defaultTheme from "tailwindcss/defaultTheme";
 
 const config: Config = {
   future: { hoverOnlyWhenSupported: true },

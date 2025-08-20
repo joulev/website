@@ -1,6 +1,6 @@
 "use client";
 import { produce } from "immer";
-import { useMemo, useOptimistic } from "react";
+import { useOptimistic } from "react";
 import type { AnimeListItemStatus, AnimeLists } from "~/lib/anime/get-lists";
 import { getAccumulatedScore } from "~/lib/anime/utils";
 import { generateContext } from "~/lib/hooks/generate-context";
@@ -68,7 +68,10 @@ function optimisticReducer(current: OptimisticValue, action: ReducerAction): Opt
 export function AnimeDataContextProvider({
   value,
   children,
-}: { value: OptimisticValue; children: React.ReactNode }) {
+}: {
+  value: OptimisticValue;
+  children: React.ReactNode;
+}) {
   const [optimisticValue, optimisticListsAct] = useOptimistic(value, optimisticReducer);
   useNProgress(optimisticValue.pending);
   return (

@@ -1,9 +1,9 @@
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { AxiomWebVitals } from "next-axiom";
 import { Hanken_Grotesk as HankenGrotesk } from "next/font/google";
 import localFont from "next/font/local";
+import { AxiomWebVitals } from "next-axiom";
 
 import { cn } from "~/lib/cn";
 

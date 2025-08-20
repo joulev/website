@@ -7,8 +7,8 @@ import * as v from "valibot";
 
 import { env } from "~/env.mjs";
 import { db } from "~/lib/db";
-import { photos as photosSchema } from "~/lib/db/schema";
 import type { NewIrasutoPhoto } from "~/lib/db/schema";
+import { photos as photosSchema } from "~/lib/db/schema";
 import { uploadPhotoToR2 } from "~/lib/s3/irasuto";
 
 const schema = v.object({ password: v.literal(env.PASSWORD), url: v.pipe(v.string(), v.url()) });

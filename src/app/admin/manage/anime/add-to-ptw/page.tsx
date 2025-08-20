@@ -48,13 +48,11 @@ export default async function Page(props: PageProps) {
                           className="pr-3"
                         />
                         <div className="hidden pl-3 sm:block">
-                          {item.genres && item.genres.length > 0 ? (
-                            <>{item.genres.slice(0, 3).join(", ")}</>
-                          ) : item.season && item.seasonYear ? (
-                            `${convertSeason(item.season)} ${item.seasonYear}`
-                          ) : (
-                            "Season N/A"
-                          )}
+                          {item.genres && item.genres.length > 0
+                            ? item.genres.slice(0, 3).join(", ")
+                            : item.season && item.seasonYear
+                              ? `${convertSeason(item.season)} ${item.seasonYear}`
+                              : "Season N/A"}
                         </div>
                       </div>
                       <ActionButtons id={item.id} />

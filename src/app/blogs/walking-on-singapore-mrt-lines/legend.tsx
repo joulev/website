@@ -34,7 +34,12 @@ function LineDescription({
   name,
   isDashed,
   unopened,
-}: { colour: string; name: string; isDashed?: boolean; unopened?: boolean }) {
+}: {
+  colour: string;
+  name: string;
+  isDashed?: boolean;
+  unopened?: boolean;
+}) {
   return (
     <div className="flex flex-row gap-3 items-center">
       <div

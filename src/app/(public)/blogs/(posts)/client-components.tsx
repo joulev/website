@@ -3,12 +3,10 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { Balancer } from "react-wrap-balancer";
-
+import { useHoverBackground } from "~/components/ui/hooks/use-hover-background";
 import { Link } from "~/components/ui/link";
 import { incrementViews } from "~/lib/blogs/increment-view";
 import { formatTime } from "~/lib/blogs/utils";
-
-import { useHoverBackground } from "~/components/ui/hooks/use-hover-background";
 import { meta } from "../meta";
 
 function useMetadata() {
