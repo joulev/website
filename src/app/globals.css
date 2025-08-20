@@ -52,6 +52,8 @@
   --default-transition-duration: 300ms;
 
   --breakpoint-blog-lg: 1150px;
+
+  --max-width-prose: 700px;
 }
 
 @utility container {
@@ -59,19 +61,11 @@
   padding-inline: 1.5rem;
 }
 
-@utility max-w-prose {
-  max-width: 700px !important;
-}
-
 @utility error-page-link {
   @apply text-text-primary underline underline-offset-4 decoration-text-tertiary;
 }
 
 @layer base {
-  :root {
-    --prose-width: 700px;
-  }
-
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
