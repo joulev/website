@@ -2,15 +2,15 @@
 import { createRequire } from "node:module";
 import createMDX from "@next/mdx";
 import { withAxiom } from "next-axiom";
-import rehypePrettyCode from "rehype-pretty-code";
-import rehypeSlug from "rehype-slug";
 
 import { env } from "./src/env.mjs";
 
 const theme = createRequire(import.meta.url)("./.theme/theme.json");
 
 const withMDX = createMDX({
-  options: { rehypePlugins: [rehypeSlug, [rehypePrettyCode, { keepBackground: false, theme }]] },
+  options: {
+    rehypePlugins: ["rehype-slug", ["rehype-pretty-code", { keepBackground: false, theme }]],
+  },
 });
 
 /** @type {import("next").NextConfig} */
