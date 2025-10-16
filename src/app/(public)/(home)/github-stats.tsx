@@ -1,23 +1,20 @@
-import { unstable_cache as cache } from "next/cache";
-
 import { GitHub } from "~/components/icons";
 import { octokit } from "~/lib/octokit";
 
 import { MetadataCard } from "./metadata-card";
 
 // Taken from https://github.com/anuraghazra/github-readme-stats
-const getStats = cache(
-  async () => {
-    const gql = String.raw;
-    const { user } = await octokit.graphql<{
-      user: {
-        repositoriesContributedTo: { totalCount: number };
-        pullRequests: { totalCount: number };
-        openIssues: { totalCount: number };
-        closedIssues: { totalCount: number };
-      };
-    }>(
-      gql`
+async function getStats() {
+  const gql = String.raw;
+  const { user } = await octokit.graphql<{
+    user: {
+      repositoriesContributedTo: { totalCount: number };
+      pullRequests: { totalCount: number };
+      openIssues: { totalCount: number };
+      closedIssues: { totalCount: number };
+    };
+  }>(
+    gql`
         query ($login: String!) {
           user(login: $login) {
             repositoriesContributedTo(
@@ -38,17 +35,14 @@ const getStats = cache(
           }
         }
       `,
-      { login: "joulev" },
-    );
-    return {
-      issues: user.closedIssues.totalCount + user.openIssues.totalCount,
-      prs: user.pullRequests.totalCount,
-      contribs: user.repositoriesContributedTo.totalCount,
-    };
-  },
-  [],
-  { revalidate: 86400 }, // 24 hours
-);
+    { login: "joulev" },
+  );
+  return {
+    issues: user.closedIssues.totalCount + user.openIssues.totalCount,
+    prs: user.pullRequests.totalCount,
+    contribs: user.repositoriesContributedTo.totalCount,
+  };
+}
 
 function BackgroundPattern() {
   // For uniform patterns

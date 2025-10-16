@@ -247,5 +247,3 @@ export const metadata: Metadata = getMetadata({
   description: "My personal homepage on the Internet",
   url: "/",
 });
-
-export const revalidate = 3600;
