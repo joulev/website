@@ -32,7 +32,7 @@
     "@mdx-js/react": "3.1.1",
     "@neondatabase/serverless": "1.0.2",
     "@next/mdx": "16.1.6",
-    "@paralleldrive/cuid2": "2.3.1",
+    "@paralleldrive/cuid2": "3.3.0",
     "@parcel/watcher": "2.5.6",
     "@radix-ui/react-dialog": "1.1.15",
     "@radix-ui/react-dropdown-menu": "2.1.16",
