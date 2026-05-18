@@ -62,7 +62,7 @@
     "discord-api-types": "0.38.38",
     "dotenv": "17.2.3",
     "drizzle-kit": "0.31.8",
-    "drizzle-orm": "0.45.1",
+    "drizzle-orm": "0.45.2",
     "github-slugger": "2.0.0",
     "graphql": "16.12.0",
     "graphql-request": "7.4.0",
