@@ -1,6 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", "schedule:monthly", "group:allNonMajor"],
-  "timezone": "Asia/Singapore",
-  "ignoreDeps": ["next", "react", "react-dom", "@types/react", "@types/react-dom", "sharp"]
+  "enabled": false
 }
