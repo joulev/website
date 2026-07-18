@@ -34,7 +34,7 @@ export function PageClient() {
     setIsLoading(true);
     await navigator.clipboard.writeText(prompt);
     try {
-      await sendMessage({ role: "user", parts: [{ type: "text", text: prompt }] });
+      await sendMessage({ text: prompt });
       setPrompt("");
     } catch {
       alert("Fetch failed, please try again later.");

@@ -16,7 +16,6 @@ const withMDX = createMDX({
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   experimental: {
-    webpackBuildWorker: true,
     optimizePackageImports: ["shiki"],
     staleTimes: {
       dynamic: 30,

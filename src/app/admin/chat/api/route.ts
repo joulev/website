@@ -1,19 +1,13 @@
 import { openai } from "@ai-sdk/openai";
-import { streamText } from "ai";
-import * as v from "valibot";
+import {
+  convertToModelMessages,
+  createUIMessageStreamResponse,
+  safeValidateUIMessages,
+  streamText,
+  toUIMessageStream,
+} from "ai";
 
 import { getSession } from "~/lib/auth/helpers";
-
-const bodySchema = v.object({
-  messages: v.array(
-    v.object({
-      id: v.optional(v.string()),
-      createdAt: v.optional(v.any()),
-      content: v.string(),
-      role: v.picklist(["system", "user", "assistant"]),
-    }),
-  ),
-});
 
 const initialPrompt = `
 You are a helpful assistant.
@@ -47,17 +41,20 @@ instead of \\[\\pi\\approx3.14\\] or
 export async function POST(req: Request) {
   await getSession();
 
-  const result = v.safeParse(bodySchema, (await req.json()) as unknown);
-  if (!result.success) return Response.json({}, { status: 400 });
-  const { messages } = result.output;
+  const body = (await req.json()) as { messages?: unknown };
+  const validation = await safeValidateUIMessages({ messages: body.messages });
+  if (!validation.success) return Response.json({}, { status: 400 });
+  const messages = validation.data;
 
   try {
     const result = streamText({
       model: openai("gpt-5"),
-      messages: [{ role: "system", content: initialPrompt }, ...messages],
+      instructions: initialPrompt,
+      messages: await convertToModelMessages(messages),
       temperature: 0.2,
     });
-    return result.toTextStreamResponse();
+    const stream = toUIMessageStream({ stream: result.stream, originalMessages: messages });
+    return createUIMessageStreamResponse({ stream });
   } catch (e) {
     console.error(e);
     return Response.json({}, { status: 500 });

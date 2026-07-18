@@ -96,7 +96,7 @@ export async function POST(request: Request) {
       }),
     );
 
-    revalidateTag("photos");
+    revalidateTag("photos", { expire: 0 });
 
     return new Response("Ok!");
   } catch (error) {

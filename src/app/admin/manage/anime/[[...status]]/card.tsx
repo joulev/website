@@ -41,7 +41,6 @@ import {
 import type { AnimeListItem, AnimeListItemStatus } from "~/lib/anime/get-lists";
 import { constraintScore, convertSeason, getAccumulatedScore, getTitle } from "~/lib/anime/utils";
 import { cn } from "~/lib/cn";
-import { MediaFormat, MediaListStatus, MediaStatus } from "~/lib/gql/graphql";
 
 function BottomPartTemplate({
   text,
@@ -132,7 +131,7 @@ function UpdateItemScore({ item, status }: { item: AnimeListItem; status: AnimeL
 }
 
 function checkProgressBehind(item: AnimeListItem) {
-  if (item.media?.status !== MediaStatus.Releasing) return false;
+  if (item.media?.status !== "RELEASING") return false;
   const nextAiring = item.media?.nextAiringEpisode?.episode;
   if (!nextAiring) return false;
   const watchedEpisodes = item.progress ?? 0;
@@ -146,22 +145,22 @@ function BottomPart({ item, status }: { item: AnimeListItem; status: AnimeListIt
   const setAsWatching = () =>
     startTransition(async () => {
       optimisticListsAct(["UPDATE_STATUS", { status, id: item.id, newStatus: "watching" }]);
-      await updateStatus(item, MediaListStatus.Current);
+      await updateStatus(item, "CURRENT");
     });
   const setAsRewatching = () =>
     startTransition(async () => {
       optimisticListsAct(["UPDATE_STATUS", { status, id: item.id, newStatus: "rewatching" }]);
-      await updateStatus(item, MediaListStatus.Repeating);
+      await updateStatus(item, "REPEATING");
     });
   const setAsPaused = () =>
     startTransition(async () => {
       optimisticListsAct(["UPDATE_STATUS", { status, id: item.id, newStatus: "paused" }]);
-      await updateStatus(item, MediaListStatus.Paused);
+      await updateStatus(item, "PAUSED");
     });
   const setAsDropped = () =>
     startTransition(async () => {
       optimisticListsAct(["UPDATE_STATUS", { status, id: item.id, newStatus: "dropped" }]);
-      await updateStatus(item, MediaListStatus.Dropped);
+      await updateStatus(item, "DROPPED");
     });
   const increment = () =>
     startTransition(async () => {
@@ -170,15 +169,15 @@ function BottomPart({ item, status }: { item: AnimeListItem; status: AnimeListIt
     });
   const cancelRewatch = () =>
     startTransition(async () => {
-      const format = item.media?.format ?? MediaFormat.Ova;
+      const format = item.media?.format ?? "OVA";
       optimisticListsAct([
         "CANCEL_REWATCH",
         {
           id: item.id,
           newStatus:
-            format === MediaFormat.Tv
+            format === "TV"
               ? "completed/tv"
-              : format === MediaFormat.Movie
+              : format === "MOVIE"
                 ? "completed/movies"
                 : "completed/others",
         },

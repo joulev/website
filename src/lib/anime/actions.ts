@@ -1,7 +1,7 @@
 "use server";
 
 import type { GraphQLClient } from "graphql-request";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 import type { AnimeListItem } from "~/lib/anime/get-lists";
@@ -15,7 +15,7 @@ import {
 } from "~/lib/anime/mutations";
 import { getAccumulatedScore } from "~/lib/anime/utils";
 import { getAuthenticatedGraphQLClient } from "~/lib/auth/helpers";
-import { MediaListStatus } from "~/lib/gql/graphql";
+import type { MediaListStatus } from "~/lib/gql/graphql";
 
 function generateAction<T extends unknown[] = []>(
   callback: (client: GraphQLClient, ...data: T) => Promise<void>,
@@ -24,7 +24,7 @@ function generateAction<T extends unknown[] = []>(
   return async (...args: T) => {
     const client = await getAuthenticatedGraphQLClient();
     await callback(client, ...args);
-    revalidateTag("anime-lists");
+    updateTag("anime-lists");
     if (redirectTo) redirect(redirectTo);
   };
 }
@@ -43,7 +43,7 @@ export const updateStatus = generateAction(
 
 export const cancelRewatch = generateAction(async (client, item: AnimeListItem) => {
   await Promise.allSettled([
-    client.request(UPDATE_STATUS, { id: item.id, status: MediaListStatus.Completed }),
+    client.request(UPDATE_STATUS, { id: item.id, status: "COMPLETED" }),
     client.request(UPDATE_REPEAT, { id: item.id, repeat: 0, progress: item.media?.episodes ?? 0 }),
   ]);
 });
@@ -62,5 +62,5 @@ export const addToPTW = generateAction(async (client, itemId: number) => {
 }, "/admin/manage/anime/planning");
 
 export async function forceRefresh() {
-  revalidateTag("anime-lists");
+  updateTag("anime-lists");
 }

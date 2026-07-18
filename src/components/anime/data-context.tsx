@@ -19,6 +19,7 @@ const [Provider, useAnimeData] = generateContext<{
   optimisticLists: AnimeLists;
   optimisticListsAct: (reducerArgument: ReducerAction) => void;
 }>("AnimeData");
+
 export { useAnimeData };
 
 function optimisticReducer(current: OptimisticValue, action: ReducerAction): OptimisticValue {
