@@ -14,7 +14,6 @@ export default {
       case "anime":
       case "cuid2":
       case "irasuto":
-      case "link":
       case "tategaki":
         return getRedirectResponse(
           `https://joulev.dev/apps/${subdomain}${url.pathname}${url.search}`,
@@ -27,9 +26,6 @@ export default {
         return getRedirectResponse("https://joulev.dev/admin/chat");
       case "ma":
         return getRedirectResponse("https://joulev.dev/admin/manage/anime");
-      case "l":
-        if (url.pathname === "/") return getRedirectResponse("https://joulev.dev/apps/link");
-        return getRedirectResponse(`https://joulev.dev/apps/link/l${url.pathname}${url.search}`);
       case "p":
         if (url.pathname === "/") return getRedirectResponse("https://joulev.dev/apps/snippets");
         return getRedirectResponse(`https://joulev.dev/p${url.pathname}${url.search}`);

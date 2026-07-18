@@ -62,10 +62,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
     },
     {
-      url: "https://joulev.dev/apps/link",
-      lastModified: new Date(getLastUpdatedDate("src/app/(public)/apps/link")),
-    },
-    {
       url: "https://joulev.dev/apps/snippets",
       lastModified: new Date(getLastUpdatedDate("src/app/(public)/apps/snippets")),
     },

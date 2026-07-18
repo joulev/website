@@ -12,7 +12,7 @@ const iaWriterMonoFonts: Asset[] = ["Bold", "BoldItalic", "Italic", "Regular"].m
 
 const assets: Asset[] = [
   {
-    url: "https://l.joulev.dev/theme",
+    url: "https://r2.joulev.dev/files/c7gautdgs9l5mlkkjsbveqtq",
     filePath: ".theme/theme.json",
     name: "theme file",
   },

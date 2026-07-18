@@ -57,11 +57,6 @@ export function Navigation() {
       href: "/admin/manage/irasuto",
       description: "Manage the irasuto illustration collection",
     },
-    {
-      title: "link",
-      href: "/admin/manage/link",
-      description: "Manage personal short links",
-    },
   ];
   return (
     <div className={cn("fixed top-12 inset-x-0 z-10", RemoveScroll.classNames.zeroRight)}>

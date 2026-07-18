@@ -37,11 +37,6 @@ const navItems: { title: string; href: string; description: string }[] = [
     description: "A website featuring Japanese illustrations that I love",
   },
   {
-    title: "link",
-    href: "/apps/link",
-    description: "A simple URL shortener",
-  },
-  {
     title: "snippets",
     href: "/apps/snippets",
     description: "Upload and share short code snippets",
