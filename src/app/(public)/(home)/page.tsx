@@ -9,8 +9,6 @@ import { List, ListContent, ListHeader, ListItem } from "~/components/ui/lists";
 
 import { getMetadata } from "~/lib/seo";
 import { getGithubReadme } from "./get-github-readme";
-import { GitHubStats } from "./github-stats";
-import { MusicData } from "./music-data";
 
 function ReadmeA({ href, ...rest }: React.ComponentPropsWithoutRef<"a">) {
   return <Link href={href ?? "/"} {...rest} />;
@@ -154,10 +152,6 @@ export default function Page() {
         <section className="flex flex-col gap-6 p-6 sm:p-9">
           <h2 className="sr-only">About me</h2>
           <ReadmeContent />
-          <div className="grid grid-cols-1 grid-rows-2 gap-6 sm:grid-cols-2 sm:grid-rows-1">
-            <GitHubStats />
-            <MusicData />
-          </div>
         </section>
         <hr />
         <div className="mx-auto flex w-full max-w-lg flex-col gap-6 p-6 sm:p-9">
