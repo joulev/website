@@ -1,5 +1,5 @@
 import { type EnrichedTweet, enrichTweet } from "react-tweet";
-import { getTweet } from "react-tweet/api";
+import { getTweet, type TweetEntities } from "react-tweet/api";
 
 import { ExternalLink, Heart, MessageCircle, Reply, Twitter } from "~/components/icons";
 import { Card } from "~/components/ui/card";
@@ -7,6 +7,16 @@ import { Link } from "~/components/ui/link";
 import { cn } from "~/lib/cn";
 
 import { LinkButton } from "./button";
+
+function normalizeTweetEntities(entities: Partial<TweetEntities> | undefined): TweetEntities {
+  return {
+    ...entities,
+    hashtags: entities?.hashtags ?? [],
+    urls: entities?.urls ?? [],
+    user_mentions: entities?.user_mentions ?? [],
+    symbols: entities?.symbols ?? [],
+  };
+}
 
 function TweetContainer({
   className,
@@ -148,7 +158,16 @@ function TweetActions({ tweet }: { tweet: EnrichedTweet }) {
 export async function Tweet({ id, className }: { id: string; className?: string }) {
   const rawTweet = await getTweet(id);
   if (!rawTweet) throw new Error("Tweet not found");
-  const tweet = enrichTweet(rawTweet);
+  const tweet = enrichTweet({
+    ...rawTweet,
+    entities: normalizeTweetEntities(rawTweet.entities),
+    quoted_tweet: rawTweet.quoted_tweet
+      ? {
+          ...rawTweet.quoted_tweet,
+          entities: normalizeTweetEntities(rawTweet.quoted_tweet.entities),
+        }
+      : undefined,
+  });
   return (
     <TweetContainer className={className}>
       <TweetHeader tweet={tweet} />
